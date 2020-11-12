@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -11,18 +12,20 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 // work properly.
 
 export default function BasicExample() {
+  const { t } = useTranslation();
+
   return (
     <Router>
       <div>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">{t("app.links.home")}</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/about">{t("app.links.about")}</Link>
           </li>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dashboard">{t("app.links.dashboard")}</Link>
           </li>
         </ul>
 
