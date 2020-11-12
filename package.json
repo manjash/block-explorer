@@ -1,5 +1,7 @@
 {
   "name": "block-explorer",
+  "license": "MPL 2.0",
+  "author": "Iron Fish <contact@ironfish.network> (https://ironfish.network)",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -41,5 +43,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "4.2.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-header": "^3.1.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "24.0.2",
+    "eslint-plugin-prettier": "3.1.4",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "4.1.2",
+    "prettier": "2.1.2"
   }
 }
