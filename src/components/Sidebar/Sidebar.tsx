@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Drawer from '@material-ui/core/Drawer'
-import Hidden from '@material-ui/core/Hidden'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -14,7 +13,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 import sidebarStyle from '../../assets/jss/components/Sidebar/sidebarStyle'
 import { RouteValidator } from '../../routes'
-import logo from '../../assets/logo.svg'
+import logo from '../../assets/images/logo.svg'
 import Ad from './Ad'
 
 interface Props {
@@ -27,9 +26,11 @@ const Sidebar = ({ routes }: Props) => {
   const classes = useStyles()
   const { t } = useTranslation()
 
+  const displayAd = useMediaQuery('(min-height:650px)')
+
   const links = (
     <List className={classes.list}>
-      {routes.map((route: any) => {
+      {routes.map((route: RouteValidator) => {
         const listItem = (
           <ListItem button className={classes.itemLink}>
             <route.icon className={classNames(classes.itemIcon)} />
@@ -67,38 +68,19 @@ const Sidebar = ({ routes }: Props) => {
     </List>
   )
 
-  const displayAd = useMediaQuery('(min-height:650px)')
-
   return (
     <nav className={classes.drawer}>
-      {/* <Hidden mdUp={true} implementation="css">
-        <Drawer
-          variant="temporary"
-          open={props.open}
-          classes={{
-            paper: classNames(classes.drawerPaper),
-          }}
-          onClose={props.handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-        >
-          <div className={classes.sidebarWrapper}>{links}</div>
-        </Drawer>
-      </Hidden> */}
-      <Hidden smDown implementation='css'>
-        <Drawer
-          variant='permanent'
-          open
-          classes={{
-            paper: classNames(classes.drawerPaper),
-          }}
-        >
-          <img src={logo} alt={t('app.header.logo.alt')} className={classes.logo} />
-          {links}
-          {displayAd && <Ad />}
-        </Drawer>
-      </Hidden>
+      <Drawer
+        variant='permanent'
+        open
+        classes={{
+          paper: classNames(classes.drawerPaper),
+        }}
+      >
+        <img src={logo} alt={t('app.header.logo.alt')} className={classes.logo} />
+        {links}
+        {displayAd && <Ad />}
+      </Drawer>
     </nav>
   )
 }

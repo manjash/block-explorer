@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 
-import logo from '../../assets/logo-fishonly.svg'
+import logo from '../../assets/images/logo-fishonly.svg'
 import adStyle from '../../assets/jss/components/Sidebar/adStyle'
 
 const useStyles = makeStyles(adStyle)

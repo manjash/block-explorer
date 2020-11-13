@@ -8,7 +8,7 @@ import Dashboard from './views/Dashboard'
 import Explorer from './views/Explorer'
 
 export interface RouteValidator {
-  icon: React.ReactNode
+  icon: React.ElementType
   nameKey: string
   component?: FunctionComponent
   path?: string

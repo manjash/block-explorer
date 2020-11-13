@@ -1,8 +1,8 @@
 import { defaultFont, defaultPrimaryBackgroundColor } from '../base'
 
-import { createStyles } from '@material-ui/core'
+import { createStyles, Theme } from '@material-ui/core'
 
-const sidebarStyle = () =>
+const sidebarStyle = (theme: Theme) =>
   createStyles({
     wrapper: {
       ...defaultFont,
@@ -11,6 +11,11 @@ const sidebarStyle = () =>
     content: {
       flexGrow: 1,
       backgroundColor: defaultPrimaryBackgroundColor,
+      padding: theme.spacing(5),
+      [theme.breakpoints.down('sm')]: {
+        padding: theme.spacing(2),
+        paddingBottom: '80px',
+      },
     },
   })
 

@@ -3,6 +3,9 @@
     "header": {
       "logo": {
         "alt": "Iron Fish Block Explorer"
+      },
+      "search": {
+        "placeholder": "Search by block height, block hash, or transaction hash"
       }
     },
     "navigation": {

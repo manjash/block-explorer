@@ -8,7 +8,9 @@ const blackColor = '#000'
 const blackColorRGB = '0,0,0'
 const whiteColor = '#FFF'
 const whiteColorRGB = '255,255,255'
-const primaryColor = '#5f75ee'
+
+const backgroundNavigationColor =
+  'radial-gradient(circle, rgba(86,29,247,1) 0%, rgba(29,0,112,1) 100%)'
 
 // Layout
 const drawerWidth = 260
@@ -25,17 +27,14 @@ const boxShadow = {
   boxShadow: `0 10px 30px -12px rgba(${blackColorRGB}, 0.42), 0 4px 25px 0px rgba(${blackColorRGB}, 0.12), 0 8px 10px -5px rgba(${blackColorRGB}, 0.2)`,
 }
 
-const defaultBorderRadius = '16px'
-
 export {
+  backgroundNavigationColor,
   blackColor,
   blackColorRGB,
   boxShadow,
-  defaultBorderRadius,
   defaultFont,
   defaultPrimaryBackgroundColor,
   drawerWidth,
-  primaryColor,
   transition,
   whiteColorRGB,
   whiteColor,
