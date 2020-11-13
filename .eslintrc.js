@@ -4,19 +4,21 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:prettier/recommended",
-    "prettier",
-    "prettier/@typescript-eslint",
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:prettier/recommended',
+    'prettier',
+    'prettier/@typescript-eslint',
   ],
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 12,
   },
-  plugins: ["prettier", "react", "@typescript-eslint"],
-  rules: {},
-};
+  plugins: ['prettier', 'react', '@typescript-eslint'],
+  rules: {
+    'no-unused-vars': 'error',
+  },
+}
