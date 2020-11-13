@@ -1,9 +1,17 @@
 {
   "app": {
-      "links": {
-        "home": "Home",
-        "about": "About",
-        "dashboard": "Dashboard"
+    "header": {
+      "logo": {
+        "alt": "Iron Fish Block Explorer"
       }
+    },
+    "navigation": {
+      "sidebar": {
+        "dashboard": "Dashboard",
+        "explorer": "Explorer",
+        "docs": "Developer docs",
+        "ironfish": "Iron Fish"
+      }
+    }
   }
 }
