@@ -1,0 +1,9 @@
+{
+  "app": {
+      "links": {
+        "home": "Home",
+        "about": "About",
+        "dashboard": "Dashboard"
+      }
+  }
+}
