@@ -16,3 +16,11 @@ jest.mock('react-i18next', () => ({
   // eslint-disable-next-line react/display-name
   Trans: (): ReactElement => <></>,
 }))
+
+// Mock useLocation hook in the test suite
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useLocation: () => ({
+    pathname: '/dashboard',
+  }),
+}))

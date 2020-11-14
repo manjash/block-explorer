@@ -1,4 +1,10 @@
-import { drawerWidth, boxShadow, whiteColor, blackColorRGB } from '../../base'
+import {
+  drawerWidth,
+  boxShadow,
+  whiteColor,
+  blackColorRGB,
+  backgroundNavigationColor,
+} from '../../base'
 
 import { createStyles } from '@material-ui/core'
 
@@ -13,7 +19,7 @@ const sidebarStyle = () =>
       flexShrink: 0,
     },
     drawerPaper: {
-      background: '#1D0070',
+      background: backgroundNavigationColor,
       border: 'none',
       position: 'fixed',
       paddingTop: '54px',

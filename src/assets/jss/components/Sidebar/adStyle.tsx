@@ -1,7 +1,7 @@
-import { defaultBorderRadius, whiteColorRGB } from '../../base'
-import { createStyles } from '@material-ui/core'
+import { whiteColorRGB } from '../../base'
+import { createStyles, Theme } from '@material-ui/core'
 
-const adStyle = () =>
+const adStyle = (theme: Theme) =>
   createStyles({
     container: {
       display: 'flex',
@@ -13,7 +13,7 @@ const adStyle = () =>
       width: '216px',
       margin: '0 auto',
       height: '290px',
-      borderRadius: defaultBorderRadius,
+      borderRadius: theme.shape.borderRadius,
       backgroundColor: `rgba(${whiteColorRGB}, 0.02)`,
     },
     image: {
