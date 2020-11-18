@@ -4,8 +4,8 @@ import DashboardIcon from '@material-ui/icons/Dashboard'
 import ExploreIcon from '@material-ui/icons/Explore'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 
-import Dashboard from './views/Dashboard'
-import Explorer from './views/Explorer'
+import Dashboard from './container/Dashboard/Dashboard'
+import Explorer from './container/Explorer/Explorer'
 
 export interface RouteValidator {
   icon: React.ElementType

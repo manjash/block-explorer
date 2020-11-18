@@ -5,13 +5,13 @@ import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useTheme } from '@material-ui/core/styles'
 
-import Sidebar from '../components/Sidebar/Sidebar'
-import Header from '../components/Header/Header'
-import MobileNavBar from '../components/MobileNavBar/MobileNavBar'
+import Sidebar from '../../components/Sidebar/Sidebar'
+import Header from '../../components/Header/Header'
+import MobileNavBar from '../../components/MobileNavBar/MobileNavBar'
 
-import layoutStyle from '../assets/jss/components/layoutStyle'
-import themeIronFish from '../assets/jss/theme'
-import { RouteValidator } from '../routes'
+import layoutStyle from '../../assets/jss/components/layoutStyle'
+import themeIronFish from '../../assets/jss/theme'
+import { RouteValidator } from '../../routes'
 
 interface Props {
   children: ReactNode

@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
-import App from './container/App'
+import App from './container/App/App'
 import reportWebVitals from './reportWebVitals'
 import './i18n.ts'
 import Loading from './components/Loading/Loading'

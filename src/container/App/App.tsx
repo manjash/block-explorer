@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
-import Layout from '../layout/Layout'
-import routes from '../routes'
+import Layout from '../Layout/Layout'
+import routes from '../../routes'
 
 const App = () => (
   <Router>

@@ -2,8 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import Layout from './Layout'
-import Sidebar from '../components/Sidebar/Sidebar'
-import routes from '../routes'
+import Sidebar from '../../components/Sidebar/Sidebar'
+import routes from '../../routes'
 
 describe('<Layout />', () => {
   test('It renders correctly', () => {
