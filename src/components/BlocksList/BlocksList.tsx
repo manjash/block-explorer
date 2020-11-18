@@ -12,17 +12,21 @@ import Paper from '@material-ui/core/Paper'
 import NavigateNext from '@material-ui/icons/NavigateNext'
 
 import Block from '../../shapes/Block'
-import { blockList } from './BlockMock'
+
 import {
   tableCellStyle,
   tableRowStyle,
 } from '../../assets/jss/components/BlocksList/blocksListStyle'
 import IconButton from '@material-ui/core/IconButton'
 
+interface Prop {
+  blockList: Block[]
+}
+
 const StyledTableCell = withStyles(tableCellStyle)(TableCell)
 const StyledTableRow = withStyles(tableRowStyle)(TableRow)
 
-const BlocksList = () => {
+const BlocksList = ({ blockList }: Prop) => {
   const { t } = useTranslation()
 
   return (
@@ -49,7 +53,7 @@ const BlocksList = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {blockList(7).map((block: Block) => (
+          {blockList.map((block: Block) => (
             <StyledTableRow key={String(block.height)}>
               <StyledTableCell component='th' scope='row'>
                 {block.height}
