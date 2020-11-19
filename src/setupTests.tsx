@@ -19,7 +19,7 @@ jest.mock('react-i18next', () => ({
 
 // Mock useLocation hook in the test suite
 jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+  ...(jest.requireActual('react-router-dom') as object),
   useLocation: () => ({
     pathname: '/dashboard',
   }),
