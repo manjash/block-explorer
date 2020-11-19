@@ -1,6 +1,8 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
+import IconButton from '@material-ui/core/IconButton'
 import { withStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -12,12 +14,11 @@ import Paper from '@material-ui/core/Paper'
 import NavigateNext from '@material-ui/icons/NavigateNext'
 
 import Block from '../../shapes/Block'
-
 import {
   tableCellStyle,
   tableRowStyle,
 } from '../../assets/jss/components/BlocksList/blocksListStyle'
-import IconButton from '@material-ui/core/IconButton'
+import { getBlockDetailPageUrl } from '../../utils/routes'
 
 interface Prop {
   blockList: Block[]
@@ -56,7 +57,7 @@ const BlocksList = ({ blockList }: Prop) => {
           {blockList.map((block: Block) => (
             <StyledTableRow key={String(block.height)}>
               <StyledTableCell component='th' scope='row'>
-                {block.height}
+                <Link to={getBlockDetailPageUrl(block.height)}>{block.height}</Link>
               </StyledTableCell>
               <StyledTableCell align='right'>{block.size}</StyledTableCell>
               <StyledTableCell align='right'>{block.transactions}</StyledTableCell>

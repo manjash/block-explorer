@@ -34,8 +34,9 @@ const MobileNavBar = ({ routes }: Props) => {
         showLabels
       >
         {routes.map((route: RouteValidator) => {
-          if (route.path !== undefined) {
-            return (
+          return (
+            route.path &&
+            route.isVisibleInSidebar && (
               <BottomNavigationAction
                 component={NavLink}
                 to={route.path}
@@ -45,7 +46,7 @@ const MobileNavBar = ({ routes }: Props) => {
                 icon={<route.icon />}
               />
             )
-          }
+          )
         })}
       </BottomNavigation>
     </AppBar>

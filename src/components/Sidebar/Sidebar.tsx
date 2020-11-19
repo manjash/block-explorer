@@ -45,7 +45,7 @@ const Sidebar = ({ routes }: Props) => {
           </ListItem>
         )
 
-        if (route.path !== undefined) {
+        if (route.isVisibleInSidebar && route.path !== undefined) {
           return (
             <NavLink
               to={route.path}
@@ -58,11 +58,13 @@ const Sidebar = ({ routes }: Props) => {
           )
         }
         return (
-          // these are links that we trust, so it's okay to give referrer informations
-          // eslint-disable-next-line react/jsx-no-target-blank
-          <a href={route.url} target='_blank' key={route.nameKey} className={classes.item}>
-            {listItem}
-          </a>
+          route.isVisibleInSidebar && (
+            // these are links that we trust, so it's okay to give referrer informations
+            // eslint-disable-next-line react/jsx-no-target-blank
+            <a href={route.url} target='_blank' key={route.nameKey} className={classes.item}>
+              {listItem}
+            </a>
+          )
         )
       })}
     </List>

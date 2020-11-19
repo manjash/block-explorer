@@ -1,16 +1,13 @@
 import React, { ReactNode } from 'react'
 
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import { useTheme } from '@material-ui/core/styles'
+import { useTheme, makeStyles } from '@material-ui/core/styles'
 
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Header from '../../components/Header/Header'
 import MobileNavBar from '../../components/MobileNavBar/MobileNavBar'
 
 import layoutStyle from '../../assets/jss/components/layoutStyle'
-import themeIronFish from '../../assets/jss/theme'
 import { RouteValidator } from '../../routes'
 
 interface Props {
@@ -27,18 +24,14 @@ const Layout = ({ children, routes }: Props) => {
 
   return (
     <>
-      <ThemeProvider theme={themeIronFish}>
-        <CssBaseline />
-
-        <div className={classes.wrapper}>
-          {!isSmallBreakpoint && <Sidebar routes={routes} />}
-          <div>
-            <Header isSmallBreakpoint={isSmallBreakpoint} />
-            <main className={classes.content}>{children}</main>
-          </div>
-          {isSmallBreakpoint && <MobileNavBar routes={routes} />}
+      <div className={classes.wrapper}>
+        {!isSmallBreakpoint && <Sidebar routes={routes} />}
+        <div>
+          <Header isSmallBreakpoint={isSmallBreakpoint} />
+          <main className={classes.content}>{children}</main>
         </div>
-      </ThemeProvider>
+        {isSmallBreakpoint && <MobileNavBar routes={routes} />}
+      </div>
     </>
   )
 }

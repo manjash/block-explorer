@@ -35,12 +35,11 @@
       }
     },
     "navigation": {
-      "sidebar": {
-        "dashboard": "Dashboard",
-        "explorer": "Explorer",
-        "docs": "Developer docs",
-        "ironfish": "Iron Fish"
-      }
+      "dashboard": "Dashboard",
+      "explorer": "Explorer",
+      "docs": "Developer docs",
+      "ironfish": "Iron Fish",
+      "blocks": "Blocks"
     }
   }
 }
