@@ -18,6 +18,23 @@
         "actions": "Actions"
       }
     },
+    "blockDetailPage": {
+      "informationPanel": {
+        "height": "Height",
+        "size": "Size",
+        "hash": "Hash",
+        "transactions": "Transactions count",
+        "difficulty": "Difficulty",
+        "timestamp": "timestamp"
+      },
+      "information": {
+        "title": "General Information",
+        "error": {
+          "title": "Block not available",
+          "description": "We are not able to load the information of this block, or the connection to Iron Fish is broken"
+        }
+      }
+    },
     "dashboard": {
       "blocks": {
         "latestBlocksTitle": "Latest Blocks",

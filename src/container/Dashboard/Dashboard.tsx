@@ -1,10 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
-
-import { useTranslation } from 'react-i18next'
 
 import Metrics from '../../components/Dashboard/Metrics'
 import BlocksList from '../../components/BlocksList/BlocksList'

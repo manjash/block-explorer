@@ -10,7 +10,7 @@ const boxWrapperStyle = (theme: Theme) =>
       ...boxShadow,
     },
     header: {
-      margin: theme.spacing(4, 0, 3, 0),
+      margin: theme.spacing(2, 0, 3, 0),
     },
   })
 

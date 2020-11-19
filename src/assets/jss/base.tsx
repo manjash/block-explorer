@@ -10,7 +10,6 @@ const blackColor = '#000'
 const blackColorRGB = '0,0,0'
 const whiteColor = '#FFF'
 const whiteColorRGB = '255,255,255'
-
 const backgroundNavigationColor =
   'radial-gradient(circle, rgba(86,29,247,1) 0%, rgba(29,0,112,1) 100%)'
 

@@ -9,6 +9,7 @@ import { whiteColor } from './base'
 const defaultBorderRadius = 16
 const primaryColor = '#808191'
 const secondaryColor = '#1B089A'
+const errorColor = '#d2000078'
 
 const theme = createMuiTheme({
   breakpoints: {
@@ -29,6 +30,9 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: secondaryColor,
+    },
+    error: {
+      main: errorColor,
     },
   },
   overrides: {

@@ -44,8 +44,8 @@ const adStyle = (theme: Theme) =>
       height: 2,
     },
     'wrapper-high': {
-      backgroundColor: '#2C72FF',
-      borderColor: '#2C72FF',
+      backgroundColor: theme.palette.secondary.main,
+      borderColor: theme.palette.secondary.main,
     },
     'wrapper-medium': {
       backgroundColor: '#FFC2E8',
