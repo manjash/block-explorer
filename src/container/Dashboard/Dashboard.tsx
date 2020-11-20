@@ -10,7 +10,7 @@ import Metrics from '../../components/Dashboard/Metrics'
 import BlocksList from '../../components/BlocksList/BlocksList'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
 import { RoutePath } from '../../routes'
-import { blockList as mockData } from '../../components/BlocksList/BlockMock'
+import { blockList as mockData } from '../../mocks/BlockMock'
 
 const Dashboard = () => {
   const { t } = useTranslation()

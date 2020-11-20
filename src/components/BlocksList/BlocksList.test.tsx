@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 import TableRow from '@material-ui/core/TableRow'
 
 import BlocksList from './BlocksList'
-import { blockList as mockData } from '../../components/BlocksList/BlockMock'
+import { blockList as mockData } from '../../mocks/BlockMock'
 
 describe('<BlocksList />', () => {
   test('It renders correctly', () => {

@@ -1,4 +1,4 @@
-import Block from '../../shapes/Block'
+import Block from '../types/Block'
 
 function getRandomIntInclusive(min: number, max: number): number {
   min = Math.ceil(min)

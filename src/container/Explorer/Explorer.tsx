@@ -6,7 +6,7 @@ import Box from '@material-ui/core/Box'
 import Loading from '../../components/Loading/Loading'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
 import BlocksList from '../../components/BlocksList/BlocksList'
-import { blockList as mockData } from '../../components/BlocksList/BlockMock'
+import { blockList as mockData } from '../../mocks/BlockMock'
 import useInfiniteScroll, { DoneFunction } from '../../hooks/useInfiniteScroll'
 
 const Explorer = () => {

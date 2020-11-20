@@ -13,7 +13,7 @@ import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import NavigateNext from '@material-ui/icons/NavigateNext'
 
-import Block from '../../shapes/Block'
+import Block from '../../types/Block'
 import {
   tableCellStyle,
   tableRowStyle,
