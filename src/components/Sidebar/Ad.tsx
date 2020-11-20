@@ -18,7 +18,7 @@ const Ad = () => {
       <img className={classes.image} src={logo} alt={t('app.navigation.sidebar.ironfish')} />
 
       <Button className={classes.button} variant='contained'>
-        {t('app.navigation.sidebar.ironfish')}
+        {t('app.navigation.ironfish')}
       </Button>
     </div>
   )
