@@ -4,6 +4,8 @@
 
 // Colors
 const defaultPrimaryBackgroundColor = '#eeeeee'
+const defaultSecondaryBackgroundColor = '#fff'
+const defaultBorderColor = '#E5E5E5'
 const blackColor = '#000'
 const blackColorRGB = '0,0,0'
 const whiteColor = '#FFF'
@@ -24,7 +26,7 @@ const defaultFont = {
 }
 
 const boxShadow = {
-  boxShadow: `0 10px 30px -12px rgba(${blackColorRGB}, 0.42), 0 4px 25px 0px rgba(${blackColorRGB}, 0.12), 0 8px 10px -5px rgba(${blackColorRGB}, 0.2)`,
+  boxShadow: `0 10px 30px -12px rgba(${blackColorRGB}, 0.22), 0 4px 25px 0px rgba(${blackColorRGB}, 0.08), 0 8px 10px -5px rgba(${blackColorRGB}, 0.1)`,
 }
 
 export {
@@ -32,8 +34,10 @@ export {
   blackColor,
   blackColorRGB,
   boxShadow,
+  defaultBorderColor,
   defaultFont,
   defaultPrimaryBackgroundColor,
+  defaultSecondaryBackgroundColor,
   drawerWidth,
   transition,
   whiteColorRGB,

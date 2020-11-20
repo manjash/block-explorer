@@ -1,5 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 
+import { whiteColor } from './base'
+
 /*
  * Only use this file to override MUI components globally
  * Prefer using classes to override a one off component
@@ -32,12 +34,16 @@ const theme = createMuiTheme({
   overrides: {
     MuiButton: {
       root: {
+        padding: '8px 64px 8px 64px',
         fontSize: '1rem',
         textTransform: 'none',
         borderRadius: defaultBorderRadius,
       },
-      label: {
+      contained: {
         color: secondaryColor,
+      },
+      containedSecondary: {
+        color: whiteColor,
       },
     },
   },

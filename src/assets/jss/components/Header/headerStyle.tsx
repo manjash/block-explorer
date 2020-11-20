@@ -1,4 +1,8 @@
-import { defaultPrimaryBackgroundColor } from '../../base'
+import {
+  boxShadow,
+  defaultPrimaryBackgroundColor,
+  defaultSecondaryBackgroundColor,
+} from '../../base'
 import { fade, createStyles, Theme } from '@material-ui/core'
 
 const defaultHeight = '49px'
@@ -31,10 +35,11 @@ const adStyle = (theme: Theme) =>
     search: {
       color: theme.palette.primary.main,
       position: 'relative',
+      backgroundColor: defaultSecondaryBackgroundColor,
       borderRadius: theme.shape.borderRadius,
       border: `2px solid ${theme.palette.secondary.main}`,
       '&:hover': {
-        backgroundColor: fade('#000', 0.05),
+        backgroundColor: fade(defaultSecondaryBackgroundColor, 0.01),
       },
       width: '100%',
       margin: theme.spacing(5, 2, 0, 2),
@@ -42,6 +47,7 @@ const adStyle = (theme: Theme) =>
       [theme.breakpoints.down('sm')]: {
         margin: theme.spacing(2, 0, 2, 0),
       },
+      ...boxShadow,
     },
     searchIcon: {
       color: theme.palette.primary.main,

@@ -8,6 +8,32 @@
         "placeholder": "Search by block height, block hash, or transaction hash"
       }
     },
+    "components": {
+      "blockslist": {
+        "height": "Height",
+        "size": "Size",
+        "transactions": "Transactions",
+        "timestamp": "Timestamp",
+        "hash": "Block Hash",
+        "actions": "Actions"
+      }
+    },
+    "dashboard": {
+      "blocks": {
+        "latestBlocksTitle": "Latest Blocks",
+        "goToExplorer": "Block Explorer →"
+      },
+      "metrics": {
+        "difficulty": "Difficulty",
+        "height": "Height",
+        "hashrate": "Hash rate",
+        "reward": "Block reward",
+        "latesthash": "Latest block hash",
+        "latesttransaction": "Latest block transactions #",
+        "latestblocksseconds": "Seconds since latest block time",
+        "circulation": "Circulation"
+      }
+    },
     "navigation": {
       "sidebar": {
         "dashboard": "Dashboard",

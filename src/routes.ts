@@ -15,16 +15,21 @@ export interface RouteValidator {
   url?: string
 }
 
+export enum RoutePath {
+  Dashboard = '/dashboard',
+  Explorer = '/explorer',
+}
+
 const routes: RouteValidator[] = [
   {
     icon: DashboardIcon,
-    path: '/dashboard',
+    path: RoutePath.Dashboard,
     nameKey: 'app.navigation.sidebar.dashboard',
     component: Dashboard,
   },
   {
     icon: ExploreIcon,
-    path: '/explorer',
+    path: RoutePath.Explorer,
     nameKey: 'app.navigation.sidebar.explorer',
     component: Explorer,
   },

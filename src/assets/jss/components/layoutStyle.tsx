@@ -1,4 +1,4 @@
-import { defaultFont, defaultPrimaryBackgroundColor } from '../base'
+import { defaultFont, defaultPrimaryBackgroundColor, drawerWidth } from '../base'
 
 import { createStyles, Theme } from '@material-ui/core'
 
@@ -10,6 +10,8 @@ const sidebarStyle = (theme: Theme) =>
     },
     content: {
       flexGrow: 1,
+      minHeight: '100vh',
+      minWidth: `calc(100vw - ${drawerWidth}px)`,
       backgroundColor: defaultPrimaryBackgroundColor,
       padding: theme.spacing(5),
       [theme.breakpoints.down('sm')]: {
