@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import useMediaQuery from '@material-ui/core/useMediaQuery'
@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 import sidebarStyle from '../../assets/jss/components/Sidebar/sidebarStyle'
-import { RouteValidator } from '../../routes'
+import { RoutePath, RouteValidator } from '../../routes'
 import logo from '../../assets/images/logo.svg'
 import Ad from './Ad'
 
@@ -79,7 +79,9 @@ const Sidebar = ({ routes }: Props) => {
           paper: classNames(classes.drawerPaper),
         }}
       >
-        <img src={logo} alt={t('app.header.logo.alt')} className={classes.logo} />
+        <Link to={RoutePath.Dashboard} className={classes.logo}>
+          <img src={logo} alt={t('app.header.logo.alt')} className={classes.logo} />
+        </Link>
         {links}
         {displayAd && <Ad />}
       </Drawer>
