@@ -1,8 +1,4 @@
-import {
-  boxShadow,
-  defaultPrimaryBackgroundColor,
-  defaultSecondaryBackgroundColor,
-} from '../../base'
+import { defaultPrimaryBackgroundColor, defaultSecondaryBackgroundColor } from '../../base'
 import { fade, createStyles, Theme } from '@material-ui/core'
 
 const defaultHeight = '49px'
@@ -47,7 +43,7 @@ const adStyle = (theme: Theme) =>
       [theme.breakpoints.down('sm')]: {
         margin: theme.spacing(2, 0, 2, 0),
       },
-      ...boxShadow,
+      boxShadow: theme.shadows[3],
     },
     searchIcon: {
       color: theme.palette.primary.main,

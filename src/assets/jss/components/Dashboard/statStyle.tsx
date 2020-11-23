@@ -1,5 +1,5 @@
 import { createStyles, Theme } from '@material-ui/core'
-import { defaultBorderColor, whiteColor } from '../../base'
+import { defaultBorderColor } from '../../base'
 
 const adStyle = (theme: Theme) =>
   createStyles({
@@ -29,7 +29,7 @@ const adStyle = (theme: Theme) =>
       marginRight: theme.spacing(1),
     },
     icon: {
-      color: whiteColor,
+      color: theme.palette.common.white,
       width: 14,
       height: 14,
     },

@@ -3,7 +3,7 @@ export default interface Block {
   size: Number
   transactions: Number
   difficulty?: Number
-  hash: String
+  hash: string
   timestamp: Date
 }
 

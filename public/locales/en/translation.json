@@ -16,6 +16,9 @@
         "timestamp": "Timestamp",
         "hash": "Block Hash",
         "actions": "Actions"
+      },
+      "breadcrumb": {
+        "blocks": "Blocks"
       }
     },
     "blockDetailPage": {

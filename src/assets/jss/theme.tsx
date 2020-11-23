@@ -1,7 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 
-import { whiteColor } from './base'
-
 /*
  * Only use this file to override MUI components globally
  * Prefer using classes to override a one off component
@@ -47,7 +45,7 @@ const theme = createMuiTheme({
         color: secondaryColor,
       },
       containedSecondary: {
-        color: whiteColor,
+        color: '#fff',
       },
     },
   },
