@@ -24,7 +24,7 @@ export enum RoutePath {
   Dashboard = '/dashboard',
   Explorer = '/explorer',
   BlockDetailPage = '/blocks/:id',
-  TransactionDetailPage = '/transactions/:id',
+  TransactionDetailPage = '/transactions/:hash',
 }
 
 const routes: RouteValidator[] = [

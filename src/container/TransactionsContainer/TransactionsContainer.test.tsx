@@ -4,15 +4,15 @@ import { shallow } from 'enzyme'
 import Alert from '../../components/Alert/Alert'
 import { generateBlock } from '../../mocks/BlockMock'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
-import BlockInformationPanel from '../../components/BlockInformationPanel/BlockInformationPanel'
+import TransactionsList from '../../components/TransactionsList/TransactionsList'
 import * as hooks from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
 
-import BlockDetailPage from './BlockDetailPage'
+import TransactionsContainer from './TransactionsContainer'
 
-describe('<BlockDetailPage />', () => {
+describe('<TransactionsContainer />', () => {
   test('It renders correctly', () => {
-    const wrapper = shallow(<BlockDetailPage />)
+    const wrapper = shallow(<TransactionsContainer hash='abc' />)
     expect(wrapper.find(BoxWrapper)).toHaveLength(1)
     expect(wrapper.find(Alert)).toHaveLength(0)
   })
@@ -23,9 +23,9 @@ describe('<BlockDetailPage />', () => {
       error: new Error('error message'),
     })
 
-    const wrapper = shallow(<BlockDetailPage />)
+    const wrapper = shallow(<TransactionsContainer hash='abc' />)
     expect(wrapper.find(Alert)).toHaveLength(1)
-    expect(wrapper.find(BlockInformationPanel)).toHaveLength(0)
+    expect(wrapper.find(TransactionsList)).toHaveLength(0)
   })
 
   test('It renders no data while loading', () => {
@@ -33,9 +33,9 @@ describe('<BlockDetailPage />', () => {
       status: ServiceState.LOADING,
     })
 
-    const wrapper = shallow(<BlockDetailPage />)
+    const wrapper = shallow(<TransactionsContainer hash='abc' />)
     expect(wrapper.find(Alert)).toHaveLength(0)
-    expect(wrapper.find(BlockInformationPanel)).toHaveLength(0)
+    expect(wrapper.find(TransactionsList)).toHaveLength(0)
   })
 
   test('It renders panel', () => {
@@ -48,8 +48,8 @@ describe('<BlockDetailPage />', () => {
       },
     })
 
-    const wrapper = shallow(<BlockDetailPage />)
+    const wrapper = shallow(<TransactionsContainer hash='abc' />)
     expect(wrapper.find(Alert)).toHaveLength(0)
-    expect(wrapper.find(BlockInformationPanel)).toHaveLength(1)
+    expect(wrapper.find(TransactionsList)).toHaveLength(1)
   })
 })

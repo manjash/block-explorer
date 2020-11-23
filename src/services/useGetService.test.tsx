@@ -5,6 +5,7 @@ import useGetService from './useGetService'
 import { ApiUrls } from './servicesUrls'
 import { generateBlock } from '../mocks/BlockMock'
 import { ServiceState } from '../types/Service'
+import Block from '../types/Block'
 
 jest.mock('node-fetch', () => require('fetch-mock-jest').sandbox())
 const fetchMock = require('node-fetch')
@@ -21,9 +22,11 @@ describe('useGetService', () => {
   describe('200', () => {
     beforeAll(() => {
       fetchMock.mock(ApiUrls.BLOCK_DETAIL_PAGE, mockedData)
+      fetchMock.mock(`${ApiUrls.BLOCK_DETAIL_PAGE}?params=abcde`, [])
     })
+
     it('returns the correct states', async () => {
-      const { result } = renderHook(() => useGetService(ApiUrls.BLOCK_DETAIL_PAGE))
+      const { result } = renderHook(() => useGetService<Block>(ApiUrls.BLOCK_DETAIL_PAGE))
 
       await act(async () => {
         expect(result.current.status).toEqual(ServiceState.LOADING)
@@ -33,6 +36,22 @@ describe('useGetService', () => {
         expect(result.current.status).toEqual(ServiceState.LOADED)
         if (result.current.status === ServiceState.LOADED) {
           expect(result.current.payload.result.height).toEqual(mockedData.height)
+        }
+      })
+    })
+
+    it('supports the query params', async () => {
+      const { result } = renderHook(() =>
+        useGetService<Block>(ApiUrls.BLOCK_DETAIL_PAGE, { params: 'abcde' }),
+      )
+
+      await act(async () => {
+        expect(result.current.status).toEqual(ServiceState.LOADING)
+      })
+
+      await act(async () => {
+        if (result.current.status === ServiceState.LOADED) {
+          expect(result.current.payload.result).toEqual([])
         }
       })
     })

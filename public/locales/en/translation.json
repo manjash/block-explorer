@@ -17,6 +17,12 @@
         "hash": "Block Hash",
         "actions": "Actions"
       },
+      "transactionslist": {
+        "hash": "Hash",
+        "fee": "Fee",
+        "bytes": "Bytes",
+        "actions": "Actions"
+      },
       "breadcrumb": {
         "blocks": "Blocks"
       }
@@ -36,6 +42,13 @@
           "title": "Block not available",
           "description": "We are not able to load the information of this block, or the connection to Iron Fish is broken"
         }
+      }
+    },
+    "transactionsContainer": {
+      "title": "Transactions",
+      "error": {
+        "title": "Transactions not available",
+        "description": "We are not able to load the transactions, or the connection to Iron Fish is broken"
       }
     },
     "dashboard": {

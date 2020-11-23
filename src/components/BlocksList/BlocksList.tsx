@@ -3,10 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import IconButton from '@material-ui/core/IconButton'
-import { withStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
@@ -14,18 +12,12 @@ import Paper from '@material-ui/core/Paper'
 import NavigateNext from '@material-ui/icons/NavigateNext'
 
 import Block from '../../types/Block'
-import {
-  tableCellStyle,
-  tableRowStyle,
-} from '../../assets/jss/components/BlocksList/blocksListStyle'
 import { getBlockDetailPageUrl } from '../../utils/routes'
+import { StyledTableCell, StyledTableRow } from '../Table/Table'
 
 interface Prop {
   blockList: Block[]
 }
-
-const StyledTableCell = withStyles(tableCellStyle)(TableCell)
-const StyledTableRow = withStyles(tableRowStyle)(TableRow)
 
 const BlocksList = ({ blockList }: Prop) => {
   const { t } = useTranslation()
@@ -56,7 +48,7 @@ const BlocksList = ({ blockList }: Prop) => {
         <TableBody>
           {blockList.map((block: Block) => (
             <StyledTableRow key={String(block.height)}>
-              <StyledTableCell component='th' scope='row'>
+              <StyledTableCell scope='row'>
                 <Link to={getBlockDetailPageUrl(block.height)}>{block.height}</Link>
               </StyledTableCell>
               <StyledTableCell align='right'>{block.size}</StyledTableCell>
@@ -66,7 +58,7 @@ const BlocksList = ({ blockList }: Prop) => {
                 {`${block.timestamp.toLocaleDateString()} ${block.timestamp.toLocaleTimeString()}`}
               </StyledTableCell>
               <StyledTableCell align='right'>
-                <IconButton>
+                <IconButton component={Link} to={getBlockDetailPageUrl(block.height)}>
                   <NavigateNext />
                 </IconButton>
               </StyledTableCell>

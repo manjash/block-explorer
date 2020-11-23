@@ -1,26 +1,34 @@
 import { useEffect, useState } from 'react'
 
-import Block from '../types/Block'
 import { Service, ServiceState } from '../types/Service'
 import { ApiUrls } from './servicesUrls'
 
-export interface ServicePayload {
-  result: Block
+export interface ServicePayload<Type> {
+  result: Type
 }
 
-const useGetService = (url: ApiUrls) => {
-  const [result, setResult] = useState<Service<ServicePayload>>({
+interface Params {
+  [key: string]: string
+}
+
+const useGetService = <Type>(url: ApiUrls, queryParams = {} as Params) => {
+  const [result, setResult] = useState<Service<ServicePayload<Type>>>({
     status: ServiceState.LOADING,
   })
 
+  const queryUrl = new URL(url)
+  Object.keys(queryParams).forEach((key) => queryUrl.searchParams.append(key, queryParams[key]))
+
+  const finalUrl = queryUrl.toString()
+
   useEffect(() => {
-    fetch(url)
+    fetch(finalUrl.toString())
       .then((response) => response.json())
       .then((response) =>
         setResult({ status: ServiceState.LOADED, payload: { result: response } }),
       )
       .catch((error) => setResult({ status: ServiceState.ERROR, error }))
-  }, [url])
+  }, [finalUrl])
 
   return result
 }
