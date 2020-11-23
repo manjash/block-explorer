@@ -1,13 +1,12 @@
 import { createStyles, Theme } from '@material-ui/core'
-import { boxShadow, whiteColor } from '../../base'
 
 const boxWrapperStyle = (theme: Theme) =>
   createStyles({
     root: {
-      background: whiteColor,
+      background: theme.palette.common.white,
       padding: theme.spacing(2),
       borderRadius: theme.shape.borderRadius,
-      ...boxShadow,
+      boxShadow: theme.shadows[3],
     },
     header: {
       margin: theme.spacing(2, 0, 3, 0),

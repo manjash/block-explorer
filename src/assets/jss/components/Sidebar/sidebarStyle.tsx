@@ -1,14 +1,8 @@
-import {
-  drawerWidth,
-  boxShadow,
-  whiteColor,
-  blackColorRGB,
-  backgroundNavigationColor,
-} from '../../base'
+import { drawerWidth, blackColorRGB, backgroundNavigationColor } from '../../base'
 
-import { createStyles } from '@material-ui/core'
+import { createStyles, Theme } from '@material-ui/core'
 
-const sidebarStyle = () =>
+const sidebarStyle = (theme: Theme) =>
   createStyles({
     logo: {
       maxWidth: '220px',
@@ -27,7 +21,7 @@ const sidebarStyle = () =>
       bottom: '0',
       left: '0',
       zIndex: 1,
-      ...boxShadow,
+      boxShadow: theme.shadows[3],
       width: drawerWidth,
       height: '100%',
     },
@@ -41,13 +35,13 @@ const sidebarStyle = () =>
       borderLeft: '4px solid transparent',
       display: 'block',
       textDecoration: 'none',
-      color: whiteColor,
+      color: theme.palette.common.white,
       '&:hover,&:focus': {
         backgroundColor: `rgba(${blackColorRGB}, 0.25)`,
       },
     },
     itemActive: {
-      borderLeft: `4px solid ${whiteColor}`,
+      borderLeft: `4px solid ${theme.palette.common.white}`,
     },
     itemLink: {
       width: 'auto',
