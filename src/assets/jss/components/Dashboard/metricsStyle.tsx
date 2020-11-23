@@ -4,7 +4,7 @@ const metricsStyle = (theme: Theme) =>
   createStyles({
     root: {
       backgroundColor: theme.palette.common.white,
-      border: `1px solid ${theme.palette.borderColor.main}`,
+      border: `1px solid ${theme.palette.borderColor?.main}`,
       borderRadius: theme.shape.borderRadius,
       display: 'flex',
       flexDirection: 'row',

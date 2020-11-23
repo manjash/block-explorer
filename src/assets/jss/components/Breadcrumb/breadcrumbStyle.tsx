@@ -23,8 +23,8 @@ const breadcrumbStyle = (theme: Theme) =>
       color: theme.palette.common.white,
     },
     block: {
-      backgroundColor: theme.palette.secondaryBackground.main,
-      borderColor: theme.palette.secondaryBackground.main,
+      backgroundColor: theme.palette.secondaryBackground?.main,
+      borderColor: theme.palette.secondaryBackground?.main,
       color: theme.palette.common.white,
     },
     transaction: {

@@ -5,7 +5,7 @@ const defaultHeight = '49px'
 const adStyle = (theme: Theme) =>
   createStyles({
     root: {
-      backgroundColor: theme.palette.primaryBackground.main,
+      backgroundColor: theme.palette.primaryBackground?.main,
       [theme.breakpoints.down('sm')]: {
         paddingTop: theme.spacing(2),
       },

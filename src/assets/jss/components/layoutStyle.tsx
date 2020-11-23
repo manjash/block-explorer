@@ -8,8 +8,8 @@ const sidebarStyle = (theme: Theme) =>
     content: {
       flexGrow: 1,
       minHeight: '100vh',
-      minWidth: `calc(100vw - ${theme.sidebar.width}px)`,
-      backgroundColor: theme.palette.primaryBackground.main,
+      minWidth: `calc(100vw - ${theme.sidebar?.width}px)`,
+      backgroundColor: theme.palette.primaryBackground?.main,
       padding: theme.spacing(5),
       [theme.breakpoints.down('sm')]: {
         padding: theme.spacing(2),

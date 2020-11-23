@@ -7,11 +7,11 @@ const sidebarStyle = (theme: Theme) =>
       margin: '0 auto',
     },
     drawer: {
-      width: theme.sidebar.width,
+      width: theme.sidebar?.width,
       flexShrink: 0,
     },
     drawerPaper: {
-      background: theme.sidebar.background,
+      background: theme.sidebar?.background,
       border: 'none',
       position: 'fixed',
       paddingTop: '54px',
@@ -20,7 +20,7 @@ const sidebarStyle = (theme: Theme) =>
       left: '0',
       zIndex: 1,
       boxShadow: theme.shadows[3],
-      width: theme.sidebar.width,
+      width: theme.sidebar?.width,
       height: '100%',
     },
     list: {
