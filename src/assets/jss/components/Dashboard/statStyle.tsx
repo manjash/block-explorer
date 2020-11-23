@@ -1,11 +1,10 @@
 import { createStyles, Theme } from '@material-ui/core'
-import { defaultBorderColor } from '../../base'
 
 const adStyle = (theme: Theme) =>
   createStyles({
     root: {
       width: '25%',
-      borderRight: `1px solid ${defaultBorderColor}`,
+      borderRight: `1px solid ${theme.palette.borderColor.main}`,
       padding: theme.spacing(2, 4, 2, 4),
       '&:nth-of-type(4n)': {
         borderRight: 'none',
@@ -35,7 +34,7 @@ const adStyle = (theme: Theme) =>
     },
     bar: {
       margin: theme.spacing(2, 0, 1, 0),
-      backgroundColor: defaultBorderColor,
+      backgroundColor: theme.palette.borderColor.main,
       width: '100%',
       height: 2,
     },

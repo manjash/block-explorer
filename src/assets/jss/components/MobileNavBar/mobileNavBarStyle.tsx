@@ -1,10 +1,9 @@
-import { backgroundNavigationColor } from '../../base'
-import { createStyles } from '@material-ui/core'
+import { createStyles, Theme } from '@material-ui/core'
 
-const mobileNavBarStyle = () =>
+const mobileNavBarStyle = (theme: Theme) =>
   createStyles({
     root: {
-      background: backgroundNavigationColor,
+      background: theme.sidebar.background,
       bottom: 0,
       top: 'auto',
       position: 'fixed',

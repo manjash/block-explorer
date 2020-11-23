@@ -1,5 +1,4 @@
-import { whiteColorRGB } from '../../base'
-import { createStyles, Theme } from '@material-ui/core'
+import { createStyles, Theme, fade } from '@material-ui/core'
 
 const adStyle = (theme: Theme) =>
   createStyles({
@@ -14,7 +13,7 @@ const adStyle = (theme: Theme) =>
       margin: '0 auto',
       height: '290px',
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: `rgba(${whiteColorRGB}, 0.02)`,
+      backgroundColor: fade(theme.palette.common.white, 0.02),
     },
     image: {
       width: '100px',

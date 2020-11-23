@@ -1,5 +1,4 @@
 import { createStyles, Theme } from '@material-ui/core'
-import { defaultBorderColor } from '../../base'
 
 const blockInformationStyle = (theme: Theme) =>
   createStyles({
@@ -23,7 +22,7 @@ const blockInformationStyle = (theme: Theme) =>
     },
     bar: {
       margin: theme.spacing(2, 0, 1, 0),
-      backgroundColor: defaultBorderColor,
+      backgroundColor: theme.palette.borderColor.main,
       width: '80%',
       height: 2,
     },
