@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 import Alert from '../../components/Alert/Alert'
 import { generateBlock } from '../../mocks/BlockMock'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
-import BlockInformationPanel from '../../components/BlockInformationPanel/BlockInformationPanel'
+import BlockInformationPanel from '../../components/InformationPanel/InformationPanel'
 import * as hooks from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
 

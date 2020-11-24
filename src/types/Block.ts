@@ -1,8 +1,8 @@
 export default interface Block {
-  height: Number
-  size: Number
-  transactions: Number
-  difficulty?: Number
+  height: number
+  size: number
+  transactions: number
+  difficulty?: number
   hash: string
   timestamp: Date
 }

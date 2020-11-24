@@ -1,6 +1,6 @@
 import { createStyles } from '@material-ui/core'
 
-const blockInformationPanelStyle = () =>
+const informationPanelStyle = () =>
   createStyles({
     root: {
       display: 'flex',
@@ -9,4 +9,4 @@ const blockInformationPanelStyle = () =>
     },
   })
 
-export default blockInformationPanelStyle
+export default informationPanelStyle

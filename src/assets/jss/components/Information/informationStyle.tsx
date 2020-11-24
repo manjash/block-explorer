@@ -1,6 +1,6 @@
 import { createStyles, Theme } from '@material-ui/core'
 
-const blockInformationStyle = (theme: Theme) =>
+const informationStyle = (theme: Theme) =>
   createStyles({
     root: {
       width: '33%',
@@ -22,7 +22,7 @@ const blockInformationStyle = (theme: Theme) =>
     },
     bar: {
       margin: theme.spacing(2, 0, 1, 0),
-      backgroundColor: theme.palette.borderColor.main,
+      backgroundColor: theme.palette.borderColor?.main,
       width: '80%',
       height: 2,
     },
@@ -34,4 +34,4 @@ const blockInformationStyle = (theme: Theme) =>
     },
   })
 
-export default blockInformationStyle
+export default informationStyle

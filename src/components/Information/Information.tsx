@@ -3,16 +3,16 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import blockInformationStyle from '../../assets/jss/components/BlockInformation/blockInformationStyle'
+import informationStyle from '../../assets/jss/components/Information/informationStyle'
 
 interface Prop {
   title: any
   children: any
   icon: any
 }
-const useStyles = makeStyles(blockInformationStyle)
+const useStyles = makeStyles(informationStyle)
 
-const BlockInformation = (props: Prop) => {
+const Information = (props: Prop) => {
   const { title, children } = props
   const classes = useStyles()
   return (
@@ -29,4 +29,4 @@ const BlockInformation = (props: Prop) => {
   )
 }
 
-export default BlockInformation
+export default Information

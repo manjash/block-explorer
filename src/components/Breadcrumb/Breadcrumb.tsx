@@ -17,7 +17,7 @@ export enum PillType {
 
 interface Path {
   title: string | Number
-  to: string
+  to?: string
   type: PillType
 }
 
@@ -31,19 +31,34 @@ const Breadcrumb = ({ paths }: Props) => {
   const pathsLength = paths.length
   return (
     <Breadcrumbs separator={null} aria-label='breadcrumb' className={classes.root}>
-      {paths.map((path, index) => (
-        <Link
-          className={classNames(classes.link, {
-            [classes[path.type]]: true,
-            [classes['lastItem']]: pathsLength === index + 1,
-          })}
-          key={path.to}
-          color='inherit'
-          to={path.to}
-        >
-          {path.title}
-        </Link>
-      ))}
+      {paths.map((path, index) => {
+        if (path.to) {
+          return (
+            <Link
+              className={classNames(classes.pill, classes.link, {
+                [classes[path.type]]: true,
+                [classes['lastItem']]: pathsLength === index + 1,
+              })}
+              key={path.to}
+              color='inherit'
+              to={path.to}
+            >
+              {path.title}
+            </Link>
+          )
+        }
+        return (
+          <span
+            className={classNames(classes.pill, {
+              [classes[path.type]]: true,
+              [classes['lastItem']]: pathsLength === index + 1,
+            })}
+            key={path.to}
+          >
+            {path.title}
+          </span>
+        )
+      })}
     </Breadcrumbs>
   )
 }

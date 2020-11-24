@@ -6,7 +6,7 @@ const breadcrumbStyle = (theme: Theme) =>
       height: theme.spacing(5),
       marginBottom: theme.spacing(1),
     },
-    link: {
+    pill: {
       transition: `all 0.33s ${theme.transitions.easing.easeInOut}`,
       borderRadius: theme.shape.borderRadius,
       border: `2px solid ${theme.palette.secondary.main}`,
@@ -14,7 +14,11 @@ const breadcrumbStyle = (theme: Theme) =>
       padding: theme.spacing(1, 2, 1, 2),
       fontWeight: theme.typography.fontWeightBold,
       textDecoration: 'none',
+      cursor: 'default',
+    },
+    link: {
       '&:hover, &:focus': {
+        cursor: 'pointer',
         backgroundColor: 'transparent',
         color: theme.palette.common.black,
       },
@@ -35,6 +39,7 @@ const breadcrumbStyle = (theme: Theme) =>
     lastItem: {
       backgroundColor: 'transparent',
       color: theme.palette.common.black,
+      borderColor: theme.palette.secondaryBackground?.main,
     },
   })
 

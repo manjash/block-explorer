@@ -24,18 +24,23 @@
         "actions": "Actions"
       },
       "breadcrumb": {
-        "blocks": "Blocks"
+        "blocks": "Blocks",
+        "transactions": "Transactions"
+      },
+      "informationPanel": {
+        "blockId": "Block ID",
+        "confirmations": "Confirmations",
+        "difficulty": "Difficulty",
+        "fee": "Fee",
+        "hash": "Hash",
+        "height": "Height",
+        "size": "Size",
+        "spendsReceipts": "Spends / Receipts",
+        "timestamp": "Timestamp",
+        "transactions": "Transactions count"
       }
     },
     "blockDetailPage": {
-      "informationPanel": {
-        "height": "Height",
-        "size": "Size",
-        "hash": "Hash",
-        "transactions": "Transactions count",
-        "difficulty": "Difficulty",
-        "timestamp": "timestamp"
-      },
       "information": {
         "title": "General Information",
         "error": {

@@ -6,7 +6,7 @@ import TransactionsContainer from '../TransactionsContainer/TransactionsContaine
 import Alert from '../../components/Alert/Alert'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
 import Breadcrumb, { PillType } from '../../components/Breadcrumb/Breadcrumb'
-import BlockInformationPanel from '../../components/BlockInformationPanel/BlockInformationPanel'
+import InformationPanel from '../../components/InformationPanel/InformationPanel'
 
 import { ApiUrls } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
@@ -39,7 +39,6 @@ const BlockDetailPage = () => {
             },
             {
               title: blockData.hash,
-              to: getBlockDetailPageUrl(blockData.height),
               type: PillType.Block,
             },
           ]}
@@ -60,7 +59,13 @@ const BlockDetailPage = () => {
         <div>
           {blockData && (
             <>
-              <BlockInformationPanel block={blockData} />
+              <InformationPanel
+                height={blockData.height}
+                size={blockData.size}
+                transactions={blockData.transactions}
+                difficulty={blockData.difficulty}
+                timestamp={blockData.timestamp}
+              />
             </>
           )}
         </div>

@@ -1,7 +1,12 @@
 export default interface Transaction {
-  size: number
-  hash: string
+  blockId: number
+  confirmations: number
   fee: number
+  hash: string
+  receipts: number
+  size: number
+  spends: number
+  timestamp: Date
 }
 
 export type Transactions = Transaction[]
