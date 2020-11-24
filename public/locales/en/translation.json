@@ -49,6 +49,20 @@
         }
       }
     },
+    "transactionDetailPage": {
+      "information": {
+        "title": "General Information",
+        "error": {
+          "title": "Block not available",
+          "description": "We are not able to load the information of this block, or the connection to Iron Fish is broken"
+        }
+      },
+      "warning": {
+        "title": "Iron Fish is a private cryptocurrency",
+        "description": "You can’t see the details of a transaction without the public view key",
+        "button": "More details"
+      }
+    },
     "transactionsContainer": {
       "title": "Transactions",
       "error": {

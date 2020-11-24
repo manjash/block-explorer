@@ -1,4 +1,4 @@
-import { createStyles, Theme } from '@material-ui/core'
+import { createStyles, fade, Theme } from '@material-ui/core'
 
 const alertStyle = (theme: Theme) =>
   createStyles({
@@ -7,8 +7,14 @@ const alertStyle = (theme: Theme) =>
       borderRadius: 0,
       display: 'flex',
       flexDirection: 'column',
-      padding: theme.spacing(1, 2, 1, 2),
+      padding: theme.spacing(2, 2, 2, 2),
+    },
+    error: {
       backgroundColor: theme.palette.error.main,
+    },
+    information: {
+      backgroundColor: fade(theme.palette.secondary.main, 0.9),
+      color: theme.palette.common.white,
     },
     icon: {
       marginRight: theme.spacing(1),

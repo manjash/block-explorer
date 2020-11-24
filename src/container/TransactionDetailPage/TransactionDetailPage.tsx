@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 
 // import TransactionsContainer from '../TransactionsContainer/TransactionsContainer'
 
-import Alert from '../../components/Alert/Alert'
+import Alert, { AlertType } from '../../components/Alert/Alert'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
 import Breadcrumb, { PillType } from '../../components/Breadcrumb/Breadcrumb'
 import InformationPanel from '../../components/InformationPanel/InformationPanel'
@@ -59,29 +59,32 @@ const TransactionDetailPage = () => {
       <BoxWrapper
         marginBottom={2}
         isLoading={service.status === ServiceState.LOADING}
-        title={t('app.blockDetailPage.information.title')}
+        title={t('app.transactionDetailPage.information.title')}
       >
         {service.status === ServiceState.ERROR && (
           <Alert
-            title={t('app.blockDetailPage.information.error.title')}
-            description={t('app.blockDetailPage.information.error.description')}
+            title={t('app.transactionDetailPage.information.error.title')}
+            description={t('app.transactionDetailPage.information.error.description')}
           />
         )}
-        <div>
-          {transactionData && (
-            <>
-              <InformationPanel
-                blockId={transactionData.blockId}
-                fee={transactionData.fee}
-                confirmations={transactionData.confirmations}
-                timestamp={transactionData.timestamp}
-                size={transactionData.size}
-                spendsReceipts={`${transactionData.spends} / ${transactionData.receipts}`}
-              />
-            </>
-          )}
-        </div>
+        {transactionData && (
+          <InformationPanel
+            blockId={transactionData.blockId}
+            fee={transactionData.fee}
+            confirmations={transactionData.confirmations}
+            timestamp={transactionData.timestamp}
+            size={transactionData.size}
+            spendsReceipts={`${transactionData.spends} / ${transactionData.receipts}`}
+          />
+        )}
       </BoxWrapper>
+      {transactionData && (
+        <Alert
+          type={AlertType.Information}
+          title={t('app.transactionDetailPage.warning.title')}
+          description={t('app.transactionDetailPage.warning.description')}
+        />
+      )}
 
       {/* {blockData && <TransactionsContainer hash={blockData.hash} />} */}
     </>
