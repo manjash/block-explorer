@@ -8,6 +8,7 @@ const alertStyle = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       padding: theme.spacing(2, 2, 2, 2),
+      boxShadow: theme.shadows[5],
     },
     error: {
       backgroundColor: theme.palette.error.main,

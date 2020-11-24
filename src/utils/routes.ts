@@ -1,7 +1,7 @@
 import { RoutePath } from '../routes'
 
-export const getBlockDetailPageUrl = (id: Number): string => {
-  return RoutePath.BlockDetailPage.replace(':id', String(id))
+export const getBlockDetailPageUrl = (id: number): string => {
+  return RoutePath.BlockDetailPage.replace(':id', `${id}`)
 }
 
 export const getTransactionDetailPageUrl = (hash: string): string => {

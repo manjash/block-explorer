@@ -2,12 +2,12 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
-// import TransactionsContainer from '../TransactionsContainer/TransactionsContainer'
-
 import Alert, { AlertType } from '../../components/Alert/Alert'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
 import Breadcrumb, { PillType } from '../../components/Breadcrumb/Breadcrumb'
 import InformationPanel from '../../components/InformationPanel/InformationPanel'
+import SpendsList from '../../components/SpendsList/SpendsList'
+import ReceiptsList from '../../components/ReceiptsList/ReceiptsList'
 
 import { ApiUrls } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
@@ -16,6 +16,7 @@ import Transaction from '../../types/Transaction'
 
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { RoutePath } from '../../routes'
+import { Box } from '@material-ui/core'
 
 interface ParamTypes {
   hash: string
@@ -40,7 +41,7 @@ const TransactionDetailPage = () => {
               type: PillType.Route,
             },
             {
-              title: transactionData.blockId,
+              title: `${transactionData.blockId}`,
               to: getBlockDetailPageUrl(transactionData.blockId),
               type: PillType.Block,
             },
@@ -74,7 +75,7 @@ const TransactionDetailPage = () => {
             confirmations={transactionData.confirmations}
             timestamp={transactionData.timestamp}
             size={transactionData.size}
-            spendsReceipts={`${transactionData.spends} / ${transactionData.receipts}`}
+            spendsReceipts={`${transactionData.spends.length} / ${transactionData.receipts.length}`}
           />
         )}
       </BoxWrapper>
@@ -85,8 +86,16 @@ const TransactionDetailPage = () => {
           description={t('app.transactionDetailPage.warning.description')}
         />
       )}
-
-      {/* {blockData && <TransactionsContainer hash={blockData.hash} />} */}
+      {transactionData && (
+        <Box marginTop={2} display='flex' justifyContent='space-between'>
+          <BoxWrapper title={t('app.transactionDetailPage.spends')} width='49%'>
+            <SpendsList spends={transactionData.spends} />
+          </BoxWrapper>
+          <BoxWrapper title={t('app.transactionDetailPage.receipts')} width='49%'>
+            <ReceiptsList receipts={transactionData.receipts} />
+          </BoxWrapper>
+        </Box>
+      )}
     </>
   )
 }

@@ -38,6 +38,12 @@
         "spendsReceipts": "Spends / Receipts",
         "timestamp": "Timestamp",
         "transactions": "Transactions count"
+      },
+      "receipts": {
+        "noteCommitment": "Note commitment"
+      },
+      "spends": {
+        "nullifier": "Nullifier"
       }
     },
     "blockDetailPage": {
@@ -50,6 +56,8 @@
       }
     },
     "transactionDetailPage": {
+      "spends": "Spends",
+      "receipts": "Receipts",
       "information": {
         "title": "General Information",
         "error": {

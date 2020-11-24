@@ -23,4 +23,7 @@ jest.mock('react-router-dom', () => ({
   useLocation: () => ({
     pathname: '/dashboard',
   }),
+  useParams: () => ({
+    hash: 'group1',
+  }),
 }))

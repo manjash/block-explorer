@@ -39,7 +39,7 @@ const Breadcrumb = ({ paths }: Props) => {
                 [classes[path.type]]: true,
                 [classes['lastItem']]: pathsLength === index + 1,
               })}
-              key={path.to}
+              key={String(path.title)}
               color='inherit'
               to={path.to}
             >
@@ -53,7 +53,7 @@ const Breadcrumb = ({ paths }: Props) => {
               [classes[path.type]]: true,
               [classes['lastItem']]: pathsLength === index + 1,
             })}
-            key={path.to}
+            key={String(path.title)}
           >
             {path.title}
           </span>

@@ -6,6 +6,23 @@
   "fee": "0.0001",
   "hash": "c62d378ef9cbc0764a8ef556d8bb541b03373426634a6e8e70f42533ec325c33",
   "blockId": "2227131",
-  "spends": "0",
-  "receipts": "2"
+  "spends": [
+    {
+      "nullifier": "cd378ef9cbc0764a8ef556d8bb541b03373426634a6e8e70f42533ec325c33"
+    },
+    {
+      "nullifier": "f556d8bb541b03373426634a6e8e70f42533ec325c33cd378ef9cbc0764a8e"
+    },
+    {
+      "nullifier": "cfsd12fdd39cbc0764a8ef556d8bb541b03373426634a6e8e70f42533ec325c33"
+    }
+  ],
+  "receipts": [
+    {
+      "noteCommitment": "cd378ef9cbc0764a8ef556d8bb541b03373426634a6e8e70f42533ec325c33"
+    },
+    {
+      "noteCommitment": "cfsd12fdd39cbc0764a8ef556d8bb541b03373426634a6e8e70f42533ec325c33"
+    }
+  ]
 }

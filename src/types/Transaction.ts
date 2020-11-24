@@ -1,11 +1,14 @@
+import { Receipts } from './Receipt'
+import { Spends } from './Spend'
+
 export default interface Transaction {
   blockId: number
-  confirmations: number
+  confirmations?: number
   fee: number
   hash: string
-  receipts: number
+  receipts: Receipts
   size: number
-  spends: number
+  spends: Spends
   timestamp: Date
 }
 

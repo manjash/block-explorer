@@ -2,8 +2,10 @@ import { createStyles, Theme } from '@material-ui/core'
 
 export const tableCellStyle = (theme: Theme) =>
   createStyles({
-    body: {
+    root: {
+      whiteSpace: 'nowrap',
       paddingTop: 0,
+      height: theme.spacing(4),
       paddingBottom: 0,
       '& a': {
         fontWeight: theme.typography.fontWeightBold,
