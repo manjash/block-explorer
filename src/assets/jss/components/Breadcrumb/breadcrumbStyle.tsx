@@ -1,4 +1,3 @@
-import { defaultOrangeBackgroundColor } from '../../base'
 import { createStyles, Theme } from '@material-ui/core'
 
 const breadcrumbStyle = (theme: Theme) =>
@@ -8,6 +7,7 @@ const breadcrumbStyle = (theme: Theme) =>
       marginBottom: theme.spacing(1),
     },
     link: {
+      transition: `all 0.33s ${theme.transitions.easing.easeInOut}`,
       borderRadius: theme.shape.borderRadius,
       border: `2px solid ${theme.palette.secondary.main}`,
       height: theme.spacing(3),
@@ -24,8 +24,8 @@ const breadcrumbStyle = (theme: Theme) =>
       color: theme.palette.common.white,
     },
     block: {
-      backgroundColor: defaultOrangeBackgroundColor,
-      borderColor: defaultOrangeBackgroundColor,
+      backgroundColor: theme.palette.secondaryBackground?.main,
+      borderColor: theme.palette.secondaryBackground?.main,
       color: theme.palette.common.white,
     },
     transaction: {

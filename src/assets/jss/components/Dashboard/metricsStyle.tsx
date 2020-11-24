@@ -1,11 +1,10 @@
 import { createStyles, Theme } from '@material-ui/core'
-import { defaultBorderColor } from '../../base'
 
 const metricsStyle = (theme: Theme) =>
   createStyles({
     root: {
       backgroundColor: theme.palette.common.white,
-      border: `1px solid ${defaultBorderColor}`,
+      border: `1px solid ${theme.palette.borderColor?.main}`,
       borderRadius: theme.shape.borderRadius,
       display: 'flex',
       flexDirection: 'row',

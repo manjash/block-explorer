@@ -33,11 +33,11 @@ const Sidebar = ({ routes }: Props) => {
       {routes.map((route: RouteValidator) => {
         const listItem = (
           <ListItem button className={classes.itemLink}>
-            <route.icon className={classNames(classes.itemIcon)} />
+            <route.icon className={classes.itemIcon} />
 
             <ListItemText
               primary={t(route.nameKey)}
-              className={classNames(classes.itemText)}
+              className={classes.itemText}
               disableTypography
             />
 

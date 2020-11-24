@@ -24,7 +24,7 @@ const Stat = (props: Prop) => {
     <div className={classes.root}>
       <div className={classes.header}>
         <div className={classNames(classes.iconWrapper, { [classes[wrapperClassName]]: true })}>
-          <props.icon className={classNames(classes.icon)} />
+          <props.icon className={classes.icon} />
         </div>
         {props.title}
       </div>

@@ -1,6 +1,4 @@
-import { drawerWidth, blackColorRGB, backgroundNavigationColor } from '../../base'
-
-import { createStyles, Theme } from '@material-ui/core'
+import { createStyles, fade, Theme } from '@material-ui/core'
 
 const sidebarStyle = (theme: Theme) =>
   createStyles({
@@ -9,11 +7,11 @@ const sidebarStyle = (theme: Theme) =>
       margin: '0 auto',
     },
     drawer: {
-      width: drawerWidth,
+      width: theme.sidebar?.width,
       flexShrink: 0,
     },
     drawerPaper: {
-      background: backgroundNavigationColor,
+      background: theme.sidebar?.background,
       border: 'none',
       position: 'fixed',
       paddingTop: '54px',
@@ -22,7 +20,7 @@ const sidebarStyle = (theme: Theme) =>
       left: '0',
       zIndex: 1,
       boxShadow: theme.shadows[3],
-      width: drawerWidth,
+      width: theme.sidebar?.width,
       height: '100%',
     },
     list: {
@@ -36,8 +34,9 @@ const sidebarStyle = (theme: Theme) =>
       display: 'block',
       textDecoration: 'none',
       color: theme.palette.common.white,
+      transition: `all 0.33s ${theme.transitions.easing.easeInOut}`,
       '&:hover,&:focus': {
-        backgroundColor: `rgba(${blackColorRGB}, 0.25)`,
+        backgroundColor: fade(theme.palette.common.black, 0.25),
       },
     },
     itemActive: {
@@ -45,7 +44,6 @@ const sidebarStyle = (theme: Theme) =>
     },
     itemLink: {
       width: 'auto',
-      transition: 'all 300ms linear',
       margin: '10px 15px 0',
       display: 'flex',
       padding: '10px 15px',
