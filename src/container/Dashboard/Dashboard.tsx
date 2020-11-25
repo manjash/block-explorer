@@ -5,10 +5,11 @@ import { useTranslation } from 'react-i18next'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
 
+import Meta from '../../components/Meta/Meta'
 import Metrics from '../../components/Dashboard/Metrics'
 import BlocksList from '../../components/BlocksList/BlocksList'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
-import { RoutePath } from '../../routes'
+import { RoutePath } from '../../routes/routePath'
 import { blockList as mockData } from '../../mocks/BlockMock'
 
 const Dashboard = () => {
@@ -16,9 +17,11 @@ const Dashboard = () => {
 
   return (
     <>
+      <Meta path={RoutePath.Dashboard} />
       <Box marginBottom={4}>
         <Metrics />
       </Box>
+
       <BoxWrapper title={t('app.dashboard.blocks.latestBlocksTitle')}>
         <BlocksList blockList={mockData(5)} />
 

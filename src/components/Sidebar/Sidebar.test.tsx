@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 import ListItem from '@material-ui/core/ListItem'
 
 import Sidebar from './Sidebar'
-import routes from '../../routes'
+import routes from '../../routes/routeSwitch'
 
 describe('<Sidebar />', () => {
   test('It renders correctly', () => {

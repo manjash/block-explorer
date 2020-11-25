@@ -1,22 +1,25 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { HelmetProvider } from 'react-helmet-async'
 
 import Layout from '../Layout/Layout'
-import routes from '../../routes'
+import routes from '../../routes/routeSwitch'
 
 const App = () => (
-  <Router>
-    <Layout routes={routes}>
-      <Switch>
-        {routes
-          .filter((route) => route.path !== undefined)
-          .map((route) => {
-            return <Route path={route.path} component={route.component} key={route.nameKey} />
-          })}
-        <Redirect from='/' to='dashboard' />
-      </Switch>
-    </Layout>
-  </Router>
+  <HelmetProvider>
+    <Router>
+      <Layout routes={routes}>
+        <Switch>
+          {routes
+            .filter((route) => route.path !== undefined)
+            .map((route) => {
+              return <Route path={route.path} component={route.component} key={route.nameKey} />
+            })}
+          <Redirect from='/' to='dashboard' />
+        </Switch>
+      </Layout>
+    </Router>
+  </HelmetProvider>
 )
 
 export default App

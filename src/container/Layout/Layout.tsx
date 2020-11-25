@@ -8,7 +8,7 @@ import Header from '../../components/Header/Header'
 import MobileNavBar from '../../components/MobileNavBar/MobileNavBar'
 
 import layoutStyle from '../../assets/jss/components/layoutStyle'
-import { RouteValidator } from '../../routes'
+import { RouteValidator } from '../../routes/routeSwitch'
 
 interface Props {
   children: ReactNode

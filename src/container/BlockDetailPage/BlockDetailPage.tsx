@@ -7,6 +7,7 @@ import Alert from '../../components/Alert/Alert'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
 import Breadcrumb, { PillType } from '../../components/Breadcrumb/Breadcrumb'
 import InformationPanel from '../../components/InformationPanel/InformationPanel'
+import Meta from '../../components/Meta/Meta'
 
 import { ApiUrls } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
@@ -14,7 +15,7 @@ import { ServiceState } from '../../types/Service'
 import Block from '../../types/Block'
 
 import { getBlockDetailPageUrl } from '../../utils/routes'
-import { RoutePath } from '../../routes'
+import { RoutePath } from '../../routes/routePath'
 
 const BlockDetailPage = () => {
   const { t } = useTranslation()
@@ -22,8 +23,15 @@ const BlockDetailPage = () => {
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
 
+  const metaVariables = {
+    id: blockData ? `${blockData.height}` : '',
+    hash: blockData ? blockData.hash : '',
+  }
+
   return (
     <>
+      {blockData && <Meta path={RoutePath.BlockDetailPage} variables={metaVariables} />}
+
       {blockData && (
         <Breadcrumb
           paths={[

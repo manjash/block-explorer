@@ -8,7 +8,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import { AppBar } from '@material-ui/core'
 
-import { RouteValidator } from '../../routes'
+import { RouteValidator } from '../../routes/routeSwitch'
 import mobileNavBarStyle from '../../assets/jss/components/MobileNavBar/mobileNavBarStyle'
 
 const useStyles = makeStyles(mobileNavBarStyle)

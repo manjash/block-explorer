@@ -12,7 +12,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 import sidebarStyle from '../../assets/jss/components/Sidebar/sidebarStyle'
-import { RoutePath, RouteValidator } from '../../routes'
+import { RouteValidator } from '../../routes/routeSwitch'
+import { RoutePath } from '../../routes/routePath'
 import logo from '../../assets/images/logo.svg'
 import Ad from './Ad'
 

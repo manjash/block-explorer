@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 
 import Layout from './Layout'
 import Sidebar from '../../components/Sidebar/Sidebar'
-import routes from '../../routes'
+import routes from '../../routes/routeSwitch'
 
 describe('<Layout />', () => {
   test('It renders correctly', () => {

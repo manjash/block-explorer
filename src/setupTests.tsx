@@ -12,7 +12,10 @@ configure({ adapter: new Adapter() })
 
 // Mock i18n provider in the test suite
 jest.mock('react-i18next', () => ({
-  useTranslation: (): {} => ({ t: (key: string): string => key }),
+  useTranslation: (): {} => ({
+    t: (key: string, variables: object = {}): string =>
+      key + Object.values(variables).join(','),
+  }),
   // eslint-disable-next-line react/display-name
   Trans: (): ReactElement => <></>,
 }))

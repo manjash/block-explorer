@@ -6,10 +6,12 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 import WidgetsIcon from '@material-ui/icons/Widgets'
 import ReceiptIcon from '@material-ui/icons/Receipt'
 
-import BlockDetailPage from './container/BlockDetailPage/BlockDetailPage'
-import TransactionDetailPage from './container/TransactionDetailPage/TransactionDetailPage'
-import Dashboard from './container/Dashboard/Dashboard'
-import Explorer from './container/Explorer/Explorer'
+import BlockDetailPage from '../container/BlockDetailPage/BlockDetailPage'
+import TransactionDetailPage from '../container/TransactionDetailPage/TransactionDetailPage'
+import Dashboard from '../container/Dashboard/Dashboard'
+import Explorer from '../container/Explorer/Explorer'
+
+import { RoutePath } from './routePath'
 
 export interface RouteValidator {
   icon: React.ElementType
@@ -18,13 +20,6 @@ export interface RouteValidator {
   component?: FunctionComponent
   path?: string
   url?: string
-}
-
-export enum RoutePath {
-  Dashboard = '/dashboard',
-  Explorer = '/explorer',
-  BlockDetailPage = '/blocks/:id',
-  TransactionDetailPage = '/transactions/:hash',
 }
 
 const routes: RouteValidator[] = [

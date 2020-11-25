@@ -2,6 +2,8 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
+import { Box } from '@material-ui/core'
+
 import Alert, { AlertType } from '../../components/Alert/Alert'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
 import Breadcrumb, { PillType } from '../../components/Breadcrumb/Breadcrumb'
@@ -15,8 +17,8 @@ import { ServiceState } from '../../types/Service'
 import Transaction from '../../types/Transaction'
 
 import { getBlockDetailPageUrl } from '../../utils/routes'
-import { RoutePath } from '../../routes'
-import { Box } from '@material-ui/core'
+import { RoutePath } from '../../routes/routePath'
+import Meta from '../../components/Meta/Meta'
 
 interface ParamTypes {
   hash: string
@@ -30,8 +32,13 @@ const TransactionDetailPage = () => {
 
   const transactionData = service.status === ServiceState.LOADED && service.payload.result
 
+  const metaVariables = { hash: transactionData ? transactionData.hash : '' }
+
   return (
     <>
+      {transactionData && (
+        <Meta path={RoutePath.TransactionDetailPage} variables={metaVariables} />
+      )}
       {transactionData && (
         <Breadcrumb
           paths={[

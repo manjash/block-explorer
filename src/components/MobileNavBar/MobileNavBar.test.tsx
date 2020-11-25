@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 
 import MobileNavBar from './MobileNavBar'
-import routes from '../../routes'
+import routes from '../../routes/routeSwitch'
 
 describe('<MobileNavBar />', () => {
   test('It renders the right action items', () => {

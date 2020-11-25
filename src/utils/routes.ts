@@ -1,4 +1,4 @@
-import { RoutePath } from '../routes'
+import { RoutePath } from '../routes/routePath'
 
 export const getBlockDetailPageUrl = (id: number): string => {
   return RoutePath.BlockDetailPage.replace(':id', `${id}`)

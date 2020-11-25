@@ -1,5 +1,10 @@
 {
   "app": {
+    "meta": {
+      "defaultTitle": "Iron Fish Block Explorer",
+      "defaultDescription": "Block Explorer for IRF - Browse and search transactions, blocks. See spends and receipts for transaction.",
+      "defaultKeywords": "IRF, Iron Fish, blocks, transactions, explorer, public key, hashrate, analytics"
+    },
     "header": {
       "logo": {
         "alt": "Iron Fish Block Explorer"
@@ -47,6 +52,10 @@
       }
     },
     "blockDetailPage": {
+      "meta": {
+        "title": "IRF / Block / {{ hash }} / {{ id }}",
+        "description": "Iron Fish (IRF) block {{ id }}, hash: {{ hash }}"
+      },
       "information": {
         "title": "General Information",
         "error": {
@@ -56,6 +65,10 @@
       }
     },
     "transactionDetailPage": {
+      "meta": {
+        "title": "IRF / Transaction / {{ hash }}",
+        "description": "Iron Fish (IRF) Transaction hash: {{ hash }}"
+      },
       "spends": "Spends",
       "receipts": "Receipts",
       "information": {
@@ -78,7 +91,15 @@
         "description": "We are not able to load the transactions, or the connection to Iron Fish is broken"
       }
     },
+    "explorer": {
+      "meta": {
+        "title": "IRF blocks Explorer"
+      }
+    },
     "dashboard": {
+      "meta": {
+        "title": "IRF Dashboard"
+      },
       "blocks": {
         "latestBlocksTitle": "Latest Blocks",
         "goToExplorer": "Block Explorer →"
@@ -99,7 +120,8 @@
       "explorer": "Explorer",
       "docs": "Developer docs",
       "ironfish": "Iron Fish",
-      "blocks": "Blocks"
+      "blocks": "Blocks",
+      "transactions": "Transactions"
     }
   }
 }
