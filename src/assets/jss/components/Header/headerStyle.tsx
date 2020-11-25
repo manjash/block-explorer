@@ -5,10 +5,11 @@ const defaultHeight = '49px'
 const adStyle = (theme: Theme) =>
   createStyles({
     root: {
-      backgroundColor: theme.palette.primaryBackground?.main,
-      [theme.breakpoints.down('sm')]: {
-        paddingTop: theme.spacing(2),
-      },
+      boxShadow: 'none',
+      background: 'none',
+    },
+    toolbar: {
+      padding: 0,
     },
     inputRoot: {
       color: 'inherit',
@@ -38,7 +39,6 @@ const adStyle = (theme: Theme) =>
         backgroundColor: fade(theme.palette.common.white, 0.01),
       },
       width: '100%',
-      margin: theme.spacing(5, 2, 0, 2),
       height: defaultHeight,
       [theme.breakpoints.down('sm')]: {
         margin: theme.spacing(2, 0, 2, 0),

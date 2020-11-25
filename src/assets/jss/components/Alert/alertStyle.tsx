@@ -23,6 +23,14 @@ const alertStyle = (theme: Theme) =>
     header: {
       display: 'flex',
       alignItems: 'center',
+      [theme.breakpoints.down('sm')]: {
+        marginBottom: theme.spacing(2),
+      },
+    },
+    title: {
+      [theme.breakpoints.down('sm')]: {
+        lineHeight: 1,
+      },
     },
   })
 

@@ -5,6 +5,9 @@ const breadcrumbStyle = (theme: Theme) =>
     root: {
       height: theme.spacing(5),
       marginBottom: theme.spacing(1),
+      [theme.breakpoints.down('sm')]: {
+        display: 'hidden',
+      },
     },
     pill: {
       transition: `all 0.33s ${theme.transitions.easing.easeInOut}`,
@@ -35,11 +38,17 @@ const breadcrumbStyle = (theme: Theme) =>
     transaction: {
       backgroundColor: theme.palette.secondary.main,
       color: theme.palette.common.white,
+      [theme.breakpoints.down('sm')]: {
+        display: 'none',
+      },
     },
     lastItem: {
       backgroundColor: 'transparent',
       color: theme.palette.common.black,
       borderColor: theme.palette.secondaryBackground?.main,
+      [theme.breakpoints.down('md')]: {
+        display: 'none',
+      },
     },
   })
 

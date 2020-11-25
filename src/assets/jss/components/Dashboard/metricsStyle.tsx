@@ -11,6 +11,9 @@ const metricsStyle = (theme: Theme) =>
       flexWrap: 'wrap',
       padding: theme.spacing(1, 0, 1, 0),
       boxShadow: theme.shadows[3],
+      [theme.breakpoints.down('sm')]: {
+        flexDirection: 'column',
+      },
     },
   })
 

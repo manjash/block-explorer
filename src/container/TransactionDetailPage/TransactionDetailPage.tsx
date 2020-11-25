@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
+import { makeStyles } from '@material-ui/core/styles'
 
 import { Box } from '@material-ui/core'
 
@@ -10,6 +11,7 @@ import Breadcrumb, { PillType } from '../../components/Breadcrumb/Breadcrumb'
 import InformationPanel from '../../components/InformationPanel/InformationPanel'
 import SpendsList from '../../components/SpendsList/SpendsList'
 import ReceiptsList from '../../components/ReceiptsList/ReceiptsList'
+import Meta from '../../components/Meta/Meta'
 
 import { ApiUrls } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
@@ -18,15 +20,17 @@ import Transaction from '../../types/Transaction'
 
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { RoutePath } from '../../routes/routePath'
-import Meta from '../../components/Meta/Meta'
+import transactionDetailPageStyle from '../../assets/jss/containers/transactionDetailPageStyle'
 
 interface ParamTypes {
   hash: string
 }
 
+const useStyles = makeStyles(transactionDetailPageStyle)
 const TransactionDetailPage = () => {
   const { t } = useTranslation()
   const { hash } = useParams<ParamTypes>()
+  const classes = useStyles()
 
   const service = useGetService<Transaction>(ApiUrls.BLOCK_TRANSACTION_PAGE, { hash })
 
@@ -94,13 +98,17 @@ const TransactionDetailPage = () => {
         />
       )}
       {transactionData && (
-        <Box marginTop={2} display='flex' justifyContent='space-between'>
-          <BoxWrapper title={t('app.transactionDetailPage.spends')} width='49%'>
-            <SpendsList spends={transactionData.spends} />
-          </BoxWrapper>
-          <BoxWrapper title={t('app.transactionDetailPage.receipts')} width='49%'>
-            <ReceiptsList receipts={transactionData.receipts} />
-          </BoxWrapper>
+        <Box marginTop={2} className={classes.root}>
+          <div className={classes.blocks}>
+            <BoxWrapper title={t('app.transactionDetailPage.spends')}>
+              <SpendsList spends={transactionData.spends} />
+            </BoxWrapper>
+          </div>
+          <div className={classes.blocks}>
+            <BoxWrapper title={t('app.transactionDetailPage.receipts')}>
+              <ReceiptsList receipts={transactionData.receipts} />
+            </BoxWrapper>
+          </div>
         </Box>
       )}
     </>

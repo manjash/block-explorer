@@ -35,7 +35,9 @@ const Alert = ({ title, description, type = AlertType.Error }: Prop) => {
       <div className={classes.header}>
         {type === AlertType.Error && <ErrorOutlineIcon className={classes.icon} />}
         {type === AlertType.Information && <InfoIcon className={classes.icon} />}
-        <Typography variant='h6'>{title}</Typography>
+        <Typography variant='h6' className={classes.title}>
+          {title}
+        </Typography>
       </div>
 
       {description}

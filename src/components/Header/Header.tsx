@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -9,6 +10,7 @@ import InputBase from '@material-ui/core/InputBase'
 
 import headerStyle from '../../assets/jss/components/Header/headerStyle'
 import hexofish from '../../assets/images/logo-fishonly.svg'
+import { RoutePath } from '../../routes/routePath'
 
 const useStyles = makeStyles(headerStyle)
 
@@ -22,9 +24,11 @@ const Header = ({ isSmallBreakpoint }: Props) => {
 
   return (
     <AppBar position='static' className={classes.root}>
-      <Toolbar>
+      <Toolbar className={classes.toolbar}>
         {isSmallBreakpoint && (
-          <img src={hexofish} alt={t('app.header.logo.alt')} className={classes.logo} />
+          <Link to={RoutePath.Dashboard}>
+            <img src={hexofish} alt={t('app.header.logo.alt')} className={classes.logo} />
+          </Link>
         )}
         <div className={classes.search}>
           <div className={classes.searchIcon}>

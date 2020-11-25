@@ -5,6 +5,9 @@ const informationStyle = (theme: Theme) =>
     root: {
       width: '33%',
       padding: theme.spacing(2, 2, 2, 2),
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
+      },
     },
     header: {
       display: 'flex',

@@ -9,6 +9,14 @@ const adStyle = (theme: Theme) =>
       '&:nth-of-type(4n)': {
         borderRight: 'none',
       },
+      [theme.breakpoints.down('md')]: {
+        width: '50%',
+        borderRight: 'none',
+      },
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
+        borderRight: 'none',
+      },
     },
     header: {
       display: 'flex',
