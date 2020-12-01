@@ -17,6 +17,7 @@ import { StyledTableCell, StyledTableRow } from '../../components/Table/Table'
 
 import { getTransactionDetailPageUrl } from '../../utils/routes'
 import { getIRFCurrencyAmount } from '../../utils/currency'
+import { getDisplaySizeInBytes } from '../../utils/size'
 
 interface Prop {
   transactions: Transactions
@@ -53,7 +54,9 @@ const TransactionsList = ({ transactions }: Prop) => {
               <StyledTableCell align='right'>
                 {getIRFCurrencyAmount(transaction.fee)}
               </StyledTableCell>
-              <StyledTableCell align='right'>{transaction.size}</StyledTableCell>
+              <StyledTableCell align='right'>
+                {getDisplaySizeInBytes(transaction.size)}
+              </StyledTableCell>
               <StyledTableCell align='right'>
                 <IconButton component={Link} to={getTransactionDetailPageUrl(transaction.hash)}>
                   <NavigateNext />

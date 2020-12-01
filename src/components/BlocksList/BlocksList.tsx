@@ -15,6 +15,7 @@ import Block from '../../types/Block'
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { StyledTableCell, StyledTableRow } from '../Table/Table'
 import { getDisplayTimestamp } from '../../utils/time'
+import { getDisplaySizeInBytes } from '../../utils/size'
 
 interface Prop {
   blockList: Block[]
@@ -52,7 +53,9 @@ const BlocksList = ({ blockList }: Prop) => {
               <StyledTableCell scope='row'>
                 <Link to={getBlockDetailPageUrl(block.height)}>{block.height}</Link>
               </StyledTableCell>
-              <StyledTableCell align='right'>{block.size}</StyledTableCell>
+              <StyledTableCell align='right'>
+                {getDisplaySizeInBytes(block.size)}
+              </StyledTableCell>
               <StyledTableCell align='right'>{block.transactions}</StyledTableCell>
               <StyledTableCell align='left'>{block.hash}</StyledTableCell>
               <StyledTableCell align='right'>

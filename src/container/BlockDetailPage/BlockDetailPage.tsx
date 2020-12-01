@@ -16,6 +16,7 @@ import Block, { formatBlockFromJson } from '../../types/Block'
 
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { RoutePath } from '../../routes/routePath'
+import { getDisplaySizeInBytes } from '../../utils/size'
 
 const BlockDetailPage = () => {
   const { t } = useTranslation()
@@ -69,7 +70,7 @@ const BlockDetailPage = () => {
             <>
               <InformationPanel
                 height={blockData.height}
-                size={blockData.size}
+                size={getDisplaySizeInBytes(blockData.size)}
                 transactions={blockData.transactions}
                 difficulty={blockData.difficulty}
                 timestamp={blockData.timestamp}

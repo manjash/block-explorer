@@ -24,6 +24,7 @@ import { RoutePath } from '../../routes/routePath'
 import transactionDetailPageStyle from '../../assets/jss/containers/transactionDetailPageStyle'
 
 import { getIRFCurrencyAmount } from '../../utils/currency'
+import { getDisplaySizeInBytes } from '../../utils/size'
 
 interface ParamTypes {
   hash: string
@@ -92,7 +93,7 @@ const TransactionDetailPage = () => {
             fee={getIRFCurrencyAmount(transactionData.fee)}
             confirmations={transactionData.confirmations}
             timestamp={transactionData.timestamp}
-            size={transactionData.size}
+            size={getDisplaySizeInBytes(transactionData.size)}
             spendsReceipts={`${transactionData.spends.length} / ${transactionData.receipts.length}`}
           />
         )}

@@ -1,6 +1,9 @@
 {
   "app": {
     "units": {
+      "size": {
+        "bytes": "{{ size }} {{ unit }}"
+      },
       "time": {
         "seconds": "{{ time }}s"
       },

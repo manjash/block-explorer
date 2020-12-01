@@ -22,7 +22,7 @@ interface Prop {
   difficulty?: number
   fee?: string
   height?: number
-  size?: number
+  size?: string
   spendsReceipts?: string
   timestamp?: Date
   transactions?: number
