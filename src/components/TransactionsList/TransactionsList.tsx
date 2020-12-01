@@ -16,6 +16,7 @@ import { Transactions } from '../../types/Transaction'
 import { StyledTableCell, StyledTableRow } from '../../components/Table/Table'
 
 import { getTransactionDetailPageUrl } from '../../utils/routes'
+import { getIRFCurrencyAmount } from '../../utils/currency'
 
 interface Prop {
   transactions: Transactions
@@ -49,7 +50,9 @@ const TransactionsList = ({ transactions }: Prop) => {
                   {transaction.hash}
                 </Link>
               </StyledTableCell>
-              <StyledTableCell align='right'>{transaction.fee}</StyledTableCell>
+              <StyledTableCell align='right'>
+                {getIRFCurrencyAmount(transaction.fee)}
+              </StyledTableCell>
               <StyledTableCell align='right'>{transaction.size}</StyledTableCell>
               <StyledTableCell align='right'>
                 <IconButton component={Link} to={getTransactionDetailPageUrl(transaction.hash)}>

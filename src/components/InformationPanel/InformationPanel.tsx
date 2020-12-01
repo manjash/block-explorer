@@ -19,7 +19,7 @@ interface Prop {
   blockId?: number
   confirmations?: number
   difficulty?: number
-  fee?: number
+  fee?: string
   height?: number
   size?: number
   spendsReceipts?: string

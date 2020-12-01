@@ -20,7 +20,10 @@ import Transaction from '../../types/Transaction'
 
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { RoutePath } from '../../routes/routePath'
+
 import transactionDetailPageStyle from '../../assets/jss/containers/transactionDetailPageStyle'
+
+import { getIRFCurrencyAmount } from '../../utils/currency'
 
 interface ParamTypes {
   hash: string
@@ -82,7 +85,7 @@ const TransactionDetailPage = () => {
         {transactionData && (
           <InformationPanel
             blockId={transactionData.blockId}
-            fee={transactionData.fee}
+            fee={getIRFCurrencyAmount(transactionData.fee)}
             confirmations={transactionData.confirmations}
             timestamp={transactionData.timestamp}
             size={transactionData.size}

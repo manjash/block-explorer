@@ -20,6 +20,10 @@ jest.mock('react-i18next', () => ({
   Trans: (): ReactElement => <></>,
 }))
 
+jest.mock('i18next', () => ({
+  t: (key: string, variables: object = {}): string => key + Object.values(variables).join(','),
+}))
+
 // Mock useLocation hook in the test suite
 jest.mock('react-router-dom', () => ({
   ...(jest.requireActual('react-router-dom') as object),

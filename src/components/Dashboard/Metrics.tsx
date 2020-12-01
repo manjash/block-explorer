@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import Stat from './Stat'
 import metricsStyle from '../../assets/jss/components/Dashboard/metricsStyle'
+import { getIRFAmountWithCurrency } from '../../utils/currency'
 
 const useStyles = makeStyles(metricsStyle)
 
@@ -64,7 +65,7 @@ const Metrics = () => {
         icon={AccountBalanceIcon}
         priority='high'
       >
-        7,532 IRF
+        {getIRFAmountWithCurrency(7531)}
       </Stat>
     </div>
   )

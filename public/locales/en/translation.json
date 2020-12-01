@@ -1,5 +1,11 @@
 {
   "app": {
+    "units": {
+      "currency": {
+        "IRF": "IRF",
+        "IRFAmount": "{{ amount }} IRF"
+      }
+    },
     "meta": {
       "defaultTitle": "Iron Fish Block Explorer",
       "defaultDescription": "Block Explorer for IRF - Browse and search transactions, blocks. See spends and receipts for transaction.",
