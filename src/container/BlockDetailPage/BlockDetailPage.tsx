@@ -12,14 +12,14 @@ import Meta from '../../components/Meta/Meta'
 import { ApiUrls } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
-import Block from '../../types/Block'
+import Block, { formatBlockFromJson } from '../../types/Block'
 
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { RoutePath } from '../../routes/routePath'
 
 const BlockDetailPage = () => {
   const { t } = useTranslation()
-  const service = useGetService<Block>(ApiUrls.BLOCK_DETAIL_PAGE)
+  const service = useGetService<Block>(ApiUrls.BLOCK_DETAIL_PAGE, {}, formatBlockFromJson)
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
 

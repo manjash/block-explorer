@@ -13,3 +13,10 @@ export default interface Transaction {
 }
 
 export type Transactions = Transaction[]
+
+export const formatTransactionFromJson = (transaction: any): Transaction => {
+  return {
+    ...transaction,
+    timestamp: new Date(transaction.timestamp),
+  }
+}

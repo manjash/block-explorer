@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Stat from './Stat'
 import metricsStyle from '../../assets/jss/components/Dashboard/metricsStyle'
 import { getIRFAmountWithCurrency } from '../../utils/currency'
+import { getDisplayTimeInSeconds } from '../../utils/time'
 
 const useStyles = makeStyles(metricsStyle)
 
@@ -58,7 +59,7 @@ const Metrics = () => {
         icon={TimerIcon}
         priority='medium'
       >
-        12s
+        {getDisplayTimeInSeconds(12)}
       </Stat>
       <Stat
         title={t('app.dashboard.metrics.circulation')}

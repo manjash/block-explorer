@@ -1,6 +1,9 @@
 {
   "app": {
     "units": {
+      "time": {
+        "seconds": "{{ time }}s"
+      },
       "currency": {
         "IRF": "IRF",
         "IRFAmount": "{{ amount }} IRF"

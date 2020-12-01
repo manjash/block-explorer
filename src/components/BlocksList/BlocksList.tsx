@@ -14,6 +14,7 @@ import NavigateNext from '@material-ui/icons/NavigateNext'
 import Block from '../../types/Block'
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { StyledTableCell, StyledTableRow } from '../Table/Table'
+import { getDisplayTimestamp } from '../../utils/time'
 
 interface Prop {
   blockList: Block[]
@@ -55,7 +56,7 @@ const BlocksList = ({ blockList }: Prop) => {
               <StyledTableCell align='right'>{block.transactions}</StyledTableCell>
               <StyledTableCell align='left'>{block.hash}</StyledTableCell>
               <StyledTableCell align='right'>
-                {`${block.timestamp.toLocaleDateString()} ${block.timestamp.toLocaleTimeString()}`}
+                {getDisplayTimestamp(block.timestamp)}
               </StyledTableCell>
               <StyledTableCell align='right'>
                 <IconButton component={Link} to={getBlockDetailPageUrl(block.height)}>

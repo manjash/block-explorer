@@ -40,6 +40,29 @@ describe('useGetService', () => {
       })
     })
 
+    it('correctly normalize the data', async () => {
+      const formatFunction = (any: any): any => {
+        return {
+          ...any,
+          height: `Modified through the format function ${any.height}`,
+        }
+      }
+      const { result } = renderHook(() =>
+        useGetService<Block>(ApiUrls.BLOCK_DETAIL_PAGE, {}, formatFunction),
+      )
+
+      await act(async () => {})
+
+      await act(async () => {
+        expect(result.current.status).toEqual(ServiceState.LOADED)
+        if (result.current.status === ServiceState.LOADED) {
+          expect(result.current.payload.result.height).toEqual(
+            `Modified through the format function ${mockedData.height}`,
+          )
+        }
+      })
+    })
+
     it('supports the query params', async () => {
       const { result } = renderHook(() =>
         useGetService<Block>(ApiUrls.BLOCK_DETAIL_PAGE, { params: 'abcde' }),

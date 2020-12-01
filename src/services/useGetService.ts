@@ -11,7 +11,14 @@ interface Params {
   [key: string]: string
 }
 
-const useGetService = <Type>(url: ApiUrls, queryParams = {} as Params) => {
+// create your own format function to normalize the data coming from the API to the typed data
+const defaultFormatFunction = (data: any) => data
+
+const useGetService = <Type>(
+  url: ApiUrls,
+  queryParams = {} as Params,
+  formatFunction = defaultFormatFunction,
+) => {
   const [result, setResult] = useState<Service<ServicePayload<Type>>>({
     status: ServiceState.LOADING,
   })
@@ -25,10 +32,13 @@ const useGetService = <Type>(url: ApiUrls, queryParams = {} as Params) => {
     fetch(finalUrl.toString())
       .then((response) => response.json())
       .then((response) =>
-        setResult({ status: ServiceState.LOADED, payload: { result: response } }),
+        setResult({
+          status: ServiceState.LOADED,
+          payload: { result: formatFunction(response) },
+        }),
       )
       .catch((error) => setResult({ status: ServiceState.ERROR, error }))
-  }, [finalUrl])
+  }, [finalUrl, formatFunction])
 
   return result
 }

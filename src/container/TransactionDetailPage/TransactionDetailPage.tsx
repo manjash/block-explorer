@@ -16,7 +16,7 @@ import Meta from '../../components/Meta/Meta'
 import { ApiUrls } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
-import Transaction from '../../types/Transaction'
+import Transaction, { formatTransactionFromJson } from '../../types/Transaction'
 
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { RoutePath } from '../../routes/routePath'
@@ -35,7 +35,11 @@ const TransactionDetailPage = () => {
   const { hash } = useParams<ParamTypes>()
   const classes = useStyles()
 
-  const service = useGetService<Transaction>(ApiUrls.BLOCK_TRANSACTION_PAGE, { hash })
+  const service = useGetService<Transaction>(
+    ApiUrls.BLOCK_TRANSACTION_PAGE,
+    { hash },
+    formatTransactionFromJson,
+  )
 
   const transactionData = service.status === ServiceState.LOADED && service.payload.result
 

@@ -10,3 +10,10 @@ export default interface Block {
 export interface Blocks {
   blocks: Block[]
 }
+
+export const formatBlockFromJson = (block: any): Block => {
+  return {
+    ...block,
+    timestamp: new Date(block.timestamp),
+  }
+}

@@ -14,6 +14,7 @@ import ReceiptIcon from '@material-ui/icons/Receipt'
 
 import Information from '../Information/Information'
 import informationPanelStyle from '../../assets/jss/components/InformationPanel/informationPanelStyle'
+import { getDisplayTimestamp } from '../../utils/time'
 
 interface Prop {
   blockId?: number
@@ -93,7 +94,7 @@ const InformationPanel = ({
       )}
       {timestamp && (
         <Information icon={TimerIcon} title={t('app.components.informationPanel.timestamp')}>
-          {timestamp}
+          {getDisplayTimestamp(timestamp)}
         </Information>
       )}
       {spendsReceipts && (
