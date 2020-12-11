@@ -1,5 +1,5 @@
 export enum ApiUrls {
-  BLOCK_DETAIL_PAGE = 'http://localhost:3000/mocks/BlockDetailPageMock.json',
-  BLOCK_TRANSACTION_PAGE = 'http://localhost:3000/mocks/TransactionDetailPageMock.json',
-  TRANSACTIONS_LIST = 'http://localhost:3000/mocks/BlockTransactions.json',
+  BLOCK_DETAIL_PAGE = 'https://block-explorer-five.vercel.app/mocks/BlockDetailPageMock.json',
+  BLOCK_TRANSACTION_PAGE = 'https://block-explorer-five.vercel.app/mocks/TransactionDetailPageMock.json',
+  TRANSACTIONS_LIST = 'https://block-explorer-five.vercel.app/mocks/BlockTransactions.json',
 }
