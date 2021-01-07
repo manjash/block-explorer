@@ -1,15 +1,24 @@
-import { Receipts } from './Receipt'
+import { BlockIdentifier } from './Block'
+import { Notes } from './Note'
 import { Spends } from './Spend'
 
+export interface Operation {}
+
 export default interface Transaction {
-  blockId: number
+  block_identifier?: BlockIdentifier
   confirmations?: number
-  fee: number
-  hash: string
-  receipts: Receipts
-  size: number
-  spends: Spends
-  timestamp: Date
+  fee?: number
+
+  transaction_identifier: {
+    hash: string
+  }
+  operations: Array<Operation>
+  metadata: {
+    notes: Notes
+    spends: Spends
+    size: number
+  }
+  timestamp?: Date
 }
 
 export type Transactions = Transaction[]

@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useEffect, useRef, useState } from 'react'
+import { networkIdentifier } from '../config'
 
 import { Service, ServiceState } from '../types/Service'
 import { ApiUrls } from './servicesUrls'
@@ -7,38 +9,33 @@ export interface ServicePayload<Type> {
   result: Type
 }
 
-interface Params {
-  [key: string]: string
-}
-
 // create your own format function to normalize the data coming from the API to the typed data
 const defaultFormatFunction = (data: any) => data
 
 const useGetService = <Type>(
   url: ApiUrls,
-  queryParams = {} as Params,
+  queryParams: any = {},
   formatFunction = defaultFormatFunction,
 ) => {
   const [result, setResult] = useState<Service<ServicePayload<Type>>>({
     status: ServiceState.LOADING,
   })
-
-  const queryUrl = new URL(url)
-  Object.keys(queryParams).forEach((key) => queryUrl.searchParams.append(key, queryParams[key]))
-
-  const finalUrl = queryUrl.toString()
+  const params = useRef({
+    network_identifier: networkIdentifier,
+    ...queryParams,
+  })
 
   useEffect(() => {
-    fetch(finalUrl.toString())
-      .then((response) => response.json())
+    axios
+      .post(url, { ...params.current })
       .then((response) =>
         setResult({
           status: ServiceState.LOADED,
-          payload: { result: formatFunction(response) },
+          payload: { result: formatFunction(response.data.block) },
         }),
       )
       .catch((error) => setResult({ status: ServiceState.ERROR, error }))
-  }, [finalUrl, formatFunction])
+  }, [url, formatFunction])
 
   return result
 }

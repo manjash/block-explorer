@@ -44,7 +44,9 @@ const TransactionDetailPage = () => {
 
   const transactionData = service.status === ServiceState.LOADED && service.payload.result
 
-  const metaVariables = { hash: transactionData ? transactionData.hash : '' }
+  const metaVariables = {
+    hash: transactionData ? transactionData.transaction_identifier.hash : '',
+  }
 
   return (
     <>
@@ -60,8 +62,8 @@ const TransactionDetailPage = () => {
               type: PillType.Route,
             },
             {
-              title: `${transactionData.blockId}`,
-              to: getBlockDetailPageUrl(transactionData.blockId),
+              title: `${transactionData.block_identifier?.index}`,
+              to: getBlockDetailPageUrl(transactionData.block_identifier?.index),
               type: PillType.Block,
             },
             {
@@ -69,7 +71,7 @@ const TransactionDetailPage = () => {
               type: PillType.Transaction,
             },
             {
-              title: transactionData.hash,
+              title: transactionData.transaction_identifier.hash,
               type: PillType.Transaction,
             },
           ]}
@@ -89,12 +91,12 @@ const TransactionDetailPage = () => {
         )}
         {transactionData && (
           <InformationPanel
-            blockId={transactionData.blockId}
+            blockId={transactionData.block_identifier?.index}
             fee={getIRFCurrencyAmount(transactionData.fee)}
             confirmations={transactionData.confirmations}
             timestamp={transactionData.timestamp}
-            size={getDisplaySizeInBytes(transactionData.size)}
-            spendsReceipts={`${transactionData.spends.length} / ${transactionData.receipts.length}`}
+            size={getDisplaySizeInBytes(transactionData.metadata.size)}
+            spendsReceipts={`${transactionData.metadata.spends.length} / ${transactionData.metadata.notes.length}`}
           />
         )}
       </BoxWrapper>
@@ -109,12 +111,12 @@ const TransactionDetailPage = () => {
         <Box marginTop={2} className={classes.root}>
           <div className={classes.blocks}>
             <BoxWrapper title={t('app.transactionDetailPage.spends')}>
-              <SpendsList spends={transactionData.spends} />
+              <SpendsList spends={transactionData.metadata.spends} />
             </BoxWrapper>
           </div>
           <div className={classes.blocks}>
             <BoxWrapper title={t('app.transactionDetailPage.receipts')}>
-              <ReceiptsList receipts={transactionData.receipts} />
+              <ReceiptsList notes={transactionData.metadata.notes} />
             </BoxWrapper>
           </div>
         </Box>

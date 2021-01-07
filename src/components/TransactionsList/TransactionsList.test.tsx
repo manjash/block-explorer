@@ -13,22 +13,30 @@ describe('<TransactionsList />', () => {
       <TransactionsList
         transactions={[
           {
-            blockId: 156,
-            size: 1156,
+            transaction_identifier: {
+              hash: '041e4a5c6fe659fds31f087059a2db6be65928765899b6110127ce169e4edfb',
+            },
+            metadata: {
+              size: 1156,
+              spends: [],
+              notes: [],
+            },
+            operations: [],
             fee: 0.03283901,
-            spends: [],
-            receipts: [],
             timestamp: new Date(),
-            hash: '041e4a5c6fe659fds31f087059a2db6be65928765899b6110127ce169e4edfb',
           },
           {
-            blockId: 156,
-            size: 2456,
-            spends: [],
-            receipts: [],
+            transaction_identifier: {
+              hash: '042e4a5c6fe6591sf0f0f087059a2db6be65928765899b6110127ce169e4edfb',
+            },
+            metadata: {
+              size: 1156,
+              spends: [],
+              notes: [],
+            },
+            operations: [],
             timestamp: new Date(),
             fee: 0.01083901,
-            hash: '042e4a5c6fe6591sf0f0f087059a2db6be65928765899b6110127ce169e4edfb',
           },
         ]}
       />,

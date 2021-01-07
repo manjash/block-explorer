@@ -28,3 +28,15 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Dev setup
+Run the Iron Fish Rosetta API
+`cd ironfish/ironfish-rosetta-api`
+`yarn start`
+The Rosetta API is set to run on `localhost:8080`. If the port is different on your machine, update the `package.json` for CORS
+
+Run a Full node
+`cd ironfish/ironfish-cli`
+`yarn start start`
+
+Run a the block explorer
+`yarn start`

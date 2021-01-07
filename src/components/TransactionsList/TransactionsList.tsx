@@ -18,6 +18,7 @@ import { StyledTableCell, StyledTableRow } from '../../components/Table/Table'
 import { getTransactionDetailPageUrl } from '../../utils/routes'
 import { getIRFCurrencyAmount } from '../../utils/currency'
 import { getDisplaySizeInBytes } from '../../utils/size'
+import BoxWrapper from '../BoxWrapper/BoxWrapper'
 
 interface Prop {
   transactions: Transactions
@@ -27,46 +28,53 @@ const TransactionsList = ({ transactions }: Prop) => {
   const { t } = useTranslation()
 
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label='customized table'>
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>{t('app.components.transactionslist.hash')}</StyledTableCell>
-            <StyledTableCell align='right'>
-              {t('app.components.transactionslist.fee')}
-            </StyledTableCell>
-            <StyledTableCell align='right'>
-              {t('app.components.transactionslist.bytes')}
-            </StyledTableCell>
-            <StyledTableCell align='right'>
-              {t('app.components.blockslist.actions')}
-            </StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {transactions.map((transaction) => (
-            <StyledTableRow key={transaction.hash}>
-              <StyledTableCell scope='row'>
-                <Link to={getTransactionDetailPageUrl(transaction.hash)}>
-                  {transaction.hash}
-                </Link>
+    <BoxWrapper title={t('app.transactionsContainer.title')}>
+      <TableContainer component={Paper}>
+        <Table aria-label='customized table'>
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>{t('app.components.transactionslist.hash')}</StyledTableCell>
+              <StyledTableCell align='right'>
+                {t('app.components.transactionslist.fee')}
               </StyledTableCell>
               <StyledTableCell align='right'>
-                {getIRFCurrencyAmount(transaction.fee)}
+                {t('app.components.transactionslist.bytes')}
               </StyledTableCell>
               <StyledTableCell align='right'>
-                {getDisplaySizeInBytes(transaction.size)}
+                {t('app.components.blockslist.actions')}
               </StyledTableCell>
-              <StyledTableCell align='right'>
-                <IconButton component={Link} to={getTransactionDetailPageUrl(transaction.hash)}>
-                  <NavigateNext />
-                </IconButton>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {transactions.map((transaction) => (
+              <StyledTableRow key={transaction.transaction_identifier.hash}>
+                <StyledTableCell scope='row'>
+                  <Link
+                    to={getTransactionDetailPageUrl(transaction.transaction_identifier.hash)}
+                  >
+                    {transaction.transaction_identifier.hash}
+                  </Link>
+                </StyledTableCell>
+                <StyledTableCell align='right'>
+                  {getIRFCurrencyAmount(transaction.fee)}
+                </StyledTableCell>
+                <StyledTableCell align='right'>
+                  {getDisplaySizeInBytes(transaction.metadata.size)}
+                </StyledTableCell>
+                <StyledTableCell align='right'>
+                  <IconButton
+                    component={Link}
+                    to={getTransactionDetailPageUrl(transaction.transaction_identifier.hash)}
+                  >
+                    <NavigateNext />
+                  </IconButton>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </BoxWrapper>
   )
 }
 

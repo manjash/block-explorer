@@ -8,15 +8,15 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 
-import { Receipts } from '../../types/Receipt'
+import { Notes } from '../../types/Note'
 
 import { StyledTableCell, StyledTableRow } from '../Table/Table'
 
 interface Prop {
-  receipts: Receipts
+  notes: Notes
 }
 
-const ReceiptsList = ({ receipts }: Prop) => {
+const ReceiptsList = ({ notes }: Prop) => {
   const { t } = useTranslation()
 
   return (
@@ -30,9 +30,9 @@ const ReceiptsList = ({ receipts }: Prop) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {receipts.map((receipt) => (
-            <StyledTableRow key={receipt.noteCommitment}>
-              <StyledTableCell align='right'>{receipt.noteCommitment}</StyledTableCell>
+          {notes.map((note) => (
+            <StyledTableRow key={note.commitment}>
+              <StyledTableCell align='right'>{note.commitment}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

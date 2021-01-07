@@ -4,6 +4,7 @@ export const getIRFAmountWithCurrency = (amount: number): string => {
   return i18n.t('app.units.currency.IRFAmount', { amount: getIRFCurrencyAmount(amount) })
 }
 
-export const getIRFCurrencyAmount = (amount: number): string => {
+export const getIRFCurrencyAmount = (amount: number | undefined): string => {
+  if (!amount) return '0'
   return amount.toLocaleString()
 }

@@ -1,7 +1,8 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 
-import TransactionsContainer from '../TransactionsContainer/TransactionsContainer'
+import TransactionsList from '../../components/TransactionsList/TransactionsList'
 
 import Alert from '../../components/Alert/Alert'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
@@ -18,15 +19,27 @@ import { getBlockDetailPageUrl } from '../../utils/routes'
 import { RoutePath } from '../../routes/routePath'
 import { getDisplaySizeInBytes } from '../../utils/size'
 
+type ParamTypes = {
+  id: string
+}
+
 const BlockDetailPage = () => {
   const { t } = useTranslation()
-  const service = useGetService<Block>(ApiUrls.BLOCK_DETAIL_PAGE, {}, formatBlockFromJson)
+  const { id } = useParams<ParamTypes>()
+  const service = useGetService<Block>(
+    ApiUrls.BLOCK_DETAIL_PAGE,
+    {
+      block_identifier: {
+        index: Number(id),
+      },
+    },
+    formatBlockFromJson,
+  )
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
-
   const metaVariables = {
-    id: blockData ? `${blockData.height}` : '',
-    hash: blockData ? blockData.hash : '',
+    id: blockData ? `${blockData.block_identifier.index}` : '',
+    hash: blockData ? blockData.block_identifier.hash : '',
   }
 
   return (
@@ -42,12 +55,12 @@ const BlockDetailPage = () => {
               type: PillType.Route,
             },
             {
-              title: blockData.height,
-              to: getBlockDetailPageUrl(blockData.height),
+              title: blockData.block_identifier.index,
+              to: getBlockDetailPageUrl(blockData.block_identifier.index),
               type: PillType.Block,
             },
             {
-              title: blockData.hash,
+              title: blockData.block_identifier.hash,
               type: PillType.Block,
             },
           ]}
@@ -69,10 +82,10 @@ const BlockDetailPage = () => {
           {blockData && (
             <>
               <InformationPanel
-                height={blockData.height}
-                size={getDisplaySizeInBytes(blockData.size)}
-                transactions={blockData.transactions}
-                difficulty={blockData.difficulty}
+                height={blockData.block_identifier.index}
+                size={getDisplaySizeInBytes(blockData.metadata.size)}
+                transactions={blockData.transactions.length}
+                difficulty={blockData.metadata.difficulty}
                 timestamp={blockData.timestamp}
               />
             </>
@@ -80,7 +93,9 @@ const BlockDetailPage = () => {
         </div>
       </BoxWrapper>
 
-      {blockData && <TransactionsContainer hash={blockData.hash} />}
+      {blockData && blockData.transactions.length > 0 && (
+        <TransactionsList transactions={blockData.transactions} />
+      )}
     </>
   )
 }

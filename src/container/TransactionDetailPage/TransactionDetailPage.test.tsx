@@ -45,15 +45,18 @@ describe('<TransactionDetailPage />', () => {
       status: ServiceState.LOADED,
       payload: {
         result: {
-          height: '2227147',
+          transaction_identifier: {
+            hash: 'c62d378ef9cbc0764a8ef556d8bb541b03373426634a6e8e70f42533ec325c33',
+          },
           timestamp: '2020-11-09 23:00:06 UTC',
           confirmations: '2',
-          size: '75992',
-          fee: '0.0001',
-          hash: 'c62d378ef9cbc0764a8ef556d8bb541b03373426634a6e8e70f42533ec325c33',
+          metadata: {
+            size: '75992',
+            fee: '0.0001',
+            spends: [],
+            notes: [],
+          },
           blockId: '2227131',
-          spends: [],
-          receipts: [],
         },
       },
     })
