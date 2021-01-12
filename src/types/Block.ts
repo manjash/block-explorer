@@ -20,7 +20,7 @@ export interface Blocks {
   blocks: Block[]
 }
 
-export const formatBlockFromJson = (block: any): Block => ({
+export const formatBlockFromJson = ({ block }: any): Block => ({
   ...block,
   timestamp: new Date(block.timestamp),
 })

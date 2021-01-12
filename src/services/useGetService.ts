@@ -31,7 +31,7 @@ const useGetService = <Type>(
       .then((response) =>
         setResult({
           status: ServiceState.LOADED,
-          payload: { result: formatFunction(response.data.block) },
+          payload: { result: formatFunction(response.data) },
         }),
       )
       .catch((error) => setResult({ status: ServiceState.ERROR, error }))

@@ -24,7 +24,9 @@ describe('useGetService', () => {
     })
 
     it('returns the correct states', async () => {
-      const { result } = renderHook(() => useGetService<Block>(ApiUrls.BLOCK_DETAIL_PAGE))
+      const { result } = renderHook(() =>
+        useGetService<{ block: Block }>(ApiUrls.BLOCK_DETAIL_PAGE),
+      )
       await act(async () => {
         expect(result.current.status).toEqual(ServiceState.LOADING)
       })
@@ -32,7 +34,7 @@ describe('useGetService', () => {
       await act(async () => {
         expect(result.current.status).toEqual(ServiceState.LOADED)
         if (result.current.status === ServiceState.LOADED) {
-          expect(result.current.payload.result.block_identifier.index).toEqual(
+          expect(result.current.payload.result.block.block_identifier.index).toEqual(
             mockedData.block_identifier.index,
           )
         }
@@ -40,11 +42,11 @@ describe('useGetService', () => {
     })
 
     it('correctly normalize the data', async () => {
-      const formatFunction = (any: any): any => {
+      const formatFunction = ({ block }: any): any => {
         return {
-          ...any,
+          ...block,
           block_identifier: {
-            index: `Modified through the format function ${any.block_identifier.index}`,
+            index: `Modified through the format function ${block.block_identifier.index}`,
           },
         }
       }

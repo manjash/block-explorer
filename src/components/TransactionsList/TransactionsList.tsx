@@ -22,9 +22,10 @@ import BoxWrapper from '../BoxWrapper/BoxWrapper'
 
 interface Prop {
   transactions: Transactions
+  blockHash: string
 }
 
-const TransactionsList = ({ transactions }: Prop) => {
+const TransactionsList = ({ blockHash, transactions }: Prop) => {
   const { t } = useTranslation()
 
   return (
@@ -50,7 +51,10 @@ const TransactionsList = ({ transactions }: Prop) => {
               <StyledTableRow key={transaction.transaction_identifier.hash}>
                 <StyledTableCell scope='row'>
                   <Link
-                    to={getTransactionDetailPageUrl(transaction.transaction_identifier.hash)}
+                    to={getTransactionDetailPageUrl(
+                      blockHash,
+                      transaction.transaction_identifier.hash,
+                    )}
                   >
                     {transaction.transaction_identifier.hash}
                   </Link>
@@ -64,7 +68,10 @@ const TransactionsList = ({ transactions }: Prop) => {
                 <StyledTableCell align='right'>
                   <IconButton
                     component={Link}
-                    to={getTransactionDetailPageUrl(transaction.transaction_identifier.hash)}
+                    to={getTransactionDetailPageUrl(
+                      blockHash,
+                      transaction.transaction_identifier.hash,
+                    )}
                   >
                     <NavigateNext />
                   </IconButton>

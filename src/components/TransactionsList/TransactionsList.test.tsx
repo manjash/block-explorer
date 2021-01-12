@@ -11,6 +11,7 @@ describe('<TransactionsList />', () => {
   test('It renders correctly', () => {
     const wrapper = shallow(
       <TransactionsList
+        blockHash='test'
         transactions={[
           {
             transaction_identifier: {

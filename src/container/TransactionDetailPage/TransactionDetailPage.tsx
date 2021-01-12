@@ -27,26 +27,32 @@ import { getIRFCurrencyAmount } from '../../utils/currency'
 import { getDisplaySizeInBytes } from '../../utils/size'
 
 interface ParamTypes {
+  blockHash: string
   hash: string
 }
 
 const useStyles = makeStyles(transactionDetailPageStyle)
 const TransactionDetailPage = () => {
   const { t } = useTranslation()
-  const { hash } = useParams<ParamTypes>()
+  const { blockHash, hash } = useParams<ParamTypes>()
   const classes = useStyles()
 
   const service = useGetService<Transaction>(
     ApiUrls.BLOCK_TRANSACTION_PAGE,
-    { hash },
+    {
+      block_identifier: {
+        index: 0,
+        hash: blockHash,
+      },
+      transaction_identifier: {
+        hash,
+      },
+    },
     formatTransactionFromJson,
   )
 
   const transactionData = service.status === ServiceState.LOADED && service.payload.result
-
-  const metaVariables = {
-    hash: transactionData ? transactionData.transaction_identifier.hash : '',
-  }
+  const metaVariables = { blockHash, hash }
 
   return (
     <>
@@ -62,8 +68,8 @@ const TransactionDetailPage = () => {
               type: PillType.Route,
             },
             {
-              title: `${transactionData.block_identifier?.index}`,
-              to: getBlockDetailPageUrl(transactionData.block_identifier?.index),
+              title: blockHash,
+              to: getBlockDetailPageUrl(blockHash),
               type: PillType.Block,
             },
             {

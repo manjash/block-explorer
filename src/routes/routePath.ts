@@ -3,6 +3,6 @@ export const baseUrl = process.env.PUBLIC_URL || 'https://explorer.ironfish.netw
 export enum RoutePath {
   Dashboard = '/dashboard',
   Explorer = '/explorer',
+  TransactionDetailPage = '/transaction/:blockHash/:hash',
   BlockDetailPage = '/blocks/:id',
-  TransactionDetailPage = '/transactions/:hash',
 }

@@ -6,6 +6,6 @@ describe('Routes utils', () => {
   })
 
   test('getTransactionDetailPageUrl return the right URL', () => {
-    expect(getTransactionDetailPageUrl('123')).toEqual('/transactions/123')
+    expect(getTransactionDetailPageUrl('block1', '123')).toEqual('/transaction/block1/123')
   })
 })

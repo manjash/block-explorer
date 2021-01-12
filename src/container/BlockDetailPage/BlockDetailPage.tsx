@@ -26,12 +26,18 @@ type ParamTypes = {
 const BlockDetailPage = () => {
   const { t } = useTranslation()
   const { id } = useParams<ParamTypes>()
+
+  const blockIdentifier = {} as { hash?: string; index?: number }
+  if (Number.isNaN(id)) {
+    blockIdentifier.hash = id
+  } else {
+    blockIdentifier.index = Number(id)
+  }
+
   const service = useGetService<Block>(
     ApiUrls.BLOCK_DETAIL_PAGE,
     {
-      block_identifier: {
-        index: Number(id),
-      },
+      block_identifier: blockIdentifier,
     },
     formatBlockFromJson,
   )
@@ -94,7 +100,10 @@ const BlockDetailPage = () => {
       </BoxWrapper>
 
       {blockData && blockData.transactions.length > 0 && (
-        <TransactionsList transactions={blockData.transactions} />
+        <TransactionsList
+          transactions={blockData.transactions}
+          blockHash={blockData.block_identifier.hash}
+        />
       )}
     </>
   )
