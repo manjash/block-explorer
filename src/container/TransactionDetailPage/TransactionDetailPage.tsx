@@ -25,6 +25,7 @@ import transactionDetailPageStyle from '../../assets/jss/containers/transactionD
 
 import { getIRFCurrencyAmount } from '../../utils/currency'
 import { getDisplaySizeInBytes } from '../../utils/size'
+import { getDisplayShortHash } from '../../utils/string'
 
 interface ParamTypes {
   blockHash: string
@@ -59,6 +60,7 @@ const TransactionDetailPage = () => {
       {transactionData && (
         <Meta path={RoutePath.TransactionDetailPage} variables={metaVariables} />
       )}
+
       {transactionData && (
         <Breadcrumb
           paths={[
@@ -68,7 +70,7 @@ const TransactionDetailPage = () => {
               type: PillType.Route,
             },
             {
-              title: blockHash,
+              title: getDisplayShortHash(blockHash || ''),
               to: getBlockDetailPageUrl(blockHash),
               type: PillType.Block,
             },

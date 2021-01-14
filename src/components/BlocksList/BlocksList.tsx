@@ -49,7 +49,7 @@ const BlocksList = ({ blockList }: Prop) => {
         </TableHead>
         <TableBody>
           {blockList.map((block: Block) => (
-            <StyledTableRow key={String(block.block_identifier.index)}>
+            <StyledTableRow key={String(block.block_identifier.hash)}>
               <StyledTableCell scope='row'>
                 <Link to={getBlockDetailPageUrl(block.block_identifier.index)}>
                   {block.block_identifier.index}
@@ -58,7 +58,9 @@ const BlocksList = ({ blockList }: Prop) => {
               <StyledTableCell align='right'>
                 {getDisplaySizeInBytes(block.metadata.size)}
               </StyledTableCell>
-              <StyledTableCell align='right'>{block.transactions}</StyledTableCell>
+              <StyledTableCell align='right'>
+                {block.metadata.transactionsCount}
+              </StyledTableCell>
               <StyledTableCell align='left'>{block.block_identifier.hash}</StyledTableCell>
               <StyledTableCell align='right'>
                 {getDisplayTimestamp(block.timestamp)}

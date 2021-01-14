@@ -28,7 +28,7 @@ const BlockDetailPage = () => {
   const { id } = useParams<ParamTypes>()
 
   const blockIdentifier = {} as { hash?: string; index?: number }
-  if (Number.isNaN(id)) {
+  if (Number.isNaN(Number(id))) {
     blockIdentifier.hash = id
   } else {
     blockIdentifier.index = Number(id)

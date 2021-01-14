@@ -11,6 +11,7 @@ export default interface Block {
   metadata: {
     size: number
     difficulty: number
+    transactionsCount?: number
   }
   transactions: Array<Transaction>
   timestamp: Date
@@ -24,3 +25,8 @@ export const formatBlockFromJson = ({ block }: any): Block => ({
   ...block,
   timestamp: new Date(block.timestamp),
 })
+
+export const formatBlocksFromJson = ({ blocks }: any): Block[] =>
+  blocks.map((block: any) => ({
+    ...formatBlockFromJson({ block }),
+  }))

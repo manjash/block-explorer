@@ -3,22 +3,31 @@ import { useTranslation } from 'react-i18next'
 
 import AllInclusiveIcon from '@material-ui/icons/AllInclusive'
 import TimerIcon from '@material-ui/icons/Timer'
-import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
 import AccountTreeIcon from '@material-ui/icons/AccountTree'
 import HttpsIcon from '@material-ui/icons/Https'
-import TrendingUpIcon from '@material-ui/icons/TrendingUp'
-import LocalActivityIcon from '@material-ui/icons/LocalActivity'
 import LineWeightIcon from '@material-ui/icons/LineWeight'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Stat from './Stat'
 import metricsStyle from '../../assets/jss/components/Dashboard/metricsStyle'
-import { getIRFAmountWithCurrency } from '../../utils/currency'
 import { getDisplayTimeInSeconds } from '../../utils/time'
+import { getDisplayShortHash } from '../../utils/string'
 
 const useStyles = makeStyles(metricsStyle)
 
-const Metrics = () => {
+export interface MetricsData {
+  blockTime: number | null
+  difficulty: number | null
+  height: number | null
+  latestHash: string | null
+  transactionsCount: number | null
+}
+
+interface Prop {
+  metrics: MetricsData
+}
+
+const Metrics = ({ metrics }: Prop) => {
   const classes = useStyles()
   const { t } = useTranslation()
 
@@ -29,44 +38,27 @@ const Metrics = () => {
         icon={AllInclusiveIcon}
         priority='high'
       >
-        198466363744
+        {metrics.difficulty || 0}
       </Stat>
       <Stat title={t('app.dashboard.metrics.height')} icon={LineWeightIcon} priority='medium'>
-        2227124
-      </Stat>
-      <Stat title={t('app.dashboard.metrics.hashrate')} icon={TrendingUpIcon} priority='low'>
-        1653.9 Mh/s
-      </Stat>
-      <Stat
-        title={t('app.dashboard.metrics.reward')}
-        icon={LocalActivityIcon}
-        priority='verylow'
-      >
-        17753210
+        {metrics.height || 0}
       </Stat>
       <Stat title={t('app.dashboard.metrics.latesthash')} icon={HttpsIcon} priority='verylow'>
-        7d1...ba8d
+        {getDisplayShortHash(metrics.latestHash || '0000000000000000000000000')}
       </Stat>
       <Stat
         title={t('app.dashboard.metrics.latesttransaction')}
         icon={AccountTreeIcon}
         priority='low'
       >
-        23
+        {metrics.transactionsCount || 0}
       </Stat>
       <Stat
         title={t('app.dashboard.metrics.latestblocksseconds')}
         icon={TimerIcon}
         priority='medium'
       >
-        {getDisplayTimeInSeconds(12)}
-      </Stat>
-      <Stat
-        title={t('app.dashboard.metrics.circulation')}
-        icon={AccountBalanceIcon}
-        priority='high'
-      >
-        {getIRFAmountWithCurrency(7531)}
+        {getDisplayTimeInSeconds(Math.round(metrics.blockTime || 0))}
       </Stat>
     </div>
   )
