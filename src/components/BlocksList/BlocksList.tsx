@@ -81,4 +81,4 @@ const BlocksList = ({ blockList }: Prop) => {
   )
 }
 
-export default BlocksList
+export default React.memo(BlocksList)

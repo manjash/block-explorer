@@ -18,7 +18,11 @@ import { ApiUrls } from '../../services/servicesUrls'
 const Dashboard = () => {
   const { t } = useTranslation()
 
-  const service = useGetService<Block[]>(ApiUrls.SEARCH_BLOCKS, {}, formatBlocksFromJson)
+  const service = useGetService<Block[]>(
+    ApiUrls.SEARCH_BLOCKS,
+    { limit: 10 },
+    formatBlocksFromJson,
+  )
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
 
