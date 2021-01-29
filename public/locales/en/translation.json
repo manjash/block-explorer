@@ -127,7 +127,7 @@
         "reward": "Block reward",
         "latesthash": "Latest block hash",
         "latesttransaction": "Latest block transactions #",
-        "latestblocksseconds": "Seconds since latest block time",
+        "latestblocksseconds": "Seconds to generate latest block",
         "circulation": "Circulation"
       }
     },
