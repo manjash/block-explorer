@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { networkIdentifier } from '../config'
 
 import { Service, ServiceState } from '../types/Service'
@@ -20,14 +20,15 @@ const useGetService = <Type>(
   const [result, setResult] = useState<Service<ServicePayload<Type>>>({
     status: ServiceState.LOADING,
   })
-  const params = useRef({
+
+  const params = JSON.stringify({
     network_identifier: networkIdentifier,
     ...queryParams,
   })
 
   useEffect(() => {
     axios
-      .post(url, { ...params.current })
+      .post(url, JSON.parse(params))
       .then((response) =>
         setResult({
           status: ServiceState.LOADED,
@@ -35,7 +36,7 @@ const useGetService = <Type>(
         }),
       )
       .catch((error) => setResult({ status: ServiceState.ERROR, error }))
-  }, [url, formatFunction])
+  }, [url, params, formatFunction])
 
   return result
 }

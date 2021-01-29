@@ -33,7 +33,7 @@ const Explorer = () => {
     axios
       .post(ApiUrls.SEARCH_BLOCKS, {
         network_identifier: networkIdentifier,
-        limit: 10,
+        limit: 20,
         seek,
       })
       .then((response) => {

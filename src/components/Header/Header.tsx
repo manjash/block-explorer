@@ -5,12 +5,11 @@ import { Link } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import { makeStyles } from '@material-ui/core/styles'
-import SearchIcon from '@material-ui/icons/Search'
-import InputBase from '@material-ui/core/InputBase'
 
 import headerStyle from '../../assets/jss/components/Header/headerStyle'
 import hexofish from '../../assets/images/logo-fishonly.svg'
 import { RoutePath } from '../../routes/routePath'
+import Search from '../../container/Search/Search'
 
 const useStyles = makeStyles(headerStyle)
 
@@ -30,19 +29,7 @@ const Header = ({ isSmallBreakpoint }: Props) => {
             <img src={hexofish} alt={t('app.header.logo.alt')} className={classes.logo} />
           </Link>
         )}
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <InputBase
-            placeholder={t('app.header.search.placeholder')}
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': t('app.header.search.placeholder') }}
-          />
-        </div>
+        <Search />
       </Toolbar>
     </AppBar>
   )
