@@ -1,13 +1,13 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
-import SearchIcon from '@material-ui/icons/Search'
-import TextField from '@material-ui/core/TextField'
-import Autocomplete from '@material-ui/lab/Autocomplete'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
+import { makeStyles } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+
+import searchIcon from '../../assets/images/search.svg'
 import { networkIdentifier } from '../../config'
 import searchStyle from '../../assets/jss/containers/searchStyle'
 import { ApiUrls } from '../../services/servicesUrls'
@@ -57,7 +57,7 @@ const Search = () => {
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
-        <SearchIcon />
+        <img src={searchIcon} role='decorative' />
       </div>
 
       <Autocomplete
@@ -67,6 +67,8 @@ const Search = () => {
         popupIcon={null}
         classes={{
           root: classes.inputRoot,
+          paper: classes.popup,
+          listbox: classes.list,
         }}
         onClose={() => {
           setOpen(false)
@@ -82,6 +84,7 @@ const Search = () => {
         renderInput={(params) => (
           <TextField
             {...params}
+            color='secondary'
             placeholder={t('app.header.search.placeholder')}
             classes={{
               root: classes.inputInput,
@@ -90,12 +93,6 @@ const Search = () => {
             InputProps={{
               ...params.InputProps,
               disableUnderline: true,
-              endAdornment: (
-                <React.Fragment>
-                  {loading ? <CircularProgress color='inherit' size={20} /> : null}
-                  {params.InputProps.endAdornment}
-                </React.Fragment>
-              ),
             }}
           />
         )}

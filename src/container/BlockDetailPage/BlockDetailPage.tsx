@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
 import TransactionsList from '../../components/TransactionsList/TransactionsList'
-
+import Container from '../../components/Container/Container'
 import Alert from '../../components/Alert/Alert'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
-import Breadcrumb, { PillType } from '../../components/Breadcrumb/Breadcrumb'
+import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
 import InformationPanel from '../../components/InformationPanel/InformationPanel'
 import Meta from '../../components/Meta/Meta'
 
@@ -15,9 +15,11 @@ import useGetService from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
 import Block, { formatBlockFromJson } from '../../types/Block'
 
-import { getBlockDetailPageUrl } from '../../utils/routes'
 import { RoutePath } from '../../routes/routePath'
 import { getDisplaySizeInBytes } from '../../utils/size'
+import blocksGray from '../../assets/images/breadcrumb/blocks-gray.svg'
+import blocks from '../../assets/images/breadcrumb/blocks.svg'
+import { getDisplayShortHash } from '../../utils/string'
 
 type ParamTypes = {
   id: string
@@ -49,25 +51,20 @@ const BlockDetailPage = () => {
   }
 
   return (
-    <>
+    <Container>
       {blockData && <Meta path={RoutePath.BlockDetailPage} variables={metaVariables} />}
 
       {blockData && (
         <Breadcrumb
           paths={[
             {
-              title: t('app.components.breadcrumb.blocks'),
+              title: t('app.components.breadcrumb.explorer'),
               to: RoutePath.Explorer,
-              type: PillType.Route,
+              logo: blocks,
             },
             {
-              title: blockData.block_identifier.index,
-              to: getBlockDetailPageUrl(blockData.block_identifier.index),
-              type: PillType.Block,
-            },
-            {
-              title: blockData.block_identifier.hash,
-              type: PillType.Block,
+              title: getDisplayShortHash(blockData.block_identifier.hash || ''),
+              logo: blocksGray,
             },
           ]}
         />
@@ -79,22 +76,20 @@ const BlockDetailPage = () => {
         title={t('app.blockDetailPage.information.title')}
       >
         {service.status === ServiceState.ERROR && (
-          <Alert
-            title={t('app.blockDetailPage.information.error.title')}
-            description={t('app.blockDetailPage.information.error.description')}
-          />
+          <Alert title={t('app.blockDetailPage.information.error.title')}>
+            {t('app.blockDetailPage.information.error.description')}
+          </Alert>
         )}
         <div>
           {blockData && (
-            <>
-              <InformationPanel
-                height={blockData.block_identifier.index}
-                size={getDisplaySizeInBytes(blockData.metadata.size)}
-                transactions={blockData.transactions.length}
-                difficulty={blockData.metadata.difficulty}
-                timestamp={blockData.timestamp}
-              />
-            </>
+            <InformationPanel
+              height={blockData.block_identifier.index}
+              blockHash={blockData.block_identifier.hash}
+              size={getDisplaySizeInBytes(blockData.metadata.size)}
+              transactions={blockData.transactions.length}
+              difficulty={blockData.metadata.difficulty}
+              timestamp={blockData.timestamp}
+            />
           )}
         </div>
       </BoxWrapper>
@@ -105,7 +100,7 @@ const BlockDetailPage = () => {
           blockHash={blockData.block_identifier.hash}
         />
       )}
-    </>
+    </Container>
   )
 }
 

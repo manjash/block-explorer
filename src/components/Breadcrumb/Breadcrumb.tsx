@@ -1,24 +1,22 @@
 import React from 'react'
 import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 import Breadcrumbs from '@material-ui/core/Breadcrumbs'
 
+import { RoutePath } from '../../routes/routePath'
 import breadcrumbStyle from '../../assets/jss/components/Breadcrumb/breadcrumbStyle'
 
-const useStyles = makeStyles(breadcrumbStyle)
+import home from '../../assets/images/breadcrumb/home.svg'
 
-export enum PillType {
-  Route = 'route',
-  Block = 'block',
-  Transaction = 'transaction',
-}
+const useStyles = makeStyles(breadcrumbStyle)
 
 interface Path {
   title: string | Number
   to?: string
-  type: PillType
+  logo: string
 }
 
 interface Props {
@@ -27,35 +25,46 @@ interface Props {
 
 const Breadcrumb = ({ paths }: Props) => {
   const classes = useStyles()
+  const { t } = useTranslation()
 
   const pathsLength = paths.length
   return (
-    <Breadcrumbs separator={null} aria-label='breadcrumb' className={classes.root}>
+    <Breadcrumbs separator={'/'} aria-label='breadcrumb' className={classes.root}>
+      <Link
+        className={classNames(classes.pill, classes.link)}
+        key='home'
+        color='inherit'
+        to={RoutePath.Dashboard}
+      >
+        <img src={home} role='presentation' />
+        <span>{t('app.components.breadcrumb.home')}</span>
+      </Link>
+
       {paths.map((path, index) => {
         if (path.to) {
           return (
             <Link
               className={classNames(classes.pill, classes.link, {
-                [classes[path.type]]: true,
                 [classes['lastItem']]: pathsLength === index + 1,
               })}
               key={String(path.title)}
               color='inherit'
               to={path.to}
             >
-              {path.title}
+              <img src={path.logo} role='presentation' />
+              <span>{path.title}</span>
             </Link>
           )
         }
         return (
           <span
             className={classNames(classes.pill, {
-              [classes[path.type]]: true,
               [classes['lastItem']]: pathsLength === index + 1,
             })}
             key={String(path.title)}
           >
-            {path.title}
+            <img src={path.logo} role='presentation' />
+            <span>{path.title}</span>
           </span>
         )
       })}

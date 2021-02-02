@@ -1,28 +1,33 @@
-import { fade, createStyles, Theme } from '@material-ui/core'
+import { createStyles, Theme } from '@material-ui/core'
+import blocks from '../../images/breadcrumb/blocks.svg'
 
-const defaultHeight = '49px'
+const defaultHeight = '60px'
 
 const adStyle = (theme: Theme) =>
   createStyles({
     inputRoot: {
       color: 'inherit',
       height: defaultHeight,
-      width: '100%',
+      width: 'calc(100% + 2px)',
+      marginLeft: '-1px',
+      '& input': {
+        paddingLeft: '56px!important',
+      },
     },
     inputInput: {
-      padding: `8px 0 ${theme.spacing(1)}px calc(1em + ${theme.spacing(4)}px)`,
-      width: 'calc(100% - 8px)',
+      padding: `14px 0 14px 0`,
+      width: '100%',
+      color: theme.palette.secondary.main,
+      '&::placeholder': {
+        color: theme.palette.secondary.main,
+      },
     },
     search: {
       transition: `all 0.33s ${theme.transitions.easing.easeInOut}`,
-      color: theme.palette.primary.main,
       position: 'relative',
       backgroundColor: theme.palette.common.white,
       borderRadius: theme.shape.borderRadius,
-      border: `2px solid ${theme.palette.secondary.main}`,
-      '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.01),
-      },
+      border: `1px solid ${theme.palette.borderColor.main}`,
       width: '100%',
       height: defaultHeight,
       [theme.breakpoints.down('sm')]: {
@@ -39,6 +44,25 @@ const adStyle = (theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    popup: {
+      marginTop: '15px',
+      border: `1px solid ${theme.palette.borderColor.main}`,
+      boxShadow: theme.shadows[1],
+    },
+    list: {
+      paddingLeft: '56px',
+      '& li': {
+        '&[data-focus="true"]': {
+          backgroundColor: theme.palette.common.white,
+        },
+        '&:hover': {
+          backgroundColor: theme.palette.common.white,
+        },
+        background: `url(${blocks}) no-repeat`,
+        paddingLeft: '30px',
+        backgroundPositionY: 'center',
+      },
     },
   })
 

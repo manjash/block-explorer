@@ -5,36 +5,32 @@ const informationStyle = (theme: Theme) =>
     root: {
       width: '33%',
       padding: theme.spacing(2, 2, 2, 2),
+      display: 'flex',
       [theme.breakpoints.down('sm')]: {
         width: '100%',
       },
-    },
-    header: {
-      display: 'flex',
-      flexDirection: 'row',
-      fontWeight: 500,
-      color: theme.palette.primary.main,
-      alignItems: 'center',
-      marginBottom: theme.spacing(1),
+      '&.copy': {
+        cursor: 'pointer',
+      },
+      '& h6': {
+        marginBottom: '3px',
+      },
     },
     icon: {
-      marginRight: theme.spacing(1),
+      marginRight: theme.spacing(2),
+      border: `1px solid ${theme.palette.borderColor.main}`,
       color: theme.palette.secondary.main,
-      width: 14,
-      height: 14,
+      width: 42,
+      height: 42,
+      boxShadow: theme.shadows[1],
+      display: 'flex',
+      alignItems: 'center',
+      alignContent: 'center',
+      '& img': {
+        flex: 1,
+      },
     },
-    bar: {
-      margin: theme.spacing(2, 0, 1, 0),
-      backgroundColor: theme.palette.borderColor?.main,
-      width: '80%',
-      height: 2,
-    },
-    inside: {
-      width: '25%',
-      height: 2,
-      borderColor: theme.palette.secondary.main,
-      backgroundColor: theme.palette.secondary.main,
-    },
+    content: {},
   })
 
 export default informationStyle
