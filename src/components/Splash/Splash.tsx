@@ -1,46 +1,67 @@
-import React, { MutableRefObject, useRef } from 'react'
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import classNames from 'classnames'
 
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import splashStyle from '../../assets/jss/components/Splash/splashStyle'
-import Search from '../../container/Search/Search'
-import splash from '../../assets/images/splash.svg'
 import Header from '../Header/Header'
+import arrowDown from '../../assets/images/arrow_down.svg'
+import splashStyle from '../../assets/jss/components/Splash/splashStyle'
+import { debounce } from '../../utils/debounce'
+import { HEADER_HEIGHT } from '../../assets/jss/theme'
 
 const useStyles = makeStyles(splashStyle)
 
-// interface Props {
-//   // isSmallBreakpoint: Boolean
-// }
-
 const Splash = () => {
-  const classes = useStyles()
   const { t } = useTranslation()
+  const classes = useStyles()
+  const [isSticky, setSticky] = useState(false)
   const anchor = useRef() as MutableRefObject<HTMLDivElement>
 
   const executeScroll = () => {
-    anchor.current.scrollIntoView({ behavior: 'smooth' })
+    window.scrollTo({
+      top: window.pageYOffset + anchor.current.getBoundingClientRect().top - HEADER_HEIGHT,
+      behavior: 'smooth',
+    })
   }
 
-  return (
-    <div>
-      <div className={classes.wrapper}>
-        <Header isSmallBreakpoint={false} />
+  const handleScroll = debounce(() => {
+    if (anchor == null || anchor.current == null) {
+      return
+    }
+    setSticky(anchor.current.getBoundingClientRect().top - 300 <= 0)
+  }, 15)
 
-        <Typography variant='h4' className={classes.h1}>
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', () => handleScroll)
+    }
+  }, [handleScroll])
+
+  return (
+    <>
+      <div>
+        <Typography variant='h1' className={classes.h1}>
           {t('app.dashboard.title')}
         </Typography>
+        <div className={classNames(classes.search, { [classes.sticky]: isSticky })}>
+          <Header isSmallBreakpoint={false} showSearch isSticky={isSticky} />
+        </div>
+        <div className={classNames({ [classes.placeholder]: isSticky })}></div>
 
-        <Search />
+        <p className={classes.viewAll} onClick={executeScroll}>
+          {t('app.dashboard.view_blocks')}
+          <img src={arrowDown} alt={t('app.header.logo.alt')} className={classes.arrowDown} />
+        </p>
 
-        <p onClick={executeScroll}>{t('app.dashboard.view_blocks')}</p>
+        <div className={classes.splash}>
+          <div className={classes.background} />
+        </div>
       </div>
-
-      <img src={splash} alt={t('app.header.logo.alt')} className={classes.background} />
       <span ref={anchor} />
-    </div>
+    </>
   )
 }
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 
@@ -13,8 +14,6 @@ import twitter from '../../assets/images/footer/twitter.svg'
 import github from '../../assets/images/footer/github.svg'
 import discord from '../../assets/images/footer/discord.svg'
 import reddit from '../../assets/images/footer/reddit.svg'
-import { useLocation } from 'react-router-dom'
-import { RoutePath } from '../../routes/routePath'
 
 const useStyles = makeStyles(footerStyle)
 
@@ -47,10 +46,6 @@ const LinksBlock = ({ title, links, classes }: Props) => {
 const Footer = () => {
   const classes = useStyles()
   const { t } = useTranslation()
-  let location = useLocation()
-
-  // this page has infinite scroll
-  if (location && location.pathname === RoutePath.Explorer) return null
 
   return (
     <div className={classes.root}>
