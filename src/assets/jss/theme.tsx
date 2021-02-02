@@ -5,10 +5,16 @@ import { createMuiTheme } from '@material-ui/core/styles'
  * Prefer using classes to override a one off component
  */
 
-const defaultBorderRadius = 16
-const primaryColor = '#808191'
-const secondaryColor = '#1B089A'
+export const HEADER_HEIGHT = 92
+
+const defaultBorderRadius = 2
+const defaultBackground = '#fff'
+const defaultBorderColor = '#DFE1E4'
+const primaryColor = '#000'
+const titleColor = '#1D0070'
+const secondaryColor = '#6B6D76'
 const errorColor = '#d2000078'
+const defaultBoxShadow = '0px 1px 1px rgba(0, 0, 0, 0.07)'
 
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
@@ -42,11 +48,33 @@ declare module '@material-ui/core/styles/createPalette' {
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(','),
+    fontSize: 12,
+    fontFamily: ['mono-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
+    h1: {
+      fontFamily: ['extended-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
+      color: titleColor,
+    },
+    h5: {
+      fontFamily: ['extended-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
+      fontSize: '20px',
+      margin: '16px 0px 15px 0px',
+    },
+    h6: {
+      fontFamily: ['extended-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
+      fontSize: '14px',
+    },
+    subtitle1: {
+      fontFamily: ['favorit-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
+    },
+    subtitle2: {
+      fontSize: 12,
+      fontFamily: ['mono-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
+      color: secondaryColor,
+    },
   },
   sidebar: {
     width: 260,
-    background: 'radial-gradient(circle, rgba(86,29,247,1) 0%, rgba(29,0,112,1) 100%)',
+    background: 'white',
   },
   breakpoints: {
     values: {
@@ -60,7 +88,46 @@ const theme = createMuiTheme({
   shape: {
     borderRadius: defaultBorderRadius,
   },
+  shadows: [
+    'none',
+    defaultBoxShadow,
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+  ],
   palette: {
+    info: {
+      main: titleColor,
+    },
+    text: {
+      primary: primaryColor,
+      secondary: '#000',
+      disabled: '#3C75F6',
+      hint: '#6B6F76',
+    },
+    background: {
+      default: defaultBackground,
+    },
     primary: {
       main: primaryColor,
     },
@@ -71,28 +138,62 @@ const theme = createMuiTheme({
       main: errorColor,
     },
     primaryBackground: {
-      main: '#eeeeee',
+      main: defaultBackground,
     },
     secondaryBackground: {
       main: '#F0A858',
     },
     borderColor: {
-      main: '#E5E5E5',
+      main: defaultBorderColor,
     },
   },
   overrides: {
+    MuiInputBase: {
+      root: {
+        color: secondaryColor,
+        '&::placeholder': {
+          textOverflow: 'ellipsis !important',
+          color: 'blue !important',
+          fontSize: 14,
+        },
+        '& inputTypeSearch': {
+          opacity: 1,
+          color: secondaryColor,
+        },
+        '& input': {
+          opacity: 1,
+          color: secondaryColor,
+          '&::placeholder': {
+            opacity: 1,
+            color: secondaryColor,
+          },
+        },
+      },
+    },
     MuiButton: {
       root: {
-        padding: '8px 64px 8px 64px',
-        fontSize: '1rem',
+        padding: '10px 12px 10px 12px',
+        fontSize: '14px',
         textTransform: 'none',
         borderRadius: defaultBorderRadius,
       },
       contained: {
-        color: secondaryColor,
+        backgroundColor: defaultBackground,
+        border: `1px solid ${defaultBorderColor}`,
+        boxShadow: defaultBoxShadow,
       },
       containedSecondary: {
         color: '#fff',
+      },
+      outlined: {
+        backgroundColor: '#000',
+        borderRadius: 90,
+        color: '#fff',
+        fontSize: '16px',
+        fontFamily: ['extended-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
+        '&:hover': {
+          backgroundColor: '#000',
+        },
       },
     },
   },

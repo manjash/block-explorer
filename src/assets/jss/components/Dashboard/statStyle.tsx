@@ -3,68 +3,43 @@ import { createStyles, Theme } from '@material-ui/core'
 const adStyle = (theme: Theme) =>
   createStyles({
     root: {
-      width: '25%',
-      borderRight: `1px solid ${theme.palette.borderColor?.main}`,
-      padding: theme.spacing(2, 4, 2, 4),
-      '&:nth-of-type(4n)': {
-        borderRight: 'none',
+      border: `1px solid ${theme.palette.borderColor.main}`,
+      boxShadow: theme.shadows[1],
+      width: `calc(33% - 3px)`,
+      height: '81px',
+      alignItems: 'center',
+      borderRadius: theme.shape.borderRadius,
+      padding: '0px 20px 0px 20px',
+      marginRight: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+      display: 'flex',
+      '&:nth-of-type(3n)': {
+        marginRight: '0',
       },
-      [theme.breakpoints.down('md')]: {
-        width: '50%',
-        borderRight: 'none',
+      '&:nth-of-type(4n), &:nth-of-type(5n), &:nth-of-type(6n)': {
+        marginBottom: '0',
       },
-      [theme.breakpoints.down('sm')]: {
-        width: '100%',
-        borderRight: 'none',
-      },
+      // [theme.breakpoints.down('md')]: {
+      //   width: '50%',
+      //   borderRight: 'none',
+      // },
+      // [theme.breakpoints.down('sm')]: {
+      //   width: '100%',
+      //   borderRight: 'none',
+      // },
     },
     header: {
-      display: 'flex',
-      flexDirection: 'row',
-      fontWeight: 500,
-      color: theme.palette.primary.main,
-      alignItems: 'center',
-      marginBottom: theme.spacing(1),
+      marginBottom: '2px',
     },
     iconWrapper: {
-      width: 20,
-      height: 18,
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: theme.shape.borderRadius,
+      alignSelf: 'center',
       marginRight: theme.spacing(1),
     },
-    icon: {
-      color: theme.palette.common.white,
-      width: 14,
-      height: 14,
-    },
-    bar: {
-      margin: theme.spacing(2, 0, 1, 0),
-      backgroundColor: theme.palette.borderColor?.main,
-      width: '100%',
-      height: 2,
-    },
-    inside: {
-      width: '25%',
-      height: 2,
-    },
-    'wrapper-high': {
-      backgroundColor: theme.palette.secondary.main,
-      borderColor: theme.palette.secondary.main,
-    },
-    'wrapper-medium': {
-      backgroundColor: '#FFC2E8',
-      borderColor: '#FFC2E8',
-    },
-    'wrapper-low': {
-      backgroundColor: '#FFCD85',
-      borderColor: '#FFCD85',
-    },
-    'wrapper-verylow': {
-      backgroundColor: '#6C5DD3',
-      borderColor: '#6C5DD3',
+    content: {
+      display: 'flex',
+      flexDirection: 'column',
+      flex: 1,
     },
   })
 

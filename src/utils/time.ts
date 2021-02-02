@@ -5,5 +5,5 @@ export const getDisplayTimeInSeconds = (time: number): string => {
 }
 
 export const getDisplayTimestamp = (timestamp: Date): string => {
-  return `${timestamp.toLocaleDateString()} ${timestamp.toLocaleTimeString()}`
+  return `${timestamp.toLocaleDateString()} ${timestamp.toLocaleTimeString().replace(' ', '')}`
 }

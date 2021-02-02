@@ -19,8 +19,8 @@ const BoxWrapper = (props: Prop) => {
   const { children, isLoading = false, title, ...cssProps } = props
 
   return (
-    <Box padding={2} className={classes.root} {...cssProps}>
-      <Typography variant='h6' className={classes.header}>
+    <Box className={classes.root} {...cssProps}>
+      <Typography variant='h5' className={classes.header}>
         {title}
       </Typography>
       {isLoading && <Loading />}

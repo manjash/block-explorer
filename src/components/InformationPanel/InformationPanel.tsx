@@ -2,25 +2,28 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { makeStyles } from '@material-ui/core/styles'
-import AllInclusiveIcon from '@material-ui/icons/AllInclusive'
-import LineWeightIcon from '@material-ui/icons/LineWeight'
-import AccountTreeIcon from '@material-ui/icons/AccountTree'
-import FitnessCenterIcon from '@material-ui/icons/FitnessCenter'
-import TimerIcon from '@material-ui/icons/Timer'
-import WidgetsIcon from '@material-ui/icons/Widgets'
-import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber'
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
-import ReceiptIcon from '@material-ui/icons/Receipt'
+
+import architecture from '../../assets/images/informations/architecture.svg'
+import blocksGray from '../../assets/images/breadcrumb/blocks-gray.svg'
+import hashIcon from '../../assets/images/informations/hashIcon.svg'
+import reward from '../../assets/images/informations/reward.svg'
+import sizeIcon from '../../assets/images/informations/sizeIcon.svg'
+import transactionIcon from '../../assets/images/breadcrumb/transaction-gray.svg'
+import timestampIcon from '../../assets/images/informations/timestamp.svg'
+import spendsreceipt from '../../assets/images/informations/spendsreceipt.svg'
 
 import Information from '../Information/Information'
 import informationPanelStyle from '../../assets/jss/components/InformationPanel/informationPanelStyle'
 import { getDisplayTimestamp } from '../../utils/time'
+import { getDisplayShortHash } from '../../utils/string'
 
 interface Prop {
   blockId?: number
   confirmations?: number
   difficulty?: number
   fee?: string
+  blockHash?: string
+  transactionHash?: string
   height?: number
   size?: string
   spendsReceipts?: string
@@ -32,10 +35,11 @@ const useStyles = makeStyles(informationPanelStyle)
 
 // This component is fairly verbose at this point. But the idea is to be flexible enough to start adding tooltips and other child components
 const InformationPanel = ({
-  blockId,
   confirmations,
   difficulty,
   fee,
+  blockHash,
+  transactionHash,
   height,
   size,
   spendsReceipts,
@@ -48,58 +52,76 @@ const InformationPanel = ({
 
   return (
     <div className={classes.root}>
-      {blockId && (
-        <Information icon={WidgetsIcon} title={t('app.components.informationPanel.blockId')}>
-          {blockId}
+      {height != undefined && (
+        <Information icon={blocksGray} title={t('app.components.informationPanel.height')}>
+          {String(height)}
         </Information>
       )}
-      {fee && (
-        <Information icon={MonetizationOnIcon} title={t('app.components.informationPanel.fee')}>
-          {fee}
-        </Information>
-      )}
-      {confirmations && (
+      {blockHash && (
         <Information
-          icon={ConfirmationNumberIcon}
-          title={t('app.components.informationPanel.confirmations')}
+          icon={hashIcon}
+          copyString={blockHash}
+          canCopy
+          title={t('app.components.informationPanel.blockHash')}
         >
-          {confirmations}
+          {getDisplayShortHash(blockHash)}
         </Information>
       )}
-      {height && (
-        <Information icon={LineWeightIcon} title={t('app.components.informationPanel.height')}>
-          {height}
+      {transactionHash && (
+        <Information
+          copyString={transactionHash}
+          canCopy
+          icon={hashIcon}
+          title={t('app.components.informationPanel.transactionHash')}
+        >
+          {getDisplayShortHash(transactionHash)}
         </Information>
       )}
       {size && (
-        <Information icon={FitnessCenterIcon} title={t('app.components.informationPanel.size')}>
+        <Information icon={sizeIcon} title={t('app.components.informationPanel.size')}>
           {size}
         </Information>
       )}
-      {transactions && (
+      {difficulty != undefined && (
         <Information
-          icon={AccountTreeIcon}
-          title={t('app.components.informationPanel.transactions')}
-        >
-          {transactions}
-        </Information>
-      )}
-      {difficulty && (
-        <Information
-          icon={AllInclusiveIcon}
+          icon={architecture}
           title={t('app.components.informationPanel.difficulty')}
         >
-          {difficulty}
+          {String(difficulty)}
+        </Information>
+      )}
+      {fee && (
+        <Information icon={reward} title={t('app.components.informationPanel.fee')}>
+          {fee}
+        </Information>
+      )}
+      {transactions != undefined && (
+        <Information
+          icon={transactionIcon}
+          title={t('app.components.informationPanel.transactions')}
+        >
+          {String(transactions)}
+        </Information>
+      )}
+      {confirmations != undefined && (
+        <Information
+          icon={transactionIcon}
+          title={t('app.components.informationPanel.confirmations')}
+        >
+          {String(confirmations)}
         </Information>
       )}
       {timestamp && (
-        <Information icon={TimerIcon} title={t('app.components.informationPanel.timestamp')}>
+        <Information
+          icon={timestampIcon}
+          title={t('app.components.informationPanel.timestamp')}
+        >
           {getDisplayTimestamp(timestamp)}
         </Information>
       )}
       {spendsReceipts && (
         <Information
-          icon={ReceiptIcon}
+          icon={spendsreceipt}
           title={t('app.components.informationPanel.spendsReceipts')}
         >
           {spendsReceipts}

@@ -2,7 +2,7 @@
   "app": {
     "units": {
       "size": {
-        "bytes": "{{ size }} {{ unit }}"
+        "bytes": "{{ size }}{{ unit }}"
       },
       "time": {
         "seconds": "{{ time }}s"
@@ -21,9 +21,28 @@
       "logo": {
         "alt": "Iron Fish Block Explorer"
       },
+      "docs": "Developer Docs",
       "search": {
         "placeholder": "Search by block height, block hash, or transaction hash"
       }
+    },
+    "footer": {
+      "slogan": "Iron Fish is a novel cryptocurrency focused on privacy and accessibility",
+      "copyright": "Copyright {{ year }} Iron Fish. All rights reserved.",
+      "company": "Company",
+      "product": "Product",
+      "aboutUs": "About Us",
+      "careers": "Careers",
+      "blog": "Blog",
+      "blockExplorer": "Block Explorer",
+      "whitePaper": "White Paper",
+      "faq": "FAQ",
+      "contact": "Drop us a line!",
+      "telegram": "Telegram",
+      "twitter": "Twitter",
+      "github": "Github",
+      "discord": "Discord",
+      "reddit": "Reddit"
     },
     "components": {
       "blockslist": {
@@ -41,10 +60,14 @@
         "actions": "Actions"
       },
       "breadcrumb": {
+        "home": "Home",
+        "explorer": "All Blocks",
         "blocks": "Blocks",
         "transactions": "Transactions"
       },
       "informationPanel": {
+        "blockHash": "Block Hash",
+        "transactionHash": "Transaction Hash",
         "blockId": "Block ID",
         "confirmations": "Confirmations",
         "difficulty": "Difficulty",
@@ -69,7 +92,7 @@
         "description": "Iron Fish (IRF) block {{ id }}, hash: {{ hash }}"
       },
       "information": {
-        "title": "General Information",
+        "title": "Block Information",
         "error": {
           "title": "Block not available",
           "description": "We are not able to load the information of this block, or the connection to Iron Fish is broken"
@@ -84,16 +107,16 @@
       "spends": "Spends",
       "receipts": "Receipts",
       "information": {
-        "title": "General Information",
+        "title": "Transaction Information",
         "error": {
           "title": "Transaction not available",
           "description": "We are not able to load the information of this transaction, or the connection to Iron Fish is broken"
         }
       },
       "warning": {
-        "title": "Iron Fish is a private cryptocurrency",
-        "description": "You can’t see the details of a transaction without the public view key",
-        "button": "More details"
+        "title": "Can't see your transaction details?",
+        "description": "That's because Iron Fish is a privacy first cryptocurrency.",
+        "link": "To learn more, visit our website!"
       }
     },
     "transactionsContainer": {
@@ -104,6 +127,7 @@
       }
     },
     "explorer": {
+      "title": "All Blocks",
       "meta": {
         "title": "IRF blocks Explorer"
       },
@@ -113,12 +137,16 @@
       }
     },
     "dashboard": {
+      "title": "Iron Fish Block Explorer",
+      "view_blocks": "View All Blocks",
       "meta": {
         "title": "IRF Dashboard"
       },
       "blocks": {
-        "latestBlocksTitle": "Latest Blocks",
-        "goToExplorer": "Block Explorer →"
+        "title": "Blocks",
+        "latestBlocksTitle": "View Latest",
+        "tabBlock": "Blocks",
+        "goToExplorer": "View All Blocks"
       },
       "metrics": {
         "difficulty": "Difficulty",
@@ -137,7 +165,8 @@
       "docs": "Developer docs",
       "ironfish": "Iron Fish",
       "blocks": "Blocks",
-      "transactions": "Transactions"
+      "transactions": "Transactions",
+      "copy": "Copy to clipboard"
     }
   }
 }

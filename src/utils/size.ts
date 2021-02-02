@@ -6,7 +6,7 @@ interface Size {
 }
 
 export const getSizeInBytes = (bytes: number): Size => {
-  const suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+  const suffixes = ['b', 'kb', 'mb', 'gb', 'tb', 'pb', 'eb', 'zb', 'yb']
   const i = Math.floor(Math.log(bytes) / Math.log(1024))
 
   return {

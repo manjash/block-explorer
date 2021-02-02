@@ -7,7 +7,7 @@ import { Box } from '@material-ui/core'
 
 import Alert, { AlertType } from '../../components/Alert/Alert'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
-import Breadcrumb, { PillType } from '../../components/Breadcrumb/Breadcrumb'
+import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
 import InformationPanel from '../../components/InformationPanel/InformationPanel'
 import SpendsList from '../../components/SpendsList/SpendsList'
 import ReceiptsList from '../../components/ReceiptsList/ReceiptsList'
@@ -26,6 +26,10 @@ import transactionDetailPageStyle from '../../assets/jss/containers/transactionD
 import { getIRFCurrencyAmount } from '../../utils/currency'
 import { getDisplaySizeInBytes } from '../../utils/size'
 import { getDisplayShortHash } from '../../utils/string'
+
+import blocks from '../../assets/images/breadcrumb/blocks.svg'
+import transaction from '../../assets/images/breadcrumb/transaction-gray.svg'
+import Container from '../../components/Container/Container'
 
 interface ParamTypes {
   blockHash: string
@@ -56,7 +60,7 @@ const TransactionDetailPage = () => {
   const metaVariables = { blockHash, hash }
 
   return (
-    <>
+    <Container>
       {transactionData && (
         <Meta path={RoutePath.TransactionDetailPage} variables={metaVariables} />
       )}
@@ -65,22 +69,18 @@ const TransactionDetailPage = () => {
         <Breadcrumb
           paths={[
             {
-              title: t('app.components.breadcrumb.blocks'),
+              title: t('app.components.breadcrumb.explorer'),
               to: RoutePath.Explorer,
-              type: PillType.Route,
+              logo: blocks,
             },
             {
               title: getDisplayShortHash(blockHash || ''),
               to: getBlockDetailPageUrl(blockHash),
-              type: PillType.Block,
+              logo: blocks,
             },
             {
-              title: t('app.components.breadcrumb.transactions'),
-              type: PillType.Transaction,
-            },
-            {
-              title: transactionData.transaction_identifier.hash,
-              type: PillType.Transaction,
+              title: getDisplayShortHash(transactionData.transaction_identifier.hash || ''),
+              logo: transaction,
             },
           ]}
         />
@@ -92,14 +92,14 @@ const TransactionDetailPage = () => {
         title={t('app.transactionDetailPage.information.title')}
       >
         {service.status === ServiceState.ERROR && (
-          <Alert
-            title={t('app.transactionDetailPage.information.error.title')}
-            description={t('app.transactionDetailPage.information.error.description')}
-          />
+          <Alert title={t('app.transactionDetailPage.information.error.title')}>
+            {t('app.transactionDetailPage.information.error.description')}
+          </Alert>
         )}
         {transactionData && (
           <InformationPanel
-            blockId={transactionData.block_identifier?.index}
+            blockHash={blockHash}
+            transactionHash={hash}
             fee={getIRFCurrencyAmount(transactionData.fee)}
             confirmations={transactionData.confirmations}
             timestamp={transactionData.timestamp}
@@ -112,8 +112,12 @@ const TransactionDetailPage = () => {
         <Alert
           type={AlertType.Information}
           title={t('app.transactionDetailPage.warning.title')}
-          description={t('app.transactionDetailPage.warning.description')}
-        />
+        >
+          {t('app.transactionDetailPage.warning.description')}
+          <a href='https://www.ironfish.network'>
+            {t('app.transactionDetailPage.warning.link')}
+          </a>
+        </Alert>
       )}
       {transactionData && (
         <Box marginTop={2} className={classes.root}>
@@ -129,7 +133,7 @@ const TransactionDetailPage = () => {
           </div>
         </Box>
       )}
-    </>
+    </Container>
   )
 }
 

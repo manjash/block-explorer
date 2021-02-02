@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline'
-import InfoIcon from '@material-ui/icons/Info'
 
 import alertStyle from '../../assets/jss/components/Alert/alertStyle'
 
@@ -16,13 +15,13 @@ export enum AlertType {
 
 interface Prop {
   title: string
-  description: string
+  children: React.ReactNode
   type?: AlertType
 }
 
 const useStyles = makeStyles(alertStyle)
 
-const Alert = ({ title, description, type = AlertType.Error }: Prop) => {
+const Alert = ({ title, children, type = AlertType.Error }: Prop) => {
   const classes = useStyles()
 
   return (
@@ -34,13 +33,12 @@ const Alert = ({ title, description, type = AlertType.Error }: Prop) => {
     >
       <div className={classes.header}>
         {type === AlertType.Error && <ErrorOutlineIcon className={classes.icon} />}
-        {type === AlertType.Information && <InfoIcon className={classes.icon} />}
-        <Typography variant='h6' className={classes.title}>
+        <Typography variant='h5' className={classes.title}>
           {title}
         </Typography>
       </div>
 
-      {description}
+      {children}
     </Paper>
   )
 }
