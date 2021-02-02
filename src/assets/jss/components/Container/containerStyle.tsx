@@ -8,7 +8,8 @@ const adStyle = (theme: Theme) =>
   createStyles({
     root: {
       maxWidth: '990px',
-      margin: '0 auto',
+      marginLeft: 'auto',
+      marginRight: 'auto',
     },
   })
 

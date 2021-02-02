@@ -2,8 +2,6 @@
 import { createStyles, Theme } from '@material-ui/core'
 import { HEADER_HEIGHT } from '../../theme'
 
-const defaultHeight = '49px'
-
 const adStyle = (theme: Theme) =>
   createStyles({
     root: {
@@ -13,16 +11,28 @@ const adStyle = (theme: Theme) =>
       background: 'none',
       padding: theme.spacing(2, 10, 0, 10),
       zIndex: 1,
+      transition: `all 0.1s ${theme.transitions.easing.easeInOut}`,
+    },
+    sticky: {
+      position: 'fixed',
+      border: `1px solid ${theme.palette.borderColor.main}`,
+      top: 0,
     },
     background: {},
     toolbar: {
       padding: 0,
     },
     button: {
+      opacity: 1,
       position: 'absolute',
       right: 0,
     },
-    logo: {},
+    logo: {
+      opacity: 1,
+    },
+    invisible: {
+      opacity: 0,
+    },
   })
 
 export default adStyle

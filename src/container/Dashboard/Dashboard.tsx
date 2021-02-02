@@ -1,8 +1,8 @@
-import React, { MutableRefObject, useRef } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
 
+import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
@@ -17,15 +17,14 @@ import useGetService from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
 import Block, { formatBlocksFromJson } from '../../types/Block'
 import { ApiUrls } from '../../services/servicesUrls'
-// import Splash from '../../components/Splash/Splash'
-import Search from '../Search/Search'
-import splash from '../../assets/images/splash.svg'
-import arrowDown from '../../assets/images/arrow_down.svg'
-import splashStyle from '../../assets/jss/components/Splash/splashStyle'
-const useStyles = makeStyles(splashStyle)
+import Splash from '../../components/Splash/Splash'
+import dashboardStyle from '../../assets/jss/containers/dashboardStyle'
+
+const useStyles = makeStyles(dashboardStyle)
 
 const Dashboard = () => {
   const { t } = useTranslation()
+  const classes = useStyles()
 
   const service = useGetService<Block[]>(
     ApiUrls.SEARCH_BLOCKS,
@@ -51,38 +50,13 @@ const Dashboard = () => {
     metrics.height = blockData[0].block_identifier.index || null
     metrics.difficulty = blockData[0].metadata.difficulty || null
   }
-  const classes = useStyles()
-
-  const anchor = useRef() as MutableRefObject<HTMLDivElement>
-
-  const executeScroll = () => {
-    anchor.current.scrollIntoView({ behavior: 'smooth' })
-  }
 
   return (
     <>
       <Meta path={RoutePath.Dashboard} />
-      <div>
-        <Typography variant='h1' className={classes.h1}>
-          {t('app.dashboard.title')}
-        </Typography>
-        <div className={classes.search}>
-          <Search />
-        </div>
-
-        <p className={classes.viewAll} onClick={executeScroll}>
-          {t('app.dashboard.view_blocks')}
-          <img src={arrowDown} alt={t('app.header.logo.alt')} className={classes.arrowDown} />
-        </p>
-
-        <div className={classes.splash}>
-          <img src={splash} alt={t('app.header.logo.alt')} className={classes.background} />
-        </div>
-      </div>
-      <span ref={anchor} />
-
-      <Container>
-        <Box marginTop={7} marginBottom={4}>
+      <Splash />
+      <Container marginTop={6}>
+        <Box marginBottom={4}>
           <Metrics metrics={metrics} />
         </Box>
 
