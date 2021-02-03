@@ -7,7 +7,7 @@ import { RoutePath } from '../../routes/routePath'
 describe('<Meta />', () => {
   describe('Dashboard route', () => {
     test('It renders correctly', () => {
-      const wrapper = shallow(<Meta path={RoutePath.Dashboard} />)
+      const wrapper = shallow(<Meta path={RoutePath.Home} />)
       expect(wrapper.find('title').text()).toEqual(
         'app.dashboard.meta.title - app.meta.defaultTitle',
       )

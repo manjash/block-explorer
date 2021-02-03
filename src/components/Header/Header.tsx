@@ -16,25 +16,24 @@ import Search from '../../container/Search/Search'
 const useStyles = makeStyles(headerStyle)
 
 interface Props {
-  isSmallBreakpoint: Boolean
   showSearch: Boolean
   isSticky?: Boolean
   isTop?: Boolean
 }
 
-const Header = ({ isSmallBreakpoint, isSticky, isTop, showSearch }: Props) => {
+const Header = ({ isSticky, isTop, showSearch }: Props) => {
   const classes = useStyles()
   const { t } = useTranslation()
   return (
     <AppBar
       position='relative'
       className={classNames(classes.root, {
-        [classes.sticky]: !isTop && isSticky,
+        [classes.sticky]: isSticky,
+        [classes.isTop]: showSearch && isTop,
       })}
     >
       <Toolbar className={classes.toolbar}>
-        {/* {isSmallBreakpoint && ( */}
-        <Link to={RoutePath.Dashboard}>
+        <Link to={RoutePath.Home}>
           <img
             src={logo}
             alt={t('app.header.logo.alt')}
@@ -43,8 +42,7 @@ const Header = ({ isSmallBreakpoint, isSticky, isTop, showSearch }: Props) => {
             })}
           />
         </Link>
-        {/* )} */}
-        {showSearch && <Search />}
+        <div className={classes.search}>{showSearch && <Search />}</div>
         <Button
           href='https://www.ironfish.network/docs/whitepaper/1_introduction'
           className={classNames(classes.button, {

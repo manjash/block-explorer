@@ -8,14 +8,13 @@ const adStyle = (theme: Theme) =>
     inputRoot: {
       color: 'inherit',
       height: defaultHeight,
-      width: 'calc(100% + 2px)',
-      marginLeft: '-1px',
+      width: '100%',
       '& input': {
         paddingLeft: '56px!important',
       },
     },
     inputInput: {
-      padding: `14px 0 14px 0`,
+      padding: `17px 0 14px 0`,
       width: '100%',
       color: theme.palette.secondary.main,
       '&::placeholder': {
@@ -23,21 +22,16 @@ const adStyle = (theme: Theme) =>
       },
     },
     search: {
-      maxWidth: '954px',
+      display: 'flex',
+      alignItems: 'center',
       transition: `all 0.1s ${theme.transitions.easing.easeInOut}`,
-      position: 'absolute',
-      margin: '0 auto',
-      left: '0',
-      right: '0',
+      boxSizing: 'border-box',
       backgroundColor: theme.palette.common.white,
       borderRadius: theme.shape.borderRadius,
       border: `1px solid ${theme.palette.borderColor.main}`,
       width: '100%',
       height: defaultHeight,
-      [theme.breakpoints.down('sm')]: {
-        margin: theme.spacing(2, 0, 2, 0),
-      },
-      boxShadow: theme.shadows[3],
+      boxShadow: theme.shadows[1],
     },
     searchIcon: {
       color: theme.palette.primary.main,
@@ -50,8 +44,9 @@ const adStyle = (theme: Theme) =>
       justifyContent: 'center',
     },
     popup: {
-      marginTop: '15px',
+      marginTop: '14px',
       border: `1px solid ${theme.palette.borderColor.main}`,
+      borderTop: 'none',
       boxShadow: theme.shadows[1],
     },
     list: {

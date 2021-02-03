@@ -16,7 +16,7 @@ type PageType = {
 }
 
 const Page: PageType = {
-  [RoutePath.Dashboard]: {
+  [RoutePath.Home]: {
     title: 'app.dashboard.meta.title',
     description: 'app.meta.defaultDescription',
     keywords: 'app.meta.defaultKeywords',

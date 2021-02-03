@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import ScrollToTop from 'react-router-scroll-top'
 
@@ -19,7 +19,6 @@ const App = () => (
                   <Route path={route.path} component={route.component} key={route.nameKey} />
                 )
               })}
-            <Redirect from='/' to='dashboard' />
           </Switch>
         </Layout>
       </ScrollToTop>

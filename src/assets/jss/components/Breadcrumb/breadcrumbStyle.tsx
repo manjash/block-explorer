@@ -7,7 +7,7 @@ const breadcrumbStyle = (theme: Theme) =>
       height: theme.spacing(5),
       marginBottom: theme.spacing(1),
       [theme.breakpoints.down('sm')]: {
-        display: 'hidden',
+        height: 'auto',
       },
     },
     pill: {

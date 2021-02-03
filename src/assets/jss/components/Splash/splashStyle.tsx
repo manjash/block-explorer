@@ -1,5 +1,7 @@
 import { createStyles, Theme } from '@material-ui/core'
 import splash from '../../../images/splash.svg'
+import splashMobile from '../../../images/splash_mobile.svg'
+import { HEADER_HEIGHT } from '../../theme'
 
 const splashStyle = (theme: Theme) =>
   createStyles({
@@ -10,10 +12,18 @@ const splashStyle = (theme: Theme) =>
       background: 'linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, #FBFBFB 100%)',
       overflow: 'hidden',
       textAlign: 'center',
+      borderBottom: `1px solid ${theme.palette.borderColor.main}`,
+      [theme.breakpoints.down('sm')]: {
+        maxHeight: 'inherit',
+      },
     },
     background: {
       background: `url(${splash}) no-repeat center`,
       height: '571px',
+      [theme.breakpoints.down('sm')]: {
+        background: `url(${splashMobile}) no-repeat center`,
+        height: '505px',
+      },
     },
     h1: {
       width: '620px',
@@ -23,6 +33,12 @@ const splashStyle = (theme: Theme) =>
       display: 'block',
       lineHeight: '85px',
       margin: '60px auto 36px auto',
+      [theme.breakpoints.down('sm')]: {
+        marginTop: 0,
+        width: '320px',
+        fontSize: '42px',
+        lineHeight: '52px',
+      },
     },
     placeholder: {
       height: '92px',
@@ -32,14 +48,19 @@ const splashStyle = (theme: Theme) =>
       textAlign: 'center',
     },
     search: {
-      // maxWidth: '954px',
       margin: '0 auto',
-      // position: 'sticky',
-      top: 22,
+      height: HEADER_HEIGHT,
+      maxWidth: '954px',
       zIndex: 2,
+      position: 'relative',
+      padding: theme.spacing(0, 2, 0, 2),
+      [theme.breakpoints.down('sm')]: {
+        height: '60px',
+        '& > div': {
+          position: 'relative',
+        },
+      },
     },
-    sticky: {},
-    arrowDown: {},
     viewAll: {
       display: 'flex',
       cursor: 'pointer',

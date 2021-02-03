@@ -53,7 +53,7 @@ const Footer = () => {
         <div className={classes.container}>
           <div className={classes.about}>
             <a href='https://www.ironfish.network'>
-              <img src={logo} alt={t('app.header.logo.alt')} className={classes.logo} />
+              <img src={logo} alt={t('app.header.logo.alt')} />
             </a>
             <p>{t('app.footer.slogan')}</p>
           </div>

@@ -19,14 +19,13 @@ const adStyle = (theme: Theme) =>
       '&:nth-of-type(4n), &:nth-of-type(5n), &:nth-of-type(6n)': {
         marginBottom: '0',
       },
-      // [theme.breakpoints.down('md')]: {
-      //   width: '50%',
-      //   borderRight: 'none',
-      // },
-      // [theme.breakpoints.down('sm')]: {
-      //   width: '100%',
-      //   borderRight: 'none',
-      // },
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
+        marginBottom: theme.spacing(1),
+        '&:nth-of-type(4n), &:nth-of-type(5n), &:nth-of-type(6n)': {
+          marginBottom: theme.spacing(1),
+        },
+      },
     },
     header: {
       marginBottom: '2px',

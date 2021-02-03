@@ -71,7 +71,6 @@ const BlockDetailPage = () => {
       )}
 
       <BoxWrapper
-        marginBottom={2}
         isLoading={service.status === ServiceState.LOADING}
         title={t('app.blockDetailPage.information.title')}
       >

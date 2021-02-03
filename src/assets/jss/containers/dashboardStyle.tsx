@@ -8,6 +8,11 @@ const dashboardStyle = (theme: Theme) =>
       marginBottom: '15px',
       textAlign: 'center',
     },
+    button: {
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
+      },
+    },
   })
 
 export default dashboardStyle
