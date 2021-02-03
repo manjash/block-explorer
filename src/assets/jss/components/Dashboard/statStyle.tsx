@@ -3,7 +3,7 @@ import { createStyles, Theme } from '@material-ui/core'
 const adStyle = (theme: Theme) =>
   createStyles({
     root: {
-      border: `1px solid ${theme.palette.borderColor.main}`,
+      border: `1px solid ${theme.palette.borderColor?.main}`,
       boxShadow: theme.shadows[1],
       width: `calc(33% - 3px)`,
       height: '81px',

@@ -7,8 +7,8 @@ const alertStyle = (theme: Theme) =>
       borderRadius: 0,
       display: 'flex',
       flexDirection: 'column',
-      fontSize: '14px',
       padding: theme.spacing(4),
+      fontSize: '14px',
       lineHeight: '18px',
       '& a': {
         color: '#F6C5E6',
@@ -16,7 +16,9 @@ const alertStyle = (theme: Theme) =>
       },
     },
     error: {
+      fontFamily: ['extended-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
       backgroundColor: theme.palette.error.main,
+      color: '#CE3722',
     },
     information: {
       backgroundColor: theme.palette.info.main,
@@ -35,6 +37,7 @@ const alertStyle = (theme: Theme) =>
       },
     },
     title: {
+      fontSize: '20px',
       margin: 0,
       [theme.breakpoints.down('sm')]: {
         lineHeight: 1,

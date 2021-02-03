@@ -3,12 +3,12 @@ import { createStyles, Theme } from '@material-ui/core'
 const blocksListSmall = (theme: Theme) =>
   createStyles({
     item: {
-      border: `1px solid ${theme.palette.borderColor.main}`,
+      border: `1px solid ${theme.palette.borderColor?.main}`,
       borderTop: 'none',
       padding: theme.spacing(2),
     },
     firstItem: {
-      borderTop: `1px solid ${theme.palette.borderColor.main}`,
+      borderTop: `1px solid ${theme.palette.borderColor?.main}`,
       marginBottom: 0,
     },
     content: {

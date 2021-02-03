@@ -6,7 +6,7 @@ import Information from '../Information/Information'
 
 describe('<InformationPanel />', () => {
   test('It renders correctly', () => {
-    const wrapper = shallow(<InformationPanel blockId={123} size='2' />)
-    expect(wrapper.find(Information)).toHaveLength(2)
+    const wrapper = shallow(<InformationPanel size='2' />)
+    expect(wrapper.find(Information)).toHaveLength(1)
   })
 })

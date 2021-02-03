@@ -1,17 +1,16 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import AllInclusiveIcon from '@material-ui/icons/AllInclusive'
+import Typography from '@material-ui/core/Typography'
 
 import Stat from './Stat'
 
 describe('<Stat />', () => {
   test('It renders correctly', () => {
     const wrapper = shallow(
-      <Stat icon={AllInclusiveIcon} priority='low' title='test'>
+      <Stat priority='low' title='test'>
         testvalue
       </Stat>,
     )
-    expect(wrapper.find(AllInclusiveIcon)).toHaveLength(1)
-    expect(wrapper.html().indexOf('wrapper-low')).not.toEqual(-1)
+    expect(wrapper.find(Typography)).toHaveLength(2)
   })
 })

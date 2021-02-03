@@ -15,6 +15,6 @@ describe('<Metrics />', () => {
 
   test('It renders correctly', () => {
     const wrapper = shallow(<Metrics metrics={metricsData} />)
-    expect(wrapper.find(Stat)).toHaveLength(5)
+    expect(wrapper.find(Stat)).toHaveLength(6)
   })
 })

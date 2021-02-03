@@ -12,7 +12,7 @@ const splashStyle = (theme: Theme) =>
       background: 'linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, #FBFBFB 100%)',
       overflow: 'hidden',
       textAlign: 'center',
-      borderBottom: `1px solid ${theme.palette.borderColor.main}`,
+      borderBottom: `1px solid ${theme.palette.borderColor?.main}`,
       [theme.breakpoints.down('sm')]: {
         maxHeight: 'inherit',
       },

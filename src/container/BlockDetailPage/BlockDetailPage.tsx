@@ -75,9 +75,7 @@ const BlockDetailPage = () => {
         title={t('app.blockDetailPage.information.title')}
       >
         {service.status === ServiceState.ERROR && (
-          <Alert title={t('app.blockDetailPage.information.error.title')}>
-            {t('app.blockDetailPage.information.error.description')}
-          </Alert>
+          <Alert title={t('app.blockDetailPage.information.error.description')} />
         )}
         <div>
           {blockData && (

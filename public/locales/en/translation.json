@@ -94,8 +94,7 @@
       "information": {
         "title": "Block Information",
         "error": {
-          "title": "Block not available",
-          "description": "We are not able to load the information of this block, or the connection to Iron Fish is broken"
+          "description": "Block not found"
         }
       }
     },

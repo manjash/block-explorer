@@ -7,6 +7,6 @@ describe('Time utils', () => {
 
   test('getDisplayTimestamp returns the right string', () => {
     const date = new Date('2020-01-01 10:10:10')
-    expect(getDisplayTimestamp(date)).toEqual('1/1/2020 10:10:10 AM')
+    expect(getDisplayTimestamp(date)).toEqual('1/1/2020 10:10:10AM')
   })
 })

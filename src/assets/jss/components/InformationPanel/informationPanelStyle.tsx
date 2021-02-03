@@ -7,7 +7,7 @@ const informationPanelStyle = (theme: Theme) =>
       padding: theme.spacing(2),
       flexDirection: 'row',
       flexWrap: 'wrap',
-      border: `1px solid ${theme.palette.borderColor.main}`,
+      border: `1px solid ${theme.palette.borderColor?.main}`,
       [theme.breakpoints.down('sm')]: {
         padding: theme.spacing(0),
         border: 'none',

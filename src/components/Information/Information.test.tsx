@@ -1,13 +1,12 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import ReceiptIcon from '@material-ui/icons/Receipt'
 
 import Information from './Information'
 
 describe('<Information />', () => {
   test('It renders correctly', () => {
     const wrapper = shallow(
-      <Information title='test title' icon={ReceiptIcon}>
+      <Information title='test title' icon={'test'}>
         test value
       </Information>,
     )

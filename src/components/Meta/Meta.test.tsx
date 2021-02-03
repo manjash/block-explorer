@@ -18,7 +18,7 @@ describe('<Meta />', () => {
         'app.meta.defaultKeywords',
       )
       expect(wrapper.find('link[rel="canonical"]').prop('href')).toEqual(
-        'https://explorer.ironfish.network/dashboard',
+        'https://explorer.ironfish.network/',
       )
     })
   })

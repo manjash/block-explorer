@@ -5,7 +5,7 @@ const containerWidthSmallBreakpoint = '210px'
 const adStyle = (theme: Theme) =>
   createStyles({
     root: {
-      borderTop: `1px solid ${theme.palette.borderColor.main}`,
+      borderTop: `1px solid ${theme.palette.borderColor?.main}`,
       paddingTop: '36px',
       color: theme.palette.info.main,
       fontFamily: ['extended-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
@@ -46,7 +46,7 @@ const adStyle = (theme: Theme) =>
       display: 'flex',
       width: '100%',
       justifyContent: 'space-between',
-      borderTop: `1px solid ${theme.palette.borderColor.main}`,
+      borderTop: `1px solid ${theme.palette.borderColor?.main}`,
       [theme.breakpoints.down('sm')]: {
         padding: theme.spacing(2),
         flexDirection: 'column',

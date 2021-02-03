@@ -4,7 +4,7 @@ import { HEADER_HEIGHT, HEADER_HEIGHT_SM } from '../../theme'
 const adStyle = (theme: Theme) =>
   createStyles({
     root: {
-      backgroundColor: theme.palette.primaryBackground.main,
+      backgroundColor: theme.palette.primaryBackground?.main,
       boxShadow: 'none',
       height: `${HEADER_HEIGHT}px`,
       background: 'none',
@@ -42,12 +42,12 @@ const adStyle = (theme: Theme) =>
       },
     },
     isTop: {
-      border: `1px solid ${theme.palette.borderColor.main}`,
+      border: `1px solid ${theme.palette.borderColor?.main}`,
       boxShadow: theme.shadows[1],
     },
     sticky: {
       position: 'fixed',
-      border: `1px solid ${theme.palette.borderColor.main}`,
+      border: `1px solid ${theme.palette.borderColor?.main}`,
       top: 0,
     },
     toolbar: {

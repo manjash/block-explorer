@@ -4,8 +4,7 @@ import classNames from 'classnames'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline'
-
+import info from '../../assets/images/info.svg'
 import alertStyle from '../../assets/jss/components/Alert/alertStyle'
 
 export enum AlertType {
@@ -15,7 +14,7 @@ export enum AlertType {
 
 interface Prop {
   title: string
-  children: React.ReactNode
+  children?: React.ReactNode
   type?: AlertType
 }
 
@@ -32,7 +31,9 @@ const Alert = ({ title, children, type = AlertType.Error }: Prop) => {
       })}
     >
       <div className={classes.header}>
-        {type === AlertType.Error && <ErrorOutlineIcon className={classes.icon} />}
+        {type === AlertType.Error && (
+          <img src={info} role='decorative' className={classes.icon} />
+        )}
         <Typography variant='h5' className={classes.title}>
           {title}
         </Typography>

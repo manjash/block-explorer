@@ -28,7 +28,7 @@ const adStyle = (theme: Theme) =>
       boxSizing: 'border-box',
       backgroundColor: theme.palette.common.white,
       borderRadius: theme.shape.borderRadius,
-      border: `1px solid ${theme.palette.borderColor.main}`,
+      border: `1px solid ${theme.palette.borderColor?.main}`,
       width: '100%',
       height: defaultHeight,
       boxShadow: theme.shadows[1],
@@ -45,7 +45,7 @@ const adStyle = (theme: Theme) =>
     },
     popup: {
       marginTop: '14px',
-      border: `1px solid ${theme.palette.borderColor.main}`,
+      border: `1px solid ${theme.palette.borderColor?.main}`,
       borderTop: 'none',
       boxShadow: theme.shadows[1],
     },

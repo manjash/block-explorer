@@ -14,7 +14,7 @@ const defaultBorderColor = '#DFE1E4'
 const primaryColor = '#000'
 const titleColor = '#1D0070'
 const secondaryColor = '#6B6D76'
-const errorColor = '#d2000078'
+const errorColor = '#FBD5C9'
 const defaultBoxShadow = '0px 1px 1px rgba(0, 0, 0, 0.07)'
 
 declare module '@material-ui/core/styles/createMuiTheme' {

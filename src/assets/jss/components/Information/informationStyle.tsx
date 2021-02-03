@@ -20,7 +20,7 @@ const informationStyle = (theme: Theme) =>
     },
     icon: {
       marginRight: theme.spacing(2),
-      border: `1px solid ${theme.palette.borderColor.main}`,
+      border: `1px solid ${theme.palette.borderColor?.main}`,
       color: theme.palette.secondary.main,
       width: 42,
       height: 42,
