@@ -10,6 +10,7 @@ import arrowDown from '../../assets/images/arrow_down.svg'
 import splashStyle from '../../assets/jss/components/Splash/splashStyle'
 import { debounce } from '../../utils/debounce'
 import { HEADER_HEIGHT } from '../../assets/jss/theme'
+import Search from '../../container/Search/Search'
 
 const useStyles = makeStyles(splashStyle)
 
@@ -43,17 +44,19 @@ const Splash = () => {
   return (
     <>
       <div>
+        {isSticky && <Header isSticky={isSticky} showSearch />}
+
         <Typography variant='h1' className={classes.h1}>
           {t('app.dashboard.title')}
         </Typography>
-        <div className={classNames(classes.search, { [classes.sticky]: isSticky })}>
-          <Header isSmallBreakpoint={false} showSearch isSticky={isSticky} />
+        <div className={classes.search}>
+          <Search />
         </div>
         <div className={classNames({ [classes.placeholder]: isSticky })}></div>
 
         <p className={classes.viewAll} onClick={executeScroll}>
           {t('app.dashboard.view_blocks')}
-          <img src={arrowDown} alt={t('app.header.logo.alt')} className={classes.arrowDown} />
+          <img src={arrowDown} alt={t('app.header.logo.alt')} />
         </p>
 
         <div className={classes.splash}>

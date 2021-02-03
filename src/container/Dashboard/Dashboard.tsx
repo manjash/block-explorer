@@ -55,7 +55,7 @@ const Dashboard = () => {
     <>
       <Meta path={RoutePath.Dashboard} />
       <Splash />
-      <Container marginTop={6}>
+      <Container>
         <Box marginBottom={4}>
           <Metrics metrics={metrics} />
         </Box>
@@ -71,7 +71,12 @@ const Dashboard = () => {
           <BlocksList blockList={blockData ? blockData : []} />
 
           <Box textAlign='center' marginTop={4} marginBottom={2}>
-            <Button component={Link} to={RoutePath.Explorer} variant='contained'>
+            <Button
+              component={Link}
+              to={RoutePath.Explorer}
+              variant='contained'
+              className={classes.button}
+            >
               {t('app.dashboard.blocks.goToExplorer')}
             </Button>
           </Box>

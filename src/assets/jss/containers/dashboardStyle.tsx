@@ -8,6 +8,9 @@ const dashboardStyle = (theme: Theme) =>
       marginBottom: '15px',
       textAlign: 'center',
     },
+    button: {
+      width: '100%',
+    },
   })
 
 export default dashboardStyle

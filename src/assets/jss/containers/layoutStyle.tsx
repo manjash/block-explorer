@@ -1,4 +1,5 @@
 import { createStyles, Theme } from '@material-ui/core'
+import { HEADER_HEIGHT, HEADER_HEIGHT_SM } from '../theme'
 
 const layoutStyle = (theme: Theme) =>
   createStyles({
@@ -22,11 +23,15 @@ const layoutStyle = (theme: Theme) =>
     content: {
       width: '100%',
       minHeight: '100vh',
+      paddingTop: HEADER_HEIGHT,
       paddingBottom: theme.spacing(4),
-      paddingTop: theme.spacing(2),
       [theme.breakpoints.down('sm')]: {
-        paddingBottom: theme.spacing(10),
+        paddingTop: HEADER_HEIGHT_SM,
+        paddingBottom: theme.spacing(6),
       },
+    },
+    noPadding: {
+      paddingTop: 0,
     },
   })
 

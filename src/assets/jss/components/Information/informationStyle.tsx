@@ -7,6 +7,8 @@ const informationStyle = (theme: Theme) =>
       padding: theme.spacing(2, 2, 2, 2),
       display: 'flex',
       [theme.breakpoints.down('sm')]: {
+        paddingLeft: 0,
+        paddingRight: 0,
         width: '100%',
       },
       '&.copy': {
@@ -27,6 +29,8 @@ const informationStyle = (theme: Theme) =>
       alignItems: 'center',
       alignContent: 'center',
       '& img': {
+        width: '16px',
+        height: '16px',
         flex: 1,
       },
     },

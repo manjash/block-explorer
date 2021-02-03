@@ -2,12 +2,13 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
-import { makeStyles } from '@material-ui/core/styles'
+import { useTheme, makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import Block from '../../types/Block'
 import { getBlockDetailPageUrl } from '../../utils/routes'
@@ -16,6 +17,7 @@ import { getDisplayTimestamp } from '../../utils/time'
 import { getDisplaySizeInBytes } from '../../utils/size'
 import blockRow from '../../assets/images/blockRow.svg'
 import blocksList from '../../assets/jss/components/BlocksList/blocksList'
+import BlocksListSmall from './BlocksListSmall'
 
 interface Prop {
   blockList: Block[]
@@ -25,6 +27,10 @@ const useStyles = makeStyles(blocksList)
 const BlocksList = ({ blockList }: Prop) => {
   const { t } = useTranslation()
   const classes = useStyles()
+
+  const theme = useTheme()
+  const isSmallBreakpoint = useMediaQuery(theme.breakpoints.down('sm'))
+  if (isSmallBreakpoint) return <BlocksListSmall blockList={blockList} />
 
   return (
     <TableContainer>

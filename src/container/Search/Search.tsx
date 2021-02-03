@@ -3,9 +3,10 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-import { makeStyles } from '@material-ui/core/styles'
+import { useTheme, makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import searchIcon from '../../assets/images/search.svg'
 import { networkIdentifier } from '../../config'
@@ -13,6 +14,7 @@ import searchStyle from '../../assets/jss/containers/searchStyle'
 import { ApiUrls } from '../../services/servicesUrls'
 import Block, { formatBlocksFromJson } from '../../types/Block'
 import { getBlockDetailPageUrl } from '../../utils/routes'
+import { getDisplayShortHash } from '../../utils/string'
 
 const useStyles = makeStyles(searchStyle)
 
@@ -23,6 +25,9 @@ const Search = () => {
   const classes = useStyles()
   const { t } = useTranslation()
   const history = useHistory()
+
+  const theme = useTheme()
+  const isSmallBreakpoint = useMediaQuery(theme.breakpoints.down('sm'))
 
   const navigate = (block: Block | null) => {
     if (!block) return
@@ -77,7 +82,11 @@ const Search = () => {
           option.block_identifier.index === value.block_identifier.index
         }
         getOptionLabel={(option) =>
-          `${option.block_identifier.index} - ${option.block_identifier.hash}`
+          `${option.block_identifier.index} - ${
+            isSmallBreakpoint
+              ? getDisplayShortHash(option.block_identifier.hash)
+              : option.block_identifier.hash
+          }`
         }
         options={results}
         loading={loading}

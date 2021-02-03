@@ -1,8 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createStyles, Theme } from '@material-ui/core'
-import { HEADER_HEIGHT } from '../../theme'
-
-const defaultHeight = '49px'
 
 const adStyle = (theme: Theme) =>
   createStyles({
@@ -10,6 +6,11 @@ const adStyle = (theme: Theme) =>
       maxWidth: '990px',
       marginLeft: 'auto',
       marginRight: 'auto',
+      marginTop: theme.spacing(4),
+      [theme.breakpoints.down('sm')]: {
+        paddingLeft: theme.spacing(3),
+        paddingRight: theme.spacing(3),
+      },
     },
   })
 

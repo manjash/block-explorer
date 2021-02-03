@@ -51,7 +51,7 @@
         "transactions": "Transactions",
         "timestamp": "Timestamp",
         "hash": "Block Hash",
-        "actions": "Actions"
+        "difficulty": "Difficulty"
       },
       "transactionslist": {
         "hash": "Hash",
