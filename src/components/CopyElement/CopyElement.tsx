@@ -7,6 +7,7 @@ import Snackbar from '@material-ui/core/Snackbar'
 import Tooltip from '@material-ui/core/Tooltip'
 
 import copyElementStyle from '../../assets/jss/components/CopyElement/copyElementStyle'
+import copyIcon from '../../assets/images/copy.svg'
 import { copyToClipboard } from '../../utils/copyToClipboard'
 
 interface Prop {
@@ -40,7 +41,10 @@ const CopyElement = ({ copyString, children }: Prop) => {
       )}
       <div onClick={copyClick} className={classes.root}>
         <Tooltip title={tooltipString} placement='top'>
-          {children}
+          <div className={classes.content}>
+            {children}
+            <img className={classes.icon} src={copyIcon} role='decorative' />
+          </div>
         </Tooltip>
       </div>
     </>
