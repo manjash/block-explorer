@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper'
 
 import nullifier from '../../assets/images/nullifier.svg'
 import { Spends } from '../../types/Spend'
-import { copyToClipboard } from '../../utils/copyToClipboard'
+import CopyElement from '../CopyElement/CopyElement'
 import { StyledTableCell, StyledTableRow } from '../Table/Table'
 import spendsList from '../../assets/jss/components/SpendsList/spendsList'
 
@@ -38,14 +38,12 @@ const SpendsList = ({ spends }: Prop) => {
           {spends.map((spend) => (
             <StyledTableRow key={spend.nullifier}>
               <StyledTableCell align='justify'>
-                <div
-                  className={classes.root}
-                  title={t('app.navigation.copy')}
-                  onClick={() => copyToClipboard(spend.nullifier)}
-                >
-                  <img src={nullifier} role='presentation' />
-                  {spend.nullifier}
-                </div>
+                <CopyElement copyString={spend.nullifier}>
+                  <div className={classes.root}>
+                    <img src={nullifier} role='presentation' />
+                    {spend.nullifier}
+                  </div>
+                </CopyElement>
               </StyledTableCell>
             </StyledTableRow>
           ))}

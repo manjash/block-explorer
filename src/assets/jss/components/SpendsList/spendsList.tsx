@@ -6,7 +6,6 @@ const splashStyle = () =>
       fontSize: '11px',
       display: 'flex',
       alignItems: 'center',
-      cursor: 'pointer',
     },
   })
 

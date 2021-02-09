@@ -11,9 +11,6 @@ const informationStyle = (theme: Theme) =>
         paddingRight: 0,
         width: '100%',
       },
-      '&.copy': {
-        cursor: 'pointer',
-      },
       '& h6': {
         marginBottom: '3px',
       },

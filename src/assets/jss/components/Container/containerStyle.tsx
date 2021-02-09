@@ -1,6 +1,6 @@
 import { createStyles, Theme } from '@material-ui/core'
 
-const adStyle = (theme: Theme) =>
+const containerStyle = (theme: Theme) =>
   createStyles({
     root: {
       maxWidth: '990px',
@@ -14,4 +14,4 @@ const adStyle = (theme: Theme) =>
     },
   })
 
-export default adStyle
+export default containerStyle

@@ -164,7 +164,8 @@
       "ironfish": "Iron Fish",
       "blocks": "Blocks",
       "transactions": "Transactions",
-      "copy": "Copy to clipboard"
+      "copy": "Copy to clipboard",
+      "copySuccess": "Copied {{ copyString }} to clipboard."
     }
   }
 }
