@@ -17,7 +17,7 @@ const adStyle = (theme: Theme) =>
       },
       '& .MuiToolbar-root': {
         display: 'flex',
-        maxWidth: '1320px',
+        maxWidth: '1413px',
         margin: '0 auto',
         height: HEADER_HEIGHT,
         width: '100%',
@@ -32,13 +32,13 @@ const adStyle = (theme: Theme) =>
       marginLeft: '46px',
       marginRight: '46px',
       flex: 1,
-      maxWidth: '954px',
+      maxWidth: '988px',
       [theme.breakpoints.down('sm')]: {
         marginLeft: '0px',
         marginRight: '0px',
         width: '100%',
         position: 'absolute',
-        marginTop: '66px',
+        marginTop: '58px',
       },
     },
     isTop: {

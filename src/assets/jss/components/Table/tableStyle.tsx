@@ -11,7 +11,7 @@ export const tableCellStyle = (theme: Theme) =>
         color: theme.palette.text.hint,
         fontWeight: 400,
         height: '30px',
-        padding: '0 16px 0 16px',
+        padding: '5px 16px 0 16px',
         textTransform: 'uppercase',
         borderBottom: 'none',
         fontFamily: ['favorit-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),

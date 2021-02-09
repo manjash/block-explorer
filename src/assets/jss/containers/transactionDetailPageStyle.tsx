@@ -16,6 +16,12 @@ const transactionDetailPageStyle = (theme: Theme) =>
         marginBottom: theme.spacing(2),
       },
     },
+    warningContainer: {
+      maxWidth: '990px',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginTop: theme.spacing(4),
+    },
   })
 
 export default transactionDetailPageStyle

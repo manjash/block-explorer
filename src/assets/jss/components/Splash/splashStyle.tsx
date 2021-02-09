@@ -3,8 +3,9 @@ import splash from '../../../images/splash.svg'
 import splashMobile from '../../../images/splash_mobile.svg'
 import { HEADER_HEIGHT } from '../../theme'
 
-const splashStyle = (theme: Theme) =>
-  createStyles({
+const splashStyle = (theme: Theme) => {
+  console.log(theme)
+  return createStyles({
     splash: {
       // header + search + arrow down
       maxHeight: `calc(100vh - 500px)`,
@@ -20,7 +21,7 @@ const splashStyle = (theme: Theme) =>
     background: {
       background: `url(${splash}) no-repeat center`,
       height: '571px',
-      [theme.breakpoints.down('sm')]: {
+      '@media (max-width: 400px)': {
         background: `url(${splashMobile}) no-repeat center`,
         height: '505px',
       },
@@ -71,5 +72,5 @@ const splashStyle = (theme: Theme) =>
       margin: theme.spacing(4, 'auto', 0, 'auto'),
     },
   })
-
+}
 export default splashStyle

@@ -6,7 +6,7 @@ import { createMuiTheme } from '@material-ui/core/styles'
  */
 
 export const HEADER_HEIGHT = 92
-export const HEADER_HEIGHT_SM = 165
+export const HEADER_HEIGHT_SM = 153
 
 const defaultBorderRadius = 2
 const defaultBackground = '#fff'

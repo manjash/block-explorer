@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { HEADER_HEIGHT } from '../assets/jss/theme'
 
 export type DoneFunction = (lastPage: boolean) => void
 
@@ -13,14 +14,13 @@ const useInfiniteScroll = (
 
   const handleScroll = () => {
     if (
-      window.innerHeight + document.documentElement.scrollTop !==
-        document.documentElement.offsetHeight ||
+      window.innerHeight + document.documentElement.scrollTop <
+        document.documentElement.offsetHeight - HEADER_HEIGHT ||
       isFetching ||
       !hasMoreItems
     ) {
       return
     }
-
     setLoadMore(true)
   }
 

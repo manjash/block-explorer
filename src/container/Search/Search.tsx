@@ -69,9 +69,11 @@ const Search = () => {
         id='asynchronous-demo'
         open={open}
         onChange={(event, value) => navigate(value)}
+        forcePopupIcon={false}
         popupIcon={null}
         classes={{
           root: classes.inputRoot,
+          focused: classes.inputRootFocused,
           paper: classes.popup,
           listbox: classes.list,
         }}
@@ -101,6 +103,7 @@ const Search = () => {
             onChange={(ev) => onChangeHandle(ev.target.value)}
             InputProps={{
               ...params.InputProps,
+              endAdornment: null,
               disableUnderline: true,
             }}
           />

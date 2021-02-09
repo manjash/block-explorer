@@ -13,6 +13,9 @@ const alertStyle = (theme: Theme) =>
       '& a': {
         color: '#F6C5E6',
         textDecoration: 'none',
+        '&:hover': {
+          textDecoration: 'underline',
+        },
       },
     },
     error: {

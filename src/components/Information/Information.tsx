@@ -10,6 +10,7 @@ import { copyToClipboard } from '../../utils/copyToClipboard'
 
 interface Prop {
   canCopy?: boolean
+  largerIcon?: boolean
   title: string
   children: string
   icon: string
@@ -17,7 +18,7 @@ interface Prop {
 }
 const useStyles = makeStyles(informationStyle)
 
-const Information = ({ canCopy, title, icon, copyString, children }: Prop) => {
+const Information = ({ largerIcon, canCopy, title, icon, copyString, children }: Prop) => {
   const { t } = useTranslation()
   const classes = useStyles()
 
@@ -32,7 +33,7 @@ const Information = ({ canCopy, title, icon, copyString, children }: Prop) => {
       onClick={copyClick}
       title={canCopy === true ? t('app.navigation.copy') : ''}
     >
-      <div className={classes.icon}>
+      <div className={classNames(classes.icon, { [classes.largeIcon]: largerIcon || false })}>
         <img src={icon} role='presentation' />
       </div>
       <div className={classes.content}>

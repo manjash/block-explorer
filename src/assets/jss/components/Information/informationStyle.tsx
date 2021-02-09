@@ -34,6 +34,12 @@ const informationStyle = (theme: Theme) =>
         flex: 1,
       },
     },
+    largeIcon: {
+      '& img': {
+        width: '20px',
+        height: '20px',
+      },
+    },
     content: {},
   })
 

@@ -7,6 +7,7 @@ const informationPanelStyle = (theme: Theme) =>
       padding: theme.spacing(2),
       flexDirection: 'row',
       flexWrap: 'wrap',
+      boxShadow: theme.shadows[1],
       border: `1px solid ${theme.palette.borderColor?.main}`,
       [theme.breakpoints.down('sm')]: {
         padding: theme.spacing(0),

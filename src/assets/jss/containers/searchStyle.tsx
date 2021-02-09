@@ -9,14 +9,20 @@ const adStyle = (theme: Theme) =>
       color: 'inherit',
       height: defaultHeight,
       width: '100%',
+      border: '1px solid transparent',
       '& input': {
-        paddingLeft: '56px!important',
+        paddingLeft: '46px!important',
       },
     },
+    inputRootFocused: {
+      border: '1px solid #1D0070',
+      boxShadow: '0px 1px 5px #B79DFF',
+    },
     inputInput: {
-      padding: `17px 0 14px 0`,
+      padding: `15px 0 16px 0`,
       width: '100%',
       color: theme.palette.secondary.main,
+      '& > div': { paddingRight: '0 !important' },
       '&::placeholder': {
         color: theme.palette.secondary.main,
       },

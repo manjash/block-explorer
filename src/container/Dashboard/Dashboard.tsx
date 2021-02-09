@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
 
 import Meta from '../../components/Meta/Meta'
 import Metrics, { MetricsData } from '../../components/Dashboard/Metrics'
@@ -64,10 +63,6 @@ const Dashboard = () => {
           title={t('app.dashboard.blocks.latestBlocksTitle')}
           isLoading={service.status === ServiceState.LOADING}
         >
-          <Typography variant='h6' className={classes.h6}>
-            {t('app.dashboard.blocks.title')}
-          </Typography>
-
           <BlocksList blockList={blockData ? blockData : []} />
 
           <Box textAlign='center' marginTop={4} marginBottom={2}>

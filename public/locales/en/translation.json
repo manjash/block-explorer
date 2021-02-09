@@ -8,14 +8,14 @@
         "seconds": "{{ time }}s"
       },
       "currency": {
-        "IRF": "IRF",
-        "IRFAmount": "{{ amount }} IRF"
+        "IRON": "IRON",
+        "IRONAmount": "{{ amount }} IRON"
       }
     },
     "meta": {
       "defaultTitle": "Iron Fish Block Explorer",
-      "defaultDescription": "Block Explorer for IRF - Browse and search transactions, blocks. See spends and receipts for transaction.",
-      "defaultKeywords": "IRF, Iron Fish, blocks, transactions, explorer, public key, hashrate, analytics"
+      "defaultDescription": "Block Explorer for $IRON - Browse and search transactions, blocks. See spends and receipts for transaction.",
+      "defaultKeywords": "$IRON, Iron Fish, blocks, transactions, explorer, public key, hashrate, analytics"
     },
     "header": {
       "logo": {
@@ -23,7 +23,7 @@
       },
       "docs": "Developer Docs",
       "search": {
-        "placeholder": "Search by block height, block hash, or transaction hash"
+        "placeholder": "Search by block height or hash"
       }
     },
     "footer": {
@@ -88,8 +88,8 @@
     },
     "blockDetailPage": {
       "meta": {
-        "title": "IRF / Block / {{ hash }} / {{ id }}",
-        "description": "Iron Fish (IRF) block {{ id }}, hash: {{ hash }}"
+        "title": "$IRON / Block / {{ hash }} / {{ id }}",
+        "description": "Iron Fish ($IRON) block {{ id }}, hash: {{ hash }}"
       },
       "information": {
         "title": "Block Information",
@@ -100,8 +100,8 @@
     },
     "transactionDetailPage": {
       "meta": {
-        "title": "IRF / Transaction / {{ hash }}",
-        "description": "Iron Fish (IRF) Transaction hash: {{ hash }}"
+        "title": "$IRON / Transaction / {{ hash }}",
+        "description": "Iron Fish ($IRON) Transaction hash: {{ hash }}"
       },
       "spends": "Spends",
       "receipts": "Receipts",
@@ -128,7 +128,7 @@
     "explorer": {
       "title": "All Blocks",
       "meta": {
-        "title": "IRF blocks Explorer"
+        "title": "$IRON blocks Explorer"
       },
       "error": {
         "title": "Blocks not available",
@@ -139,12 +139,11 @@
       "title": "Iron Fish Block Explorer",
       "view_blocks": "View All Blocks",
       "meta": {
-        "title": "IRF Dashboard"
+        "title": "$IRON Dashboard"
       },
       "blocks": {
         "title": "Blocks",
-        "latestBlocksTitle": "View Latest",
-        "tabBlock": "Blocks",
+        "latestBlocksTitle": "View Latest Blocks",
         "goToExplorer": "View All Blocks"
       },
       "metrics": {

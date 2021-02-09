@@ -85,6 +85,7 @@ const InformationPanel = ({
       {difficulty != undefined && (
         <Information
           icon={architecture}
+          largerIcon
           title={t('app.components.informationPanel.difficulty')}
         >
           {String(difficulty)}

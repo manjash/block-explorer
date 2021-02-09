@@ -60,80 +60,88 @@ const TransactionDetailPage = () => {
   const metaVariables = { blockHash, hash }
 
   return (
-    <Container>
-      {transactionData && (
-        <Meta path={RoutePath.TransactionDetailPage} variables={metaVariables} />
-      )}
-
-      {transactionData && (
-        <Breadcrumb
-          paths={[
-            {
-              title: t('app.components.breadcrumb.explorer'),
-              to: RoutePath.Explorer,
-              logo: blocks,
-            },
-            {
-              title: getDisplayShortHash(blockHash || ''),
-              to: getBlockDetailPageUrl(blockHash),
-              logo: blocks,
-            },
-            {
-              title: getDisplayShortHash(transactionData.transaction_identifier.hash || ''),
-              logo: transaction,
-            },
-          ]}
-        />
-      )}
-
-      <BoxWrapper
-        marginBottom={2}
-        isLoading={service.status === ServiceState.LOADING}
-        title={t('app.transactionDetailPage.information.title')}
-      >
-        {service.status === ServiceState.ERROR && (
-          <Alert title={t('app.transactionDetailPage.information.error.title')}>
-            {t('app.transactionDetailPage.information.error.description')}
-          </Alert>
-        )}
+    <>
+      <Container>
         {transactionData && (
-          <InformationPanel
-            blockHash={blockHash}
-            transactionHash={hash}
-            fee={getIRFCurrencyAmount(transactionData.fee)}
-            confirmations={transactionData.confirmations}
-            timestamp={transactionData.timestamp}
-            size={getDisplaySizeInBytes(transactionData.metadata.size)}
-            spendsReceipts={`${transactionData.metadata.spends.length} / ${transactionData.metadata.notes.length}`}
+          <Meta path={RoutePath.TransactionDetailPage} variables={metaVariables} />
+        )}
+
+        {transactionData && (
+          <Breadcrumb
+            paths={[
+              {
+                title: t('app.components.breadcrumb.explorer'),
+                to: RoutePath.Explorer,
+                logo: blocks,
+              },
+              {
+                title: getDisplayShortHash(blockHash || ''),
+                to: getBlockDetailPageUrl(blockHash),
+                logo: blocks,
+              },
+              {
+                title: getDisplayShortHash(transactionData.transaction_identifier.hash || ''),
+                logo: transaction,
+              },
+            ]}
           />
         )}
-      </BoxWrapper>
-      {transactionData && (
-        <Alert
-          type={AlertType.Information}
-          title={t('app.transactionDetailPage.warning.title')}
+
+        <BoxWrapper
+          marginBottom={2}
+          isLoading={service.status === ServiceState.LOADING}
+          title={t('app.transactionDetailPage.information.title')}
         >
-          {t('app.transactionDetailPage.warning.description')}
-          <a href='https://www.ironfish.network'>
-            {t('app.transactionDetailPage.warning.link')}
-          </a>
-        </Alert>
-      )}
+          {service.status === ServiceState.ERROR && (
+            <Alert title={t('app.transactionDetailPage.information.error.title')}>
+              {t('app.transactionDetailPage.information.error.description')}
+            </Alert>
+          )}
+          {transactionData && (
+            <InformationPanel
+              blockHash={blockHash}
+              transactionHash={hash}
+              fee={getIRFCurrencyAmount(transactionData.fee)}
+              confirmations={transactionData.confirmations}
+              timestamp={transactionData.timestamp}
+              size={getDisplaySizeInBytes(transactionData.metadata.size)}
+              spendsReceipts={`${transactionData.metadata.spends.length} / ${transactionData.metadata.notes.length}`}
+            />
+          )}
+        </BoxWrapper>
+      </Container>
+
       {transactionData && (
-        <Box marginTop={2} className={classes.root}>
-          <div className={classes.blocks}>
-            <BoxWrapper title={t('app.transactionDetailPage.spends')}>
-              <SpendsList spends={transactionData.metadata.spends} />
-            </BoxWrapper>
-          </div>
-          <div className={classes.blocks}>
-            <BoxWrapper title={t('app.transactionDetailPage.receipts')}>
-              <ReceiptsList notes={transactionData.metadata.notes} />
-            </BoxWrapper>
-          </div>
-        </Box>
+        <div className={classes.warningContainer}>
+          <Alert
+            type={AlertType.Information}
+            title={t('app.transactionDetailPage.warning.title')}
+          >
+            {t('app.transactionDetailPage.warning.description')}
+            <a href='https://www.ironfish.network'>
+              {t('app.transactionDetailPage.warning.link')}
+            </a>
+          </Alert>
+        </div>
       )}
-    </Container>
+
+      <Container>
+        {transactionData && (
+          <Box marginTop={2} className={classes.root}>
+            <div className={classes.blocks}>
+              <BoxWrapper title={t('app.transactionDetailPage.spends')}>
+                <SpendsList spends={transactionData.metadata.spends} />
+              </BoxWrapper>
+            </div>
+            <div className={classes.blocks}>
+              <BoxWrapper title={t('app.transactionDetailPage.receipts')}>
+                <ReceiptsList notes={transactionData.metadata.notes} />
+              </BoxWrapper>
+            </div>
+          </Box>
+        )}
+      </Container>
+    </>
   )
 }
 
