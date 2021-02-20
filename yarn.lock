@@ -9816,6 +9816,11 @@ react-router-dom@^5.2.0:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
+react-router-last-location@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-router-last-location/-/react-router-last-location-2.0.1.tgz#54d625876dd1448594fa1114aa02e7e21db12970"
+  integrity sha512-3FbFIWwUr2qN28vN9DNdFp6RhUH/yif6ILVff1zT+hLdyGmlNPh3GuPhveb7bHQLgB744QW8L0qtWjX58ESuZQ==
+
 react-router-scroll-top@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/react-router-scroll-top/-/react-router-scroll-top-0.2.1.tgz#7fc28b9636d64b2d42a24b5b64eb4bd4219a672b"

@@ -7,10 +7,11 @@ const useInfiniteScroll = (
   window: Window,
   document: Document,
   fetchData: (done: DoneFunction) => void,
-): boolean => {
+  hasMoreItemsDefault = true,
+): [boolean, Function] => {
   const [loadMore, setLoadMore] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
-  const [hasMoreItems, setHasMoreItems] = useState(true)
+  const [hasMoreItems, setHasMoreItems] = useState(hasMoreItemsDefault)
 
   const handleScroll = () => {
     if (
@@ -50,7 +51,13 @@ const useInfiniteScroll = (
     })
   }
 
-  return isFetching
+  const resetAndFetch = () => {
+    setIsFetching(false)
+    setHasMoreItems(true)
+    setLoadMore(true)
+  }
+
+  return [isFetching, resetAndFetch]
 }
 
 export default useInfiniteScroll
