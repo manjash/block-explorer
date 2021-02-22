@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import { useTheme, makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
@@ -27,6 +28,7 @@ const useStyles = makeStyles(blocksList)
 const BlocksList = ({ blockList }: Prop) => {
   const { t } = useTranslation()
   const classes = useStyles()
+  const history = useHistory()
 
   const theme = useTheme()
   const isSmallBreakpoint = useMediaQuery(theme.breakpoints.down('sm'))
@@ -54,7 +56,11 @@ const BlocksList = ({ blockList }: Prop) => {
         </TableHead>
         <TableBody>
           {blockList.map((block: Block) => (
-            <StyledTableRow key={String(block.block_identifier.hash)}>
+            <StyledTableRow
+              className={classes.row}
+              onClick={() => history.push(getBlockDetailPageUrl(block.block_identifier.hash))}
+              key={String(block.block_identifier.hash)}
+            >
               <StyledTableCell scope='row'>
                 <Link
                   className={classes.root}
