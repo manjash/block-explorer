@@ -165,7 +165,8 @@
       "blocks": "Blocks",
       "transactions": "Transactions",
       "copy": "Copy to clipboard",
-      "copySuccess": "Copied {{ copyString }} to clipboard."
+      "copySuccess": "Copied {{ copyString }} to clipboard.",
+      "refresh": "Refresh List"
     }
   }
 }

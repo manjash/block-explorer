@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box'
 import Loading from '../../components/Loading/Loading'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
 import BlocksList from '../../components/BlocksList/BlocksList'
+import RefreshButton from '../../components/RefreshButton/RefreshButton'
 import Meta from '../../components/Meta/Meta'
 import Alert from '../../components/Alert/Alert'
 import Container from '../../components/Container/Container'
@@ -89,7 +90,6 @@ const Explorer = () => {
       })
   }
 
-  console.log(result)
   return (
     <Container>
       <Meta path={RoutePath.Explorer} />
@@ -103,6 +103,7 @@ const Explorer = () => {
         ]}
       />
 
+      <RefreshButton onClick={refreshlist} />
       <BoxWrapper title={t('app.explorer.title')}>
         {result.status === ServiceState.ERROR && (
           <Alert title={t('app.explorer.error.title')}>
