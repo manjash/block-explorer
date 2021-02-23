@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import TransactionsList from '../../components/TransactionsList/TransactionsList'
 import Container from '../../components/Container/Container'
-import Alert from '../../components/Alert/Alert'
+import Error404 from '../../components/Error404/Error404'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
 import InformationPanel from '../../components/InformationPanel/InformationPanel'
@@ -75,7 +75,10 @@ const BlockDetailPage = () => {
         title={t('app.blockDetailPage.information.title')}
       >
         {service.status === ServiceState.ERROR && (
-          <Alert title={t('app.blockDetailPage.information.error.description')} />
+          <Error404
+            title={t('app.blockDetailPage.information.error.title')}
+            description={t('app.blockDetailPage.information.error.description')}
+          />
         )}
         <div>
           {blockData && (

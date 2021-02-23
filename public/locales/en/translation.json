@@ -94,7 +94,8 @@
       "information": {
         "title": "Block Information",
         "error": {
-          "description": "Block not found"
+          "title": "Block not found",
+          "description": "This block either swam off or we are having trouble finding it. Please try again later."
         }
       }
     },
@@ -108,8 +109,8 @@
       "information": {
         "title": "Transaction Information",
         "error": {
-          "title": "Transaction not available",
-          "description": "We are not able to load the information of this transaction, or the connection to Iron Fish is broken"
+          "title": "Transaction not found",
+          "description": "It looks like the transaction has sunk to the depts of the ocean... or we just can’t find it at this time."
         }
       },
       "warning": {
@@ -166,7 +167,8 @@
       "transactions": "Transactions",
       "copy": "Copy to clipboard",
       "copySuccess": "Copied {{ copyString }} to clipboard.",
-      "refresh": "Refresh List"
+      "refresh": "Refresh List",
+      "takeMeHome": "Take me home"
     }
   }
 }
