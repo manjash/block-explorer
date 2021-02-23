@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import { Box } from '@material-ui/core'
 
+import Error404 from '../../components/Error404/Error404'
 import Alert, { AlertType } from '../../components/Alert/Alert'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
@@ -93,9 +94,10 @@ const TransactionDetailPage = () => {
           title={t('app.transactionDetailPage.information.title')}
         >
           {service.status === ServiceState.ERROR && (
-            <Alert title={t('app.transactionDetailPage.information.error.title')}>
-              {t('app.transactionDetailPage.information.error.description')}
-            </Alert>
+            <Error404
+              title={t('app.transactionDetailPage.information.error.title')}
+              description={t('app.transactionDetailPage.information.error.description')}
+            />
           )}
           {transactionData && (
             <InformationPanel

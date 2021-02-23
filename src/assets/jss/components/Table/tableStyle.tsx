@@ -29,8 +29,8 @@ export const tableCellStyle = (theme: Theme) =>
 export const tableRowStyle = () =>
   createStyles({
     root: {
-      // '&:first-of-type': {
-      //   border: 'none',
-      // },
+      '&:hover': {
+        backgroundColor: '#F7F9FC',
+      },
     },
   })

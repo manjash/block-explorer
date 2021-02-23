@@ -1,6 +1,5 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 
 import { useTheme, makeStyles } from '@material-ui/core/styles'
@@ -62,13 +61,10 @@ const BlocksList = ({ blockList }: Prop) => {
               key={String(block.block_identifier.hash)}
             >
               <StyledTableCell scope='row'>
-                <Link
-                  className={classes.root}
-                  to={getBlockDetailPageUrl(block.block_identifier.hash)}
-                >
+                <span className={classes.root}>
                   <img src={blockRow} />
                   {block.block_identifier.index}
-                </Link>
+                </span>
               </StyledTableCell>
               <StyledTableCell align='right'>
                 {getDisplaySizeInBytes(block.metadata.size)}
