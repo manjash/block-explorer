@@ -31,7 +31,7 @@ const Splash = ({ title, description }: Prop) => {
         <Typography variant='h5' className={classes.paragraph}>
           {description}
         </Typography>
-        <Button component={Link} to={RoutePath.Explorer} variant='contained'>
+        <Button component={Link} to={RoutePath.Home} variant='contained'>
           {t('app.navigation.takeMeHome')}
         </Button>
       </div>

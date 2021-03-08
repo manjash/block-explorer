@@ -21,6 +21,7 @@ const transactionDetailPageStyle = (theme: Theme) =>
       marginLeft: 'auto',
       marginRight: 'auto',
       marginTop: theme.spacing(4),
+      '& > div': { lineHeight: '160%' },
     },
   })
 
