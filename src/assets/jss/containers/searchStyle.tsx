@@ -1,5 +1,6 @@
 import { createStyles, Theme } from '@material-ui/core'
 import blocks from '../../images/breadcrumb/blocks.svg'
+import transaction from '../../images/breadcrumb/transaction.svg'
 
 const defaultHeight = '60px'
 
@@ -57,16 +58,32 @@ const adStyle = (theme: Theme) =>
     },
     list: {
       paddingLeft: '56px',
+    },
+    groupHeader: {
+      fontSize: '14px',
+      marginBottom: '2px',
+    },
+    group: {
+      '& > ul': {
+        padding: 0,
+      },
       '& li': {
         '&[data-focus="true"]': {
           backgroundColor: theme.palette.common.white,
         },
-        '&:hover': {
-          backgroundColor: theme.palette.common.white,
-        },
-        background: `url(${blocks}) no-repeat`,
         paddingLeft: '30px',
         backgroundPositionY: 'center',
+        backgroundRepeat: 'no-repeat',
+      },
+    },
+    blocks: {
+      '& li': {
+        backgroundImage: `url(${blocks})`,
+      },
+    },
+    transactions: {
+      '& li': {
+        backgroundImage: `url(${transaction})`,
       },
     },
   })

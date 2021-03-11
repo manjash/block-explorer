@@ -30,3 +30,7 @@ export const formatBlocksFromJson = ({ blocks }: any): Block[] =>
   blocks.map((block: any) => ({
     ...formatBlockFromJson({ block }),
   }))
+
+export function isBlock(x: any): x is Block {
+  return typeof x === 'object' && 'block_identifier' in x && !('transaction_identifier' in x)
+}

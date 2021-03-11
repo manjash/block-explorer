@@ -17,7 +17,10 @@ import Meta from '../../components/Meta/Meta'
 import { ApiUrls } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
-import Transaction, { formatTransactionFromJson } from '../../types/Transaction'
+import Transaction, {
+  formatSearchTransactionsFromJson,
+  formatTransactionFromJson,
+} from '../../types/Transaction'
 
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { RoutePath } from '../../routes/routePath'
@@ -40,24 +43,37 @@ interface ParamTypes {
 const useStyles = makeStyles(transactionDetailPageStyle)
 const TransactionDetailPage = () => {
   const { t } = useTranslation()
-  const { blockHash, hash } = useParams<ParamTypes>()
+  const { blockHash: queryBlockHash, hash } = useParams<ParamTypes>()
   const classes = useStyles()
 
-  const service = useGetService<Transaction>(
-    ApiUrls.BLOCK_TRANSACTION_PAGE,
-    {
-      block_identifier: {
-        index: 0,
-        hash: blockHash,
-      },
-      transaction_identifier: {
-        hash,
-      },
-    },
-    formatTransactionFromJson,
-  )
+  // if we are coming from a block, we know the block hash and the transaction hash to query the transaction API
+  // if we just have the transaction hash, we need to query the search API to find the transactions
+  const api = queryBlockHash ? ApiUrls.BLOCK_TRANSACTION_PAGE : ApiUrls.SEARCH_TRANSACTIONS
+  const params = queryBlockHash
+    ? {
+        block_identifier: {
+          index: 0,
+          hash: queryBlockHash,
+        },
+        transaction_identifier: {
+          hash,
+        },
+      }
+    : {
+        transaction_identifier: {
+          hash,
+        },
+      }
+  const format = queryBlockHash ? formatTransactionFromJson : formatSearchTransactionsFromJson
+  const service = useGetService<Transaction>(api, params, format)
 
-  const transactionData = service.status === ServiceState.LOADED && service.payload.result
+  const serviceResult = service.status === ServiceState.LOADED && service.payload.result
+  const transactionData = Array.isArray(serviceResult)
+    ? serviceResult.length > 0
+      ? serviceResult[0]
+      : null
+    : serviceResult
+  const blockHash = queryBlockHash || transactionData?.block_identifier?.hash
   const metaVariables = { blockHash, hash }
 
   return (
@@ -93,12 +109,13 @@ const TransactionDetailPage = () => {
           isLoading={service.status === ServiceState.LOADING}
           title={t('app.transactionDetailPage.information.title')}
         >
-          {service.status === ServiceState.ERROR && (
-            <Error404
-              title={t('app.transactionDetailPage.information.error.title')}
-              description={t('app.transactionDetailPage.information.error.description')}
-            />
-          )}
+          {service.status === ServiceState.ERROR ||
+            (serviceResult && !transactionData && (
+              <Error404
+                title={t('app.transactionDetailPage.information.error.title')}
+                description={t('app.transactionDetailPage.information.error.description')}
+              />
+            ))}
           {transactionData && (
             <InformationPanel
               blockHash={blockHash}

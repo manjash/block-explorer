@@ -5,6 +5,12 @@ export const getBlockDetailPageUrl = (id: number | string | undefined): string =
   return RoutePath.BlockDetailPage.replace(':id', `${id}`)
 }
 
-export const getTransactionDetailPageUrl = (blockHash: string, hash: string): string => {
-  return RoutePath.TransactionDetailPage.replace(':hash', hash).replace(':blockHash', blockHash)
+export const getTransactionDetailPageUrl = (
+  blockHash: string | undefined,
+  hash: string,
+): string => {
+  return RoutePath.TransactionDetailPage.replace(':hash', hash).replace(
+    ':blockHash',
+    blockHash || '',
+  )
 }

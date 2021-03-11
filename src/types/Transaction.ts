@@ -29,6 +29,15 @@ export const formatTransactionFromJson = ({ transaction }: any): Transaction => 
   timestamp: new Date(transaction.metadata.timestamp),
 })
 
-export const formatTransactionsFromJson = (transactions: any): Transactions => {
-  return transactions.map((transaction: any) => formatTransactionFromJson(transaction))
+export const formatTransactionsFromJson = (transactions: any): Transactions =>
+  transactions.map((transaction: any) => formatTransactionFromJson(transaction))
+
+export const formatSearchTransactionsFromJson = (searchTransactions: any): Transactions =>
+  searchTransactions.transactions.map((transaction: any) => ({
+    ...formatTransactionFromJson(transaction),
+    block_identifier: transaction.block_identifier,
+  }))
+
+export function isTransaction(x: any): x is Transaction {
+  return typeof x === 'object' && 'transaction_identifier' in x
 }
