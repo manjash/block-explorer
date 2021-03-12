@@ -56,12 +56,12 @@ const TransactionDetailPage = () => {
           hash: queryBlockHash,
         },
         transaction_identifier: {
-          hash,
+          hash: hash.toUpperCase(),
         },
       }
     : {
         transaction_identifier: {
-          hash,
+          hash: hash.toUpperCase(),
         },
       }
   const format = queryBlockHash ? formatTransactionFromJson : formatSearchTransactionsFromJson
