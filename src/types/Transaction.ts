@@ -7,8 +7,6 @@ export interface Operation {}
 export default interface Transaction {
   block_identifier?: BlockIdentifier
   confirmations?: number
-  fee?: number
-
   transaction_identifier: {
     hash: string
   }
@@ -17,6 +15,7 @@ export default interface Transaction {
     notes: Notes
     spends: Spends
     size: number
+    fee?: number
   }
   timestamp?: Date
 }

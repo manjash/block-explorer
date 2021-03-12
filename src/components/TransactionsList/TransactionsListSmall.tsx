@@ -10,7 +10,7 @@ import { getDisplaySizeInBytes } from '../../utils/size'
 import blocksListSmall from '../../assets/jss/components/BlocksList/blocksListSmall'
 import transactionIcon from '../../assets/images/breadcrumb/transaction.svg'
 import { Transactions } from '../../types/Transaction'
-import { getIRFCurrencyAmount } from '../../utils/currency'
+import { getIRFAmountWithCurrency } from '../../utils/currency'
 import { getTransactionDetailPageUrl } from '../../utils/routes'
 import { getDisplayShortHash } from '../../utils/string'
 import BoxWrapper from '../BoxWrapper/BoxWrapper'
@@ -55,7 +55,9 @@ const TransactionsListSmall = ({ blockHash, transactions }: Prop) => {
             <Typography variant='subtitle2'>
               {t('app.components.transactionslist.fee')}
             </Typography>
-            <Typography variant='body1'> {getIRFCurrencyAmount(transaction.fee)}</Typography>
+            <Typography variant='body1'>
+              {getIRFAmountWithCurrency(transaction.metadata.fee)}
+            </Typography>
           </div>
           <div className={classes.content}>
             <Typography variant='subtitle2'>

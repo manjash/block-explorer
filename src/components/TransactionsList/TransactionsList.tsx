@@ -14,7 +14,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { Transactions } from '../../types/Transaction'
 import { StyledTableCell, StyledTableRow } from '../../components/Table/Table'
 import { getTransactionDetailPageUrl } from '../../utils/routes'
-import { getIRFCurrencyAmount } from '../../utils/currency'
+import { getIRFAmountWithCurrency } from '../../utils/currency'
 import { getDisplaySizeInBytes } from '../../utils/size'
 import BoxWrapper from '../BoxWrapper/BoxWrapper'
 import transactionIcon from '../../assets/images/breadcrumb/transaction.svg'
@@ -68,7 +68,7 @@ const TransactionsList = (props: Prop) => {
                   </Link>
                 </StyledTableCell>
                 <StyledTableCell align='right'>
-                  {getIRFCurrencyAmount(transaction.fee)}
+                  {getIRFAmountWithCurrency(transaction.metadata.fee)}
                 </StyledTableCell>
                 <StyledTableCell align='right'>
                   {getDisplaySizeInBytes(transaction.metadata.size)}

@@ -6,10 +6,6 @@
       },
       "time": {
         "seconds": "{{ time }}s"
-      },
-      "currency": {
-        "IRON": "IRON",
-        "IRONAmount": "{{ amount }} IRON"
       }
     },
     "meta": {

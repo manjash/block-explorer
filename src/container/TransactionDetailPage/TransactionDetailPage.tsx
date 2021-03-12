@@ -27,7 +27,7 @@ import { RoutePath } from '../../routes/routePath'
 
 import transactionDetailPageStyle from '../../assets/jss/containers/transactionDetailPageStyle'
 
-import { getIRFCurrencyAmount } from '../../utils/currency'
+import { getIRFAmountWithCurrency } from '../../utils/currency'
 import { getDisplaySizeInBytes } from '../../utils/size'
 import { getDisplayShortHash } from '../../utils/string'
 
@@ -120,7 +120,7 @@ const TransactionDetailPage = () => {
             <InformationPanel
               blockHash={blockHash}
               transactionHash={hash}
-              fee={getIRFCurrencyAmount(transactionData.fee)}
+              fee={getIRFAmountWithCurrency(transactionData.metadata.fee)}
               confirmations={transactionData.confirmations}
               timestamp={transactionData.timestamp}
               size={getDisplaySizeInBytes(transactionData.metadata.size)}
