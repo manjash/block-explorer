@@ -19,7 +19,7 @@ const Stat = (props: Prop) => {
   return (
     <div className={classes.root}>
       <div className={classes.content}>
-        <Typography variant='subtitle2' className={classes.header}>
+        <Typography variant='subtitle2' component='p' className={classes.header}>
           {props.title}
         </Typography>
         <Typography variant='body1'>{props.children}</Typography>

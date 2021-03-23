@@ -24,7 +24,7 @@ const Splash = ({ title, description }: Prop) => {
   return (
     <>
       <div className={classes.root}>
-        <img src={error404} role='decorative' />
+        <img src={error404} role='presentation' />
         <Typography variant='h2' className={classes.title}>
           {title}
         </Typography>

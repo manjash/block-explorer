@@ -56,7 +56,7 @@ const Splash = () => {
         top: window.pageYOffset + anchor.current.getBoundingClientRect().top - margin,
       })
     }
-  }, [])
+  }, [margin])
 
   return (
     <>

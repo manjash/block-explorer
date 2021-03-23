@@ -32,7 +32,7 @@ const Alert = ({ title, children, type = AlertType.Error }: Prop) => {
     >
       <div className={classes.header}>
         {type === AlertType.Error && (
-          <img src={info} role='decorative' className={classes.icon} />
+          <img src={info} role='presentation' className={classes.icon} />
         )}
         <Typography variant='h5' className={classes.title}>
           {title}

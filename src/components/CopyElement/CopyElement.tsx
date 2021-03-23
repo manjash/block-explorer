@@ -50,7 +50,7 @@ const CopyElement = ({ copyString, children }: Prop) => {
         <Tooltip title={tooltipString} placement='top'>
           <div className={classes.content}>
             {children}
-            <img className={classes.icon} src={copyIcon} role='decorative' />
+            <img className={classes.icon} src={copyIcon} role='presentation' />
           </div>
         </Tooltip>
       </div>

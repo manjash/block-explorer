@@ -123,7 +123,7 @@ const theme = createMuiTheme({
     text: {
       primary: primaryColor,
       secondary: '#000',
-      disabled: '#3C75F6',
+      disabled: '#1D0070',
       hint: '#6B6F76',
     },
     background: {

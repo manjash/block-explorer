@@ -39,7 +39,7 @@ const BlocksList = ({ blockList }: Prop) => {
                 className={classes.link}
                 to={getBlockDetailPageUrl(block.block_identifier.hash)}
               >
-                <img src={blockRow} />
+                <img src={blockRow} alt='' role='presentation' />
                 {block.block_identifier.index}
               </Link>
             </Typography>

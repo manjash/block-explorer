@@ -163,7 +163,7 @@ const Search = () => {
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
-        <img src={searchIcon} role='decorative' />
+        <img src={searchIcon} role='presentation' alt='' />
       </div>
 
       <Autocomplete

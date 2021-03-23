@@ -62,7 +62,7 @@ const BlocksList = ({ blockList }: Prop) => {
             >
               <StyledTableCell scope='row'>
                 <span className={classes.root}>
-                  <img src={blockRow} />
+                  <img src={blockRow} role='presentation' alt='' />
                   {block.block_identifier.index}
                 </span>
               </StyledTableCell>
