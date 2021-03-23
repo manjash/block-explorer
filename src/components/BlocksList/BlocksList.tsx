@@ -42,7 +42,7 @@ const BlocksList = ({ blockList }: Prop) => {
             <StyledTableCell align='right'>
               {t('app.components.blockslist.size')}
             </StyledTableCell>
-            <StyledTableCell align='right'>
+            <StyledTableCell className={classes.transactionsCell} align='right'>
               {t('app.components.blockslist.transactions')}
             </StyledTableCell>
             <StyledTableCell align='left'>

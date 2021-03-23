@@ -9,5 +9,6 @@ const blocksStyle = (theme: Theme) =>
       alignItems: 'center',
       lineHeight: '11px',
     },
+    transactionsCell: { maxWidth: '100px' },
   })
 export default blocksStyle

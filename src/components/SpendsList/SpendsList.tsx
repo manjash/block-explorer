@@ -14,6 +14,7 @@ import { Spends } from '../../types/Spend'
 import CopyElement from '../CopyElement/CopyElement'
 import { StyledTableCell, StyledTableRow } from '../Table/Table'
 import spendsList from '../../assets/jss/components/SpendsList/spendsList'
+import { getDisplayShortHash } from '../../utils/string'
 
 interface Prop {
   spends: Spends
@@ -41,7 +42,7 @@ const SpendsList = ({ spends }: Prop) => {
                 <CopyElement copyString={spend.nullifier}>
                   <div className={classes.root}>
                     <img src={nullifier} role='presentation' />
-                    {spend.nullifier}
+                    <>{getDisplayShortHash(spend.nullifier, 23)}</>
                   </div>
                 </CopyElement>
               </StyledTableCell>

@@ -14,6 +14,7 @@ import { Notes } from '../../types/Note'
 import CopyElement from '../CopyElement/CopyElement'
 import { StyledTableCell, StyledTableRow } from '../Table/Table'
 import spendsList from '../../assets/jss/components/SpendsList/spendsList'
+import { getDisplayShortHash } from '../../utils/string'
 
 interface Prop {
   notes: Notes
@@ -41,7 +42,7 @@ const ReceiptsList = ({ notes }: Prop) => {
                 <CopyElement copyString={note.commitment}>
                   <div className={classes.root}>
                     <img src={noteIcon} role='presentation' />
-                    <>{note.commitment}</>
+                    <>{getDisplayShortHash(note.commitment, 23)}</>
                   </div>
                 </CopyElement>
               </StyledTableCell>

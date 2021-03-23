@@ -13,6 +13,7 @@ const useStyles = makeStyles(() =>
       marginTop: '-3px',
     },
     inline: {
+      paddingTop: '1px',
       marginLeft: '10px',
     },
   }),

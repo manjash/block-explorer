@@ -19,7 +19,7 @@
       },
       "docs": "Developer Docs",
       "search": {
-        "placeholder": "Search by block height or hash"
+        "placeholder": "Search by block height, hash, or transaction hash"
       }
     },
     "footer": {
@@ -135,7 +135,7 @@
     },
     "dashboard": {
       "title": "Iron Fish Block Explorer",
-      "view_blocks": "View All Blocks",
+      "view_blocks": "View Blocks",
       "meta": {
         "title": "$IRON Dashboard"
       },

@@ -57,6 +57,7 @@ const adStyle = (theme: Theme) =>
       opacity: 1,
       display: 'block',
       width: '145px',
+      textAlign: 'center',
       [theme.breakpoints.down('sm')]: {
         width: '120px',
         fontSize: '11px',

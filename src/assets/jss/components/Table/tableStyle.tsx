@@ -5,11 +5,13 @@ export const tableCellStyle = (theme: Theme) =>
     root: {
       whiteSpace: 'nowrap',
       height: '47px',
+      padding: '16px 8px 16px 8px',
       color: theme.palette.text.secondary,
       '&.MuiTableCell-head': {
         backgroundColor: '#F7F9FC',
         color: theme.palette.text.hint,
         fontWeight: 400,
+        fontSize: '11px',
         height: '30px',
         padding: '5px 16px 0 16px',
         textTransform: 'uppercase',

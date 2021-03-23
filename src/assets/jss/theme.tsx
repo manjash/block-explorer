@@ -49,8 +49,8 @@ declare module '@material-ui/core/styles/createPalette' {
 
 const theme = createMuiTheme({
   typography: {
-    fontSize: 12,
-    fontFamily: ['mono-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
+    fontSize: 14,
+    fontFamily: ['favorit-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
     h1: {
       fontFamily: ['extended-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
       color: titleColor,
@@ -68,8 +68,8 @@ const theme = createMuiTheme({
       fontFamily: ['favorit-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
     },
     subtitle2: {
-      fontSize: 12,
-      fontFamily: ['mono-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
+      fontSize: 14,
+      fontFamily: ['favorit-regular', 'Helvetica', 'Arial', 'sans-serif'].join(','),
       color: secondaryColor,
     },
   },
