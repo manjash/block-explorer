@@ -14,7 +14,7 @@ import SpendsList from '../../components/SpendsList/SpendsList'
 import ReceiptsList from '../../components/ReceiptsList/ReceiptsList'
 import Meta from '../../components/Meta/Meta'
 
-import { ApiUrls } from '../../services/servicesUrls'
+import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
 import Transaction, {
@@ -34,6 +34,7 @@ import { getDisplayShortHash } from '../../utils/string'
 import blocks from '../../assets/images/breadcrumb/blocks.svg'
 import transaction from '../../assets/images/breadcrumb/transaction-gray.svg'
 import Container from '../../components/Container/Container'
+import TransactionChip from '../../components/TransactionChip/TransactionChip'
 
 interface ParamTypes {
   blockHash: string
@@ -65,7 +66,7 @@ const TransactionDetailPage = () => {
         },
       }
   const format = queryBlockHash ? formatTransactionFromJson : formatSearchTransactionsFromJson
-  const service = useGetService<Transaction>(api, params, format)
+  const service = useGetService<Transaction>(getApiUrl(api), params, format)
 
   const serviceResult = service.status === ServiceState.LOADED && service.payload.result
   const transactionData = Array.isArray(serviceResult)
@@ -107,7 +108,14 @@ const TransactionDetailPage = () => {
         <BoxWrapper
           marginBottom={2}
           isLoading={service.status === ServiceState.LOADING}
-          title={t('app.transactionDetailPage.information.title')}
+          header={
+            <span>
+              {t('app.transactionDetailPage.information.title')}{' '}
+              {transactionData && transactionData.metadata.isMinerFee && (
+                <TransactionChip inline />
+              )}
+            </span>
+          }
         >
           {service.status === ServiceState.ERROR ||
             (serviceResult && !transactionData && (
@@ -121,6 +129,7 @@ const TransactionDetailPage = () => {
               blockHash={blockHash}
               transactionHash={hash}
               fee={getIRFAmountWithCurrency(transactionData.metadata.fee)}
+              isMinerFee={transactionData.metadata.isMinerFee}
               confirmations={transactionData.confirmations}
               timestamp={transactionData.timestamp}
               size={getDisplaySizeInBytes(transactionData.metadata.size)}
@@ -148,12 +157,12 @@ const TransactionDetailPage = () => {
         {transactionData && (
           <Box marginTop={2} className={classes.root}>
             <div className={classes.blocks}>
-              <BoxWrapper title={t('app.transactionDetailPage.spends')}>
+              <BoxWrapper header={t('app.transactionDetailPage.spends')}>
                 <SpendsList spends={transactionData.metadata.spends} />
               </BoxWrapper>
             </div>
             <div className={classes.blocks}>
-              <BoxWrapper title={t('app.transactionDetailPage.receipts')}>
+              <BoxWrapper header={t('app.transactionDetailPage.receipts')}>
                 <ReceiptsList notes={transactionData.metadata.notes} />
               </BoxWrapper>
             </div>

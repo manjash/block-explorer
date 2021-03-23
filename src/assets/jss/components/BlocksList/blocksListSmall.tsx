@@ -11,6 +11,10 @@ const blocksListSmall = (theme: Theme) =>
       borderTop: `1px solid ${theme.palette.borderColor?.main}`,
       marginBottom: 0,
     },
+    chip: {
+      marginTop: theme.spacing(0.5),
+      marginBottom: theme.spacing(2),
+    },
     content: {
       marginBottom: theme.spacing(2),
       '&:last-of-type': {

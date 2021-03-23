@@ -67,6 +67,7 @@
         "blockId": "Block ID",
         "confirmations": "Confirmations",
         "difficulty": "Difficulty",
+        "minerFee": "Miner fee",
         "fee": "Fee",
         "hash": "Hash",
         "height": "Height",
@@ -164,7 +165,8 @@
       "copy": "Copy to clipboard",
       "copySuccess": "Copied {{ copyString }} to clipboard.",
       "refresh": "Refresh List",
-      "takeMeHome": "Take me home"
+      "takeMeHome": "Take me home",
+      "minerFee": "Miner Reward + Fee"
     }
   }
 }

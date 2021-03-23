@@ -16,6 +16,7 @@ export default interface Transaction {
     spends: Spends
     size: number
     fee?: number
+    isMinerFee?: boolean
   }
   timestamp?: Date
 }

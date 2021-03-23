@@ -15,7 +15,7 @@ import { RoutePath } from '../../routes/routePath'
 import useGetService from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
 import Block, { formatBlocksFromJson } from '../../types/Block'
-import { ApiUrls } from '../../services/servicesUrls'
+import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
 import Splash from '../../components/Splash/Splash'
 import dashboardStyle from '../../assets/jss/containers/dashboardStyle'
 
@@ -26,7 +26,7 @@ const Dashboard = () => {
   const classes = useStyles()
 
   const service = useGetService<Block[]>(
-    ApiUrls.SEARCH_BLOCKS,
+    getApiUrl(ApiUrls.SEARCH_BLOCKS),
     { limit: 10 },
     formatBlocksFromJson,
   )
@@ -60,7 +60,7 @@ const Dashboard = () => {
         </Box>
 
         <BoxWrapper
-          title={t('app.dashboard.blocks.latestBlocksTitle')}
+          header={t('app.dashboard.blocks.latestBlocksTitle')}
           isLoading={service.status === ServiceState.LOADING}
         >
           <BlocksList blockList={blockData ? blockData : []} />

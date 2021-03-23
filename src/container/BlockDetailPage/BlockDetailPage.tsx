@@ -10,7 +10,7 @@ import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
 import InformationPanel from '../../components/InformationPanel/InformationPanel'
 import Meta from '../../components/Meta/Meta'
 
-import { ApiUrls } from '../../services/servicesUrls'
+import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
 import Block, { formatBlockFromJson } from '../../types/Block'
@@ -37,7 +37,7 @@ const BlockDetailPage = () => {
   }
 
   const service = useGetService<Block>(
-    ApiUrls.BLOCK_DETAIL_PAGE,
+    getApiUrl(ApiUrls.BLOCK_DETAIL_PAGE),
     {
       block_identifier: blockIdentifier,
     },
@@ -72,7 +72,7 @@ const BlockDetailPage = () => {
 
       <BoxWrapper
         isLoading={service.status === ServiceState.LOADING}
-        title={t('app.blockDetailPage.information.title')}
+        header={t('app.blockDetailPage.information.title')}
       >
         {service.status === ServiceState.ERROR && (
           <Error404

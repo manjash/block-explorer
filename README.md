@@ -1,11 +1,24 @@
 # block-explorer
 Block Explorer for Iron Fish blockchain
 
+## Dev setup
+Run the Iron Fish Rosetta API
+`cd ironfish/ironfish-rosetta-api`
+`yarn start`
+The Rosetta API is set to run on `localhost:8080`. If the port is different on your machine, update the `package.json` for CORS
+
+Run a Full node
+`cd ironfish/ironfish-cli`
+`yarn start start`
+
+Run the block explorer
+`yarn dev`
+
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `yarn start`
+### `yarn dev`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -28,15 +41,3 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Dev setup
-Run the Iron Fish Rosetta API
-`cd ironfish/ironfish-rosetta-api`
-`yarn start`
-The Rosetta API is set to run on `localhost:8080`. If the port is different on your machine, update the `package.json` for CORS
-
-Run a Full node
-`cd ironfish/ironfish-cli`
-`yarn start start`
-
-Run a the block explorer
-`yarn start`

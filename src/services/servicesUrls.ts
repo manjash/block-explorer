@@ -1,7 +1,13 @@
+import { API_HOST } from '../config'
+
 // TODO improve URLs the config
 export enum ApiUrls {
-  BLOCK_DETAIL_PAGE = 'https://explorer-api.ironfish.network/block',
-  BLOCK_TRANSACTION_PAGE = 'https://explorer-api.ironfish.network/block/transaction',
-  SEARCH_BLOCKS = 'https://explorer-api.ironfish.network/search/blocks',
-  SEARCH_TRANSACTIONS = 'https://explorer-api.ironfish.network/search/transactions',
+  BLOCK_DETAIL_PAGE = '/block',
+  BLOCK_TRANSACTION_PAGE = '/block/transaction',
+  SEARCH_BLOCKS = '/search/blocks',
+  SEARCH_TRANSACTIONS = '/search/transactions',
+}
+
+export function getApiUrl(url: ApiUrls): string {
+  return `${API_HOST}${url}`
 }

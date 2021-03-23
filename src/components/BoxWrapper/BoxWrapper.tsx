@@ -8,7 +8,7 @@ import boxWrapperStyle from '../../assets/jss/components/BoxWrapper/boxWrapperSt
 import Loading from '../Loading/Loading'
 
 interface Prop extends BoxProps {
-  title: string
+  header: React.ReactNode
   children: React.ReactNode
   isLoading?: boolean
 }
@@ -16,12 +16,12 @@ interface Prop extends BoxProps {
 const useStyles = makeStyles(boxWrapperStyle)
 const BoxWrapper = (props: Prop) => {
   const classes = useStyles()
-  const { children, isLoading = false, title, ...cssProps } = props
+  const { children, isLoading = false, header, ...cssProps } = props
 
   return (
     <Box className={classes.root} {...cssProps}>
       <Typography variant='h5' className={classes.header}>
-        {title}
+        {header}
       </Typography>
       {isLoading && <Loading />}
 

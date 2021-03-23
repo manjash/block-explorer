@@ -14,6 +14,7 @@ import { getIRFAmountWithCurrency } from '../../utils/currency'
 import { getTransactionDetailPageUrl } from '../../utils/routes'
 import { getDisplayShortHash } from '../../utils/string'
 import BoxWrapper from '../BoxWrapper/BoxWrapper'
+import TransactionChip from '../TransactionChip/TransactionChip'
 
 interface Prop {
   transactions: Transactions
@@ -26,7 +27,7 @@ const TransactionsListSmall = ({ blockHash, transactions }: Prop) => {
   const classes = useStyles()
 
   return (
-    <BoxWrapper title={t('app.transactionsContainer.title')}>
+    <BoxWrapper header={t('app.transactionsContainer.title')}>
       {transactions.map((transaction, index) => (
         <div
           key={transaction.transaction_identifier.hash}
@@ -35,6 +36,12 @@ const TransactionsListSmall = ({ blockHash, transactions }: Prop) => {
           })}
         >
           <div className={classes.content}>
+            {transaction.metadata.isMinerFee && (
+              <div className={classes.chip}>
+                <TransactionChip />
+              </div>
+            )}
+
             <Typography variant='subtitle2'>
               {t('app.components.transactionslist.hash')}
             </Typography>

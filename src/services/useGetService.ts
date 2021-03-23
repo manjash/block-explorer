@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { networkIdentifier } from '../config'
 
 import { Service, ServiceState } from '../types/Service'
-import { ApiUrls } from './servicesUrls'
 
 export interface ServicePayload<Type> {
   result: Type
@@ -13,7 +12,7 @@ export interface ServicePayload<Type> {
 const defaultFormatFunction = (data: any) => data
 
 const useGetService = <Type>(
-  url: ApiUrls,
+  url: string,
   queryParams: any = {},
   formatFunction = defaultFormatFunction,
 ) => {

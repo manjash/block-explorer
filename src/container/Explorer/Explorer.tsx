@@ -18,7 +18,7 @@ import { getFromLocalStorage, saveToLocalStorage } from '../../utils/persistedSt
 import { networkIdentifier } from '../../config'
 import useInfiniteScroll, { DoneFunction } from '../../hooks/useInfiniteScroll'
 import { RoutePath } from '../../routes/routePath'
-import { ApiUrls } from '../../services/servicesUrls'
+import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
 import Block, { formatBlocksFromJson } from '../../types/Block'
 import { ServiceState } from '../../types/Service'
 import blocksGray from '../../assets/images/breadcrumb/blocks-gray.svg'
@@ -64,7 +64,7 @@ const Explorer = () => {
 
   function fetchMoreListItems(done: DoneFunction) {
     axios
-      .post(ApiUrls.SEARCH_BLOCKS, {
+      .post(getApiUrl(ApiUrls.SEARCH_BLOCKS), {
         network_identifier: networkIdentifier,
         limit: 20,
         seek: result.seek,
@@ -104,7 +104,7 @@ const Explorer = () => {
       />
 
       <RefreshButton onClick={refreshlist} />
-      <BoxWrapper title={t('app.explorer.title')}>
+      <BoxWrapper header={t('app.explorer.title')}>
         {result.status === ServiceState.ERROR && (
           <Alert title={t('app.explorer.error.title')}>
             {t('app.explorer.error.description')}

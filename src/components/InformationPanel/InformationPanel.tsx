@@ -22,6 +22,7 @@ interface Prop {
   confirmations?: number
   difficulty?: number
   fee?: string
+  isMinerFee?: boolean
   blockHash?: string
   transactionHash?: string
   height?: number
@@ -38,6 +39,7 @@ const InformationPanel = ({
   confirmations,
   difficulty,
   fee,
+  isMinerFee,
   blockHash,
   transactionHash,
   height,
@@ -92,7 +94,14 @@ const InformationPanel = ({
         </Information>
       )}
       {fee && (
-        <Information icon={reward} title={t('app.components.informationPanel.fee')}>
+        <Information
+          icon={reward}
+          title={
+            isMinerFee
+              ? t('app.components.informationPanel.minerFee')
+              : t('app.components.informationPanel.fee')
+          }
+        >
           {fee}
         </Information>
       )}

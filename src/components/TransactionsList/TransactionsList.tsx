@@ -20,6 +20,7 @@ import BoxWrapper from '../BoxWrapper/BoxWrapper'
 import transactionIcon from '../../assets/images/breadcrumb/transaction.svg'
 import transactionsList from '../../assets/jss/components/TransactionsList/transactionsList'
 import TransactionsListSmall from './TransactionsListSmall'
+import TransactionChip from '../TransactionChip/TransactionChip'
 
 interface Prop {
   transactions: Transactions
@@ -37,12 +38,13 @@ const TransactionsList = (props: Prop) => {
   if (isSmallBreakpoint) return <TransactionsListSmall {...props} />
 
   return (
-    <BoxWrapper marginTop={2} title={t('app.transactionsContainer.title')}>
+    <BoxWrapper marginTop={2} header={t('app.transactionsContainer.title')}>
       <TableContainer component={Paper}>
         <Table aria-label='customized table'>
           <TableHead>
             <TableRow>
               <StyledTableCell>{t('app.components.transactionslist.hash')}</StyledTableCell>
+              <StyledTableCell align='right'></StyledTableCell>
               <StyledTableCell align='right'>
                 {t('app.components.transactionslist.fee')}
               </StyledTableCell>
@@ -66,6 +68,9 @@ const TransactionsList = (props: Prop) => {
                       {transaction.transaction_identifier.hash}
                     </div>
                   </Link>
+                </StyledTableCell>
+                <StyledTableCell align='right'>
+                  {transaction.metadata.isMinerFee && <TransactionChip />}
                 </StyledTableCell>
                 <StyledTableCell align='right'>
                   {getIRFAmountWithCurrency(transaction.metadata.fee)}

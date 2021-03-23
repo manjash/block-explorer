@@ -11,7 +11,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import searchIcon from '../../assets/images/search.svg'
 import { networkIdentifier } from '../../config'
 import searchStyle from '../../assets/jss/containers/searchStyle'
-import { ApiUrls } from '../../services/servicesUrls'
+import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
 import Block, { isBlock, formatBlocksFromJson } from '../../types/Block'
 import { getBlockDetailPageUrl, getTransactionDetailPageUrl } from '../../utils/routes'
 import { getDisplayShortHash } from '../../utils/string'
@@ -43,13 +43,13 @@ const Search = () => {
 
     setLoading(true)
 
-    const blocks = axios.post(ApiUrls.SEARCH_BLOCKS, {
+    const blocks = axios.post(getApiUrl(ApiUrls.SEARCH_BLOCKS), {
       network_identifier: networkIdentifier,
       limit: 8,
       query: value.toUpperCase(),
     })
 
-    const transactions = axios.post(ApiUrls.SEARCH_TRANSACTIONS, {
+    const transactions = axios.post(getApiUrl(ApiUrls.SEARCH_TRANSACTIONS), {
       network_identifier: networkIdentifier,
       limit: 5,
       transaction_identifier: { hash: value.toUpperCase() },
