@@ -6,8 +6,7 @@ import { HEADER_HEIGHT } from '../../theme'
 const splashStyle = (theme: Theme) =>
   createStyles({
     splash: {
-      // header + search + arrow down
-      maxHeight: `calc(100vh - 500px)`,
+      maxHeight: `470px`,
       minHeight: '310px',
       background: 'linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, #FBFBFB 100%)',
       overflow: 'hidden',
