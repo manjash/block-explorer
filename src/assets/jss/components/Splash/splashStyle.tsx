@@ -67,6 +67,7 @@ const splashStyle = (theme: Theme) =>
       width: '200px',
       color: theme.palette.info.main,
       alignItems: 'center',
+      textDecoration: 'none',
       margin: theme.spacing(4, 'auto', 0, 'auto'),
     },
   })

@@ -34,7 +34,7 @@ const Breadcrumb = ({ paths }: Props) => {
         className={classNames(classes.pill, classes.link)}
         key='home'
         color='inherit'
-        to={RoutePath.Home}
+        to={`${RoutePath.Home}#blocks`}
       >
         <img src={home} role='presentation' />
         <span>{t('app.components.breadcrumb.home')}</span>
