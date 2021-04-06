@@ -15,6 +15,10 @@ import Search from '../../container/Search/Search'
 
 const useStyles = makeStyles(headerStyle)
 
+// Config value for showing the "Network Unavailable" banner.
+// Set this to 'false' if the network is not available.
+const isNetworkAvailable = true
+
 interface Props {
   showSearch: Boolean
   isSticky?: Boolean
@@ -32,6 +36,22 @@ const Header = ({ isSticky, isTop, showSearch }: Props) => {
         [classes.isTop]: showSearch && isTop,
       })}
     >
+      {!isNetworkAvailable && (
+        <div className={classes.networkUnavailableBanner}>
+          <span>
+            <strong>Network Unavailable.</strong> Check{' '}
+            <a
+              href='https://discord.gg/H7Mk3qacyM'
+              target='_blank'
+              rel='noreferrer'
+              style={{ color: 'black' }}
+            >
+              Discord
+            </a>{' '}
+            for updates.
+          </span>
+        </div>
+      )}
       <Toolbar className={classes.toolbar}>
         <Link to={RoutePath.Home}>
           <img

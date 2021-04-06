@@ -75,6 +75,19 @@ const adStyle = (theme: Theme) =>
     invisible: {
       opacity: 0,
     },
+    networkUnavailableBanner: {
+      background: 'linear-gradient(90deg, #f6a143, #ffcd85)',
+      color: 'black',
+      display: 'flex',
+      height: '48px',
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: theme.spacing(0, -10),
+      [theme.breakpoints.down('sm')]: {
+        marginTop: theme.spacing(-2),
+        marginBottom: theme.spacing(1),
+      },
+    },
   })
 
 export default adStyle
