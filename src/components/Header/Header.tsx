@@ -41,7 +41,7 @@ const Header = ({ isSticky, isTop, showSearch }: Props) => {
           <span>
             <strong>Network Unavailable.</strong> Check{' '}
             <a
-              href='https://discord.gg/H7Mk3qacyM'
+              href='https://discord.gg/kpKeGkA3'
               target='_blank'
               rel='noreferrer'
               style={{ color: 'black' }}

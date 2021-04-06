@@ -108,7 +108,7 @@ const Footer = () => {
             <a href='https://twitter.com/ironfishcrypto'>
               <img src={twitter} alt={t('app.footer.twitter')} />
             </a>
-            <a href='https://discord.gg/H7Mk3qacyM'>
+            <a href='https://discord.gg/kpKeGkA3'>
               <img src={discord} alt={t('app.footer.discord')} />
             </a>
           </div>
