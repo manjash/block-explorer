@@ -17,7 +17,7 @@ const useStyles = makeStyles(headerStyle)
 
 // Config value for showing the "Network Unavailable" banner.
 // Set this to 'false' if the network is not available.
-const isNetworkAvailable = true
+const isNetworkAvailable = false
 
 interface Props {
   showSearch: Boolean
