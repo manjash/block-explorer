@@ -16,8 +16,10 @@ import Search from '../../container/Search/Search'
 const useStyles = makeStyles(headerStyle)
 
 // Config value for showing the "Network Unavailable" banner.
-// Set this to 'false' if the network is not available.
 const isNetworkAvailable = true
+
+// Config value for showing the "Block Explorer Unavailable" banner.
+const isExplorerAvailable = false
 
 interface Props {
   showSearch: Boolean
@@ -36,10 +38,13 @@ const Header = ({ isSticky, isTop, showSearch }: Props) => {
         [classes.isTop]: showSearch && isTop,
       })}
     >
-      {!isNetworkAvailable && (
+      {(!isNetworkAvailable || !isExplorerAvailable) && (
         <div className={classes.networkUnavailableBanner}>
           <span>
-            <strong>Network Unavailable.</strong> Check{' '}
+            <strong>
+              {!isNetworkAvailable ? 'Network Unavailable.' : 'Block Explorer Unavailable.'}
+            </strong>{' '}
+            Check{' '}
             <a
               href='https://discord.gg/EkQkEcm8DH'
               target='_blank'
