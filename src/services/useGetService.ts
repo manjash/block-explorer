@@ -20,14 +20,20 @@ const useGetService = <Type>(
     status: ServiceState.LOADING,
   })
 
-  const params = JSON.stringify({
-    network_identifier: networkIdentifier,
-    ...queryParams,
-  })
+  // const params = JSON.stringify({
+  //   network_identifier: networkIdentifier,
+  //   ...queryParams,
+  // })
+
+  const params = new URLSearchParams()
+
+  for (let key of queryParams) {
+    params.append(key, queryParams[key])
+  }
 
   useEffect(() => {
     axios
-      .post(url, JSON.parse(params))
+      .get(url + params.toString())
       .then((response) =>
         setResult({
           status: ServiceState.LOADED,
