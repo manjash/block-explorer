@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 // import { networkIdentifier } from '../config'
 
 import { Service, ServiceState } from '../types/Service'
@@ -25,8 +25,9 @@ const useGetService = <Type>(
   //   ...queryParams,
   // })
 
+  const params = useMemo(() => new URLSearchParams(queryParams), [queryParams])
+
   useEffect(() => {
-    const params = new URLSearchParams(queryParams)
     axios
       .get(url + params.toString())
       .then((response) =>
@@ -36,7 +37,7 @@ const useGetService = <Type>(
         }),
       )
       .catch((error) => setResult({ status: ServiceState.ERROR, error }))
-  }, [url, queryParams, formatFunction])
+  }, [url, params, formatFunction])
 
   return result
 }
