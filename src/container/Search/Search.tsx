@@ -43,11 +43,10 @@ const Search = () => {
 
     setLoading(true)
 
-    const blocks = axios.post(getApiUrl(ApiUrls.SEARCH_BLOCKS), {
-      network_identifier: networkIdentifier,
-      limit: 8,
-      query: value.toUpperCase(),
-    })
+    const searchParams = new URLSearchParams
+    searchParams.append('search', value.toUpperCase())
+
+    const blocks = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + searchParams.toString())
 
     const transactions = axios.post(getApiUrl(ApiUrls.SEARCH_TRANSACTIONS), {
       network_identifier: networkIdentifier,
