@@ -26,10 +26,11 @@ const useGetService = <Type>(
   // })
 
   const params = useMemo(() => new URLSearchParams(queryParams), [queryParams])
+  const searchString = params.toString()
 
   useEffect(() => {
     axios
-      .get(url + params.toString())
+      .get(url + searchString)
       .then((response) =>
         setResult({
           status: ServiceState.LOADED,
@@ -37,7 +38,7 @@ const useGetService = <Type>(
         }),
       )
       .catch((error) => setResult({ status: ServiceState.ERROR, error }))
-  }, [url, params, formatFunction])
+  }, [url, searchString, formatFunction])
 
   return result
 }
