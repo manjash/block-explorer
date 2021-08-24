@@ -43,7 +43,7 @@ const Search = () => {
 
     setLoading(true)
 
-    const searchParams = new URLSearchParams
+    const searchParams = new URLSearchParams()
     searchParams.append('search', value.toUpperCase())
 
     const blocks = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + searchParams.toString())
