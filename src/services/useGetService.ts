@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { networkIdentifier } from '../config'
+// import { networkIdentifier } from '../config'
 
 import { Service, ServiceState } from '../types/Service'
 
@@ -25,13 +25,8 @@ const useGetService = <Type>(
   //   ...queryParams,
   // })
 
-  const params = new URLSearchParams()
-
-  for (let key of queryParams) {
-    params.append(key, queryParams[key])
-  }
-
   useEffect(() => {
+    const params = new URLSearchParams(queryParams)
     axios
       .get(url + params.toString())
       .then((response) =>
@@ -41,7 +36,7 @@ const useGetService = <Type>(
         }),
       )
       .catch((error) => setResult({ status: ServiceState.ERROR, error }))
-  }, [url, params, formatFunction])
+  }, [url, queryParams, formatFunction])
 
   return result
 }
