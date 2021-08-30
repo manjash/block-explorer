@@ -6,15 +6,21 @@ export interface BlockIdentifier {
 }
 
 export default interface Block {
-  parent_block_identifier?: BlockIdentifier
-  block_identifier: BlockIdentifier
-  metadata: {
-    size: number
-    difficulty: number
-    transactionsCount?: number
-  }
-  transactions: Array<Transaction>
+  id: number
+  created_at: Date
+  updated_at: Date
+  hash: string
+  sequence: number
+  previous_block_hash: string | null
+  difficulty: number
+  main: boolean
+  network_version: number
+  transactionsCount: number
   timestamp: Date
+  graffiti: string
+  searchable_text: string
+  size: number
+  transactions: Transaction[]
 }
 
 export interface Blocks {
@@ -26,8 +32,8 @@ export const formatBlockFromJson = ({ block }: any): Block => ({
   timestamp: new Date(block.timestamp),
 })
 
-export const formatBlocksFromJson = ({ blocks }: any): Block[] =>
-  blocks.map((block: any) => ({
+export const formatBlocksFromJson = ({ data }: any): Block[] =>
+  data.map((block: any) => ({
     ...formatBlockFromJson({ block }),
   }))
 
