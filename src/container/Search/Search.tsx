@@ -46,36 +46,30 @@ const Search = () => {
     const searchParams = new URLSearchParams()
     searchParams.append('search', value.toLowerCase())
 
-    const blocks = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + searchParams.toString())
+    const blocksData = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + searchParams.toString())
+    let blocks: Block[] = []
+    if (blocksData) {
+      blocks = formatBlocksFromJson(blocksData)
+    }
 
-    const transactions = axios.post(getApiUrl(ApiUrls.SEARCH_TRANSACTIONS), {
+    // TODO: Change this when transaction search endpoint is done
+    const transactionsData = axios.post(getApiUrl(ApiUrls.SEARCH_TRANSACTIONS), {
       network_identifier: networkIdentifier,
       limit: 5,
       transaction_identifier: { hash: value.toUpperCase() },
     })
+    let transactions: Transaction[] = []
+    if (transactionsData) {
+      transactions = formatSearchTransactionsFromJson(transactionsData)
+    }
 
-    Promise.all([transactions, blocks]).then((values) => {
-      let transactions: Transaction[] = []
-      let blocks: Block[] = []
+    if (transactions.length > 0 || blocks.length > 0) {
+      setOpen(true)
+    }
 
-      for (let i = 0; i < values.length; i++) {
-        const { data } = values[i]
-        if (data && data.transactions) {
-          transactions = formatSearchTransactionsFromJson(data)
-        }
-        if (data && data.blocks) {
-          blocks = formatBlocksFromJson(data)
-        }
-      }
+    setResult([...blocks, ...transactions])
 
-      if (transactions.length > 0 || blocks.length > 0) {
-        setOpen(true)
-      }
-
-      setResult([...blocks, ...transactions])
-
-      setLoading(false)
-    })
+    setLoading(false)
   }
 
   const getOptionLabel = (option: any) => {
@@ -99,7 +93,7 @@ const Search = () => {
     value: Block | Transaction,
   ): boolean => {
     if (isBlock(option) && isBlock(value)) {
-      return option.block_identifier.hash === value.block_identifier.hash
+      return option.hash === value.hash
     }
 
     if (isTransaction(option) && isTransaction(value)) {
@@ -115,7 +109,7 @@ const Search = () => {
     }
 
     if (isBlock(value)) {
-      history.push(getBlockDetailPageUrl(value.block_identifier.index), { update: true })
+      history.push(getBlockDetailPageUrl(value.sequence), { update: true })
     }
 
     if (isTransaction(value)) {
