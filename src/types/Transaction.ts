@@ -7,17 +7,13 @@ export interface Operation {}
 export default interface Transaction {
   block_identifier?: BlockIdentifier
   confirmations?: number
-  transaction_identifier: {
-    hash: string
-  }
+  hash: string
   operations: Array<Operation>
-  metadata: {
-    notes: Notes
-    spends: Spends
-    size: number
-    fee?: number
-    isMinerFee?: boolean
-  }
+  notes: Notes
+  spends: Spends
+  size: number
+  fee?: number
+  isMinerFee?: boolean
   timestamp?: Date
 }
 
