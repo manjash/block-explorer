@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { networkIdentifier } from '../config'
 
 import { Service, ServiceState } from '../types/Service'
@@ -20,14 +20,12 @@ const useGetService = <Type>(
     status: ServiceState.LOADING,
   })
 
-  const params = JSON.stringify({
-    network_identifier: networkIdentifier,
-    ...queryParams,
-  })
+  const params = useMemo(() => new URLSearchParams(queryParams), [queryParams])
+  const queryString = params.toString()
 
   useEffect(() => {
     axios
-      .post(url, JSON.parse(params))
+      .get(url + queryString)
       .then((response) =>
         setResult({
           status: ServiceState.LOADED,
@@ -35,7 +33,7 @@ const useGetService = <Type>(
         }),
       )
       .catch((error) => setResult({ status: ServiceState.ERROR, error }))
-  }, [url, params, formatFunction])
+  }, [url, queryString, formatFunction])
 
   return result
 }
