@@ -21,8 +21,8 @@ export const formatBlockFromJson = ({ block }: any): Block => ({
   timestamp: new Date(block.timestamp),
 })
 
-export const formatBlocksFromJson = ({ blocks }: any): Block[] =>
-  blocks.map((block: any) => ({
+export const formatBlocksFromJson = (data: any): Block[] =>
+  data.map((block: any) => ({
     ...formatBlockFromJson({ block }),
   }))
 
