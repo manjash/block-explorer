@@ -95,10 +95,7 @@ const BlockDetailPage = () => {
       </BoxWrapper>
 
       {blockData && blockData.transactions.length > 0 && (
-        <TransactionsList
-          transactions={blockData.transactions}
-          blockHash={blockData.hash}
-        />
+        <TransactionsList transactions={blockData.transactions} blockHash={blockData.hash} />
       )}
     </Container>
   )

@@ -55,7 +55,7 @@ describe('<TransactionDetailPage />', () => {
           block: {
             hash: '841dc592f60746a289ced676dfff52d1',
             index: '2227131',
-          }
+          },
         },
       },
     })

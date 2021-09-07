@@ -6,7 +6,7 @@ export enum ApiUrls {
   BLOCK_TRANSACTION_PAGE = '/block/transaction',
   SEARCH_BLOCKS = '/blocks?',
   SEARCH_TRANSACTIONS = '/transactions?',
-  TRANSACTION_DETAIL_PAGE = 'transactions/find?'
+  TRANSACTION_DETAIL_PAGE = 'transactions/find?',
 }
 
 export function getApiUrl(url: ApiUrls): string {

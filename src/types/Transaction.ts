@@ -9,10 +9,10 @@ export default interface Transaction {
   size: number
   timestamp?: Date
   notes: Notes
-  spends: Spends,
+  spends: Spends
   block: {
-    hash: string,
-    index: number,
+    hash: string
+    index: number
   }
 }
 

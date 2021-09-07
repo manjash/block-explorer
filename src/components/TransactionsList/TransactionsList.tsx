@@ -55,28 +55,23 @@ const TransactionsList = (props: Prop) => {
           </TableHead>
           <TableBody>
             {transactions.map((transaction) => (
-              <StyledTableRow key={transaction.transaction_identifier.hash}>
+              <StyledTableRow key={transaction.hash}>
                 <StyledTableCell scope='row'>
-                  <Link
-                    to={getTransactionDetailPageUrl(
-                      blockHash,
-                      transaction.transaction_identifier.hash,
-                    )}
-                  >
+                  <Link to={getTransactionDetailPageUrl(blockHash, transaction.hash)}>
                     <div className={classes.root}>
                       <img src={transactionIcon} role='presentation' />
-                      {transaction.transaction_identifier.hash}
+                      {transaction.hash}
                     </div>
                   </Link>
                 </StyledTableCell>
                 <StyledTableCell align='right'>
-                  {transaction.metadata.isMinerFee && <TransactionChip />}
+                  {/* {transaction.isMinerFee && <TransactionChip />} */}
                 </StyledTableCell>
                 <StyledTableCell align='right'>
-                  {getIRFAmountWithCurrency(transaction.metadata.fee)}
+                  {getIRFAmountWithCurrency(transaction.fee)}
                 </StyledTableCell>
                 <StyledTableCell align='right'>
-                  {getDisplaySizeInBytes(transaction.metadata.size)}
+                  {getDisplaySizeInBytes(transaction.size)}
                 </StyledTableCell>
               </StyledTableRow>
             ))}

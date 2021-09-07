@@ -52,7 +52,9 @@ const Search = () => {
       blocks = formatBlocksFromJson(blocksData)
     }
 
-    const transactionsData = axios.get(getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + searchParams.toString())
+    const transactionsData = axios.get(
+      getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + searchParams.toString(),
+    )
     let transactions: Transaction[] = []
     if (transactionsData) {
       transactions = formatSearchTransactionsFromJson(transactionsData)
@@ -69,11 +71,9 @@ const Search = () => {
 
   const getOptionLabel = (option: any) => {
     if (isTransaction(option)) {
-      return `${
-        isSmallBreakpoint
-          ? getDisplayShortHash(option.hash)
-          : option.hash
-      } - Block: ${option.block.index}`
+      return `${isSmallBreakpoint ? getDisplayShortHash(option.hash) : option.hash} - Block: ${
+        option.block.index
+      }`
     }
 
     return `${option.block_identifier.index} - ${
@@ -108,15 +108,9 @@ const Search = () => {
     }
 
     if (isTransaction(value)) {
-      history.push(
-        getTransactionDetailPageUrl(
-          value.block.hash,
-          value.hash,
-        ),
-        {
-          update: true,
-        },
-      )
+      history.push(getTransactionDetailPageUrl(value.block.hash, value.hash), {
+        update: true,
+      })
     }
   }
 

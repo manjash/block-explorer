@@ -52,7 +52,7 @@ const TransactionDetailPage = () => {
   // const api = queryBlockHash ? ApiUrls.BLOCK_TRANSACTION_PAGE : ApiUrls.SEARCH_TRANSACTIONS
   const api = ApiUrls.TRANSACTION_DETAIL_PAGE
   const params = { hash: hash.toLowerCase(), with_block: true }
-  const format = formatTransactionFromJson 
+  const format = formatTransactionFromJson
   const service = useGetService<Transaction>(getApiUrl(api), params, format)
 
   const serviceResult = service.status === ServiceState.LOADED && service.payload.result
@@ -98,9 +98,9 @@ const TransactionDetailPage = () => {
           header={
             <span>
               {t('app.transactionDetailPage.information.title')}{' '}
-              {transactionData && transactionData.metadata.isMinerFee && (
+              {/* {transactionData && transactionData.metadata.isMinerFee && (
                 <TransactionChip inline />
-              )}
+              )} */}
             </span>
           }
         >

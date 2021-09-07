@@ -1,15 +1,15 @@
 import Transaction from './Transaction'
 
 export default interface Block {
-  hash: string,
-  sequence: number,
-  previous_block_hash: string,
+  hash: string
+  sequence: number
+  previous_block_hash: string
   size: number
   difficulty: number
   transactionsCount?: number
   transactions: Array<Transaction>
   timestamp: Date
-  graffiti: string,
+  graffiti: string
 }
 
 export interface Blocks {
