@@ -3,5 +3,4 @@ export const networkIdentifier = {
   network: 'testnet',
 }
 
-export const API_HOST =
-  process.env.REACT_APP_API_HOST || 'https://api-staging.ironfish.network'
+export const API_HOST = process.env.REACT_APP_API_HOST || 'https://api-staging.ironfish.network'
