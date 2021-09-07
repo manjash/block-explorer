@@ -32,6 +32,7 @@ const Dashboard = () => {
   )
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
+  console.log(blockData)
 
   const metrics: MetricsData = {
     blockTime: null,
