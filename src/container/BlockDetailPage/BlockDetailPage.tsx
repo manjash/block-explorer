@@ -29,11 +29,11 @@ const BlockDetailPage = () => {
   const { t } = useTranslation()
   const { id } = useParams<ParamTypes>()
 
-  const blockIdentifier = {} as { hash?: string; index?: number }
+  const blockIdentifier = {} as { hash?: string; sequence?: number }
   if (Number.isNaN(Number(id))) {
     blockIdentifier.hash = id
   } else {
-    blockIdentifier.index = Number(id)
+    blockIdentifier.sequence = Number(id)
   }
 
   const service = useGetService<Block>(
@@ -46,8 +46,8 @@ const BlockDetailPage = () => {
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
   const metaVariables = {
-    id: blockData ? `${blockData.block_identifier.index}` : '',
-    hash: blockData ? blockData.block_identifier.hash : '',
+    id: blockData ? `${blockData.sequence}` : '',
+    hash: blockData ? blockData.hash : '',
   }
 
   return (
@@ -63,7 +63,7 @@ const BlockDetailPage = () => {
               logo: blocks,
             },
             {
-              title: getDisplayShortHash(blockData.block_identifier.hash || ''),
+              title: getDisplayShortHash(blockData.hash || ''),
               logo: blocksGray,
             },
           ]}
@@ -83,11 +83,11 @@ const BlockDetailPage = () => {
         <div>
           {blockData && (
             <InformationPanel
-              height={blockData.block_identifier.index}
-              blockHash={blockData.block_identifier.hash}
-              size={getDisplaySizeInBytes(blockData.metadata.size)}
+              height={blockData.sequence}
+              blockHash={blockData.hash}
+              size={getDisplaySizeInBytes(blockData.size)}
               transactions={blockData.transactions.length}
-              difficulty={blockData.metadata.difficulty}
+              difficulty={blockData.difficulty}
               timestamp={blockData.timestamp}
             />
           )}
@@ -97,7 +97,7 @@ const BlockDetailPage = () => {
       {blockData && blockData.transactions.length > 0 && (
         <TransactionsList
           transactions={blockData.transactions}
-          blockHash={blockData.block_identifier.hash}
+          blockHash={blockData.hash}
         />
       )}
     </Container>
