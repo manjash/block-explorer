@@ -14,7 +14,7 @@ import { getIRFAmountWithCurrency } from '../../utils/currency'
 import { getTransactionDetailPageUrl } from '../../utils/routes'
 import { getDisplayShortHash } from '../../utils/string'
 import BoxWrapper from '../BoxWrapper/BoxWrapper'
-import TransactionChip from '../TransactionChip/TransactionChip'
+// import TransactionChip from '../TransactionChip/TransactionChip'
 
 interface Prop {
   transactions: Transactions

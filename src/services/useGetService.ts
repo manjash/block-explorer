@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useMemo, useState } from 'react'
-import { networkIdentifier } from '../config'
+// import { networkIdentifier } from '../config'
 
 import { Service, ServiceState } from '../types/Service'
 

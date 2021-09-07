@@ -20,7 +20,7 @@ import BoxWrapper from '../BoxWrapper/BoxWrapper'
 import transactionIcon from '../../assets/images/breadcrumb/transaction.svg'
 import transactionsList from '../../assets/jss/components/TransactionsList/transactionsList'
 import TransactionsListSmall from './TransactionsListSmall'
-import TransactionChip from '../TransactionChip/TransactionChip'
+// import TransactionChip from '../TransactionChip/TransactionChip'
 
 interface Prop {
   transactions: Transactions

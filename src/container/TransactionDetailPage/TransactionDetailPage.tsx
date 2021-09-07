@@ -18,7 +18,7 @@ import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
 import Transaction, {
-  formatSearchTransactionsFromJson,
+  // formatSearchTransactionsFromJson,
   formatTransactionFromJson,
 } from '../../types/Transaction'
 
@@ -34,7 +34,7 @@ import { getDisplayShortHash } from '../../utils/string'
 import blocks from '../../assets/images/breadcrumb/blocks.svg'
 import transaction from '../../assets/images/breadcrumb/transaction-gray.svg'
 import Container from '../../components/Container/Container'
-import TransactionChip from '../../components/TransactionChip/TransactionChip'
+// import TransactionChip from '../../components/TransactionChip/TransactionChip'
 
 interface ParamTypes {
   blockHash: string
@@ -44,7 +44,7 @@ interface ParamTypes {
 const useStyles = makeStyles(transactionDetailPageStyle)
 const TransactionDetailPage = () => {
   const { t } = useTranslation()
-  const { blockHash: queryBlockHash, hash } = useParams<ParamTypes>()
+  const { hash } = useParams<ParamTypes>()
   const classes = useStyles()
 
   // if we are coming from a block, we know the block hash and the transaction hash to query the transaction API
