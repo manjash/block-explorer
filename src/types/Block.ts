@@ -2,7 +2,7 @@ import Transaction from './Transaction'
 
 export default interface Block {
   hash: string,
-  sequence: string,
+  sequence: number,
   previous_block_hash: string,
   size: number
   difficulty: number
