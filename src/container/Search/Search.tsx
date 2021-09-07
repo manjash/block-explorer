@@ -9,7 +9,7 @@ import Autocomplete, { AutocompleteRenderGroupParams } from '@material-ui/lab/Au
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import searchIcon from '../../assets/images/search.svg'
-import { networkIdentifier } from '../../config'
+// import { networkIdentifier } from '../../config'
 import searchStyle from '../../assets/jss/containers/searchStyle'
 import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
 import Block, { isBlock, formatBlocksFromJson } from '../../types/Block'
@@ -43,49 +43,37 @@ const Search = () => {
 
     setLoading(true)
 
-    const blocks = axios.post(getApiUrl(ApiUrls.SEARCH_BLOCKS), {
-      network_identifier: networkIdentifier,
-      limit: 8,
-      query: value.toUpperCase(),
-    })
+    const searchParams = new URLSearchParams()
+    searchParams.append('search', value.toLowerCase())
 
-    const transactions = axios.post(getApiUrl(ApiUrls.SEARCH_TRANSACTIONS), {
-      network_identifier: networkIdentifier,
-      limit: 5,
-      transaction_identifier: { hash: value.toUpperCase() },
-    })
+    const blocksData = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + searchParams.toString())
+    let blocks: Block[] = []
+    if (blocksData) {
+      blocks = formatBlocksFromJson(blocksData)
+    }
 
-    Promise.all([transactions, blocks]).then((values) => {
-      let transactions: Transaction[] = []
-      let blocks: Block[] = []
+    const transactionsData = axios.get(getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + searchParams.toString())
+    let transactions: Transaction[] = []
+    if (transactionsData) {
+      transactions = formatSearchTransactionsFromJson(transactionsData)
+    }
 
-      for (let i = 0; i < values.length; i++) {
-        const { data } = values[i]
-        if (data && data.transactions) {
-          transactions = formatSearchTransactionsFromJson(data)
-        }
-        if (data && data.blocks) {
-          blocks = formatBlocksFromJson(data)
-        }
-      }
+    if (transactions.length > 0 || blocks.length > 0) {
+      setOpen(true)
+    }
 
-      if (transactions.length > 0 || blocks.length > 0) {
-        setOpen(true)
-      }
+    setResult([...blocks, ...transactions])
 
-      setResult([...blocks, ...transactions])
-
-      setLoading(false)
-    })
+    setLoading(false)
   }
 
   const getOptionLabel = (option: any) => {
     if (isTransaction(option)) {
       return `${
         isSmallBreakpoint
-          ? getDisplayShortHash(option.transaction_identifier.hash)
-          : option.transaction_identifier.hash
-      } - Block: ${option.block_identifier?.index}`
+          ? getDisplayShortHash(option.hash)
+          : option.hash
+      } - Block: ${option.block.index}`
     }
 
     return `${option.block_identifier.index} - ${
@@ -100,11 +88,11 @@ const Search = () => {
     value: Block | Transaction,
   ): boolean => {
     if (isBlock(option) && isBlock(value)) {
-      return option.block_identifier.hash === value.block_identifier.hash
+      return option.hash === value.hash
     }
 
     if (isTransaction(option) && isTransaction(value)) {
-      return option.transaction_identifier.hash === value.transaction_identifier.hash
+      return option.hash === value.hash
     }
 
     return false
@@ -116,14 +104,14 @@ const Search = () => {
     }
 
     if (isBlock(value)) {
-      history.push(getBlockDetailPageUrl(value.block_identifier.index), { update: true })
+      history.push(getBlockDetailPageUrl(value.sequence), { update: true })
     }
 
     if (isTransaction(value)) {
       history.push(
         getTransactionDetailPageUrl(
-          value.block_identifier?.hash,
-          value.transaction_identifier.hash,
+          value.block.hash,
+          value.hash,
         ),
         {
           update: true,
