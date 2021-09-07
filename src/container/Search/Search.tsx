@@ -46,27 +46,33 @@ const Search = () => {
     const searchParams = new URLSearchParams()
     searchParams.append('search', value.toLowerCase())
 
-    const blocksData = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + searchParams.toString())
-    let blocks: Block[] = []
-    if (blocksData) {
-      blocks = formatBlocksFromJson(blocksData)
-    }
-
-    const transactionsData = axios.get(
+    const blocks = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + searchParams.toString())
+    const transactions = axios.get(
       getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + searchParams.toString(),
     )
-    let transactions: Transaction[] = []
-    if (transactionsData) {
-      transactions = formatSearchTransactionsFromJson(transactionsData)
-    }
 
-    if (transactions.length > 0 || blocks.length > 0) {
-      setOpen(true)
-    }
+    Promise.all([transactions, blocks]).then((values) => {
+      let transactions: Transaction[] = []
+      let blocks: Block[] = []
 
-    setResult([...blocks, ...transactions])
+      for (let i = 0; i < values.length; i++) {
+        const { data } = values[i]
+        if (data && data.transactions) {
+          transactions = formatSearchTransactionsFromJson(data)
+        }
+        if (data && data.blocks) {
+          blocks = formatBlocksFromJson(data)
+        }
+      }
 
-    setLoading(false)
+      if (transactions.length > 0 || blocks.length > 0) {
+        setOpen(true)
+      }
+
+      setResult([...blocks, ...transactions])
+
+      setLoading(false)
+    })
   }
 
   const getOptionLabel = (option: any) => {
