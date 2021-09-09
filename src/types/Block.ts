@@ -7,7 +7,7 @@ export default interface Block {
   size: number
   difficulty: number
   transactionsCount?: number
-  transactions: Array<Transaction>
+  transactions?: Array<Transaction>
   timestamp: Date
   graffiti: string
 }
@@ -16,12 +16,22 @@ export interface Blocks {
   blocks: Block[]
 }
 
+export const formatFlatBlockFromJson = (data: any): Block => ({
+  ...data,
+  timestamp: new Date(data.timestamp),
+})
+
 export const formatBlockFromJson = ({ block }: any): Block => ({
   ...block,
   timestamp: new Date(block.timestamp),
 })
 
-export const formatBlocksFromJson = (data: any): Block[] =>
+export const formatBlocksFromJson = ({ data }: any): Block[] =>
+  data.map((block: any) => ({
+    ...formatBlockFromJson({ block }),
+  }))
+
+export const formatSearchBlocksFromJson = (data: any): Block[] =>
   data.map((block: any) => ({
     ...formatBlockFromJson({ block }),
   }))
