@@ -64,11 +64,13 @@ const Explorer = () => {
 
   function fetchMoreListItems(done: DoneFunction) {
     axios
-      .post(getApiUrl(ApiUrls.SEARCH_BLOCKS), {
-        network_identifier: networkIdentifier,
-        limit: 20,
-        seek: result.seek,
-      })
+      .get(
+        getApiUrl(ApiUrls.SEARCH_BLOCKS) +
+          new URLSearchParams({
+            limit: '20',
+            seek: result.seek,
+          }).toString(),
+      )
       .then((response) => {
         setResult((prevState: any) => {
           const newState = {
