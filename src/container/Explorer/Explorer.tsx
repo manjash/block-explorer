@@ -15,7 +15,7 @@ import Container from '../../components/Container/Container'
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
 import { getFromLocalStorage, saveToLocalStorage } from '../../utils/persistedStorage'
 
-import { networkIdentifier } from '../../config'
+// import { networkIdentifier } from '../../config'
 import useInfiniteScroll, { DoneFunction } from '../../hooks/useInfiniteScroll'
 import { RoutePath } from '../../routes/routePath'
 import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
