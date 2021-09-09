@@ -13,7 +13,7 @@ import Meta from '../../components/Meta/Meta'
 import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
-import Block, { formatBlockFromJson } from '../../types/Block'
+import Block, { formatFlatBlockFromJson } from '../../types/Block'
 
 import { RoutePath } from '../../routes/routePath'
 import { getDisplaySizeInBytes } from '../../utils/size'
@@ -39,9 +39,10 @@ const BlockDetailPage = () => {
   const service = useGetService<Block>(
     getApiUrl(ApiUrls.BLOCK_DETAIL_PAGE),
     {
-      block_identifier: blockIdentifier,
+      hash: id,
+      with_transactions: true,
     },
-    formatBlockFromJson,
+    formatFlatBlockFromJson,
   )
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
@@ -81,7 +82,7 @@ const BlockDetailPage = () => {
           />
         )}
         <div>
-          {blockData && (
+          {blockData && blockData.transactions && (
             <InformationPanel
               height={blockData.sequence}
               blockHash={blockData.hash}
@@ -94,7 +95,7 @@ const BlockDetailPage = () => {
         </div>
       </BoxWrapper>
 
-      {blockData && blockData.transactions.length > 0 && (
+      {blockData && blockData.transactions && blockData.transactions.length > 0 && (
         <TransactionsList transactions={blockData.transactions} blockHash={blockData.hash} />
       )}
     </Container>
