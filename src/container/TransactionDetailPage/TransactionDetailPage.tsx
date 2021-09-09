@@ -50,19 +50,28 @@ const TransactionDetailPage = () => {
   // if we are coming from a block, we know the block hash and the transaction hash to query the transaction API
   // if we just have the transaction hash, we need to query the search API to find the transactions
   // const api = queryBlockHash ? ApiUrls.BLOCK_TRANSACTION_PAGE : ApiUrls.SEARCH_TRANSACTIONS
-  const api = ApiUrls.TRANSACTION_DETAIL_PAGE
-  const params = { hash: hash.toLowerCase(), with_block: true }
-  const format = formatTransactionFromJson
-  const service = useGetService<Transaction>(getApiUrl(api), params, format)
+  // const api = ApiUrls.TRANSACTION_DETAIL_PAGE
+  // const params = { hash: hash.toLowerCase(), with_block: true }
+  // const format = formatTransactionFromJson
+  const service = useGetService<Transaction>(
+    getApiUrl(ApiUrls.TRANSACTION_DETAIL_PAGE),
+    {
+      hash,
+      with_block: true,
+    },
+    formatTransactionFromJson,
+  )
 
-  const serviceResult = service.status === ServiceState.LOADED && service.payload.result
-  const transactionData = Array.isArray(serviceResult)
-    ? serviceResult.length > 0
-      ? serviceResult[0]
-      : null
-    : serviceResult
-  const blockHash = transactionData.block.hash
-  const metaVariables = { blockHash, hash }
+  const transactionData = service.status === ServiceState.LOADED && service.payload.result
+  // const transactionData = Array.isArray(serviceResult)
+  //   ? serviceResult.length > 0
+  //     ? serviceResult[0]
+  //     : null
+  //   : serviceResult
+  const metaVariables = {
+    blockHash: transactionData ? `${transactionData.block?.hash}` : '',
+    hash: transactionData ? transactionData.hash : '',
+  }
 
   return (
     <>
@@ -80,8 +89,8 @@ const TransactionDetailPage = () => {
                 logo: blocks,
               },
               {
-                title: getDisplayShortHash(blockHash || ''),
-                to: getBlockDetailPageUrl(blockHash),
+                title: getDisplayShortHash(transactionData.block?.hash || ''),
+                to: getBlockDetailPageUrl(transactionData.block?.hash),
                 logo: blocks,
               },
               {
@@ -105,7 +114,7 @@ const TransactionDetailPage = () => {
           }
         >
           {service.status === ServiceState.ERROR ||
-            (serviceResult && !transactionData && (
+            (!transactionData && (
               <Error404
                 title={t('app.transactionDetailPage.information.error.title')}
                 description={t('app.transactionDetailPage.information.error.description')}
@@ -113,7 +122,7 @@ const TransactionDetailPage = () => {
             ))}
           {transactionData && (
             <InformationPanel
-              blockHash={blockHash}
+              blockHash={transactionData.block?.hash}
               transactionHash={hash}
               fee={getIRFAmountWithCurrency(transactionData.fee)}
               // isMinerFee={transactionData.isMinerFee}
