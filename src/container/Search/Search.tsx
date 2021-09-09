@@ -12,7 +12,7 @@ import searchIcon from '../../assets/images/search.svg'
 // import { networkIdentifier } from '../../config'
 import searchStyle from '../../assets/jss/containers/searchStyle'
 import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
-import Block, { isBlock, formatBlocksFromJson } from '../../types/Block'
+import Block, { isBlock, formatSearchBlocksFromJson } from '../../types/Block'
 import { getBlockDetailPageUrl, getTransactionDetailPageUrl } from '../../utils/routes'
 import { getDisplayShortHash } from '../../utils/string'
 import Transaction, {
@@ -56,12 +56,12 @@ const Search = () => {
       let blocks: Block[] = []
 
       for (let i = 0; i < values.length; i++) {
-        const { data } = values[i]
-        if (data && data.transactions) {
+        const { data } = values[i].data
+        if (data[0] && data[0].object === 'transaction') {
           transactions = formatSearchTransactionsFromJson(data)
         }
-        if (data && data.blocks) {
-          blocks = formatBlocksFromJson(data)
+        if (data[0] && data[0].object === 'block') {
+          blocks = formatSearchBlocksFromJson(data)
         }
       }
 
@@ -76,16 +76,18 @@ const Search = () => {
   }
 
   const getOptionLabel = (option: any) => {
-    if (isTransaction(option)) {
-      return `${isSmallBreakpoint ? getDisplayShortHash(option.hash) : option.hash} - Block: ${
-        option.block.index
-      }`
+    if (isTransaction(option) && option.block) {
+      return `${
+        isSmallBreakpoint
+          ? getDisplayShortHash(option.hash.toUpperCase())
+          : option.hash.toUpperCase()
+      } - Block: ${option.block.sequence}`
     }
 
-    return `${option.block_identifier.index} - ${
+    return `${option.sequence} - ${
       isSmallBreakpoint
-        ? getDisplayShortHash(option.block_identifier.hash)
-        : option.block_identifier.hash
+        ? getDisplayShortHash(option.hash.toUpperCase())
+        : option.hash.toUpperCase()
     }`
   }
 
@@ -110,10 +112,10 @@ const Search = () => {
     }
 
     if (isBlock(value)) {
-      history.push(getBlockDetailPageUrl(value.sequence), { update: true })
+      history.push(getBlockDetailPageUrl(value.hash), { update: true })
     }
 
-    if (isTransaction(value)) {
+    if (isTransaction(value) && value.block) {
       history.push(getTransactionDetailPageUrl(value.block.hash, value.hash), {
         update: true,
       })
