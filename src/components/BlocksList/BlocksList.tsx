@@ -70,7 +70,7 @@ const BlocksList = ({ blockList }: Prop) => {
                 {getDisplaySizeInBytes(block.size)}
               </StyledTableCell>
               <StyledTableCell align='right'>{block.transactionsCount}</StyledTableCell>
-              <StyledTableCell align='left'>{block.hash}</StyledTableCell>
+              <StyledTableCell align='left'>{block.hash.toUpperCase()}</StyledTableCell>
               <StyledTableCell align='left'>
                 {getDisplayTimestamp(block.timestamp)}
               </StyledTableCell>

@@ -60,7 +60,7 @@ const TransactionsList = (props: Prop) => {
                   <Link to={getTransactionDetailPageUrl(blockHash, transaction.hash)}>
                     <div className={classes.root}>
                       <img src={transactionIcon} role='presentation' />
-                      {transaction.hash}
+                      {transaction.hash.toUpperCase()}
                     </div>
                   </Link>
                 </StyledTableCell>
