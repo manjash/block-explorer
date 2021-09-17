@@ -57,19 +57,22 @@ const TransactionDetailPage = () => {
     getApiUrl(ApiUrls.TRANSACTION_DETAIL_PAGE),
     {
       hash,
-      with_block: true,
+      with_blocks: true,
     },
     formatTransactionFromJson,
   )
 
   const transactionData = service.status === ServiceState.LOADED && service.payload.result
+  const mainBlock = transactionData
+    ? transactionData.blocks?.find((block) => block.main === true)
+    : undefined
   // const transactionData = Array.isArray(serviceResult)
   //   ? serviceResult.length > 0
   //     ? serviceResult[0]
   //     : null
   //   : serviceResult
   const metaVariables = {
-    blockHash: transactionData ? `${transactionData.block?.hash}` : '',
+    blockHash: transactionData ? `${mainBlock?.hash}` : '',
     hash: transactionData ? transactionData.hash : '',
   }
 
@@ -89,8 +92,8 @@ const TransactionDetailPage = () => {
                 logo: blocks,
               },
               {
-                title: getDisplayShortHash(transactionData.block?.hash || ''),
-                to: getBlockDetailPageUrl(transactionData.block?.hash),
+                title: getDisplayShortHash(mainBlock?.hash || ''),
+                to: getBlockDetailPageUrl(mainBlock?.hash),
                 logo: blocks,
               },
               {
@@ -122,7 +125,7 @@ const TransactionDetailPage = () => {
             ))}
           {transactionData && (
             <InformationPanel
-              blockHash={transactionData.block?.hash}
+              blockHash={mainBlock?.hash}
               transactionHash={hash}
               fee={getIRFAmountWithCurrency(transactionData.fee)}
               // isMinerFee={transactionData.isMinerFee}

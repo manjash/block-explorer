@@ -1,9 +1,11 @@
 import Transaction from './Transaction'
 
 export default interface Block {
+  id: number
   hash: string
   sequence: number
   previous_block_hash: string
+  main: boolean
   size: number
   difficulty: number
   transactionsCount?: number
@@ -19,11 +21,13 @@ export interface Blocks {
 export const formatFlatBlockFromJson = (data: any): Block => ({
   ...data,
   timestamp: new Date(data.timestamp),
+  transactionsCount: data.transactions_count,
 })
 
 export const formatBlockFromJson = ({ block }: any): Block => ({
   ...block,
   timestamp: new Date(block.timestamp),
+  transactionsCount: block.transactions_count,
 })
 
 export const formatBlocksFromJson = ({ data }: any): Block[] =>

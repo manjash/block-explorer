@@ -13,7 +13,7 @@ export default interface Transaction {
   timestamp?: Date
   notes: Notes
   spends: Spends
-  block?: Block
+  blocks?: Block[]
 }
 
 export type Transactions = Transaction[]

@@ -43,12 +43,18 @@ const Search = () => {
 
     setLoading(true)
 
-    const searchParams = new URLSearchParams()
-    searchParams.append('search', value.toLowerCase())
+    const blockSearchParams = new URLSearchParams({
+      search: value.toLowerCase(),
+      with_transactions: 'true',
+    })
+    const transactionSearchParams = new URLSearchParams({
+      search: value.toLowerCase(),
+      with_blocks: 'true',
+    })
 
-    const blocks = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + searchParams.toString())
+    const blocks = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + blockSearchParams.toString())
     const transactions = axios.get(
-      getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + searchParams.toString(),
+      getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + transactionSearchParams.toString(),
     )
 
     Promise.all([transactions, blocks]).then((values) => {
@@ -76,12 +82,17 @@ const Search = () => {
   }
 
   const getOptionLabel = (option: any) => {
-    if (isTransaction(option) && option.block) {
-      return `${
-        isSmallBreakpoint
-          ? getDisplayShortHash(option.hash.toUpperCase())
-          : option.hash.toUpperCase()
-      } - Block: ${option.block.sequence}`
+    if (isTransaction(option) && option.blocks) {
+      const mainBlock = option.blocks.find((block) => block.main === true)
+      if (mainBlock) {
+        return `${
+          isSmallBreakpoint
+            ? getDisplayShortHash(option.hash.toUpperCase())
+            : option.hash.toUpperCase()
+        } - Block: ${mainBlock.sequence}`
+      } else {
+        return ``
+      }
     }
 
     return `${option.sequence} - ${
@@ -115,10 +126,13 @@ const Search = () => {
       history.push(getBlockDetailPageUrl(value.hash), { update: true })
     }
 
-    if (isTransaction(value) && value.block) {
-      history.push(getTransactionDetailPageUrl(value.block.hash, value.hash), {
-        update: true,
-      })
+    if (isTransaction(value) && value.blocks) {
+      const mainBlock = value.blocks.find((block) => block.main === true)
+      if (mainBlock) {
+        history.push(getTransactionDetailPageUrl(mainBlock.hash, value.hash), {
+          update: true,
+        })
+      }
     }
   }
 
