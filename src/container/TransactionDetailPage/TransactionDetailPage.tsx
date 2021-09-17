@@ -17,10 +17,7 @@ import Meta from '../../components/Meta/Meta'
 import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
-import Transaction, {
-  // formatSearchTransactionsFromJson,
-  formatTransactionFromJson,
-} from '../../types/Transaction'
+import Transaction, { formatTransactionFromJson } from '../../types/Transaction'
 
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { RoutePath } from '../../routes/routePath'
