@@ -127,7 +127,7 @@ const TransactionDetailPage = () => {
               fee={getIRFAmountWithCurrency(transactionData.fee)}
               // isMinerFee={transactionData.isMinerFee}
               // confirmations={transactionData.confirmations}
-              timestamp={transactionData.timestamp}
+              timestamp={mainBlock?.timestamp}
               size={getDisplaySizeInBytes(transactionData.size)}
               spendsReceipts={`${transactionData.spends.length} / ${transactionData.notes.length}`}
             />
