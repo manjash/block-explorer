@@ -44,11 +44,11 @@ const Search = () => {
     setLoading(true)
 
     const blockSearchParams = new URLSearchParams({
-      search: value.toLowerCase(),
+      search: value,
       with_transactions: 'true',
     })
     const transactionSearchParams = new URLSearchParams({
-      search: value.toLowerCase(),
+      search: value,
       with_blocks: 'true',
     })
 
