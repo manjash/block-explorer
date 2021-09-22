@@ -30,7 +30,6 @@ export const formatTransactionsFromJson = (transactions: any): Transactions =>
 export const formatSearchTransactionsFromJson = (data: any): Transactions =>
   data.map((transaction: any) => ({
     ...formatTransactionFromJson(transaction),
-    // block_identifier: transaction.block.hash,
   }))
 
 export function isTransaction(x: any): x is Transaction {
