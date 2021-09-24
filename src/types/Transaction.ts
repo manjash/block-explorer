@@ -7,7 +7,6 @@ export interface Operation {}
 export default interface Transaction {
   id: number
   hash: string
-  block_id: string
   fee?: number
   size: number
   notes: Notes
