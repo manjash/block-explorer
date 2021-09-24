@@ -18,6 +18,7 @@ import { getDisplaySizeInBytes } from '../../utils/size'
 import blockRow from '../../assets/images/blockRow.svg'
 import blocksList from '../../assets/jss/components/BlocksList/blocksList'
 import BlocksListSmall from './BlocksListSmall'
+import { getDisplayShortHash } from '../../utils/string'
 
 interface Prop {
   blockList: Block[]
@@ -73,7 +74,9 @@ const BlocksList = ({ blockList }: Prop) => {
                 {getDisplaySizeInBytes(block.size)}
               </StyledTableCell>
               <StyledTableCell align='right'>{block.transactionsCount}</StyledTableCell>
-              <StyledTableCell align='left'>{block.hash.toUpperCase()}</StyledTableCell>
+              <StyledTableCell align='left'>
+                {getDisplayShortHash(block.hash.toUpperCase(), 16)}
+              </StyledTableCell>
               <StyledTableCell align='left'>
                 {getDisplayTimestamp(block.timestamp)}
               </StyledTableCell>
