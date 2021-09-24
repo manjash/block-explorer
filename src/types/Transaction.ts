@@ -21,10 +21,7 @@ export const formatTransactionFromJson = (transaction: any): Transaction => ({
   size: parseInt(transaction.size),
 })
 
-export const formatTransactionsFromJson = (transactions: any): Transactions =>
-  transactions.map((transaction: any) => formatTransactionFromJson(transaction))
-
-export const formatSearchTransactionsFromJson = (data: any): Transactions =>
+export const formatTransactionsFromJson = (data: any): Transactions =>
   data.map((transaction: any) => ({
     ...formatTransactionFromJson(transaction),
   }))

@@ -13,7 +13,7 @@ import Meta from '../../components/Meta/Meta'
 import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
-import Block, { formatFlatBlockFromJson } from '../../types/Block'
+import Block, { formatBlockFromJson } from '../../types/Block'
 
 import { RoutePath } from '../../routes/routePath'
 import blocksGray from '../../assets/images/breadcrumb/blocks-gray.svg'
@@ -41,7 +41,7 @@ const BlockDetailPage = () => {
       hash: id,
       with_transactions: true,
     },
-    formatFlatBlockFromJson,
+    (block) => formatBlockFromJson({ block }),
   )
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
