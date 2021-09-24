@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import architecture from '../../assets/images/informations/architecture.svg'
 import blocksGray from '../../assets/images/breadcrumb/blocks-gray.svg'
+import graffitiIcon from '../../assets/images/informations/graffiti.svg'
 import hashIcon from '../../assets/images/informations/hashIcon.svg'
 import reward from '../../assets/images/informations/reward.svg'
 import sizeIcon from '../../assets/images/informations/sizeIcon.svg'
@@ -22,6 +23,7 @@ interface Prop {
   confirmations?: number
   difficulty?: number
   fee?: string
+  graffiti?: string
   isMinerFee?: boolean
   blockHash?: string
   transactionHash?: string
@@ -39,6 +41,7 @@ const InformationPanel = ({
   confirmations,
   difficulty,
   fee,
+  graffiti,
   isMinerFee,
   blockHash,
   transactionHash,
@@ -77,6 +80,15 @@ const InformationPanel = ({
           title={t('app.components.informationPanel.transactionHash')}
         >
           {getDisplayShortHash(transactionHash)}
+        </Information>
+      )}
+      {graffiti && (
+        <Information
+          icon={graffitiIcon}
+          largerIcon
+          title={t('app.components.informationPanel.graffiti')}
+        >
+          {graffiti}
         </Information>
       )}
       {size && (

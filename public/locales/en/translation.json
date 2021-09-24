@@ -47,7 +47,8 @@
         "transactions": "Transactions",
         "timestamp": "Timestamp",
         "hash": "Block Hash",
-        "difficulty": "Difficulty"
+        "difficulty": "Difficulty",
+        "graffiti": "Graffiti"
       },
       "transactionslist": {
         "hash": "Hash",
@@ -67,6 +68,7 @@
         "blockId": "Block ID",
         "confirmations": "Confirmations",
         "difficulty": "Difficulty",
+        "graffiti": "Graffiti",
         "minerFee": "Miner fee",
         "fee": "Fee",
         "hash": "Hash",

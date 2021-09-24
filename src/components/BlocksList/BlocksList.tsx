@@ -51,6 +51,9 @@ const BlocksList = ({ blockList }: Prop) => {
             <StyledTableCell align='left'>
               {t('app.components.blockslist.timestamp')}
             </StyledTableCell>
+            <StyledTableCell align='left'>
+              {t('app.components.blockslist.graffiti')}
+            </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -74,6 +77,7 @@ const BlocksList = ({ blockList }: Prop) => {
               <StyledTableCell align='left'>
                 {getDisplayTimestamp(block.timestamp)}
               </StyledTableCell>
+              <StyledTableCell align='left'>{block.graffiti}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

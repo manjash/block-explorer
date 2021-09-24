@@ -16,7 +16,7 @@ import { ServiceState } from '../../types/Service'
 import Block, { formatFlatBlockFromJson } from '../../types/Block'
 
 import { RoutePath } from '../../routes/routePath'
-import { getDisplaySizeInBytes } from '../../utils/size'
+// import { getDisplaySizeInBytes } from '../../utils/size'
 import blocksGray from '../../assets/images/breadcrumb/blocks-gray.svg'
 import blocks from '../../assets/images/breadcrumb/blocks.svg'
 import { getDisplayShortHash } from '../../utils/string'
@@ -86,7 +86,7 @@ const BlockDetailPage = () => {
             <InformationPanel
               height={blockData.sequence}
               blockHash={blockData.hash}
-              size={getDisplaySizeInBytes(blockData.size)}
+              graffiti={blockData.graffiti}
               transactions={blockData.transactions.length}
               difficulty={blockData.difficulty}
               timestamp={blockData.timestamp}
