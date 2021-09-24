@@ -10,7 +10,6 @@ export default interface Transaction {
   block_id: string
   fee?: number
   size: number
-  timestamp?: Date
   notes: Notes
   spends: Spends
   blocks?: Block[]
@@ -21,7 +20,6 @@ export type Transactions = Transaction[]
 export const formatTransactionFromJson = (transaction: any): Transaction => ({
   ...transaction,
   size: parseInt(transaction.size),
-  timestamp: new Date(transaction.timestamp),
 })
 
 export const formatTransactionsFromJson = (transactions: any): Transactions =>
