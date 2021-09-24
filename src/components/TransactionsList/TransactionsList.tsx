@@ -20,7 +20,6 @@ import BoxWrapper from '../BoxWrapper/BoxWrapper'
 import transactionIcon from '../../assets/images/breadcrumb/transaction.svg'
 import transactionsList from '../../assets/jss/components/TransactionsList/transactionsList'
 import TransactionsListSmall from './TransactionsListSmall'
-// import TransactionChip from '../TransactionChip/TransactionChip'
 
 interface Prop {
   transactions: Transactions
@@ -64,9 +63,7 @@ const TransactionsList = (props: Prop) => {
                     </div>
                   </Link>
                 </StyledTableCell>
-                <StyledTableCell align='right'>
-                  {/* {transaction.isMinerFee && <TransactionChip />} */}
-                </StyledTableCell>
+                <StyledTableCell align='right'></StyledTableCell>
                 <StyledTableCell align='right'>
                   {getIRFAmountWithCurrency(transaction.fee)}
                 </StyledTableCell>
