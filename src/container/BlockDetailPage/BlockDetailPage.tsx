@@ -19,7 +19,7 @@ import { RoutePath } from '../../routes/routePath'
 // import { getDisplaySizeInBytes } from '../../utils/size'
 import blocksGray from '../../assets/images/breadcrumb/blocks-gray.svg'
 import blocks from '../../assets/images/breadcrumb/blocks.svg'
-import { getDisplayShortHash } from '../../utils/string'
+import { getDisplayShortHash, trunacteGraffitiToLimit } from '../../utils/string'
 
 type ParamTypes = {
   id: string
@@ -86,7 +86,7 @@ const BlockDetailPage = () => {
             <InformationPanel
               height={blockData.sequence}
               blockHash={blockData.hash}
-              graffiti={blockData.graffiti}
+              graffiti={trunacteGraffitiToLimit(blockData.graffiti)}
               transactions={blockData.transactions.length}
               difficulty={blockData.difficulty}
               timestamp={blockData.timestamp}
