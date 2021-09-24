@@ -31,7 +31,6 @@ import { getDisplayShortHash } from '../../utils/string'
 import blocks from '../../assets/images/breadcrumb/blocks.svg'
 import transaction from '../../assets/images/breadcrumb/transaction-gray.svg'
 import Container from '../../components/Container/Container'
-// import TransactionChip from '../../components/TransactionChip/TransactionChip'
 
 interface ParamTypes {
   blockHash: string
@@ -46,10 +45,6 @@ const TransactionDetailPage = () => {
 
   // if we are coming from a block, we know the block hash and the transaction hash to query the transaction API
   // if we just have the transaction hash, we need to query the search API to find the transactions
-  // const api = queryBlockHash ? ApiUrls.BLOCK_TRANSACTION_PAGE : ApiUrls.SEARCH_TRANSACTIONS
-  // const api = ApiUrls.TRANSACTION_DETAIL_PAGE
-  // const params = { hash: hash.toLowerCase(), with_block: true }
-  // const format = formatTransactionFromJson
   const service = useGetService<Transaction>(
     getApiUrl(ApiUrls.TRANSACTION_DETAIL_PAGE),
     {
@@ -63,11 +58,7 @@ const TransactionDetailPage = () => {
   const mainBlock = transactionData
     ? transactionData.blocks?.find((block) => block.main === true)
     : undefined
-  // const transactionData = Array.isArray(serviceResult)
-  //   ? serviceResult.length > 0
-  //     ? serviceResult[0]
-  //     : null
-  //   : serviceResult
+
   const metaVariables = {
     blockHash: transactionData ? `${mainBlock?.hash}` : '',
     hash: transactionData ? transactionData.hash : '',
@@ -104,14 +95,7 @@ const TransactionDetailPage = () => {
         <BoxWrapper
           marginBottom={2}
           isLoading={service.status === ServiceState.LOADING}
-          header={
-            <span>
-              {t('app.transactionDetailPage.information.title')}{' '}
-              {/* {transactionData && transactionData.metadata.isMinerFee && (
-                <TransactionChip inline />
-              )} */}
-            </span>
-          }
+          header={<span>{t('app.transactionDetailPage.information.title')} </span>}
         >
           {service.status === ServiceState.ERROR ||
             (!transactionData && (
@@ -125,8 +109,6 @@ const TransactionDetailPage = () => {
               blockHash={mainBlock?.hash}
               transactionHash={hash}
               fee={getIRFAmountWithCurrency(transactionData.fee)}
-              // isMinerFee={transactionData.isMinerFee}
-              // confirmations={transactionData.confirmations}
               timestamp={mainBlock?.timestamp}
               size={getDisplaySizeInBytes(transactionData.size)}
               spendsReceipts={`${transactionData.spends.length} / ${transactionData.notes.length}`}
