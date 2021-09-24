@@ -79,7 +79,7 @@ const Explorer = () => {
             ...prevState,
             status: ServiceState.LOADED,
             blocks: [...prevState.blocks, ...formatBlocksFromJson(response.data)],
-            after: blocksArray[blocksArray.length - 1].id,
+            after: blocksArray[blocksArray.length - 1]?.id,
             hasMoreItems: response.data.metadata.has_next ? true : false,
           }
           saveToLocalStorage(LOCAL_STORAGE_KEY, newState)
