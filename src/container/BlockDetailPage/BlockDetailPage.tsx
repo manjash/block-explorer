@@ -16,10 +16,9 @@ import { ServiceState } from '../../types/Service'
 import Block, { formatBlockFromJson } from '../../types/Block'
 
 import { RoutePath } from '../../routes/routePath'
-import { getDisplaySizeInBytes } from '../../utils/size'
 import blocksGray from '../../assets/images/breadcrumb/blocks-gray.svg'
 import blocks from '../../assets/images/breadcrumb/blocks.svg'
-import { getDisplayShortHash } from '../../utils/string'
+import { getDisplayShortHash, truncateGraffitiToLimit } from '../../utils/string'
 
 type ParamTypes = {
   id: string
@@ -47,7 +46,7 @@ const BlockDetailPage = () => {
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
   if (!blockData) return null
-  const { sequence, hash, transactions, size, difficulty, timestamp } = blockData
+  const { sequence, hash, transactions, graffiti, difficulty, timestamp } = blockData
   const metaVariables = {
     id: sequence,
     hash: hash,
@@ -86,7 +85,7 @@ const BlockDetailPage = () => {
             <InformationPanel
               height={sequence}
               blockHash={hash}
-              size={getDisplaySizeInBytes(size)}
+              graffiti={truncateGraffitiToLimit(graffiti)}
               transactions={transactions.length}
               difficulty={difficulty}
               timestamp={timestamp}
