@@ -27,7 +27,7 @@ const BlocksList = ({ blockList }: Prop) => {
     <>
       {blockList.map((block, index) => (
         <div
-          key={block.block_identifier.index}
+          key={block.sequence}
           className={classNames(classes.item, {
             [classes.firstItem]: index === 0,
           })}
@@ -35,12 +35,9 @@ const BlocksList = ({ blockList }: Prop) => {
           <div className={classes.content}>
             <Typography variant='subtitle2'>{t('app.components.blockslist.height')}</Typography>
             <Typography variant='body1'>
-              <Link
-                className={classes.link}
-                to={getBlockDetailPageUrl(block.block_identifier.hash)}
-              >
+              <Link className={classes.link} to={getBlockDetailPageUrl(block.hash)}>
                 <img src={blockRow} alt='' role='presentation' />
-                {block.block_identifier.index}
+                {block.sequence}
               </Link>
             </Typography>
           </div>
@@ -48,28 +45,23 @@ const BlocksList = ({ blockList }: Prop) => {
             <Typography variant='subtitle2'>
               {t('app.components.blockslist.difficulty')}
             </Typography>
-            <Typography variant='body1'>{block.metadata.difficulty}</Typography>
+            <Typography variant='body1'>{block.difficulty}</Typography>
           </div>
           <div className={classes.content}>
             <Typography variant='subtitle2'>{t('app.components.blockslist.size')}</Typography>
-            <Typography variant='body1'>
-              {getDisplaySizeInBytes(block.metadata.size)}
-            </Typography>
+            <Typography variant='body1'>{getDisplaySizeInBytes(block.size)}</Typography>
           </div>
           <div className={classes.content}>
             <Typography variant='subtitle2'>
               {t('app.components.blockslist.transactions')}
             </Typography>
-            <Typography variant='body1'>{block.metadata.transactionsCount}</Typography>
+            <Typography variant='body1'>{block.transactionsCount}</Typography>
           </div>
           <div className={classes.content}>
             <Typography variant='subtitle2'>{t('app.components.blockslist.hash')}</Typography>
             <Typography variant='body1'>
-              <Link
-                className={classes.link}
-                to={getBlockDetailPageUrl(block.block_identifier.hash)}
-              >
-                {getDisplayShortHash(block.block_identifier.hash)}
+              <Link className={classes.link} to={getBlockDetailPageUrl(block.hash)}>
+                {getDisplayShortHash(block.hash)}
               </Link>
             </Typography>
           </div>

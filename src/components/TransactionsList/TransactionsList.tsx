@@ -20,7 +20,6 @@ import BoxWrapper from '../BoxWrapper/BoxWrapper'
 import transactionIcon from '../../assets/images/breadcrumb/transaction.svg'
 import transactionsList from '../../assets/jss/components/TransactionsList/transactionsList'
 import TransactionsListSmall from './TransactionsListSmall'
-import TransactionChip from '../TransactionChip/TransactionChip'
 
 interface Prop {
   transactions: Transactions
@@ -55,28 +54,21 @@ const TransactionsList = (props: Prop) => {
           </TableHead>
           <TableBody>
             {transactions.map((transaction) => (
-              <StyledTableRow key={transaction.transaction_identifier.hash}>
+              <StyledTableRow key={transaction.hash}>
                 <StyledTableCell scope='row'>
-                  <Link
-                    to={getTransactionDetailPageUrl(
-                      blockHash,
-                      transaction.transaction_identifier.hash,
-                    )}
-                  >
+                  <Link to={getTransactionDetailPageUrl(blockHash, transaction.hash)}>
                     <div className={classes.root}>
                       <img src={transactionIcon} role='presentation' />
-                      {transaction.transaction_identifier.hash}
+                      {transaction.hash.toUpperCase()}
                     </div>
                   </Link>
                 </StyledTableCell>
+                <StyledTableCell align='right'></StyledTableCell>
                 <StyledTableCell align='right'>
-                  {transaction.metadata.isMinerFee && <TransactionChip />}
+                  {getIRFAmountWithCurrency(transaction.fee)}
                 </StyledTableCell>
                 <StyledTableCell align='right'>
-                  {getIRFAmountWithCurrency(transaction.metadata.fee)}
-                </StyledTableCell>
-                <StyledTableCell align='right'>
-                  {getDisplaySizeInBytes(transaction.metadata.size)}
+                  {getDisplaySizeInBytes(transaction.size)}
                 </StyledTableCell>
               </StyledTableRow>
             ))}

@@ -14,7 +14,6 @@ import { getIRFAmountWithCurrency } from '../../utils/currency'
 import { getTransactionDetailPageUrl } from '../../utils/routes'
 import { getDisplayShortHash } from '../../utils/string'
 import BoxWrapper from '../BoxWrapper/BoxWrapper'
-import TransactionChip from '../TransactionChip/TransactionChip'
 
 interface Prop {
   transactions: Transactions
@@ -30,31 +29,22 @@ const TransactionsListSmall = ({ blockHash, transactions }: Prop) => {
     <BoxWrapper header={t('app.transactionsContainer.title')}>
       {transactions.map((transaction, index) => (
         <div
-          key={transaction.transaction_identifier.hash}
+          key={transaction.hash}
           className={classNames(classes.item, {
             [classes.firstItem]: index === 0,
           })}
         >
           <div className={classes.content}>
-            {transaction.metadata.isMinerFee && (
-              <div className={classes.chip}>
-                <TransactionChip />
-              </div>
-            )}
-
             <Typography variant='subtitle2'>
               {t('app.components.transactionslist.hash')}
             </Typography>
             <Typography variant='body1'>
               <Link
                 className={classes.link}
-                to={getTransactionDetailPageUrl(
-                  blockHash,
-                  transaction.transaction_identifier.hash,
-                )}
+                to={getTransactionDetailPageUrl(blockHash, transaction.hash)}
               >
                 <img src={transactionIcon} role='presentation' />
-                {getDisplayShortHash(transaction.transaction_identifier.hash)}
+                {getDisplayShortHash(transaction.hash)}
               </Link>
             </Typography>
           </div>
@@ -62,17 +52,13 @@ const TransactionsListSmall = ({ blockHash, transactions }: Prop) => {
             <Typography variant='subtitle2'>
               {t('app.components.transactionslist.fee')}
             </Typography>
-            <Typography variant='body1'>
-              {getIRFAmountWithCurrency(transaction.metadata.fee)}
-            </Typography>
+            <Typography variant='body1'>{getIRFAmountWithCurrency(transaction.fee)}</Typography>
           </div>
           <div className={classes.content}>
             <Typography variant='subtitle2'>
               {t('app.components.transactionslist.bytes')}
             </Typography>
-            <Typography variant='body1'>
-              {getDisplaySizeInBytes(transaction.metadata.size)}
-            </Typography>
+            <Typography variant='body1'>{getDisplaySizeInBytes(transaction.size)}</Typography>
           </div>
         </div>
       ))}

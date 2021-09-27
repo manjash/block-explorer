@@ -29,46 +29,47 @@ const BlockDetailPage = () => {
   const { t } = useTranslation()
   const { id } = useParams<ParamTypes>()
 
-  const blockIdentifier = {} as { hash?: string; index?: number }
+  const blockIdentifier = {} as { hash?: string; sequence?: number }
   if (Number.isNaN(Number(id))) {
     blockIdentifier.hash = id
   } else {
-    blockIdentifier.index = Number(id)
+    blockIdentifier.sequence = Number(id)
   }
 
   const service = useGetService<Block>(
     getApiUrl(ApiUrls.BLOCK_DETAIL_PAGE),
     {
-      block_identifier: blockIdentifier,
+      hash: id,
+      with_transactions: true,
     },
-    formatBlockFromJson,
+    (block) => formatBlockFromJson({ block }),
   )
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
+  if (!blockData) return null
+  const { sequence, hash, transactions, size, difficulty, timestamp } = blockData
   const metaVariables = {
-    id: blockData ? `${blockData.block_identifier.index}` : '',
-    hash: blockData ? blockData.block_identifier.hash : '',
+    id: sequence,
+    hash: hash,
   }
 
   return (
     <Container>
-      {blockData && <Meta path={RoutePath.BlockDetailPage} variables={metaVariables} />}
+      <Meta path={RoutePath.BlockDetailPage} variables={metaVariables} />
 
-      {blockData && (
-        <Breadcrumb
-          paths={[
-            {
-              title: t('app.components.breadcrumb.explorer'),
-              to: RoutePath.Explorer,
-              logo: blocks,
-            },
-            {
-              title: getDisplayShortHash(blockData.block_identifier.hash || ''),
-              logo: blocksGray,
-            },
-          ]}
-        />
-      )}
+      <Breadcrumb
+        paths={[
+          {
+            title: t('app.components.breadcrumb.explorer'),
+            to: RoutePath.Explorer,
+            logo: blocks,
+          },
+          {
+            title: getDisplayShortHash(blockData.hash || ''),
+            logo: blocksGray,
+          },
+        ]}
+      />
 
       <BoxWrapper
         isLoading={service.status === ServiceState.LOADING}
@@ -81,24 +82,21 @@ const BlockDetailPage = () => {
           />
         )}
         <div>
-          {blockData && (
+          {transactions && (
             <InformationPanel
-              height={blockData.block_identifier.index}
-              blockHash={blockData.block_identifier.hash}
-              size={getDisplaySizeInBytes(blockData.metadata.size)}
-              transactions={blockData.transactions.length}
-              difficulty={blockData.metadata.difficulty}
-              timestamp={blockData.timestamp}
+              height={sequence}
+              blockHash={hash}
+              size={getDisplaySizeInBytes(size)}
+              transactions={transactions.length}
+              difficulty={difficulty}
+              timestamp={timestamp}
             />
           )}
         </div>
       </BoxWrapper>
 
-      {blockData && blockData.transactions.length > 0 && (
-        <TransactionsList
-          transactions={blockData.transactions}
-          blockHash={blockData.block_identifier.hash}
-        />
+      {transactions && transactions.length > 0 && (
+        <TransactionsList transactions={transactions} blockHash={hash} />
       )}
     </Container>
   )

@@ -15,7 +15,6 @@ import Container from '../../components/Container/Container'
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
 import { getFromLocalStorage, saveToLocalStorage } from '../../utils/persistedStorage'
 
-import { networkIdentifier } from '../../config'
 import useInfiniteScroll, { DoneFunction } from '../../hooks/useInfiniteScroll'
 import { RoutePath } from '../../routes/routePath'
 import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
@@ -38,6 +37,7 @@ const Explorer = () => {
     error: null,
     blocks: [] as Block[],
     seek: 0,
+    after: 0,
     hasMoreItems: true,
   }
 
@@ -64,25 +64,28 @@ const Explorer = () => {
 
   function fetchMoreListItems(done: DoneFunction) {
     axios
-      .post(getApiUrl(ApiUrls.SEARCH_BLOCKS), {
-        network_identifier: networkIdentifier,
-        limit: 20,
-        seek: result.seek,
-      })
+      .get(
+        getApiUrl(ApiUrls.SEARCH_BLOCKS) +
+          new URLSearchParams({
+            limit: '20',
+            after: result.after,
+          }).toString(),
+      )
       .then((response) => {
         setResult((prevState: any) => {
+          const blocksArray = response.data.data
           const newState = {
             ...prevState,
             status: ServiceState.LOADED,
             blocks: [...prevState.blocks, ...formatBlocksFromJson(response.data)],
-            seek: response.data.next_offset,
-            hasMoreItems: response.data.next_offset ? true : false,
+            after: blocksArray[blocksArray.length - 1]?.id,
+            hasMoreItems: response.data.metadata.has_next ? true : false,
           }
           saveToLocalStorage(LOCAL_STORAGE_KEY, newState)
           return newState
         })
 
-        done(!response.data.next_offset)
+        done(!response.data.metadata.has_next)
       })
       .catch((error) => {
         saveToLocalStorage(LOCAL_STORAGE_KEY, null)

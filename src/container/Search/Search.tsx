@@ -9,16 +9,12 @@ import Autocomplete, { AutocompleteRenderGroupParams } from '@material-ui/lab/Au
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import searchIcon from '../../assets/images/search.svg'
-import { networkIdentifier } from '../../config'
 import searchStyle from '../../assets/jss/containers/searchStyle'
 import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
 import Block, { isBlock, formatBlocksFromJson } from '../../types/Block'
 import { getBlockDetailPageUrl, getTransactionDetailPageUrl } from '../../utils/routes'
 import { getDisplayShortHash } from '../../utils/string'
-import Transaction, {
-  isTransaction,
-  formatSearchTransactionsFromJson,
-} from '../../types/Transaction'
+import Transaction, { isTransaction, formatTransactionsFromJson } from '../../types/Transaction'
 import classNames from 'classnames'
 import { Typography } from '@material-ui/core'
 
@@ -43,29 +39,33 @@ const Search = () => {
 
     setLoading(true)
 
-    const blocks = axios.post(getApiUrl(ApiUrls.SEARCH_BLOCKS), {
-      network_identifier: networkIdentifier,
-      limit: 8,
-      query: value.toUpperCase(),
+    const blockSearchParams = new URLSearchParams({
+      search: value,
+      with_transactions: 'true',
+    })
+    const transactionSearchParams = new URLSearchParams({
+      search: value,
+      with_blocks: 'true',
     })
 
-    const transactions = axios.post(getApiUrl(ApiUrls.SEARCH_TRANSACTIONS), {
-      network_identifier: networkIdentifier,
-      limit: 5,
-      transaction_identifier: { hash: value.toUpperCase() },
-    })
+    const blocks = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + blockSearchParams.toString())
+    const transactions = axios.get(
+      getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + transactionSearchParams.toString(),
+    )
 
     Promise.all([transactions, blocks]).then((values) => {
       let transactions: Transaction[] = []
       let blocks: Block[] = []
 
       for (let i = 0; i < values.length; i++) {
-        const { data } = values[i]
-        if (data && data.transactions) {
-          transactions = formatSearchTransactionsFromJson(data)
-        }
-        if (data && data.blocks) {
-          blocks = formatBlocksFromJson(data)
+        const { data } = values[i].data
+        const first = data[0]
+        if (first) {
+          if (first.object === 'transaction') {
+            transactions = formatTransactionsFromJson(data)
+          } else if (first.object === 'block') {
+            blocks = formatBlocksFromJson({ data })
+          }
         }
       }
 
@@ -80,19 +80,18 @@ const Search = () => {
   }
 
   const getOptionLabel = (option: any) => {
-    if (isTransaction(option)) {
-      return `${
-        isSmallBreakpoint
-          ? getDisplayShortHash(option.transaction_identifier.hash)
-          : option.transaction_identifier.hash
-      } - Block: ${option.block_identifier?.index}`
+    const hash = option.hash.toUpperCase()
+    const shortHash = isSmallBreakpoint ? getDisplayShortHash(hash) : hash
+    if (isTransaction(option) && option.blocks) {
+      const mainBlock = option.blocks.find(({ main }) => main)
+      if (mainBlock) {
+        return `${shortHash} - Block: ${mainBlock.sequence}`
+      } else {
+        return ``
+      }
     }
 
-    return `${option.block_identifier.index} - ${
-      isSmallBreakpoint
-        ? getDisplayShortHash(option.block_identifier.hash)
-        : option.block_identifier.hash
-    }`
+    return `${option.sequence} - ${shortHash}`
   }
 
   const getOptionSelected = (
@@ -100,11 +99,11 @@ const Search = () => {
     value: Block | Transaction,
   ): boolean => {
     if (isBlock(option) && isBlock(value)) {
-      return option.block_identifier.hash === value.block_identifier.hash
+      return option.hash === value.hash
     }
 
     if (isTransaction(option) && isTransaction(value)) {
-      return option.transaction_identifier.hash === value.transaction_identifier.hash
+      return option.hash === value.hash
     }
 
     return false
@@ -116,19 +115,16 @@ const Search = () => {
     }
 
     if (isBlock(value)) {
-      history.push(getBlockDetailPageUrl(value.block_identifier.index), { update: true })
+      history.push(getBlockDetailPageUrl(value.hash), { update: true })
     }
 
-    if (isTransaction(value)) {
-      history.push(
-        getTransactionDetailPageUrl(
-          value.block_identifier?.hash,
-          value.transaction_identifier.hash,
-        ),
-        {
+    if (isTransaction(value) && value.blocks) {
+      const mainBlock = value.blocks.find((block) => block.main === true)
+      if (mainBlock) {
+        history.push(getTransactionDetailPageUrl(mainBlock.hash, value.hash), {
           update: true,
-        },
-      )
+        })
+      }
     }
   }
 

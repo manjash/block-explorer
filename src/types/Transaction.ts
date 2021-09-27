@@ -1,43 +1,31 @@
-import { BlockIdentifier } from './Block'
+import Block from './Block'
 import { Notes } from './Note'
 import { Spends } from './Spend'
 
 export interface Operation {}
 
 export default interface Transaction {
-  block_identifier?: BlockIdentifier
-  confirmations?: number
-  transaction_identifier: {
-    hash: string
-  }
-  operations: Array<Operation>
-  metadata: {
-    notes: Notes
-    spends: Spends
-    size: number
-    fee?: number
-    isMinerFee?: boolean
-  }
-  timestamp?: Date
+  id: number
+  hash: string
+  fee?: number
+  size: number
+  notes: Notes
+  spends: Spends
+  blocks?: Block[]
 }
 
 export type Transactions = Transaction[]
 
-export const formatTransactionFromJson = ({ transaction }: any): Transaction => ({
+export const formatTransactionFromJson = (transaction: any): Transaction => ({
   ...transaction,
-  size: parseInt(transaction.metadata.size),
-  timestamp: new Date(transaction.metadata.timestamp),
+  size: parseInt(transaction.size),
 })
 
-export const formatTransactionsFromJson = (transactions: any): Transactions =>
-  transactions.map((transaction: any) => formatTransactionFromJson(transaction))
-
-export const formatSearchTransactionsFromJson = (searchTransactions: any): Transactions =>
-  searchTransactions.transactions.map((transaction: any) => ({
+export const formatTransactionsFromJson = (data: any): Transactions =>
+  data.map((transaction: any) => ({
     ...formatTransactionFromJson(transaction),
-    block_identifier: transaction.block_identifier,
   }))
 
 export function isTransaction(x: any): x is Transaction {
-  return typeof x === 'object' && 'transaction_identifier' in x
+  return typeof x === 'object' && 'notes' in x && 'spends' in x
 }

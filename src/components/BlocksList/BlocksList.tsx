@@ -57,22 +57,20 @@ const BlocksList = ({ blockList }: Prop) => {
           {blockList.map((block: Block) => (
             <StyledTableRow
               className={classes.row}
-              onClick={() => history.push(getBlockDetailPageUrl(block.block_identifier.hash))}
-              key={String(block.block_identifier.hash)}
+              onClick={() => history.push(getBlockDetailPageUrl(block.hash))}
+              key={String(block.hash)}
             >
               <StyledTableCell scope='row'>
                 <span className={classes.root}>
                   <img src={blockRow} role='presentation' alt='' />
-                  {block.block_identifier.index}
+                  {block.sequence}
                 </span>
               </StyledTableCell>
               <StyledTableCell align='right'>
-                {getDisplaySizeInBytes(block.metadata.size)}
+                {getDisplaySizeInBytes(block.size)}
               </StyledTableCell>
-              <StyledTableCell align='right'>
-                {block.metadata.transactionsCount}
-              </StyledTableCell>
-              <StyledTableCell align='left'>{block.block_identifier.hash}</StyledTableCell>
+              <StyledTableCell align='right'>{block.transactionsCount}</StyledTableCell>
+              <StyledTableCell align='left'>{block.hash.toUpperCase()}</StyledTableCell>
               <StyledTableCell align='left'>
                 {getDisplayTimestamp(block.timestamp)}
               </StyledTableCell>

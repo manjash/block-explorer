@@ -14,29 +14,19 @@ describe('<TransactionsList />', () => {
         blockHash='test'
         transactions={[
           {
-            transaction_identifier: {
-              hash: '041e4a5c6fe659fds31f087059a2db6be65928765899b6110127ce169e4edfb',
-            },
-            metadata: {
-              size: 1156,
-              spends: [],
-              notes: [],
-            },
-            operations: [],
+            id: 1,
+            hash: '041e4a5c6fe659fds31f087059a2db6be65928765899b6110127ce169e4edfb',
+            size: 1156,
+            spends: [],
+            notes: [],
             fee: 0.03283901,
-            timestamp: new Date(),
           },
           {
-            transaction_identifier: {
-              hash: '042e4a5c6fe6591sf0f0f087059a2db6be65928765899b6110127ce169e4edfb',
-            },
-            metadata: {
-              size: 1156,
-              spends: [],
-              notes: [],
-            },
-            operations: [],
-            timestamp: new Date(),
+            id: 2,
+            hash: '042e4a5c6fe6591sf0f0f087059a2db6be65928765899b6110127ce169e4edfb',
+            size: 1156,
+            spends: [],
+            notes: [],
             fee: 0.01083901,
           },
         ]}

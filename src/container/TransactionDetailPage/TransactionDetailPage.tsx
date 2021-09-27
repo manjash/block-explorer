@@ -17,10 +17,7 @@ import Meta from '../../components/Meta/Meta'
 import { ApiUrls, getApiUrl } from '../../services/servicesUrls'
 import useGetService from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
-import Transaction, {
-  formatSearchTransactionsFromJson,
-  formatTransactionFromJson,
-} from '../../types/Transaction'
+import Transaction, { formatTransactionFromJson } from '../../types/Transaction'
 
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { RoutePath } from '../../routes/routePath'
@@ -34,7 +31,6 @@ import { getDisplayShortHash } from '../../utils/string'
 import blocks from '../../assets/images/breadcrumb/blocks.svg'
 import transaction from '../../assets/images/breadcrumb/transaction-gray.svg'
 import Container from '../../components/Container/Container'
-import TransactionChip from '../../components/TransactionChip/TransactionChip'
 
 interface ParamTypes {
   blockHash: string
@@ -44,96 +40,76 @@ interface ParamTypes {
 const useStyles = makeStyles(transactionDetailPageStyle)
 const TransactionDetailPage = () => {
   const { t } = useTranslation()
-  const { blockHash: queryBlockHash, hash } = useParams<ParamTypes>()
+  const { hash } = useParams<ParamTypes>()
   const classes = useStyles()
 
   // if we are coming from a block, we know the block hash and the transaction hash to query the transaction API
   // if we just have the transaction hash, we need to query the search API to find the transactions
-  const api = queryBlockHash ? ApiUrls.BLOCK_TRANSACTION_PAGE : ApiUrls.SEARCH_TRANSACTIONS
-  const params = queryBlockHash
-    ? {
-        block_identifier: {
-          index: 0,
-          hash: queryBlockHash,
-        },
-        transaction_identifier: {
-          hash: hash.toUpperCase(),
-        },
-      }
-    : {
-        transaction_identifier: {
-          hash: hash.toUpperCase(),
-        },
-      }
-  const format = queryBlockHash ? formatTransactionFromJson : formatSearchTransactionsFromJson
-  const service = useGetService<Transaction>(getApiUrl(api), params, format)
+  const service = useGetService<Transaction>(
+    getApiUrl(ApiUrls.TRANSACTION_DETAIL_PAGE),
+    {
+      hash,
+      with_blocks: true,
+    },
+    formatTransactionFromJson,
+  )
 
-  const serviceResult = service.status === ServiceState.LOADED && service.payload.result
-  const transactionData = Array.isArray(serviceResult)
-    ? serviceResult.length > 0
-      ? serviceResult[0]
-      : null
-    : serviceResult
-  const blockHash = queryBlockHash || transactionData?.block_identifier?.hash
-  const metaVariables = { blockHash, hash }
+  const transactionData = service.status === ServiceState.LOADED && service.payload.result
+  const mainBlock = transactionData
+    ? transactionData.blocks?.find(({ main }) => main)
+    : undefined
+
+  if (service.status === ServiceState.ERROR || !mainBlock || !transactionData) {
+    return (
+      <Error404
+        title={t('app.transactionDetailPage.information.error.title')}
+        description={t('app.transactionDetailPage.information.error.description')}
+      />
+    )
+  }
+
+  const metaVariables = {
+    blockHash: mainBlock.hash,
+    hash: transactionData.hash,
+  }
 
   return (
     <>
       <Container>
-        {transactionData && (
-          <Meta path={RoutePath.TransactionDetailPage} variables={metaVariables} />
-        )}
+        <Meta path={RoutePath.TransactionDetailPage} variables={metaVariables} />
 
-        {transactionData && (
-          <Breadcrumb
-            paths={[
-              {
-                title: t('app.components.breadcrumb.explorer'),
-                to: RoutePath.Explorer,
-                logo: blocks,
-              },
-              {
-                title: getDisplayShortHash(blockHash || ''),
-                to: getBlockDetailPageUrl(blockHash),
-                logo: blocks,
-              },
-              {
-                title: getDisplayShortHash(transactionData.transaction_identifier.hash || ''),
-                logo: transaction,
-              },
-            ]}
-          />
-        )}
+        <Breadcrumb
+          paths={[
+            {
+              title: t('app.components.breadcrumb.explorer'),
+              to: RoutePath.Explorer,
+              logo: blocks,
+            },
+            {
+              title: getDisplayShortHash(mainBlock.hash),
+              to: getBlockDetailPageUrl(mainBlock.hash),
+              logo: blocks,
+            },
+            {
+              title: getDisplayShortHash(transactionData.hash),
+              logo: transaction,
+            },
+          ]}
+        />
 
         <BoxWrapper
           marginBottom={2}
           isLoading={service.status === ServiceState.LOADING}
-          header={
-            <span>
-              {t('app.transactionDetailPage.information.title')}{' '}
-              {transactionData && transactionData.metadata.isMinerFee && (
-                <TransactionChip inline />
-              )}
-            </span>
-          }
+          header={<span>{t('app.transactionDetailPage.information.title')} </span>}
         >
-          {service.status === ServiceState.ERROR ||
-            (serviceResult && !transactionData && (
-              <Error404
-                title={t('app.transactionDetailPage.information.error.title')}
-                description={t('app.transactionDetailPage.information.error.description')}
-              />
-            ))}
           {transactionData && (
             <InformationPanel
-              blockHash={blockHash}
+              blockHash={mainBlock.hash}
               transactionHash={hash}
-              fee={getIRFAmountWithCurrency(transactionData.metadata.fee)}
-              isMinerFee={transactionData.metadata.isMinerFee}
-              confirmations={transactionData.confirmations}
-              timestamp={transactionData.timestamp}
-              size={getDisplaySizeInBytes(transactionData.metadata.size)}
-              spendsReceipts={`${transactionData.metadata.spends.length} / ${transactionData.metadata.notes.length}`}
+              fee={getIRFAmountWithCurrency(transactionData.fee)}
+              timestamp={mainBlock.timestamp}
+              size={getDisplaySizeInBytes(transactionData.size)}
+              spendsReceipts={`${transactionData.spends.length} / ${transactionData.notes.length}`}
             />
           )}
         </BoxWrapper>
@@ -158,12 +134,12 @@ const TransactionDetailPage = () => {
           <Box marginTop={2} className={classes.root}>
             <div className={classes.blocks}>
               <BoxWrapper header={t('app.transactionDetailPage.spends')}>
-                <SpendsList spends={transactionData.metadata.spends} />
+                <SpendsList spends={transactionData.spends} />
               </BoxWrapper>
             </div>
             <div className={classes.blocks}>
               <BoxWrapper header={t('app.transactionDetailPage.receipts')}>
-                <ReceiptsList notes={transactionData.metadata.notes} />
+                <ReceiptsList notes={transactionData.notes} />
               </BoxWrapper>
             </div>
           </Box>

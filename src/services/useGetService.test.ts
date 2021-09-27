@@ -34,9 +34,7 @@ describe('useGetService', () => {
       await act(async () => {
         expect(result.current.status).toEqual(ServiceState.LOADED)
         if (result.current.status === ServiceState.LOADED) {
-          expect(result.current.payload.result.block.block_identifier.index).toEqual(
-            mockedData.block_identifier.index,
-          )
+          expect(result.current.payload.result.block.sequence).toEqual(mockedData.sequence)
         }
       })
     })
@@ -59,8 +57,8 @@ describe('useGetService', () => {
       await act(async () => {
         expect(result.current.status).toEqual(ServiceState.LOADED)
         if (result.current.status === ServiceState.LOADED) {
-          expect(result.current.payload.result.block_identifier.index).toEqual(
-            `Modified through the format function ${mockedData.block_identifier.index}`,
+          expect(result.current.payload.result.sequence).toEqual(
+            `Modified through the format function ${mockedData.sequence}`,
           )
         }
       })
