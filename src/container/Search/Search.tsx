@@ -80,24 +80,18 @@ const Search = () => {
   }
 
   const getOptionLabel = (option: any) => {
+    const hash = option.hash.toUpperCase()
+    const shortHash = isSmallBreakpoint ? getDisplayShortHash(hash) : hash
     if (isTransaction(option) && option.blocks) {
-      const mainBlock = option.blocks.find((block) => block.main === true)
+      const mainBlock = option.blocks.find(({ main }) => main)
       if (mainBlock) {
-        return `${
-          isSmallBreakpoint
-            ? getDisplayShortHash(option.hash.toUpperCase())
-            : option.hash.toUpperCase()
-        } - Block: ${mainBlock.sequence}`
+        return `${shortHash} - Block: ${mainBlock.sequence}`
       } else {
         return ``
       }
     }
 
-    return `${option.sequence} - ${
-      isSmallBreakpoint
-        ? getDisplayShortHash(option.hash.toUpperCase())
-        : option.hash.toUpperCase()
-    }`
+    return `${option.sequence} - ${shortHash}`
   }
 
   const getOptionSelected = (
