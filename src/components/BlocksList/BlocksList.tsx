@@ -18,7 +18,7 @@ import { getDisplaySizeInBytes } from '../../utils/size'
 import blockRow from '../../assets/images/blockRow.svg'
 import blocksList from '../../assets/jss/components/BlocksList/blocksList'
 import BlocksListSmall from './BlocksListSmall'
-import { getDisplayShortHash, trunacteGraffitiToLimit } from '../../utils/string'
+import { getDisplayShortHash, truncateGraffitiToLimit } from '../../utils/string'
 
 interface Prop {
   blockList: Block[]
@@ -81,7 +81,7 @@ const BlocksList = ({ blockList }: Prop) => {
                 {getDisplayTimestamp(block.timestamp)}
               </StyledTableCell>
               <StyledTableCell align='left'>
-                {trunacteGraffitiToLimit(block.graffiti)}
+                {truncateGraffitiToLimit(block.graffiti)}
               </StyledTableCell>
             </StyledTableRow>
           ))}

@@ -5,7 +5,7 @@ export const getDisplayShortHash = (hash: string, number = 4): string => {
   )}`.toUpperCase()
 }
 
-export const trunacteGraffitiToLimit = (graffiti: string, number = 32): string => {
+export const truncateGraffitiToLimit = (graffiti: string, number = 32): string => {
   if (graffiti.length < number) {
     return graffiti
   } else {

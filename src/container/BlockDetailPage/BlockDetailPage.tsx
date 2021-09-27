@@ -18,7 +18,7 @@ import Block, { formatBlockFromJson } from '../../types/Block'
 import { RoutePath } from '../../routes/routePath'
 import blocksGray from '../../assets/images/breadcrumb/blocks-gray.svg'
 import blocks from '../../assets/images/breadcrumb/blocks.svg'
-import { getDisplayShortHash, trunacteGraffitiToLimit } from '../../utils/string'
+import { getDisplayShortHash, truncateGraffitiToLimit } from '../../utils/string'
 
 type ParamTypes = {
   id: string
@@ -85,7 +85,7 @@ const BlockDetailPage = () => {
             <InformationPanel
               height={blockData.sequence}
               blockHash={blockData.hash}
-              graffiti={trunacteGraffitiToLimit(blockData.graffiti)}
+              graffiti={truncateGraffitiToLimit(blockData.graffiti)}
               transactions={blockData.transactions.length}
               difficulty={blockData.difficulty}
               timestamp={blockData.timestamp}
