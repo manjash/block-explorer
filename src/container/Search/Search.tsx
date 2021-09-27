@@ -59,11 +59,13 @@ const Search = () => {
 
       for (let i = 0; i < values.length; i++) {
         const { data } = values[i].data
-        if (data[0] && data[0].object === 'transaction') {
-          transactions = formatTransactionsFromJson(data)
-        }
-        if (data[0] && data[0].object === 'block') {
-          blocks = formatBlocksFromJson({ data })
+        const first = data[0]
+        if (first) {
+          if (first.object === 'transaction') {
+            transactions = formatTransactionsFromJson(data)
+          } else if (first.object === 'block') {
+            blocks = formatBlocksFromJson({ data })
+          }
         }
       }
 
