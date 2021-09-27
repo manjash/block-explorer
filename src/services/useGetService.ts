@@ -32,7 +32,7 @@ const useGetService = <Type>(
         }),
       )
       .catch((error) => setResult({ status: ServiceState.ERROR, error }))
-  }, [url, queryString, formatFunction])
+  }, [url, queryString]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return result
 }
