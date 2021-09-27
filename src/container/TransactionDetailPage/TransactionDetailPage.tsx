@@ -56,60 +56,58 @@ const TransactionDetailPage = () => {
 
   const transactionData = service.status === ServiceState.LOADED && service.payload.result
   const mainBlock = transactionData
-    ? transactionData.blocks?.find((block) => block.main === true)
+    ? transactionData.blocks?.find(({main}) => main)
     : undefined
 
+  if (service.status === ServiceState.ERROR || !mainBlock || !transactionData) {
+    return (
+      <Error404
+        title={t('app.transactionDetailPage.information.error.title')}
+        description={t('app.transactionDetailPage.information.error.description')}
+      />
+    )
+  }
+
   const metaVariables = {
-    blockHash: transactionData ? `${mainBlock?.hash}` : '',
-    hash: transactionData ? transactionData.hash : '',
+    blockHash: mainBlock.hash,
+    hash: transactionData.hash,
   }
 
   return (
     <>
       <Container>
-        {transactionData && (
-          <Meta path={RoutePath.TransactionDetailPage} variables={metaVariables} />
-        )}
+        <Meta path={RoutePath.TransactionDetailPage} variables={metaVariables} />
 
-        {transactionData && (
-          <Breadcrumb
-            paths={[
-              {
-                title: t('app.components.breadcrumb.explorer'),
-                to: RoutePath.Explorer,
-                logo: blocks,
-              },
-              {
-                title: getDisplayShortHash(mainBlock?.hash || ''),
-                to: getBlockDetailPageUrl(mainBlock?.hash),
-                logo: blocks,
-              },
-              {
-                title: getDisplayShortHash(transactionData.hash || ''),
-                logo: transaction,
-              },
-            ]}
-          />
-        )}
+        <Breadcrumb
+          paths={[
+            {
+              title: t('app.components.breadcrumb.explorer'),
+              to: RoutePath.Explorer,
+              logo: blocks,
+            },
+            {
+              title: getDisplayShortHash(mainBlock.hash),
+              to: getBlockDetailPageUrl(mainBlock.hash),
+              logo: blocks,
+            },
+            {
+              title: getDisplayShortHash(transactionData.hash),
+              logo: transaction,
+            },
+          ]}
+        />
 
         <BoxWrapper
           marginBottom={2}
           isLoading={service.status === ServiceState.LOADING}
           header={<span>{t('app.transactionDetailPage.information.title')} </span>}
         >
-          {service.status === ServiceState.ERROR ||
-            (!transactionData && (
-              <Error404
-                title={t('app.transactionDetailPage.information.error.title')}
-                description={t('app.transactionDetailPage.information.error.description')}
-              />
-            ))}
           {transactionData && (
             <InformationPanel
-              blockHash={mainBlock?.hash}
+              blockHash={mainBlock.hash}
               transactionHash={hash}
               fee={getIRFAmountWithCurrency(transactionData.fee)}
-              timestamp={mainBlock?.timestamp}
+              timestamp={mainBlock.timestamp}
               size={getDisplaySizeInBytes(transactionData.size)}
               spendsReceipts={`${transactionData.spends.length} / ${transactionData.notes.length}`}
             />
