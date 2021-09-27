@@ -56,7 +56,7 @@ const TransactionDetailPage = () => {
 
   const transactionData = service.status === ServiceState.LOADED && service.payload.result
   const mainBlock = transactionData
-    ? transactionData.blocks?.find(({main}) => main)
+    ? transactionData.blocks?.find(({ main }) => main)
     : undefined
 
   if (service.status === ServiceState.ERROR || !mainBlock || !transactionData) {
