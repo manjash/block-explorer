@@ -42,12 +42,14 @@ const Dashboard = () => {
   }
 
   if (blockData && blockData.length > 0) {
-    metrics.transactionsCount = blockData[0].transactionsCount || null
+    const [firstBlock, secondBlock] = blockData
+    const { transactionsCount = 0, hash, sequence, difficulty } = firstBlock
+    metrics.transactionsCount = transactionsCount
     metrics.blockTime =
-      (blockData[0].timestamp.getTime() - blockData[1].timestamp.getTime()) / 1000
-    metrics.latestHash = blockData[0].hash || null
-    metrics.height = blockData[0].sequence || null
-    metrics.difficulty = blockData[0].difficulty || null
+      (firstBlock.timestamp.getTime() - secondBlock.timestamp.getTime()) / 1000
+    metrics.latestHash = hash
+    metrics.height = sequence
+    metrics.difficulty = difficulty
   }
 
   return (

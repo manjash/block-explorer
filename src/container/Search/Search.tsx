@@ -59,11 +59,13 @@ const Search = () => {
 
       for (let i = 0; i < values.length; i++) {
         const { data } = values[i].data
-        if (data[0] && data[0].object === 'transaction') {
-          transactions = formatTransactionsFromJson(data)
-        }
-        if (data[0] && data[0].object === 'block') {
-          blocks = formatBlocksFromJson({ data })
+        const first = data[0]
+        if (first) {
+          if (first.object === 'transaction') {
+            transactions = formatTransactionsFromJson(data)
+          } else if (first.object === 'block') {
+            blocks = formatBlocksFromJson({ data })
+          }
         }
       }
 
@@ -78,24 +80,18 @@ const Search = () => {
   }
 
   const getOptionLabel = (option: any) => {
+    const hash = option.hash.toUpperCase()
+    const shortHash = isSmallBreakpoint ? getDisplayShortHash(hash) : hash
     if (isTransaction(option) && option.blocks) {
-      const mainBlock = option.blocks.find((block) => block.main === true)
+      const mainBlock = option.blocks.find(({ main }) => main)
       if (mainBlock) {
-        return `${
-          isSmallBreakpoint
-            ? getDisplayShortHash(option.hash.toUpperCase())
-            : option.hash.toUpperCase()
-        } - Block: ${mainBlock.sequence}`
+        return `${shortHash} - Block: ${mainBlock.sequence}`
       } else {
         return ``
       }
     }
 
-    return `${option.sequence} - ${
-      isSmallBreakpoint
-        ? getDisplayShortHash(option.hash.toUpperCase())
-        : option.hash.toUpperCase()
-    }`
+    return `${option.sequence} - ${shortHash}`
   }
 
   const getOptionSelected = (

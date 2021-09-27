@@ -45,30 +45,30 @@ const BlockDetailPage = () => {
   )
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
+  if (!blockData) return null
+  const { sequence, hash, transactions, graffiti, difficulty, timestamp } = blockData
   const metaVariables = {
-    id: blockData ? `${blockData.sequence}` : '',
-    hash: blockData ? blockData.hash : '',
+    id: sequence,
+    hash: hash,
   }
 
   return (
     <Container>
-      {blockData && <Meta path={RoutePath.BlockDetailPage} variables={metaVariables} />}
+      <Meta path={RoutePath.BlockDetailPage} variables={metaVariables} />
 
-      {blockData && (
-        <Breadcrumb
-          paths={[
-            {
-              title: t('app.components.breadcrumb.explorer'),
-              to: RoutePath.Explorer,
-              logo: blocks,
-            },
-            {
-              title: getDisplayShortHash(blockData.hash || ''),
-              logo: blocksGray,
-            },
-          ]}
-        />
-      )}
+      <Breadcrumb
+        paths={[
+          {
+            title: t('app.components.breadcrumb.explorer'),
+            to: RoutePath.Explorer,
+            logo: blocks,
+          },
+          {
+            title: getDisplayShortHash(blockData.hash || ''),
+            logo: blocksGray,
+          },
+        ]}
+      />
 
       <BoxWrapper
         isLoading={service.status === ServiceState.LOADING}
@@ -81,21 +81,21 @@ const BlockDetailPage = () => {
           />
         )}
         <div>
-          {blockData && blockData.transactions && (
+          {transactions && (
             <InformationPanel
-              height={blockData.sequence}
-              blockHash={blockData.hash}
-              graffiti={truncateGraffitiToLimit(blockData.graffiti)}
-              transactions={blockData.transactions.length}
-              difficulty={blockData.difficulty}
-              timestamp={blockData.timestamp}
+              height={sequence}
+              blockHash={hash}
+              graffiti={truncateGraffitiToLimit(graffiti)}
+              transactions={transactions.length}
+              difficulty={difficulty}
+              timestamp={timestamp}
             />
           )}
         </div>
       </BoxWrapper>
 
-      {blockData && blockData.transactions && blockData.transactions.length > 0 && (
-        <TransactionsList transactions={blockData.transactions} blockHash={blockData.hash} />
+      {transactions && transactions.length > 0 && (
+        <TransactionsList transactions={transactions} blockHash={hash} />
       )}
     </Container>
   )
