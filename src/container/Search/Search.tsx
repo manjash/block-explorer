@@ -69,13 +69,14 @@ const Search = () => {
         }
       }
 
-      if (transactions.length > 0 || blocks.length > 0) {
+      if (transactions.length === 0 && blocks.length === 0) {
+        setLoading(false)
         setOpen(true)
+      } else {
+        setOpen(true)
+        setResult([...blocks, ...transactions])
+        setLoading(false)
       }
-
-      setResult([...blocks, ...transactions])
-
-      setLoading(false)
     })
   }
 
@@ -164,6 +165,10 @@ const Search = () => {
 
       <Autocomplete
         id='asynchronous-demo'
+        autoHighlight={true}
+        clearOnEscape={true}
+        handleHomeEndKeys={true}
+        selectOnFocus={true}
         open={open}
         onChange={onChange}
         forcePopupIcon={false}
@@ -182,7 +187,9 @@ const Search = () => {
         renderGroup={renderGroup}
         groupBy={groupBy}
         options={result}
+        noOptionsText={'No matches'}
         loading={loading}
+        loadingText={'Loading...'}
         renderInput={(params) => (
           <TextField
             {...params}

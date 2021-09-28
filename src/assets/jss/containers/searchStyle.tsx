@@ -69,7 +69,8 @@ const adStyle = (theme: Theme) =>
       },
       '& li': {
         '&[data-focus="true"]': {
-          backgroundColor: theme.palette.common.white,
+          backgroundColor: theme.palette.grey[200],
+          borderColor: 'transparent',
         },
         paddingLeft: '30px',
         backgroundPositionY: 'center',

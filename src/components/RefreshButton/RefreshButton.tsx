@@ -43,7 +43,6 @@ const RefreshButton = ({ onClick }: Prop) => {
           {t('app.navigation.refresh')}
         </StyledButton>
       )}
-      {!isVisible && null}
     </>
   )
 }
