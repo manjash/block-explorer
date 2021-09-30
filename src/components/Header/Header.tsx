@@ -19,7 +19,7 @@ const useStyles = makeStyles(headerStyle)
 const isNetworkAvailable = true
 
 // Config value for showing the "Block Explorer Unavailable" banner.
-const isExplorerAvailable = false
+const isExplorerAvailable = true
 
 interface Props {
   showSearch: Boolean
