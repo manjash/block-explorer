@@ -40,6 +40,7 @@ const Search = () => {
     setLoading(true)
 
     const blockSearchParams = new URLSearchParams({
+      main: 'true',
       search: value,
       with_transactions: 'true',
     })

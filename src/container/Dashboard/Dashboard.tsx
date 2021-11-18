@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   const service = useGetService<Block[]>(
     getApiUrl(ApiUrls.SEARCH_BLOCKS),
-    { limit: 10 },
+    { limit: 10, main: 'true' },
     formatBlocksFromJson,
   )
 
