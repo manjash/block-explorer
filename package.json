@@ -19,6 +19,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-helmet-async": "^1.0.3",
     "@types/react-router-dom": "^5.1.6",
+    "@visx/visx": "^2.5.0",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "i18next": "^19.8.3",
@@ -31,6 +32,7 @@
     "react-router-last-location": "^2.0.1",
     "react-router-scroll-top": "^0.2.1",
     "react-scripts": "4.0.1",
+    "react-spring": "^9.3.1",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4"
   },

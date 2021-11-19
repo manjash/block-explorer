@@ -4,6 +4,7 @@ import BlockDetailPage from '../container/BlockDetailPage/BlockDetailPage'
 import TransactionDetailPage from '../container/TransactionDetailPage/TransactionDetailPage'
 import Dashboard from '../container/Dashboard/Dashboard'
 import Explorer from '../container/Explorer/Explorer'
+import ChartsPage from '../container/ChartsPage/ChartsPage'
 
 import { RoutePath } from './routePath'
 
@@ -14,6 +15,11 @@ export interface RouteValidator {
 }
 
 const routes: RouteValidator[] = [
+  {
+    path: RoutePath.Charts,
+    nameKey: 'app.navigation.charts',
+    component: ChartsPage,
+  },
   {
     path: RoutePath.Explorer,
     nameKey: 'app.navigation.explorer',

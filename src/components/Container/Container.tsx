@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Box, { BoxProps } from '@material-ui/core/Box'
 
 import containerStyle from '../../assets/jss/components/Container/containerStyle'
+import Loading from '../Loading/Loading'
 
 interface Prop extends BoxProps {
   children: React.ReactNode
@@ -13,11 +14,11 @@ interface Prop extends BoxProps {
 const useStyles = makeStyles(containerStyle)
 const Container = (props: Prop) => {
   const classes = useStyles()
-  const { children, ...cssProps } = props
+  const { children, isLoading, ...cssProps } = props
 
   return (
     <Box className={classes.root} {...cssProps}>
-      {children}
+      {isLoading ? <Loading /> : children}
     </Box>
   )
 }

@@ -53,6 +53,15 @@ const adStyle = (theme: Theme) =>
     toolbar: {
       padding: 0,
     },
+    rightWrapper: {
+      display: 'flex',
+      alignItems: 'center',
+      columnGap: '12px',
+      [theme.breakpoints.down('sm')]: {
+        right: 0,
+        position: 'absolute',
+      },
+    },
     button: {
       opacity: 1,
       display: 'block',
@@ -61,8 +70,6 @@ const adStyle = (theme: Theme) =>
       [theme.breakpoints.down('sm')]: {
         width: '120px',
         fontSize: '11px',
-        right: 0,
-        position: 'absolute',
       },
     },
     logo: {
