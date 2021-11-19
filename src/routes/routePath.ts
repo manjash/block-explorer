@@ -5,4 +5,5 @@ export enum RoutePath {
   Explorer = '/explorer',
   TransactionDetailPage = '/transaction/:hash/:blockHash?',
   BlockDetailPage = '/blocks/:id',
+  Charts = '/charts',
 }

@@ -20,7 +20,8 @@
       "docs": "Developer Docs",
       "search": {
         "placeholder": "Search by block height, hash, or transaction hash"
-      }
+      },
+      "charts": "Charts"
     },
     "footer": {
       "slogan": "Iron Fish is a novel cryptocurrency focused on privacy and accessibility",
@@ -163,12 +164,25 @@
       "docs": "Developer docs",
       "ironfish": "Iron Fish",
       "blocks": "Blocks",
+      "charts": "Charts",
       "transactions": "Transactions",
       "copy": "Copy to clipboard",
       "copySuccess": "Copied {{ copyString }} to clipboard.",
       "refresh": "Refresh List",
       "takeMeHome": "Take me home",
       "minerFee": "Miner Reward + Fee"
+    },
+    "charts": {
+      "information": {
+        "error": {
+          "title": "Chart data not found",
+          "description": "The charts either swam off or we are having trouble finding them. Please try again later."
+        }
+      },
+      "meta": {
+        "title": "Charts"
+      },
+      "title": "All Charts"
     }
   }
 }

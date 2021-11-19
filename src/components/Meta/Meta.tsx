@@ -36,6 +36,11 @@ const Page: PageType = {
     description: 'app.transactionDetailPage.meta.description',
     keywords: 'app.meta.defaultKeywords',
   },
+  [RoutePath.Charts]: {
+    title: 'app.charts.meta.title',
+    description: 'app.meta.defaultDescription',
+    keywords: 'app.meta.defaultKeywords',
+  },
 }
 
 interface Prop {
