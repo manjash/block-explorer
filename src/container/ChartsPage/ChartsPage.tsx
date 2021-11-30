@@ -42,7 +42,10 @@ const ChartsPage = () => {
       end: endDateString,
       granularity: 'day',
     },
-    (data) => data.data.map((metric: any) => ({ ...metric, date: new Date(metric.date) })),
+    (data) =>
+      data.data
+        .map((metric: any) => ({ ...metric, date: new Date(metric.date) }))
+        .sort((a: any, b: any) => a.date - b.date),
   )
 
   const metricsData = service.status === ServiceState.LOADED && service.payload.result
