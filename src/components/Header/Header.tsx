@@ -69,7 +69,7 @@ const Header = ({ isSticky, isTop, showSearch }: Props) => {
         </Link>
         <div className={classes.search}>{showSearch && <Search />}</div>
         <div className={classes.rightWrapper}>
-          <Link to={RoutePath.Charts}>{t('app.header.charts')}</Link>
+          {/* <Link to={RoutePath.Charts}>{t('app.header.charts')}</Link> */}
           <Button
             href='https://www.ironfish.network/docs/whitepaper/1_introduction'
             className={classNames(classes.button, {
