@@ -40,7 +40,8 @@ interface ParamTypes {
 const useStyles = makeStyles(transactionDetailPageStyle)
 const TransactionDetailPage = () => {
   const { t } = useTranslation()
-  const { hash } = useParams<ParamTypes>()
+  const { hash: rawHash } = useParams<ParamTypes>()
+  const hash = rawHash.toUpperCase()
   const classes = useStyles()
 
   // if we are coming from a block, we know the block hash and the transaction hash to query the transaction API
