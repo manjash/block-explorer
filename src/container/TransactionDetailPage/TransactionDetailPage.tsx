@@ -44,12 +44,13 @@ interface ParamTypes {
 const useStyles = makeStyles(transactionDetailPageStyle)
 const TransactionDetailPage = () => {
   const { t } = useTranslation()
-  const { blockHash: queryBlockHash, hash } = useParams<ParamTypes>()
+  const { blockHash: queryBlockHash, hash: rawHash } = useParams<ParamTypes>()
   const classes = useStyles()
 
   // if we are coming from a block, we know the block hash and the transaction hash to query the transaction API
   // if we just have the transaction hash, we need to query the search API to find the transactions
   const api = queryBlockHash ? ApiUrls.BLOCK_TRANSACTION_PAGE : ApiUrls.SEARCH_TRANSACTIONS
+  const hash = rawHash.toUpperCase()
   const params = queryBlockHash
     ? {
         block_identifier: {
@@ -57,12 +58,12 @@ const TransactionDetailPage = () => {
           hash: queryBlockHash,
         },
         transaction_identifier: {
-          hash: hash.toUpperCase(),
+          hash,
         },
       }
     : {
         transaction_identifier: {
-          hash: hash.toUpperCase(),
+          hash,
         },
       }
   const format = queryBlockHash ? formatTransactionFromJson : formatSearchTransactionsFromJson
