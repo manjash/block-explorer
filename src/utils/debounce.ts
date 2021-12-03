@@ -18,6 +18,7 @@ export function useDebounce<T>(value: T, delay: number): T {
     () => {
       // Update debounced value after delay
       const handler = setTimeout(() => {
+        console.log('setting', value)
         setDebouncedValue(value)
       }, delay)
 

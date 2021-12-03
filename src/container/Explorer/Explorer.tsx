@@ -72,7 +72,7 @@ const Explorer = () => {
             after: result.after,
           }).toString(),
       )
-      .then((response) => {
+      .then(response => {
         setResult((prevState: any) => {
           const blocksArray = response.data.data
           const newState = {
@@ -88,7 +88,7 @@ const Explorer = () => {
 
         done(!response.data.metadata.has_next)
       })
-      .catch((error) => {
+      .catch(error => {
         saveToLocalStorage(LOCAL_STORAGE_KEY, null)
         setResult((prevState: any) => ({ ...prevState, status: ServiceState.ERROR, error }))
       })

@@ -33,7 +33,7 @@ const LinksBlock = ({ title, links, classes }: Props) => {
     <div className={classes.linksBlock}>
       <p>{title}</p>
       <ul>
-        {links.map((link) => (
+        {links.map(link => (
           <li key={link.link}>
             <a href={link.link}>{link.name}</a>
           </li>

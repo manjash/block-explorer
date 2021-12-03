@@ -41,7 +41,7 @@ const BlockDetailPage = () => {
       hash: id,
       with_transactions: true,
     },
-    (block) => formatBlockFromJson({ block }),
+    block => formatBlockFromJson({ block }),
   )
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result

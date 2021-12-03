@@ -42,7 +42,7 @@ const ChartsPage = () => {
       end: endDateString,
       granularity: 'day',
     },
-    (data) =>
+    data =>
       data.data
         .map((metric: any) => ({ ...metric, date: new Date(metric.date) }))
         .sort((a: any, b: any) => a.date - b.date),

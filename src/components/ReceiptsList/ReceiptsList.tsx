@@ -36,7 +36,7 @@ const ReceiptsList = ({ notes }: Prop) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {notes.map((note) => (
+          {notes.map(note => (
             <StyledTableRow key={note.commitment}>
               <StyledTableCell align='left'>
                 <CopyElement copyString={note.commitment}>

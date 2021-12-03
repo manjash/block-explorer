@@ -25,13 +25,13 @@ const useGetService = <Type>(
   useEffect(() => {
     axios
       .get(url + queryString)
-      .then((response) =>
+      .then(response =>
         setResult({
           status: ServiceState.LOADED,
           payload: { result: formatFunction(response.data) },
         }),
       )
-      .catch((error) => setResult({ status: ServiceState.ERROR, error }))
+      .catch(error => setResult({ status: ServiceState.ERROR, error }))
   }, [url, queryString]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return result

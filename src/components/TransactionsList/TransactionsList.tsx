@@ -53,7 +53,7 @@ const TransactionsList = (props: Prop) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {transactions.map((transaction) => (
+            {transactions.map(transaction => (
               <StyledTableRow key={transaction.hash}>
                 <StyledTableCell scope='row'>
                   <Link to={getTransactionDetailPageUrl(blockHash, transaction.hash)}>

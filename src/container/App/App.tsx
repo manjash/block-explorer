@@ -15,8 +15,8 @@ const App = () => (
           <Layout routes={routes}>
             <Switch>
               {routes
-                .filter((route) => route.path !== undefined)
-                .map((route) => {
+                .filter(route => route.path !== undefined)
+                .map(route => {
                   return (
                     <Route path={route.path} component={route.component} key={route.nameKey} />
                   )

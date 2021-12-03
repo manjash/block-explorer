@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, ChangeEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
+import { throttle, debounce } from 'throttle-debounce-ts'
 
 import { useTheme, makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
-import Autocomplete, { AutocompleteRenderGroupParams } from '@material-ui/lab/Autocomplete'
+import Autocomplete, {
+  AutocompleteRenderGroupParams,
+  AutocompleteRenderInputParams,
+} from '@material-ui/lab/Autocomplete'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import searchIcon from '../../assets/images/search.svg'
@@ -33,23 +37,22 @@ const Search = () => {
   const theme = useTheme()
   const isSmallBreakpoint = useMediaQuery(theme.breakpoints.down('sm'))
   const [searchTerm, setSearchTerm] = useState<string>('')
-  const debouncedSearchTerm: string = useDebounce<string>(searchTerm, 500)
+  // const debouncedSearchTerm: string = useDebounce<string>(searchTerm, 300)
 
-  useEffect(
-    () => {
-      if (debouncedSearchTerm) {
-        setIsSearching(true)
-        onChangeHandle(debouncedSearchTerm).then(() => {
-          setIsSearching(false)
-        })
-      } else {
-      }
-    },
-    [debouncedSearchTerm], // Only call effect if debounced search term changes
-  )
+  // useEffect(
+  //   () => {
+  //     setIsSearching(true)
+  //     onChangeHandle(debouncedSearchTerm).then(() => {
+  //       setIsSearching(false)
+  //     })
+  //   },
+  //   [debouncedSearchTerm], // Only call effect if debounced search term changes
+  // )
 
   const onChangeHandle = async (value: string) => {
-    setOpen(false)
+    if (value.length > 0) {
+      setOpen(false)
+    }
     setLoading(true)
 
     const blockSearchParams = new URLSearchParams({
@@ -67,7 +70,7 @@ const Search = () => {
       getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + transactionSearchParams.toString(),
     )
 
-    Promise.all([transactions, blocks]).then((values) => {
+    Promise.all([transactions, blocks]).then(values => {
       let transactions: Transaction[] = []
       let blocks: Block[] = []
 
@@ -134,7 +137,7 @@ const Search = () => {
     }
 
     if (isTransaction(value) && value.blocks) {
-      const mainBlock = value.blocks.find((block) => block.main === true)
+      const mainBlock = value.blocks.find(block => block.main === true)
       if (mainBlock) {
         history.push(getTransactionDetailPageUrl(mainBlock.hash, value.hash), {
           update: true,
@@ -170,6 +173,9 @@ const Search = () => {
       </li>
     )
   }
+  const search = debounce({ delay: 600 }, (ev: ChangeEvent<HTMLInputElement>) =>
+    onChangeHandle(ev.target.value),
+  )
 
   return (
     <div className={classes.search}>
@@ -204,7 +210,7 @@ const Search = () => {
         noOptionsText={'No matches'}
         loading={loading}
         loadingText={'Loading...'}
-        renderInput={(params) => (
+        renderInput={(params: AutocompleteRenderInputParams) => (
           <TextField
             {...params}
             color='secondary'
@@ -212,7 +218,7 @@ const Search = () => {
             classes={{
               root: classes.inputInput,
             }}
-            onChange={(ev) => setSearchTerm(ev.target.value)}
+            onChange={search}
             InputProps={{
               ...params.InputProps,
               endAdornment: null,

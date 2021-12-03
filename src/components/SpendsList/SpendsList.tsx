@@ -36,7 +36,7 @@ const SpendsList = ({ spends }: Prop) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {spends.map((spend) => (
+          {spends.map(spend => (
             <StyledTableRow key={spend.nullifier}>
               <StyledTableCell align='justify'>
                 <CopyElement copyString={spend.nullifier}>
