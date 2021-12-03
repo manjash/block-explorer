@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
@@ -17,6 +17,7 @@ import { getDisplayShortHash } from '../../utils/string'
 import Transaction, { isTransaction, formatTransactionsFromJson } from '../../types/Transaction'
 import classNames from 'classnames'
 import { Typography } from '@material-ui/core'
+import { useDebounce } from '../../utils/debounce'
 
 const useStyles = makeStyles(searchStyle)
 
@@ -27,16 +28,28 @@ const Search = () => {
   const classes = useStyles()
   const { t } = useTranslation()
   const history = useHistory()
-
+  // Searching status (whether there is pending API request)
+  const [_isSearching, setIsSearching] = useState<boolean>(false)
   const theme = useTheme()
   const isSmallBreakpoint = useMediaQuery(theme.breakpoints.down('sm'))
+  const [searchTerm, setSearchTerm] = useState<string>('')
+  const debouncedSearchTerm: string = useDebounce<string>(searchTerm, 500)
+
+  useEffect(
+    () => {
+      if (debouncedSearchTerm) {
+        setIsSearching(true)
+        onChangeHandle(debouncedSearchTerm).then(() => {
+          setIsSearching(false)
+        })
+      } else {
+      }
+    },
+    [debouncedSearchTerm], // Only call effect if debounced search term changes
+  )
 
   const onChangeHandle = async (value: string) => {
-    if (value.length < 4) {
-      setOpen(false)
-      return
-    }
-
+    setOpen(false)
     setLoading(true)
 
     const blockSearchParams = new URLSearchParams({
@@ -199,7 +212,7 @@ const Search = () => {
             classes={{
               root: classes.inputInput,
             }}
-            onChange={(ev) => onChangeHandle(ev.target.value)}
+            onChange={(ev) => setSearchTerm(ev.target.value)}
             InputProps={{
               ...params.InputProps,
               endAdornment: null,
