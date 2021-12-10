@@ -110,7 +110,7 @@
         "title": "Transaction Information",
         "error": {
           "title": "Transaction not found",
-          "description": "It looks like the transaction has sunk to the depts of the ocean... or we just can’t find it at this time."
+          "description": "It looks like the transaction has sunk to the depths of the ocean...or we just can’t find it at this time."
         }
       },
       "warning": {

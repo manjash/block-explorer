@@ -17,6 +17,7 @@ import { getDisplayShortHash } from '../../utils/string'
 import Transaction, { isTransaction, formatTransactionsFromJson } from '../../types/Transaction'
 import classNames from 'classnames'
 import { Typography } from '@material-ui/core'
+import { debounce } from '../../utils/debounce'
 
 const useStyles = makeStyles(searchStyle)
 
@@ -27,16 +28,16 @@ const Search = () => {
   const classes = useStyles()
   const { t } = useTranslation()
   const history = useHistory()
-
   const theme = useTheme()
   const isSmallBreakpoint = useMediaQuery(theme.breakpoints.down('sm'))
 
   const onChangeHandle = async (value: string) => {
-    if (value.length < 4) {
+    if (value.length == 0) {
       setOpen(false)
       return
     }
 
+    setOpen(false)
     setLoading(true)
 
     const blockSearchParams = new URLSearchParams({
@@ -80,6 +81,8 @@ const Search = () => {
       }
     })
   }
+
+  const search = debounce(onChangeHandle, 250)
 
   const getOptionLabel = (option: any) => {
     const hash = option.hash.toUpperCase()
@@ -199,7 +202,7 @@ const Search = () => {
             classes={{
               root: classes.inputInput,
             }}
-            onChange={(ev) => onChangeHandle(ev.target.value)}
+            onChange={(ev) => search(ev.target.value)}
             InputProps={{
               ...params.InputProps,
               endAdornment: null,

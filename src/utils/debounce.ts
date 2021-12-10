@@ -1,9 +1,13 @@
-export const debounce = (fn: Function, delay: number): any => {
-  let timeoutId: number
-  return () => {
-    if (timeoutId) {
-      clearTimeout(timeoutId)
-    }
-    timeoutId = (setTimeout(fn, delay) as unknown) as number
+export function debounce<T extends unknown[], U>(
+  callback: (...args: T) => PromiseLike<U> | U,
+  wait: number,
+) {
+  let timer: NodeJS.Timeout
+
+  return (...args: T): Promise<U> | U => {
+    clearTimeout(timer)
+    return new Promise((resolve) => {
+      timer = setTimeout(() => resolve(callback(...args)), wait)
+    })
   }
 }
