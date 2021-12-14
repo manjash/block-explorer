@@ -2,14 +2,16 @@
 Block Explorer for Iron Fish blockchain
 
 ## Dev setup
-Run the Iron Fish Rosetta API
-`cd ironfish/ironfish-rosetta-api`
-`yarn start`
-The Rosetta API is set to run on `localhost:8080`. If the port is different on your machine, update the `package.json` for CORS
+To test block-explorer locally you have to run the Iron Fish API and Iron Fish node locally
+`cd iron-fish/ironfish-api`
+follow the config and run instruction.
+`nps start`
+The Iron Fish API is set to run on `localhost:8003`. If the port is different on your machine, update the `package.json` for CORS
 
 Run a Full node
 `cd ironfish/ironfish-cli`
-`yarn start start`
+`yarn start:once start`
+`yarn start:once service:sync`
 
 Run the block explorer
 `yarn dev`
