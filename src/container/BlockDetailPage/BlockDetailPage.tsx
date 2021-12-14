@@ -29,16 +29,14 @@ const BlockDetailPage = () => {
   const { id } = useParams<ParamTypes>()
 
   const blockIdentifier = {} as { hash?: string; sequence?: number }
-  const queryParams: any = {}
+  const queryParams: any = { with_transactions: true }
 
   if (Number.isNaN(Number(id))) {
     blockIdentifier.hash = id
     queryParams.hash = id
-    queryParams.with_transactions = true
   } else {
     blockIdentifier.sequence = Number(id)
     queryParams.sequence = Number(id)
-    queryParams.with_transactions = true
   }
 
   const service = useGetService<Block>(
