@@ -45,11 +45,22 @@
     "lint": "nps lint"
   },
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^3.4.2",
@@ -68,6 +79,8 @@
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "4.1.2",
+    "nps": "^5.10.0",
+    "nps-utils": "^1.7.0",
     "prettier": "2.1.2",
     "react-test-renderer": "^17.0.1"
   }
