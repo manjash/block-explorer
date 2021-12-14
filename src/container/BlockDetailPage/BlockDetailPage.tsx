@@ -28,14 +28,13 @@ const BlockDetailPage = () => {
   const { t } = useTranslation()
   const { id } = useParams<ParamTypes>()
 
-  const blockIdentifier = {} as { hash?: string; sequence?: number }
-  const queryParams: any = { with_transactions: true }
+  const queryParams: { with_transactions: boolean; hash?: string; sequence?: number } = {
+    with_transactions: true,
+  }
 
   if (Number.isNaN(Number(id))) {
-    blockIdentifier.hash = id
     queryParams.hash = id
   } else {
-    blockIdentifier.sequence = Number(id)
     queryParams.sequence = Number(id)
   }
 
