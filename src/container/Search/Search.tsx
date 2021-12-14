@@ -21,6 +21,10 @@ import { debounce } from '../../utils/debounce'
 
 const useStyles = makeStyles(searchStyle)
 
+type RenderParams = {
+  InputProps: string
+}
+
 const Search = () => {
   const [loading, setLoading] = React.useState(false)
   const [open, setOpen] = React.useState(false)
@@ -55,7 +59,7 @@ const Search = () => {
       getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + transactionSearchParams.toString(),
     )
 
-    Promise.all([transactions, blocks]).then((values) => {
+    Promise.all([transactions, blocks]).then(values => {
       let transactions: Transaction[] = []
       let blocks: Block[] = []
 
@@ -124,7 +128,7 @@ const Search = () => {
     }
 
     if (isTransaction(value) && value.blocks) {
-      const mainBlock = value.blocks.find((block) => block.main === true)
+      const mainBlock = value.blocks.find(block => block.main === true)
       if (mainBlock) {
         history.push(getTransactionDetailPageUrl(mainBlock.hash, value.hash), {
           update: true,
@@ -177,6 +181,10 @@ const Search = () => {
         onChange={onChange}
         forcePopupIcon={false}
         popupIcon={null}
+        filterOptions={(raw: any) => {
+          console.log({ filterOptions: true, raw })
+          return raw
+        }}
         classes={{
           root: classes.inputRoot,
           focused: classes.inputRootFocused,
@@ -194,22 +202,25 @@ const Search = () => {
         noOptionsText={'No matches'}
         loading={loading}
         loadingText={'Loading...'}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            color='secondary'
-            placeholder={t('app.header.search.placeholder')}
-            classes={{
-              root: classes.inputInput,
-            }}
-            onChange={(ev) => search(ev.target.value)}
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: null,
-              disableUnderline: true,
-            }}
-          />
-        )}
+        renderInput={(params: any) => {
+          console.log({ params })
+          return (
+            <TextField
+              {...params}
+              color='secondary'
+              placeholder={t('app.header.search.placeholder')}
+              classes={{
+                root: classes.inputInput,
+              }}
+              onChange={ev => search(ev.target.value)}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: null,
+                disableUnderline: true,
+              }}
+            />
+          )
+        }}
       />
     </div>
   )
