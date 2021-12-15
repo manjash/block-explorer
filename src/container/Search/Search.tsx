@@ -62,15 +62,15 @@ const Search = () => {
 
   const onChangeHandle = React.useCallback(
     async (value: string) => {
-      console.log('... starting')
+      console.log(value, '... starting')
       if (value.length == 0) {
-        console.log('... closing')
+        console.log(value, '... closing')
         $setOpen(false)
         return
       }
 
       $setOpen(false)
-      console.log('... loading')
+      console.log(value, '... loading')
       $setLoading(true)
 
       const blockSearchParams = new URLSearchParams({
@@ -85,7 +85,7 @@ const Search = () => {
       // shortcut out
       const oldResult = ($allResults as any)[value]
       if (oldResult) {
-        console.log(`... shortcutting ${value} in-memory cached`)
+        console.log(value, `... shortcutting ${value} in-memory cached`)
         $setResult(oldResult)
         $setLoading(false)
         return
@@ -94,12 +94,12 @@ const Search = () => {
       const processAll = (raw: AxiosResponse[]) => {
         console.log({ raw })
         const [{ data: rawTransactions }, { data: rawBlocks }] = raw
-        console.log('... processing')
+        console.log(value, '... processing')
         const transactions = formatTransactionsFromJson(rawTransactions.data)
         const blocks = formatBlocksFromJson(rawBlocks.data)
         console.log({ transactions, blocks, rawTransactions, rawBlocks })
         if (transactions.length === 0 && blocks.length === 0) {
-          console.log('... none found.')
+          console.log(value, '... none found.')
           $setLoading(false)
           $setOpen(true)
         } else {
@@ -109,7 +109,7 @@ const Search = () => {
             $setOpen(true)
             return
           }
-          console.log(`... ${results.length} found!`)
+          console.log(value, `... ${results.length} found!`)
           $setOpen(true)
           $setResult(results)
           $setAllResults({ ...$allResults, [value]: results })
