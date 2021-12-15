@@ -19,7 +19,7 @@ import Transaction, { isTransaction, formatTransactionsFromJson } from '../../ty
 import classNames from 'classnames'
 import { Typography } from '@material-ui/core'
 // import { BLOCK_FIXTURE, TRANSACTIONS_FIXTURE } from './fixture'
-// import { debounce } from '../../utils/debounce'
+import { debounce } from '../../utils/debounce'
 
 const useStyles = makeStyles(searchStyle)
 
@@ -126,8 +126,8 @@ const Search = () => {
     [$setOpen, $setLoading],
   )
 
-  // const search = debounce(onChangeHandle, 250)
-  const search = onChangeHandle
+  const search = debounce(onChangeHandle, 250)
+  // const search = onChangeHandle
 
   const onChange = (event: any, value: Block | Transaction | null) => {
     if (!value) {
