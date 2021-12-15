@@ -26,6 +26,7 @@ const useStyles = makeStyles(searchStyle)
 const Search = () => {
   const [$loading, $setLoading] = React.useState(false)
   const [$open, $setOpen] = React.useState(false)
+  const [$allResults, $setAllResults] = React.useState({})
   const [$result, $setResult] = React.useState([] as (Block | Transaction)[])
   const classes = useStyles()
   const { t } = useTranslation()
@@ -59,53 +60,68 @@ const Search = () => {
     return false
   }
 
-  const onChangeHandle = async (value: string) => {
-    console.log('... starting')
-    if (value.length == 0) {
-      console.log('... closing')
-      $setOpen(false)
-      return
-    }
-
-    $setOpen(false)
-    console.log('... loading')
-    $setLoading(true)
-
-    const blockSearchParams = new URLSearchParams({
-      main: 'true',
-      search: value,
-      with_transactions: 'true',
-    })
-    const transactionSearchParams = new URLSearchParams({
-      search: value,
-      with_blocks: 'true',
-    })
-
-    const processAll = (raw: AxiosResponse[]) => {
-      console.log({ raw })
-      const [{ data: rawTransactions }, { data: rawBlocks }] = raw
-      console.log('... processing')
-      // const processAll = (raw: any) => {
-      // const [{ data: rawTransactions }, { data: rawBlocks }] = raw
-      const transactions = formatTransactionsFromJson(rawTransactions.data)
-      const blocks = formatBlocksFromJson(rawBlocks.data)
-      console.log({ transactions, blocks, rawTransactions, rawBlocks })
-      if (transactions.length === 0 && blocks.length === 0) {
-        $setLoading(false)
-        $setOpen(true)
-      } else {
-        $setOpen(true)
-        $setResult([...blocks, ...transactions])
-        $setLoading(false)
+  const onChangeHandle = React.useCallback(
+    async (value: string) => {
+      console.log('... starting')
+      if (value.length == 0) {
+        console.log('... closing')
+        $setOpen(false)
+        return
       }
-    }
 
-    const __blocks = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + blockSearchParams.toString())
-    const __transactions = axios.get(
-      getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + transactionSearchParams.toString(),
-    )
-    Promise.all([__transactions, __blocks]).then(processAll)
-  }
+      $setOpen(false)
+      console.log('... loading')
+      $setLoading(true)
+
+      const blockSearchParams = new URLSearchParams({
+        main: 'true',
+        search: value,
+        with_transactions: 'true',
+      })
+      const transactionSearchParams = new URLSearchParams({
+        search: value,
+        with_blocks: 'true',
+      })
+      // shortcut out
+      const oldResult = ($allResults as any)[value]
+      if (oldResult) {
+        console.log(`... shortcutting ${value} in-memory cached`)
+        $setResult(oldResult)
+        $setLoading(false)
+        return
+      }
+
+      const processAll = (raw: AxiosResponse[]) => {
+        console.log({ raw })
+        const [{ data: rawTransactions }, { data: rawBlocks }] = raw
+        console.log('... processing')
+        const transactions = formatTransactionsFromJson(rawTransactions.data)
+        const blocks = formatBlocksFromJson(rawBlocks.data)
+        console.log({ transactions, blocks, rawTransactions, rawBlocks })
+        if (transactions.length === 0 && blocks.length === 0) {
+          console.log('... none found.')
+          $setLoading(false)
+          $setOpen(true)
+        } else {
+          $setOpen(true)
+          const results = [...blocks, ...transactions]
+          console.log(`... ${results.length} found!`)
+          $setResult(results)
+          $setAllResults({ ...$allResults, [value]: results })
+          $setLoading(false)
+        }
+      }
+
+      const __blocks = axios.get(
+        getApiUrl(ApiUrls.SEARCH_BLOCKS) + blockSearchParams.toString(),
+      )
+      const __transactions = axios.get(
+        getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + transactionSearchParams.toString(),
+      )
+      Promise.all([__transactions, __blocks]).then(processAll)
+    },
+    [$setOpen, $setLoading, $allResults, $setAllResults],
+  )
 
   // const search = debounce(onChangeHandle, 250)
   const search = onChangeHandle
