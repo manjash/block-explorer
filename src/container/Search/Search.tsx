@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
@@ -157,7 +157,11 @@ const Search = () => {
       </li>
     )
   }
-
+  useEffect(() => {
+    if ($result.length > 0) {
+      console.log({ $result })
+    }
+  }, [$result])
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
