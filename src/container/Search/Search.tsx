@@ -22,21 +22,6 @@ import { Typography } from '@material-ui/core'
 
 const useStyles = makeStyles(searchStyle)
 
-const getOptionLabelByBreakpoint = (isSmall: boolean) => (option: any) => {
-  const hash = option.hash.toUpperCase()
-  const shortHash = isSmall ? getDisplayShortHash(hash) : hash
-  if (isTransaction(option) && option.blocks) {
-    const mainBlock = option.blocks.find(({ main }) => main)
-    if (mainBlock) {
-      return `${shortHash} - Block: ${mainBlock.sequence}`
-    } else {
-      return ``
-    }
-  }
-
-  return `${option.sequence} - ${shortHash}`
-}
-
 const getOptionSelected = (
   option: Block | Transaction,
   value: Block | Transaction,
@@ -56,6 +41,20 @@ const Search = () => {
   const $history = useHistory()
   const $theme = useTheme()
   const $isSmallBreakpoint = useMediaQuery($theme.breakpoints.down('sm'))
+  const getOptionLabel = (option: any) => {
+    const hash = option.hash.toUpperCase()
+    const shortHash = $isSmallBreakpoint ? getDisplayShortHash(hash) : hash
+    if (isTransaction(option) && option.blocks) {
+      const mainBlock = option.blocks.find(({ main }) => main)
+      if (mainBlock) {
+        return `${shortHash} - Block: ${mainBlock.sequence}`
+      } else {
+        return ``
+      }
+    }
+
+    return `${option.sequence} - ${shortHash}`
+  }
 
   const onChangeHandle = async (value: string) => {
     if (value.length == 0) {
@@ -179,7 +178,7 @@ const Search = () => {
           $setOpen(false)
         }}
         getOptionSelected={getOptionSelected}
-        getOptionLabel={getOptionLabelByBreakpoint($isSmallBreakpoint)}
+        getOptionLabel={getOptionLabel}
         renderGroup={renderGroup}
         groupBy={groupBy}
         options={$result}
