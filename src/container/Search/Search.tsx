@@ -87,8 +87,8 @@ const Search = () => {
       console.log('... processing')
       // const processAll = (raw: any) => {
       // const [{ data: rawTransactions }, { data: rawBlocks }] = raw
-      const transactions = formatTransactionsFromJson(rawTransactions)
-      const blocks = formatBlocksFromJson(rawBlocks)
+      const transactions = formatTransactionsFromJson(rawTransactions.data)
+      const blocks = formatBlocksFromJson(rawBlocks.data)
       console.log({ transactions, blocks, rawTransactions, rawBlocks })
       if (transactions.length === 0 && blocks.length === 0) {
         $setLoading(false)
