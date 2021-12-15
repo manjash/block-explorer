@@ -26,7 +26,7 @@ const useStyles = makeStyles(searchStyle)
 const Search = () => {
   const [$loading, $setLoading] = React.useState(false)
   const [$open, $setOpen] = React.useState(false)
-  const [$allResults, $setAllResults] = React.useState({})
+  // const [$allResults, $setAllResults] = React.useState({})
   const [$result, $setResult] = React.useState([] as (Block | Transaction)[])
   const classes = useStyles()
   const { t } = useTranslation()
@@ -83,6 +83,7 @@ const Search = () => {
         with_blocks: 'true',
       })
       // shortcut out
+      /*
       const oldResult = ($allResults as any)[value]
       if (oldResult) {
         console.log(value, `... shortcutting ${value} in-memory cached`)
@@ -90,6 +91,7 @@ const Search = () => {
         $setLoading(false)
         return
       }
+      */
 
       const processAll = (raw: AxiosResponse[]) => {
         console.log({ raw })
@@ -98,21 +100,17 @@ const Search = () => {
         const transactions = formatTransactionsFromJson(rawTransactions.data)
         const blocks = formatBlocksFromJson(rawBlocks.data)
         console.log({ transactions, blocks, rawTransactions, rawBlocks })
-        if (transactions.length === 0 && blocks.length === 0) {
+        const results = [...blocks, ...transactions]
+        if (results.length === 0) {
           console.log(value, '... none found.')
           $setLoading(false)
           $setOpen(true)
+          $setResult([])
         } else {
-          const results = [...blocks, ...transactions]
-          if (results.length === 0) {
-            $setLoading(false)
-            $setOpen(true)
-            return
-          }
           console.log(value, `... ${results.length} found!`)
           $setOpen(true)
           $setResult(results)
-          $setAllResults({ ...$allResults, [value]: results })
+          // $setAllResults({ ...$allResults, [value]: results })
           $setLoading(false)
         }
       }
@@ -125,7 +123,7 @@ const Search = () => {
       )
       Promise.all([__transactions, __blocks]).then(processAll)
     },
-    [$setOpen, $setLoading, $allResults, $setAllResults],
+    [$setOpen, $setLoading],
   )
 
   // const search = debounce(onChangeHandle, 250)
