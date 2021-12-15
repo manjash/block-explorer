@@ -21,24 +21,49 @@ import { debounce } from '../../utils/debounce'
 
 const useStyles = makeStyles(searchStyle)
 
+const getOptionLabelByBreakpoint = (isSmall: boolean) => (option: any) => {
+  const hash = option.hash.toUpperCase()
+  const shortHash = isSmall ? getDisplayShortHash(hash) : hash
+  if (isTransaction(option) && option.blocks) {
+    const mainBlock = option.blocks.find(({ main }) => main)
+    if (mainBlock) {
+      return `${shortHash} - Block: ${mainBlock.sequence}`
+    } else {
+      return ``
+    }
+  }
+
+  return `${option.sequence} - ${shortHash}`
+}
+
+const getOptionSelected = (
+  option: Block | Transaction,
+  value: Block | Transaction,
+): boolean => {
+  if ((isBlock(option) && isBlock(value)) || (isTransaction(option) && isTransaction(value))) {
+    return option.hash === value.hash
+  }
+  return false
+}
+
 const Search = () => {
-  const [loading, setLoading] = React.useState(false)
-  const [open, setOpen] = React.useState(false)
-  const [result, setResult] = React.useState([] as (Block | Transaction)[])
+  const [$loading, $setLoading] = React.useState(false)
+  const [$open, $setOpen] = React.useState(false)
+  const [$result, $setResult] = React.useState([] as (Block | Transaction)[])
   const classes = useStyles()
   const { t } = useTranslation()
-  const history = useHistory()
-  const theme = useTheme()
-  const isSmallBreakpoint = useMediaQuery(theme.breakpoints.down('sm'))
+  const $history = useHistory()
+  const $theme = useTheme()
+  const $isSmallBreakpoint = useMediaQuery($theme.breakpoints.down('sm'))
 
   const onChangeHandle = async (value: string) => {
     if (value.length == 0) {
-      setOpen(false)
+      $setOpen(false)
       return
     }
 
-    setOpen(false)
-    setLoading(true)
+    $setOpen(false)
+    $setLoading(true)
 
     const blockSearchParams = new URLSearchParams({
       main: 'true',
@@ -72,61 +97,33 @@ const Search = () => {
       }
 
       if (transactions.length === 0 && blocks.length === 0) {
-        setLoading(false)
-        setOpen(true)
+        $setLoading(false)
+        $setOpen(true)
       } else {
-        setOpen(true)
-        setResult([...blocks, ...transactions])
-        setLoading(false)
+        $setOpen(true)
+        $setResult([...blocks, ...transactions])
+        $setLoading(false)
       }
     })
   }
 
-  const search = debounce(onChangeHandle, 250)
-
-  const getOptionLabel = (option: any) => {
-    const hash = option.hash.toUpperCase()
-    const shortHash = isSmallBreakpoint ? getDisplayShortHash(hash) : hash
-    if (isTransaction(option) && option.blocks) {
-      const mainBlock = option.blocks.find(({ main }) => main)
-      if (mainBlock) {
-        return `${shortHash} - Block: ${mainBlock.sequence}`
-      } else {
-        return ``
-      }
-    }
-
-    return `${option.sequence} - ${shortHash}`
-  }
-
-  const getOptionSelected = (
-    option: Block | Transaction,
-    value: Block | Transaction,
-  ): boolean => {
-    if (isBlock(option) && isBlock(value)) {
-      return option.hash === value.hash
-    }
-
-    if (isTransaction(option) && isTransaction(value)) {
-      return option.hash === value.hash
-    }
-
-    return false
-  }
+  // const search = debounce(onChangeHandle, 250)
+  const search = onChangeHandle
 
   const onChange = (event: any, value: Block | Transaction | null) => {
     if (!value) {
       return
     }
+    console.log({ value })
 
     if (isBlock(value)) {
-      history.push(getBlockDetailPageUrl(value.hash), { update: true })
+      $history.push(getBlockDetailPageUrl(value.hash), { update: true })
     }
 
     if (isTransaction(value) && value.blocks) {
       const mainBlock = value.blocks.find((block) => block.main === true)
       if (mainBlock) {
-        history.push(getTransactionDetailPageUrl(mainBlock.hash, value.hash), {
+        $history.push(getTransactionDetailPageUrl(mainBlock.hash, value.hash), {
           update: true,
         })
       }
@@ -173,7 +170,7 @@ const Search = () => {
         clearOnEscape={true}
         handleHomeEndKeys={true}
         selectOnFocus={true}
-        open={open}
+        open={$open}
         onChange={onChange}
         forcePopupIcon={false}
         popupIcon={null}
@@ -188,15 +185,15 @@ const Search = () => {
           listbox: classes.list,
         }}
         onClose={() => {
-          setOpen(false)
+          $setOpen(false)
         }}
         getOptionSelected={getOptionSelected}
-        getOptionLabel={getOptionLabel}
+        getOptionLabel={getOptionLabelByBreakpoint($isSmallBreakpoint)}
         renderGroup={renderGroup}
         groupBy={groupBy}
-        options={result}
+        options={$result}
         noOptionsText={'No matches'}
-        loading={loading}
+        loading={$loading}
         loadingText={'Loading...'}
         renderInput={(params: any) => {
           console.log({ params })
