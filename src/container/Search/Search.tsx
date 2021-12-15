@@ -18,7 +18,6 @@ import { getDisplayShortHash } from '../../utils/string'
 import Transaction, { isTransaction, formatTransactionsFromJson } from '../../types/Transaction'
 import classNames from 'classnames'
 import { Typography } from '@material-ui/core'
-// import { BLOCK_FIXTURE, TRANSACTIONS_FIXTURE } from './fixture'
 import { debounce } from '../../utils/debounce'
 
 const useStyles = makeStyles(searchStyle)
@@ -62,15 +61,12 @@ const Search = () => {
 
   const onChangeHandle = React.useCallback(
     async (value: string) => {
-      console.log(value, '... starting')
       if (value.length == 0) {
-        console.log(value, '... closing')
         $setOpen(false)
         return
       }
 
       $setOpen(false)
-      console.log(value, '... loading')
       $setLoading(true)
 
       const blockSearchParams = new URLSearchParams({
@@ -82,35 +78,19 @@ const Search = () => {
         search: value,
         with_blocks: 'true',
       })
-      // shortcut out
-      /*
-      const oldResult = ($allResults as any)[value]
-      if (oldResult) {
-        console.log(value, `... shortcutting ${value} in-memory cached`)
-        $setResult(oldResult)
-        $setLoading(false)
-        return
-      }
-      */
 
       const processAll = (raw: AxiosResponse[]) => {
-        console.log({ raw })
         const [{ data: rawTransactions }, { data: rawBlocks }] = raw
-        console.log(value, '... processing')
         const transactions = formatTransactionsFromJson(rawTransactions.data)
         const blocks = formatBlocksFromJson(rawBlocks.data)
-        console.log({ transactions, blocks, rawTransactions, rawBlocks })
         const results = [...blocks, ...transactions]
         if (results.length === 0) {
-          console.log(value, '... none found.')
           $setLoading(false)
           $setOpen(true)
           $setResult([])
         } else {
-          console.log(value, `... ${results.length} found!`)
           $setOpen(true)
           $setResult(results)
-          // $setAllResults({ ...$allResults, [value]: results })
           $setLoading(false)
         }
       }
@@ -133,7 +113,6 @@ const Search = () => {
     if (!value) {
       return
     }
-    console.log({ value })
 
     if (isBlock(value)) {
       $history.push(getBlockDetailPageUrl(value.hash), { update: true })
