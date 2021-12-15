@@ -17,7 +17,7 @@ import { getDisplayShortHash } from '../../utils/string'
 import Transaction, { isTransaction, formatTransactionsFromJson } from '../../types/Transaction'
 import classNames from 'classnames'
 import { Typography } from '@material-ui/core'
-import { debounce } from '../../utils/debounce'
+// import { debounce } from '../../utils/debounce'
 
 const useStyles = makeStyles(searchStyle)
 
