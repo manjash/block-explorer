@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+// import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import axios, { AxiosResponse } from 'axios'
@@ -21,16 +22,6 @@ import { Typography } from '@material-ui/core'
 // import { debounce } from '../../utils/debounce'
 
 const useStyles = makeStyles(searchStyle)
-
-const getOptionSelected = (
-  option: Block | Transaction,
-  value: Block | Transaction,
-): boolean => {
-  if ((isBlock(option) && isBlock(value)) || (isTransaction(option) && isTransaction(value))) {
-    return option.hash === value.hash
-  }
-  return false
-}
 
 const Search = () => {
   const [$loading, $setLoading] = React.useState(false)
@@ -55,14 +46,29 @@ const Search = () => {
 
     return `${option.sequence} - ${shortHash}`
   }
+  const getOptionSelected = (
+    option: Block | Transaction,
+    value: Block | Transaction,
+  ): boolean => {
+    if (
+      (isBlock(option) && isBlock(value)) ||
+      (isTransaction(option) && isTransaction(value))
+    ) {
+      return option.hash === value.hash
+    }
+    return false
+  }
 
   const onChangeHandle = async (value: string) => {
+    console.log('... starting')
     if (value.length == 0) {
+      console.log('... closing')
       $setOpen(false)
       return
     }
 
     $setOpen(false)
+    console.log('... loading')
     $setLoading(true)
 
     const blockSearchParams = new URLSearchParams({
@@ -75,7 +81,10 @@ const Search = () => {
       with_blocks: 'true',
     })
 
-    const processAll = ([{ data: rawTransactions }, { data: rawBlocks }]: AxiosResponse[]) => {
+    const processAll = (raw: AxiosResponse[]) => {
+      console.log({ raw })
+      const [{ data: rawTransactions }, { data: rawBlocks }] = raw
+      console.log('... processing')
       // const processAll = (raw: any) => {
       // const [{ data: rawTransactions }, { data: rawBlocks }] = raw
       const transactions = formatTransactionsFromJson(rawTransactions)
@@ -148,9 +157,6 @@ const Search = () => {
       </li>
     )
   }
-  useEffect(() => {
-    console.log({ $result })
-  }, [$result])
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
@@ -186,7 +192,6 @@ const Search = () => {
         loading={$loading}
         loadingText={'Loading...'}
         renderInput={(params: any) => {
-          console.log({ params })
           return (
             <TextField
               {...params}
