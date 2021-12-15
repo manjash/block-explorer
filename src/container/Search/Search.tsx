@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
-// import axios, { AxiosResponse } from 'axios'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 import { useTheme, makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
@@ -18,7 +17,7 @@ import { getDisplayShortHash } from '../../utils/string'
 import Transaction, { isTransaction, formatTransactionsFromJson } from '../../types/Transaction'
 import classNames from 'classnames'
 import { Typography } from '@material-ui/core'
-import { BLOCK_FIXTURE, TRANSACTIONS_FIXTURE } from './fixture'
+// import { BLOCK_FIXTURE, TRANSACTIONS_FIXTURE } from './fixture'
 // import { debounce } from '../../utils/debounce'
 
 const useStyles = makeStyles(searchStyle)
@@ -47,8 +46,6 @@ const getOptionSelected = (
   }
   return false
 }
-
-const HACK = Boolean(process.env.HACK) || false
 
 const Search = () => {
   const [$loading, $setLoading] = React.useState(false)
@@ -79,12 +76,12 @@ const Search = () => {
       with_blocks: 'true',
     })
 
-    // const processAll = ([{ data: rawTransactions }, { data: rawBlocks }]: AxiosResponse[]) => {
-    const processAll = (raw: any) => {
-      const [{ data: rawTransactions }, { data: rawBlocks }] = raw
+    const processAll = ([{ data: rawTransactions }, { data: rawBlocks }]: AxiosResponse[]) => {
+      // const processAll = (raw: any) => {
+      // const [{ data: rawTransactions }, { data: rawBlocks }] = raw
       const transactions = formatTransactionsFromJson(rawTransactions)
       const blocks = formatBlocksFromJson(rawBlocks)
-      console.log({ raw, transactions, blocks })
+      console.log({ transactions, blocks, rawTransactions, rawBlocks })
       if (transactions.length === 0 && blocks.length === 0) {
         $setLoading(false)
         $setOpen(true)
@@ -95,15 +92,11 @@ const Search = () => {
       }
     }
 
-    const __blocks = HACK
-      ? BLOCK_FIXTURE
-      : axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + blockSearchParams.toString())
-    const __transactions = HACK
-      ? TRANSACTIONS_FIXTURE
-      : axios.get(getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + transactionSearchParams.toString())
-    // HACK
-    processAll([__transactions, __blocks])
-    // Promise.all([__transactions, __blocks]).then(processAll)
+    const __blocks = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + blockSearchParams.toString())
+    const __transactions = axios.get(
+      getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + transactionSearchParams.toString(),
+    )
+    Promise.all([__transactions, __blocks]).then(processAll)
   }
 
   // const search = debounce(onChangeHandle, 250)
