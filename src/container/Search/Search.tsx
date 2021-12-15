@@ -103,9 +103,14 @@ const Search = () => {
           $setLoading(false)
           $setOpen(true)
         } else {
-          $setOpen(true)
           const results = [...blocks, ...transactions]
+          if (results.length === 0) {
+            $setLoading(false)
+            $setOpen(true)
+            return
+          }
           console.log(`... ${results.length} found!`)
+          $setOpen(true)
           $setResult(results)
           $setAllResults({ ...$allResults, [value]: results })
           $setLoading(false)
