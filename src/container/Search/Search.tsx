@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
+// import axios, { AxiosResponse } from 'axios'
 import axios from 'axios'
 
 import { useTheme, makeStyles } from '@material-ui/core/styles'
@@ -17,6 +18,7 @@ import { getDisplayShortHash } from '../../utils/string'
 import Transaction, { isTransaction, formatTransactionsFromJson } from '../../types/Transaction'
 import classNames from 'classnames'
 import { Typography } from '@material-ui/core'
+import { BLOCK_FIXTURE, TRANSACTIONS_FIXTURE } from './fixture'
 // import { debounce } from '../../utils/debounce'
 
 const useStyles = makeStyles(searchStyle)
@@ -45,6 +47,8 @@ const getOptionSelected = (
   }
   return false
 }
+
+const HACK = Boolean(process.env.HACK) || false
 
 const Search = () => {
   const [$loading, $setLoading] = React.useState(false)
@@ -75,27 +79,12 @@ const Search = () => {
       with_blocks: 'true',
     })
 
-    const blocks = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + blockSearchParams.toString())
-    const transactions = axios.get(
-      getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + transactionSearchParams.toString(),
-    )
-
-    Promise.all([transactions, blocks]).then((values) => {
-      let transactions: Transaction[] = []
-      let blocks: Block[] = []
-
-      for (let i = 0; i < values.length; i++) {
-        const { data } = values[i].data
-        const first = data[0]
-        if (first) {
-          if (first.object === 'transaction') {
-            transactions = formatTransactionsFromJson(data)
-          } else if (first.object === 'block') {
-            blocks = formatBlocksFromJson({ data })
-          }
-        }
-      }
-
+    // const processAll = ([{ data: rawTransactions }, { data: rawBlocks }]: AxiosResponse[]) => {
+    const processAll = (raw: any) => {
+      const [{ data: rawTransactions }, { data: rawBlocks }] = raw
+      const transactions = formatTransactionsFromJson(rawTransactions)
+      const blocks = formatBlocksFromJson(rawBlocks)
+      console.log({ raw, transactions, blocks })
       if (transactions.length === 0 && blocks.length === 0) {
         $setLoading(false)
         $setOpen(true)
@@ -104,7 +93,17 @@ const Search = () => {
         $setResult([...blocks, ...transactions])
         $setLoading(false)
       }
-    })
+    }
+
+    const __blocks = HACK
+      ? BLOCK_FIXTURE
+      : axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + blockSearchParams.toString())
+    const __transactions = HACK
+      ? TRANSACTIONS_FIXTURE
+      : axios.get(getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + transactionSearchParams.toString())
+    // HACK
+    processAll([__transactions, __blocks])
+    // Promise.all([__transactions, __blocks]).then(processAll)
   }
 
   // const search = debounce(onChangeHandle, 250)
@@ -171,6 +170,7 @@ const Search = () => {
         autoHighlight={true}
         clearOnEscape={true}
         handleHomeEndKeys={true}
+        filterOptions={(x) => x}
         selectOnFocus={true}
         open={$open}
         onChange={onChange}

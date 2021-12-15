@@ -42,7 +42,7 @@ const BlockDetailPage = () => {
   const service = useGetService<Block>(
     getApiUrl(ApiUrls.BLOCK_DETAIL_PAGE),
     queryParams,
-    (block) => formatBlockFromJson({ block }),
+    formatBlockFromJson,
   )
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
