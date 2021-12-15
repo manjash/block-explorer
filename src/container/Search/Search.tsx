@@ -158,9 +158,7 @@ const Search = () => {
     )
   }
   useEffect(() => {
-    if ($result.length > 0) {
-      console.log({ $result })
-    }
+    console.log({ $result })
   }, [$result])
   return (
     <div className={classes.search}>
