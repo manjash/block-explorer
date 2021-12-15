@@ -174,10 +174,6 @@ const Search = () => {
         onChange={onChange}
         forcePopupIcon={false}
         popupIcon={null}
-        filterOptions={(raw: any) => {
-          console.log({ filterOptions: true, raw })
-          return raw
-        }}
         classes={{
           root: classes.inputRoot,
           focused: classes.inputRootFocused,
