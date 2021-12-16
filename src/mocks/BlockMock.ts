@@ -22,6 +22,7 @@ export const generateBlock = (): Block => {
     difficulty: getRandomIntInclusive(10000, 99999),
     size: getRandomIntInclusive(10000, 99999),
     transactions: [],
+    transactionsCount: 0,
     timestamp: new Date(),
     graffiti: 'blahblahblah',
   }

@@ -1,6 +1,6 @@
 import Transaction from './Transaction'
 
-export default interface Block {
+interface ParsedBlock {
   id: number
   hash: string
   sequence: number
@@ -8,26 +8,28 @@ export default interface Block {
   main: boolean
   size: number
   difficulty: number
-  transactionsCount?: number
+  transactions_count: string
   transactions?: Array<Transaction>
   timestamp: Date
   graffiti: string
 }
 
+export default interface Block extends Omit<ParsedBlock, 'timestamp' | 'transactions_count'> {
+  timestamp: Date
+  transactionsCount: number
+}
 export interface Blocks {
   blocks: Block[]
 }
 
-export const formatBlockFromJson = ({ block }: any): Block => ({
+export const formatBlockFromJson = (block: ParsedBlock): Block => ({
   ...block,
   timestamp: new Date(block.timestamp),
-  transactionsCount: block.transactions_count,
+  transactionsCount: parseInt(block.transactions_count),
 })
 
-export const formatBlocksFromJson = ({ data }: any): Block[] =>
-  data.map((block: any) => ({
-    ...formatBlockFromJson({ block }),
-  }))
+export const formatBlocksFromJson = (data: ParsedBlock[]): Block[] =>
+  data.map((block: ParsedBlock) => formatBlockFromJson(block))
 
 export function isBlock(x: any): x is Block {
   return typeof x === 'object' && 'transactions' in x && !('block' in x)

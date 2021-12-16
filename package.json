@@ -37,12 +37,13 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "dev": "REACT_APP_API_HOST=http://localhost:8003 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "tsc -b && eslint --ext .ts,.tsx,.jsx,.jsx src/"
+    "prepare": "husky install",
+    "start": "nps start",
+    "dev": "nps dev",
+    "build": "nps build",
+    "test": "nps test",
+    "eject": "nps eject",
+    "lint": "nps lint"
   },
   "eslintConfig": {
     "extends": [
@@ -79,6 +80,9 @@
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "4.1.2",
+    "husky": "^7.0.4",
+    "nps": "^5.10.0",
+    "nps-utils": "^1.7.0",
     "prettier": "2.1.2",
     "react-test-renderer": "^17.0.1"
   }

@@ -1,7 +1,8 @@
+// import React, { useEffect } from 'react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 import { useTheme, makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
@@ -22,71 +23,18 @@ import { debounce } from '../../utils/debounce'
 const useStyles = makeStyles(searchStyle)
 
 const Search = () => {
-  const [loading, setLoading] = React.useState(false)
-  const [open, setOpen] = React.useState(false)
-  const [result, setResult] = React.useState([] as (Block | Transaction)[])
+  const [$loading, $setLoading] = React.useState(false)
+  const [$open, $setOpen] = React.useState(false)
+  // const [$allResults, $setAllResults] = React.useState({})
+  const [$result, $setResult] = React.useState([] as (Block | Transaction)[])
   const classes = useStyles()
   const { t } = useTranslation()
-  const history = useHistory()
-  const theme = useTheme()
-  const isSmallBreakpoint = useMediaQuery(theme.breakpoints.down('sm'))
-
-  const onChangeHandle = async (value: string) => {
-    if (value.length == 0) {
-      setOpen(false)
-      return
-    }
-
-    setOpen(false)
-    setLoading(true)
-
-    const blockSearchParams = new URLSearchParams({
-      main: 'true',
-      search: value,
-      with_transactions: 'true',
-    })
-    const transactionSearchParams = new URLSearchParams({
-      search: value,
-      with_blocks: 'true',
-    })
-
-    const blocks = axios.get(getApiUrl(ApiUrls.SEARCH_BLOCKS) + blockSearchParams.toString())
-    const transactions = axios.get(
-      getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + transactionSearchParams.toString(),
-    )
-
-    Promise.all([transactions, blocks]).then((values) => {
-      let transactions: Transaction[] = []
-      let blocks: Block[] = []
-
-      for (let i = 0; i < values.length; i++) {
-        const { data } = values[i].data
-        const first = data[0]
-        if (first) {
-          if (first.object === 'transaction') {
-            transactions = formatTransactionsFromJson(data)
-          } else if (first.object === 'block') {
-            blocks = formatBlocksFromJson({ data })
-          }
-        }
-      }
-
-      if (transactions.length === 0 && blocks.length === 0) {
-        setLoading(false)
-        setOpen(true)
-      } else {
-        setOpen(true)
-        setResult([...blocks, ...transactions])
-        setLoading(false)
-      }
-    })
-  }
-
-  const search = debounce(onChangeHandle, 250)
-
+  const $history = useHistory()
+  const $theme = useTheme()
+  const $isSmallBreakpoint = useMediaQuery($theme.breakpoints.down('sm'))
   const getOptionLabel = (option: any) => {
     const hash = option.hash.toUpperCase()
-    const shortHash = isSmallBreakpoint ? getDisplayShortHash(hash) : hash
+    const shortHash = $isSmallBreakpoint ? getDisplayShortHash(hash) : hash
     if (isTransaction(option) && option.blocks) {
       const mainBlock = option.blocks.find(({ main }) => main)
       if (mainBlock) {
@@ -98,21 +46,68 @@ const Search = () => {
 
     return `${option.sequence} - ${shortHash}`
   }
-
   const getOptionSelected = (
     option: Block | Transaction,
     value: Block | Transaction,
   ): boolean => {
-    if (isBlock(option) && isBlock(value)) {
+    if (
+      (isBlock(option) && isBlock(value)) ||
+      (isTransaction(option) && isTransaction(value))
+    ) {
       return option.hash === value.hash
     }
-
-    if (isTransaction(option) && isTransaction(value)) {
-      return option.hash === value.hash
-    }
-
     return false
   }
+
+  const onChangeHandle = React.useCallback(
+    async (value: string) => {
+      if (value.length == 0) {
+        $setOpen(false)
+        return
+      }
+
+      $setOpen(false)
+      $setLoading(true)
+
+      const blockSearchParams = new URLSearchParams({
+        main: 'true',
+        search: value,
+        with_transactions: 'true',
+      })
+      const transactionSearchParams = new URLSearchParams({
+        search: value,
+        with_blocks: 'true',
+      })
+
+      const processAll = (raw: AxiosResponse[]) => {
+        const [{ data: rawTransactions }, { data: rawBlocks }] = raw
+        const transactions = formatTransactionsFromJson(rawTransactions.data)
+        const blocks = formatBlocksFromJson(rawBlocks.data)
+        const results = [...blocks, ...transactions]
+        if (results.length === 0) {
+          $setLoading(false)
+          $setOpen(true)
+          $setResult([])
+        } else {
+          $setOpen(true)
+          $setResult(results)
+          $setLoading(false)
+        }
+      }
+
+      const __blocks = axios.get(
+        getApiUrl(ApiUrls.SEARCH_BLOCKS) + blockSearchParams.toString(),
+      )
+      const __transactions = axios.get(
+        getApiUrl(ApiUrls.SEARCH_TRANSACTIONS) + transactionSearchParams.toString(),
+      )
+      Promise.all([__transactions, __blocks]).then(processAll)
+    },
+    [$setOpen, $setLoading],
+  )
+
+  const search = debounce(onChangeHandle, 250)
+  // const search = onChangeHandle
 
   const onChange = (event: any, value: Block | Transaction | null) => {
     if (!value) {
@@ -120,13 +115,13 @@ const Search = () => {
     }
 
     if (isBlock(value)) {
-      history.push(getBlockDetailPageUrl(value.hash), { update: true })
+      $history.push(getBlockDetailPageUrl(value.hash), { update: true })
     }
 
     if (isTransaction(value) && value.blocks) {
       const mainBlock = value.blocks.find((block) => block.main === true)
       if (mainBlock) {
-        history.push(getTransactionDetailPageUrl(mainBlock.hash, value.hash), {
+        $history.push(getTransactionDetailPageUrl(mainBlock.hash, value.hash), {
           update: true,
         })
       }
@@ -160,7 +155,6 @@ const Search = () => {
       </li>
     )
   }
-
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
@@ -172,8 +166,9 @@ const Search = () => {
         autoHighlight={true}
         clearOnEscape={true}
         handleHomeEndKeys={true}
+        filterOptions={(x) => x}
         selectOnFocus={true}
-        open={open}
+        open={$open}
         onChange={onChange}
         forcePopupIcon={false}
         popupIcon={null}
@@ -184,32 +179,34 @@ const Search = () => {
           listbox: classes.list,
         }}
         onClose={() => {
-          setOpen(false)
+          $setOpen(false)
         }}
         getOptionSelected={getOptionSelected}
         getOptionLabel={getOptionLabel}
         renderGroup={renderGroup}
         groupBy={groupBy}
-        options={result}
+        options={$result}
         noOptionsText={'No matches'}
-        loading={loading}
+        loading={$loading}
         loadingText={'Loading...'}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            color='secondary'
-            placeholder={t('app.header.search.placeholder')}
-            classes={{
-              root: classes.inputInput,
-            }}
-            onChange={(ev) => search(ev.target.value)}
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: null,
-              disableUnderline: true,
-            }}
-          />
-        )}
+        renderInput={(params: any) => {
+          return (
+            <TextField
+              {...params}
+              color='secondary'
+              placeholder={t('app.header.search.placeholder')}
+              classes={{
+                root: classes.inputInput,
+              }}
+              onChange={(ev) => search(ev.target.value)}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: null,
+                disableUnderline: true,
+              }}
+            />
+          )
+        }}
       />
     </div>
   )
