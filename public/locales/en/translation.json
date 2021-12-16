@@ -19,7 +19,7 @@
       },
       "docs": "Developer Docs",
       "search": {
-        "placeholder": "Search by block height, hash, or transaction hash"
+        "placeholder": "Search by graffiti, block height, hash, or transaction hash"
       },
       "charts": "Charts"
     },
