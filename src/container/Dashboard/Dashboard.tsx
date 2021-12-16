@@ -28,7 +28,10 @@ const Dashboard = () => {
   const service = useGetService<Block[]>(
     getApiUrl(ApiUrls.SEARCH_BLOCKS),
     { limit: 10, main: 'true' },
-    formatBlocksFromJson,
+    (raw) => {
+      console.log({ raw })
+      return formatBlocksFromJson(raw)
+    },
   )
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
