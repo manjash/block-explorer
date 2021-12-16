@@ -78,7 +78,7 @@ const Explorer = () => {
           const newState = {
             ...prevState,
             status: ServiceState.LOADED,
-            blocks: [...prevState.blocks, ...formatBlocksFromJson(response.data)],
+            blocks: [...prevState.blocks, ...formatBlocksFromJson(blocksArray)],
             after: blocksArray[blocksArray.length - 1]?.id,
             hasMoreItems: response.data.metadata.has_next ? true : false,
           }
