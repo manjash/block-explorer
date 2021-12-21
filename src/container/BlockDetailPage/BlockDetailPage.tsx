@@ -73,11 +73,9 @@ const BlockDetailPage = () => {
         isLoading={service.status === ServiceState.LOADING}
         header={
           <>
-            {t('app.blockDetailPage.information.title')}
-            {!main ? (
+            {t('app.blockDetailPage.information.title')}{' '}
+            {!main && (
               <SmallChip text={t('app.blockDetailPage.information.forked')}></SmallChip>
-            ) : (
-              ''
             )}
           </>
         }
