@@ -93,6 +93,8 @@
       },
       "information": {
         "title": "Block Information",
+        "main": "Main",
+        "forked": "Forked Block",
         "error": {
           "title": "Block not found",
           "description": "This block either swam off or we are having trouble finding it. Please try again later."

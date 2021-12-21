@@ -19,6 +19,7 @@ import { RoutePath } from '../../routes/routePath'
 import blocksGray from '../../assets/images/breadcrumb/blocks-gray.svg'
 import blocks from '../../assets/images/breadcrumb/blocks.svg'
 import { getDisplayShortHash, truncateGraffitiToLimit } from '../../utils/string'
+import SmallChip from '../../components/SmallChip/SmallChip'
 
 type ParamTypes = {
   id: string
@@ -46,7 +47,7 @@ const BlockDetailPage = () => {
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
   if (!blockData) return null
-  const { sequence, hash, transactions, graffiti, difficulty, timestamp } = blockData
+  const { sequence, hash, transactions, graffiti, difficulty, timestamp, main } = blockData
   const metaVariables = {
     id: sequence,
     hash: hash,
@@ -55,7 +56,6 @@ const BlockDetailPage = () => {
   return (
     <Container>
       <Meta path={RoutePath.BlockDetailPage} variables={metaVariables} />
-
       <Breadcrumb
         paths={[
           {
@@ -69,10 +69,21 @@ const BlockDetailPage = () => {
           },
         ]}
       />
-
       <BoxWrapper
         isLoading={service.status === ServiceState.LOADING}
-        header={t('app.blockDetailPage.information.title')}
+        header={
+          main ? (
+            <>
+              {t('app.blockDetailPage.information.title')}{' '}
+              <SmallChip text={t('app.blockDetailPage.information.main')}></SmallChip>
+            </>
+          ) : (
+            <>
+              {t('app.blockDetailPage.information.title')}{' '}
+              <SmallChip text={t('app.blockDetailPage.information.forked')}></SmallChip>
+            </>
+          )
+        }
       >
         {service.status === ServiceState.ERROR && (
           <Error404
@@ -93,7 +104,6 @@ const BlockDetailPage = () => {
           )}
         </div>
       </BoxWrapper>
-
       {transactions && transactions.length > 0 && (
         <TransactionsList transactions={transactions} blockHash={hash} />
       )}

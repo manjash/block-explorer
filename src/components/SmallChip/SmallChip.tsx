@@ -20,10 +20,11 @@ const useStyles = makeStyles(() =>
 )
 
 interface Prop {
+  text: string
   inline?: boolean
 }
 
-export default function SmallChips({ inline }: Prop) {
+export default function SmallChip({ text, inline }: Prop) {
   const { t } = useTranslation()
   const classes = useStyles()
 
@@ -33,7 +34,7 @@ export default function SmallChips({ inline }: Prop) {
       className={classNames(classes.root, {
         [classes.inline]: inline,
       })}
-      label={t('app.navigation.minerFee')}
+      label={t(text)}
     />
   )
 }

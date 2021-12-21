@@ -9,6 +9,7 @@ import * as hooks from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
 
 import BlockDetailPage from './BlockDetailPage'
+import SmallChip from '../../components/SmallChip/SmallChip'
 
 describe('<BlockDetailPage />', () => {
   test('It renders correctly', () => {
@@ -50,6 +51,22 @@ describe('<BlockDetailPage />', () => {
 
     const wrapper = shallow(<BlockDetailPage />)
     expect(wrapper.find(Alert)).toHaveLength(0)
+    expect(wrapper.find(SmallChip)).toHaveLength(1)
     expect(wrapper.find(BlockInformationPanel)).toHaveLength(1)
+  })
+
+  test('It renders Forked Block chip when forked block', () => {
+    const mockedData = generateBlock()
+    mockedData.main = false
+
+    jest.spyOn(hooks, 'default').mockReturnValue({
+      status: ServiceState.LOADED,
+      payload: {
+        result: mockedData,
+      },
+    })
+
+    const wrapper = shallow(<BlockDetailPage />)
+    expect(wrapper.find(SmallChip)).toHaveLength(1)
   })
 })
