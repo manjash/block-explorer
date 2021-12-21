@@ -93,7 +93,6 @@
       },
       "information": {
         "title": "Block Information",
-        "main": "Main",
         "forked": "Forked Block",
         "error": {
           "title": "Block not found",

@@ -51,7 +51,7 @@ describe('<BlockDetailPage />', () => {
 
     const wrapper = shallow(<BlockDetailPage />)
     expect(wrapper.find(Alert)).toHaveLength(0)
-    expect(wrapper.find(SmallChip)).toHaveLength(1)
+    expect(wrapper.find(SmallChip)).toHaveLength(0)
     expect(wrapper.find(BlockInformationPanel)).toHaveLength(1)
   })
 
