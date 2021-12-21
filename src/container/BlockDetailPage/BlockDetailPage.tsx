@@ -72,14 +72,14 @@ const BlockDetailPage = () => {
       <BoxWrapper
         isLoading={service.status === ServiceState.LOADING}
         header={
-          main ? (
-            <>{t('app.blockDetailPage.information.title')}</>
-          ) : (
-            <>
-              {t('app.blockDetailPage.information.title')}{' '}
+          <>
+            {t('app.blockDetailPage.information.title')}
+            {!main ? (
               <SmallChip text={t('app.blockDetailPage.information.forked')}></SmallChip>
-            </>
-          )
+            ) : (
+              ''
+            )}
+          </>
         }
       >
         {service.status === ServiceState.ERROR && (
