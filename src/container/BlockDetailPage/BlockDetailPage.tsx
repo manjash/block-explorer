@@ -46,38 +46,46 @@ const BlockDetailPage = () => {
   )
 
   const blockData = service.status === ServiceState.LOADED && service.payload.result
-  if (!blockData) return null
-  const { sequence, hash, transactions, graffiti, difficulty, timestamp, main } = blockData
-  const metaVariables = {
-    id: sequence,
-    hash: hash,
-  }
 
   return (
     <Container>
-      <Meta path={RoutePath.BlockDetailPage} variables={metaVariables} />
-      <Breadcrumb
-        paths={[
-          {
-            title: t('app.components.breadcrumb.explorer'),
-            to: RoutePath.Explorer,
-            logo: blocks,
-          },
-          {
-            title: getDisplayShortHash(blockData.hash || ''),
-            logo: blocksGray,
-          },
-        ]}
-      />
+      {blockData && (
+        <Meta
+          path={RoutePath.BlockDetailPage}
+          variables={{
+            id: blockData.sequence,
+            hash: blockData.hash,
+          }}
+        />
+      )}
+
+      {blockData && (
+        <Breadcrumb
+          paths={[
+            {
+              title: t('app.components.breadcrumb.explorer'),
+              to: RoutePath.Explorer,
+              logo: blocks,
+            },
+            {
+              title: getDisplayShortHash(blockData.hash || ''),
+              logo: blocksGray,
+            },
+          ]}
+        />
+      )}
+
       <BoxWrapper
         isLoading={service.status === ServiceState.LOADING}
         header={
-          <>
-            {t('app.blockDetailPage.information.title')}{' '}
-            {!main && (
-              <SmallChip text={t('app.blockDetailPage.information.forked')}></SmallChip>
-            )}
-          </>
+          blockData && (
+            <>
+              {t('app.blockDetailPage.information.title')}{' '}
+              {!blockData.main && (
+                <SmallChip text={t('app.blockDetailPage.information.forked')}></SmallChip>
+              )}
+            </>
+          )
         }
       >
         {service.status === ServiceState.ERROR && (
@@ -86,21 +94,24 @@ const BlockDetailPage = () => {
             description={t('app.blockDetailPage.information.error.description')}
           />
         )}
-        <div>
-          {transactions && (
-            <InformationPanel
-              height={sequence}
-              blockHash={hash}
-              graffiti={truncateGraffitiToLimit(graffiti)}
-              transactions={transactions.length}
-              difficulty={difficulty}
-              timestamp={timestamp}
-            />
-          )}
-        </div>
+        {blockData && (
+          <div>
+            {blockData.transactions && (
+              <InformationPanel
+                height={blockData.sequence}
+                blockHash={blockData.hash}
+                graffiti={truncateGraffitiToLimit(blockData.graffiti)}
+                transactions={blockData.transactions.length}
+                difficulty={blockData.difficulty}
+                timestamp={blockData.timestamp}
+              />
+            )}
+          </div>
+        )}
       </BoxWrapper>
-      {transactions && transactions.length > 0 && (
-        <TransactionsList transactions={transactions} blockHash={hash} />
+
+      {blockData && blockData.transactions && blockData.transactions.length > 0 && (
+        <TransactionsList transactions={blockData.transactions} blockHash={blockData.hash} />
       )}
     </Container>
   )
