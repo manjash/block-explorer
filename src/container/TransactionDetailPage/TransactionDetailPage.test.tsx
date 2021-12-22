@@ -11,6 +11,7 @@ import * as hooks from '../../services/useGetService'
 import { ServiceState } from '../../types/Service'
 
 import TransactionDetailPage from './TransactionDetailPage'
+import SmallChip from '../../components/SmallChip/SmallChip'
 
 describe('<TransactionDetailPage />', () => {
   test('It renders correctly', () => {
@@ -65,5 +66,29 @@ describe('<TransactionDetailPage />', () => {
     expect(wrapper.find(InformationPanel)).toHaveLength(1)
     expect(wrapper.find(SpendsList)).toHaveLength(1)
     expect(wrapper.find(ReceiptsList)).toHaveLength(1)
+  })
+
+  test('it renders a Forked Parent Block chip when main is false', () => {
+    jest.spyOn(hooks, 'default').mockReturnValue({
+      status: ServiceState.LOADED,
+      payload: {
+        result: {
+          hash: 'c62d378ef9cbc0764a8ef556d8bb541b03373426634a6e8e70f42533ec325c33',
+          timestamp: '2020-11-09 23:00:06 UTC',
+          size: '75992',
+          fee: '0.0001',
+          spends: [],
+          notes: [],
+          block: {
+            hash: '841dc592f60746a289ced676dfff52d1',
+            index: '2227131',
+            main: false,
+          },
+        },
+      },
+    })
+
+    const wrapper = shallow(<TransactionDetailPage />)
+    expect(wrapper.find(SmallChip)).toHaveLength(1)
   })
 })

@@ -31,6 +31,7 @@ import { getDisplayShortHash } from '../../utils/string'
 import blocks from '../../assets/images/breadcrumb/blocks.svg'
 import transaction from '../../assets/images/breadcrumb/transaction-gray.svg'
 import Container from '../../components/Container/Container'
+import SmallChip from '../../components/SmallChip/SmallChip'
 
 interface ParamTypes {
   blockHash: string
@@ -40,7 +41,7 @@ interface ParamTypes {
 const useStyles = makeStyles(transactionDetailPageStyle)
 const TransactionDetailPage = () => {
   const { t } = useTranslation()
-  const { hash: rawHash } = useParams<ParamTypes>()
+  const { hash: rawHash, blockHash } = useParams<ParamTypes>()
   const hash = rawHash.toUpperCase()
   const classes = useStyles()
 
@@ -56,11 +57,11 @@ const TransactionDetailPage = () => {
   )
 
   const transactionData = service.status === ServiceState.LOADED && service.payload.result
-  const mainBlock = transactionData
-    ? transactionData.blocks?.find(({ main }) => main)
+  const block = transactionData
+    ? transactionData.blocks?.find(({ hash }) => hash === blockHash)
     : undefined
 
-  if (service.status === ServiceState.ERROR || !mainBlock || !transactionData) {
+  if (service.status === ServiceState.ERROR || !block || !transactionData) {
     return (
       <Error404
         title={t('app.transactionDetailPage.information.error.title')}
@@ -70,7 +71,7 @@ const TransactionDetailPage = () => {
   }
 
   const metaVariables = {
-    blockHash: mainBlock.hash,
+    blockHash: block.hash,
     hash: transactionData.hash,
   }
 
@@ -87,8 +88,8 @@ const TransactionDetailPage = () => {
               logo: blocks,
             },
             {
-              title: getDisplayShortHash(mainBlock.hash),
-              to: getBlockDetailPageUrl(mainBlock.hash),
+              title: getDisplayShortHash(block.hash),
+              to: getBlockDetailPageUrl(block.hash),
               logo: blocks,
             },
             {
@@ -101,14 +102,25 @@ const TransactionDetailPage = () => {
         <BoxWrapper
           marginBottom={2}
           isLoading={service.status === ServiceState.LOADING}
-          header={<span>{t('app.transactionDetailPage.information.title')} </span>}
+          header={
+            block && (
+              <>
+                {t('app.transactionDetailPage.information.title')}{' '}
+                {!block.main && (
+                  <SmallChip
+                    text={t('app.transactionDetailPage.information.forked')}
+                  ></SmallChip>
+                )}
+              </>
+            )
+          }
         >
           {transactionData && (
             <InformationPanel
-              blockHash={mainBlock.hash}
+              blockHash={block.hash}
               transactionHash={hash}
               fee={getIRFAmountWithCurrency(transactionData.fee)}
-              timestamp={mainBlock.timestamp}
+              timestamp={block.timestamp}
               size={getDisplaySizeInBytes(transactionData.size)}
               spendsReceipts={`${transactionData.spends.length} / ${transactionData.notes.length}`}
             />

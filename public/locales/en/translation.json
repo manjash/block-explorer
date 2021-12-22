@@ -109,6 +109,7 @@
       "receipts": "Outputs",
       "information": {
         "title": "Transaction Information",
+        "forked": "Forked Parent Block",
         "error": {
           "title": "Transaction not found",
           "description": "It looks like the transaction has sunk to the depths of the ocean...or we just can’t find it at this time."
