@@ -54,12 +54,12 @@ const Meta = ({ path, variables }: Prop) => {
 
   let canonicalUrl = `${baseUrl}${path}`
   if (path === RoutePath.BlockDetailPage) {
-    canonicalUrl = baseUrl + getBlockDetailPageUrl(Number(variables!.id))
+    canonicalUrl = baseUrl + getBlockDetailPageUrl(Number(variables?.id))
   }
   if (path === RoutePath.TransactionDetailPage) {
     canonicalUrl =
       baseUrl +
-      getTransactionDetailPageUrl(String(variables!.blockHash), String(variables!.hash))
+      getTransactionDetailPageUrl(String(variables?.blockHash), String(variables?.hash))
   }
 
   return (

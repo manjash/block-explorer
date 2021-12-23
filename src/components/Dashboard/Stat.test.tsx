@@ -7,7 +7,7 @@ import Stat from './Stat'
 describe('<Stat />', () => {
   test('It renders correctly', () => {
     const wrapper = shallow(
-      <Stat priority='low' title='test'>
+      <Stat priority='low' title='test' icon={''}>
         testvalue
       </Stat>,
     )

@@ -12,8 +12,8 @@ configure({ adapter: new Adapter() })
 
 // Mock i18n provider in the test suite
 jest.mock('react-i18next', () => ({
-  useTranslation: (): {} => ({
-    t: (key: string, variables: object = {}): string =>
+  useTranslation: () => ({
+    t: (key: string, variables: Record<string, unknown> = {}): string =>
       key + Object.values(variables).join(','),
   }),
   // eslint-disable-next-line react/display-name
@@ -21,12 +21,13 @@ jest.mock('react-i18next', () => ({
 }))
 
 jest.mock('i18next', () => ({
-  t: (key: string, variables: object = {}): string => key + Object.values(variables).join(','),
+  t: (key: string, variables: Record<string, unknown> = {}): string =>
+    key + Object.values(variables).join(','),
 }))
 
 // Mock useLocation hook in the test suite
 jest.mock('react-router-dom', () => ({
-  ...(jest.requireActual('react-router-dom') as object),
+  ...(jest.requireActual('react-router-dom') as Record<string, unknown>),
   useLocation: () => ({
     pathname: '/dashboard',
   }),

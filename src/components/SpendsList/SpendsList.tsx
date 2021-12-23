@@ -21,7 +21,7 @@ interface Prop {
 }
 const useStyles = makeStyles(spendsList)
 
-const SpendsList = ({ spends }: Prop) => {
+const SpendsList = ({ spends }: Prop): JSX.Element => {
   const { t } = useTranslation()
   const classes = useStyles()
 

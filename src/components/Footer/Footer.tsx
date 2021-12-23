@@ -25,7 +25,7 @@ interface link {
 interface Props {
   title: string
   links: Array<link>
-  classes: any
+  classes: Record<string, string>
 }
 
 const LinksBlock = ({ title, links, classes }: Props) => {

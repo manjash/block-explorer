@@ -2,8 +2,6 @@ import Block from './Block'
 import { Notes } from './Note'
 import { Spends } from './Spend'
 
-export interface Operation {}
-
 interface ParsedTransaction {
   id: number
   hash: string
@@ -28,6 +26,6 @@ export const formatTransactionFromJson = (transaction: ParsedTransaction): Trans
 export const formatTransactionsFromJson = (data: ParsedTransaction[]): Transactions =>
   data.map((transaction: ParsedTransaction) => formatTransactionFromJson(transaction))
 
-export function isTransaction(x: any): x is Transaction {
-  return typeof x === 'object' && 'notes' in x && 'spends' in x
+export function isTransaction(x: unknown): x is Transaction {
+  return typeof x === 'object' && !!x && 'notes' in x && 'spends' in x
 }

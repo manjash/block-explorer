@@ -24,7 +24,7 @@ const CopyElement = ({ copyString, children }: Prop) => {
   const [display, setDisplay] = useState(false)
   const isSmallBreakpoint = useMediaQuery(theme.breakpoints.down('sm'))
 
-  const handleClose = (event: any, reason: any) => {
+  const handleClose = (event: React.SyntheticEvent<HTMLElement>, reason: string) => {
     if (reason === 'clickaway') {
       return
     }

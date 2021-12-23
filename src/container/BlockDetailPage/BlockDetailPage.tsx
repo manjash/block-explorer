@@ -25,7 +25,7 @@ type ParamTypes = {
   id: string
 }
 
-const BlockDetailPage = () => {
+const BlockDetailPage = (): JSX.Element => {
   const { t } = useTranslation()
   const { id } = useParams<ParamTypes>()
 

@@ -8,7 +8,7 @@ const useInfiniteScroll = (
   document: Document,
   fetchData: (done: DoneFunction) => void,
   hasMoreItemsDefault = true,
-): [boolean, Function] => {
+): [boolean, () => void] => {
   const [loadMore, setLoadMore] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
   const [hasMoreItems, setHasMoreItems] = useState(hasMoreItemsDefault)

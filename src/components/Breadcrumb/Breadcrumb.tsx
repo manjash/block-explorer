@@ -14,7 +14,7 @@ import home from '../../assets/images/breadcrumb/home.svg'
 const useStyles = makeStyles(breadcrumbStyle)
 
 interface Path {
-  title: string | Number
+  title: string
   to?: string
   logo: string
 }

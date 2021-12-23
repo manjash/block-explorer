@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import React, { useEffect } from 'react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -109,7 +110,7 @@ const Search = () => {
   const search = debounce(onChangeHandle, 250)
   // const search = onChangeHandle
 
-  const onChange = (event: any, value: Block | Transaction | null) => {
+  const onChange = (event: unknown, value: Block | Transaction | null) => {
     if (!value) {
       return
     }

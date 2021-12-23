@@ -9,7 +9,7 @@ import reloadImg from '../../assets/images/reload.svg'
 
 const DEFAULT_TIMEOUT = 15000
 interface Prop {
-  onClick: Function
+  onClick: () => unknown
 }
 
 const StyledButton = withStyles(refreshButtonStyle)(Button)

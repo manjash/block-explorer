@@ -8,18 +8,20 @@ export interface ServicePayload<Type> {
 }
 
 // create your own format function to normalize the data coming from the API to the typed data
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const defaultFormatFunction = (data: any) => data
 
 const useGetService = <Type>(
   url: string,
-  queryParams: any = {},
+  queryParams: Record<string, unknown> = {},
   formatFunction = defaultFormatFunction,
 ) => {
   const [result, setResult] = useState<Service<ServicePayload<Type>>>({
     status: ServiceState.LOADING,
   })
 
-  const params = useMemo(() => new URLSearchParams(queryParams), [queryParams])
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const params = useMemo(() => new URLSearchParams(queryParams as any), [queryParams])
   const queryString = params.toString()
 
   useEffect(() => {

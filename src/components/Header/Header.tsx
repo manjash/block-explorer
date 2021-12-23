@@ -22,9 +22,9 @@ const isNetworkAvailable = true
 const isExplorerAvailable = true
 
 interface Props {
-  showSearch: Boolean
-  isSticky?: Boolean
-  isTop?: Boolean
+  showSearch: boolean
+  isSticky?: boolean
+  isTop?: boolean
 }
 
 const Header = ({ isSticky, isTop, showSearch }: Props) => {

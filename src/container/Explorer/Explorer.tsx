@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
@@ -24,7 +25,7 @@ import blocksGray from '../../assets/images/breadcrumb/blocks-gray.svg'
 
 const LOCAL_STORAGE_KEY = 'IRON_EXPLORER_DATA'
 
-const Explorer = () => {
+const Explorer = (): JSX.Element => {
   const { t } = useTranslation()
   const lastLocation = useLastLocation()
 

@@ -17,7 +17,7 @@ interface Props {
 
 const useStyles = makeStyles(layoutStyle)
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ children }: Props): JSX.Element => {
   const classes = useStyles()
   const location = useLocation()
 

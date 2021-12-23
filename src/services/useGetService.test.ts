@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { renderHook } from '@testing-library/react-hooks'
 import { act } from 'react-test-renderer'
 import axios from 'axios'
@@ -51,8 +52,6 @@ describe('useGetService', () => {
       const { result } = renderHook(() =>
         useGetService<Block>(ApiUrls.BLOCK_DETAIL_PAGE, {}, formatFunction),
       )
-
-      await act(async () => {})
 
       await act(async () => {
         expect(result.current.status).toEqual(ServiceState.LOADED)
