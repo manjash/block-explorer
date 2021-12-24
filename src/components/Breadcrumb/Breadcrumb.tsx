@@ -19,7 +19,7 @@ interface Path {
   logo: string
 }
 
-interface Props {
+export interface Props {
   paths: Path[]
 }
 

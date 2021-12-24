@@ -9,6 +9,7 @@ import Error404 from '../../components/Error404/Error404'
 import Alert, { AlertType } from '../../components/Alert/Alert'
 import BoxWrapper from '../../components/BoxWrapper/BoxWrapper'
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
+import { Props as BreadcrumbProps } from '../../components/Breadcrumb/Breadcrumb'
 import InformationPanel from '../../components/InformationPanel/InformationPanel'
 import SpendsList from '../../components/SpendsList/SpendsList'
 import ReceiptsList from '../../components/ReceiptsList/ReceiptsList'
@@ -32,9 +33,10 @@ import blocks from '../../assets/images/breadcrumb/blocks.svg'
 import transaction from '../../assets/images/breadcrumb/transaction-gray.svg'
 import Container from '../../components/Container/Container'
 import SmallChip from '../../components/SmallChip/SmallChip'
+import Block from '../../types/Block'
 
 interface ParamTypes {
-  blockHash: string
+  blockHash?: string
   hash: string
 }
 
@@ -56,57 +58,79 @@ const TransactionDetailPage = () => {
     formatTransactionFromJson,
   )
 
-  const transactionData = service.status === ServiceState.LOADED && service.payload.result
-  const block = transactionData
-    ? transactionData.blocks?.find(({ hash }) => hash === blockHash)
-    : undefined
+  let transactionData = service.status === ServiceState.LOADED && service.payload.result
 
-  if (service.status === ServiceState.ERROR || !block || !transactionData) {
-    return (
-      <Error404
-        title={t('app.transactionDetailPage.information.error.title')}
-        description={t('app.transactionDetailPage.information.error.description')}
-      />
-    )
+  let block: Block | undefined = undefined
+
+  // The block we resolve to should follow these rules
+  // 1. If we have a hash we should find that block or nothing
+  // 2. We should find the main block
+  // 3. We should find the latest forked block
+  if (transactionData && transactionData.blocks) {
+    if (blockHash) {
+      block = transactionData.blocks.find((block) => block.hash === blockHash)
+    } else {
+      block = transactionData.blocks.find((block) => block.main)
+
+      if (!block) {
+        // Show any forked block and sort them so we get the same
+        // block on each refresh unless a new forked block comes in
+        block = transactionData.blocks.sort((a, b) => b.id - a.id)[0]
+      }
+    }
   }
 
-  const metaVariables = {
-    blockHash: block.hash,
-    hash: transactionData.hash,
+  const blockMissing = service.status === ServiceState.LOADED && blockHash && !block
+  if (blockMissing) {
+    transactionData = false
+  }
+
+  const breadcrumbs: BreadcrumbProps['paths'] = []
+
+  if (block) {
+    breadcrumbs.push({
+      title: t('app.components.breadcrumb.explorer'),
+      to: RoutePath.Explorer,
+      logo: blocks,
+    })
+
+    breadcrumbs.push({
+      title: getDisplayShortHash(block.hash),
+      to: getBlockDetailPageUrl(block.hash),
+      logo: blocks,
+    })
+  }
+
+  if (transactionData) {
+    breadcrumbs.push({
+      title: getDisplayShortHash(transactionData.hash),
+      logo: transaction,
+    })
   }
 
   return (
     <>
       <Container>
-        <Meta path={RoutePath.TransactionDetailPage} variables={metaVariables} />
+        {transactionData && (
+          <Meta
+            path={RoutePath.TransactionDetailPage}
+            variables={{
+              blockHash: block?.hash ?? '',
+              hash: transactionData.hash,
+            }}
+          />
+        )}
 
-        <Breadcrumb
-          paths={[
-            {
-              title: t('app.components.breadcrumb.explorer'),
-              to: RoutePath.Explorer,
-              logo: blocks,
-            },
-            {
-              title: getDisplayShortHash(block.hash),
-              to: getBlockDetailPageUrl(block.hash),
-              logo: blocks,
-            },
-            {
-              title: getDisplayShortHash(transactionData.hash),
-              logo: transaction,
-            },
-          ]}
-        />
+        {transactionData && <Breadcrumb paths={breadcrumbs} />}
 
         <BoxWrapper
           marginBottom={2}
           isLoading={service.status === ServiceState.LOADING}
           header={
-            block && (
+            transactionData && (
               <>
                 {t('app.transactionDetailPage.information.title')}{' '}
-                {!block.main && (
+                {block && !block.main && (
                   <SmallChip
                     text={t('app.transactionDetailPage.information.forked')}
                   ></SmallChip>
@@ -115,12 +139,19 @@ const TransactionDetailPage = () => {
             )
           }
         >
+          {(service.status === ServiceState.ERROR || blockMissing) && (
+            <Error404
+              title={t('app.transactionDetailPage.information.error.title')}
+              description={t('app.transactionDetailPage.information.error.description')}
+            />
+          )}
+
           {transactionData && (
             <InformationPanel
-              blockHash={block.hash}
+              blockHash={block?.hash}
               transactionHash={hash}
               fee={getIRFAmountWithCurrency(transactionData.fee)}
-              timestamp={block.timestamp}
+              timestamp={block?.timestamp}
               size={getDisplaySizeInBytes(transactionData.size)}
               spendsReceipts={`${transactionData.spends.length} / ${transactionData.notes.length}`}
             />
@@ -142,8 +173,8 @@ const TransactionDetailPage = () => {
         </div>
       )}
 
-      <Container>
-        {transactionData && (
+      {transactionData && (
+        <Container>
           <Box marginTop={2} className={classes.root}>
             <div className={classes.blocks}>
               <BoxWrapper header={t('app.transactionDetailPage.spends')}>
@@ -156,8 +187,8 @@ const TransactionDetailPage = () => {
               </BoxWrapper>
             </div>
           </Box>
-        )}
-      </Container>
+        </Container>
+      )}
     </>
   )
 }

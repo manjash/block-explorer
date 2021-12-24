@@ -10,7 +10,7 @@ export const getTransactionDetailPageUrl = (
   hash: string,
 ): string => {
   return RoutePath.TransactionDetailPage.replace(':hash', hash).replace(
-    ':blockHash',
+    ':blockHash?',
     blockHash || '',
   )
 }
