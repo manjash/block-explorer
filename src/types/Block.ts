@@ -12,6 +12,7 @@ interface ParsedBlock {
   transactions?: Array<Transaction>
   timestamp: Date
   graffiti: string
+  delta?: string
 }
 
 export default interface Block extends Omit<ParsedBlock, 'timestamp' | 'transactions_count'> {

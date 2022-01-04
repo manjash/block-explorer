@@ -13,7 +13,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Block from '../../types/Block'
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { StyledTableCell, StyledTableRow } from '../Table/Table'
-import { getDisplayTimestamp } from '../../utils/time'
+import { getDisplayTimeInSeconds, getDisplayTimestamp } from '../../utils/time'
 import { getDisplaySizeInBytes } from '../../utils/size'
 import blockRow from '../../assets/images/blockRow.svg'
 import blocksList from '../../assets/jss/components/BlocksList/blocksList'
@@ -33,6 +33,17 @@ const BlocksList = ({ blockList }: Prop) => {
   const theme = useTheme()
   const isSmallBreakpoint = useMediaQuery(theme.breakpoints.down('sm'))
   if (isSmallBreakpoint) return <BlocksListSmall blockList={blockList} />
+  blockList = blockList.map((block: Block, index, blocks) => {
+    if (blocks[index + 1]) {
+      const delta = getDisplayTimeInSeconds(
+        (block.timestamp.getTime() - blocks[index + 1].timestamp.getTime()) / 1000,
+      )
+      return { ...block, delta }
+    } else {
+      return block
+    }
+  })
+  // blockList = blockList.slice(0, -1)
 
   return (
     <TableContainer>
@@ -48,6 +59,9 @@ const BlocksList = ({ blockList }: Prop) => {
             </StyledTableCell>
             <StyledTableCell align='left'>
               {t('app.components.blockslist.hash')}
+            </StyledTableCell>
+            <StyledTableCell align='left'>
+              {t('app.components.blockslist.delta')}
             </StyledTableCell>
             <StyledTableCell align='left'>
               {t('app.components.blockslist.timestamp')}
@@ -75,8 +89,9 @@ const BlocksList = ({ blockList }: Prop) => {
               </StyledTableCell>
               <StyledTableCell align='right'>{block.transactionsCount}</StyledTableCell>
               <StyledTableCell align='left'>
-                {getDisplayShortHash(block.hash.toUpperCase(), 16)}
+                {getDisplayShortHash(block.hash.toUpperCase())}
               </StyledTableCell>
+              <StyledTableCell align='left'>{block.delta}</StyledTableCell>
               <StyledTableCell align='left'>
                 {getDisplayTimestamp(block.timestamp)}
               </StyledTableCell>
