@@ -46,6 +46,7 @@
         "height": "Height",
         "size": "Size",
         "transactions": "Transactions",
+        "delta": "Since Last Block",
         "timestamp": "Timestamp",
         "hash": "Block Hash",
         "difficulty": "Difficulty",
