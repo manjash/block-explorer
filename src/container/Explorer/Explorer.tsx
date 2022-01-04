@@ -68,7 +68,7 @@ const Explorer = (): JSX.Element => {
       .get(
         getApiUrl(ApiUrls.SEARCH_BLOCKS) +
           new URLSearchParams({
-            limit: '20',
+            limit: '21',
             main: 'true',
             after: result.after,
           }).toString(),
