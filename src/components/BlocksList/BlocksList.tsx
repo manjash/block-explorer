@@ -19,6 +19,7 @@ import blockRow from '../../assets/images/blockRow.svg'
 import blocksList from '../../assets/jss/components/BlocksList/blocksList'
 import BlocksListSmall from './BlocksListSmall'
 import { getDisplayShortHash, truncateGraffitiToLimit } from '../../utils/string'
+import { generateBlocksWithMatchingHashes } from '../../mocks/BlockMock'
 
 interface Prop {
   blockList: Block[]
@@ -26,6 +27,10 @@ interface Prop {
 const useStyles = makeStyles(blocksList)
 
 const BlocksList = ({ blockList }: Prop) => {
+  if (blockList.length === 0) {
+    blockList = generateBlocksWithMatchingHashes(10)
+  }
+  console.log({ blockList })
   const { t } = useTranslation()
   const classes = useStyles()
   const history = useHistory()
