@@ -14,7 +14,6 @@ import Stat from './Stat'
 import metricsStyle from '../../assets/jss/components/Dashboard/metricsStyle'
 import { getDisplayTimeInSeconds } from '../../utils/time'
 import { getDisplayShortHash } from '../../utils/string'
-import { round } from '../../utils/mathUtils'
 
 const useStyles = makeStyles(metricsStyle)
 
@@ -53,14 +52,14 @@ const Metrics = ({ metrics }: Prop) => {
         icon={totaltransaction}
         priority='medium'
       >
-        {metrics.blockTime ? getDisplayTimeInSeconds(round(metrics.blockTime / 1000, 2)) : '∞'}
+        {getDisplayTimeInSeconds(Math.round(metrics.blockTime || 0))}
       </Stat>
       <Stat
         title={t('app.dashboard.metrics.latestblocksseconds')}
         icon={transactions}
         priority='medium'
       >
-        {metrics.blockTime ? getDisplayTimeInSeconds(round(metrics.blockTime / 1000, 2)) : '∞'}
+        {getDisplayTimeInSeconds(Math.round(metrics.blockTime || 0))}
       </Stat>
     </div>
   )

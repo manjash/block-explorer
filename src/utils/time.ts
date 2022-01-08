@@ -1,6 +1,6 @@
 import i18n from 'i18next'
 
-export const getDisplayTimeInSeconds = (time: number | string): string => {
+export const getDisplayTimeInSeconds = (time: number): string => {
   return i18n.t('app.units.time.seconds', { time })
 }
 
