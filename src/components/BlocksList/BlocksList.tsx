@@ -13,7 +13,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Block from '../../types/Block'
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { StyledTableCell, StyledTableRow } from '../Table/Table'
-import { getDisplayTimestamp } from '../../utils/time'
+import { round } from '../../utils/mathUtils'
+import { getDisplayTimeInSeconds, getDisplayTimestamp } from '../../utils/time'
 import { getDisplaySizeInBytes } from '../../utils/size'
 import blockRow from '../../assets/images/blockRow.svg'
 import blocksList from '../../assets/jss/components/BlocksList/blocksList'
@@ -50,6 +51,9 @@ const BlocksList = ({ blockList }: Prop) => {
               {t('app.components.blockslist.hash')}
             </StyledTableCell>
             <StyledTableCell align='left'>
+              {t('app.components.blockslist.time_since_last_block_ms')}
+            </StyledTableCell>
+            <StyledTableCell align='left'>
               {t('app.components.blockslist.timestamp')}
             </StyledTableCell>
             <StyledTableCell align='left'>
@@ -75,7 +79,12 @@ const BlocksList = ({ blockList }: Prop) => {
               </StyledTableCell>
               <StyledTableCell align='right'>{block.transactionsCount}</StyledTableCell>
               <StyledTableCell align='left'>
-                {getDisplayShortHash(block.hash.toUpperCase(), 16)}
+                {getDisplayShortHash(block.hash.toUpperCase())}
+              </StyledTableCell>
+              <StyledTableCell align='left'>
+                {block.time_since_last_block_ms
+                  ? getDisplayTimeInSeconds(round(block.time_since_last_block_ms / 1000, 2))
+                  : '∞'}
               </StyledTableCell>
               <StyledTableCell align='left'>
                 {getDisplayTimestamp(block.timestamp)}
