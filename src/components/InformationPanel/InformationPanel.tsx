@@ -15,12 +15,13 @@ import spendsreceipt from '../../assets/images/informations/spendsreceipt.svg'
 
 import Information from '../Information/Information'
 import informationPanelStyle from '../../assets/jss/components/InformationPanel/informationPanelStyle'
-import { getDisplayTimestamp } from '../../utils/time'
+import { getDisplayTimestamp, renderTimeSinceLastBlock } from '../../utils/time'
 import { getDisplayShortHash } from '../../utils/string'
 
 interface Prop {
   blockId?: number
   confirmations?: number
+  timeSinceLastBlockMs?: number
   difficulty?: number
   fee?: string
   graffiti?: string
@@ -39,6 +40,7 @@ const useStyles = makeStyles(informationPanelStyle)
 // This component is fairly verbose at this point. But the idea is to be flexible enough to start adding tooltips and other child components
 const InformationPanel = ({
   confirmations,
+  timeSinceLastBlockMs,
   difficulty,
   fee,
   graffiti,
@@ -147,6 +149,14 @@ const InformationPanel = ({
           title={t('app.components.informationPanel.spendsReceipts')}
         >
           {spendsReceipts}
+        </Information>
+      )}
+      {timeSinceLastBlockMs && (
+        <Information
+          icon={timestampIcon}
+          title={t('app.components.informationPanel.timeSinceLastBlockMs')}
+        >
+          {renderTimeSinceLastBlock(timeSinceLastBlockMs)}
         </Information>
       )}
     </div>

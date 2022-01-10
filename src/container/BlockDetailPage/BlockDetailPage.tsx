@@ -104,6 +104,7 @@ const BlockDetailPage = (): JSX.Element => {
                 transactions={blockData.transactions.length}
                 difficulty={blockData.difficulty}
                 timestamp={blockData.timestamp}
+                timeSinceLastBlockMs={blockData.timeSinceLastBlockMs}
               />
             )}
           </div>

@@ -12,13 +12,13 @@ import transactions from '../../assets/images/metrics/transactions.svg'
 
 import Stat from './Stat'
 import metricsStyle from '../../assets/jss/components/Dashboard/metricsStyle'
-import { getDisplayTimeInSeconds } from '../../utils/time'
+import { renderTimeSinceLastBlock } from '../../utils/time'
 import { getDisplayShortHash } from '../../utils/string'
 
 const useStyles = makeStyles(metricsStyle)
 
 export interface MetricsData {
-  blockTime: number | null
+  blockTime: number | null | undefined
   difficulty: number | null
   height: number | null
   latestHash: string | null
@@ -52,14 +52,14 @@ const Metrics = ({ metrics }: Prop) => {
         icon={totaltransaction}
         priority='medium'
       >
-        {getDisplayTimeInSeconds(Math.round(metrics.blockTime || 0))}
+        {renderTimeSinceLastBlock(metrics.blockTime)}
       </Stat>
       <Stat
         title={t('app.dashboard.metrics.latestblocksseconds')}
         icon={transactions}
         priority='medium'
       >
-        {getDisplayTimeInSeconds(Math.round(metrics.blockTime || 0))}
+        {renderTimeSinceLastBlock(metrics.blockTime)}
       </Stat>
     </div>
   )
