@@ -51,7 +51,7 @@ const BlocksList = ({ blockList }: Prop) => {
               {t('app.components.blockslist.hash')}
             </StyledTableCell>
             <StyledTableCell align='left'>
-              {t('app.components.blockslist.time_since_last_block_ms')}
+              {t('app.components.blockslist.timeSinceLastBlockMs')}
             </StyledTableCell>
             <StyledTableCell align='left'>
               {t('app.components.blockslist.timestamp')}
@@ -82,8 +82,8 @@ const BlocksList = ({ blockList }: Prop) => {
                 {getDisplayShortHash(block.hash.toUpperCase())}
               </StyledTableCell>
               <StyledTableCell align='left'>
-                {block.time_since_last_block_ms
-                  ? getDisplayTimeInSeconds(round(block.time_since_last_block_ms / 1000, 2))
+                {block.timeSinceLastBlockMs
+                  ? getDisplayTimeInSeconds(round(block.timeSinceLastBlockMs / 1000, 2))
                   : '∞'}
               </StyledTableCell>
               <StyledTableCell align='left'>

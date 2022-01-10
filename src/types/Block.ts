@@ -15,16 +15,20 @@ interface ParsedBlock {
   time_since_last_block_ms?: number
 }
 
-export default interface Block extends Omit<ParsedBlock, 'timestamp' | 'transactions_count'> {
+export default interface Block
+  extends Omit<ParsedBlock, 'timestamp' | 'transactions_count' | 'time_since_last_block_ms'> {
+  timeSinceLastBlockMs?: number
   timestamp: Date
   transactionsCount: number
 }
+
 export interface Blocks {
   blocks: Block[]
 }
 
 export const formatBlockFromJson = (block: ParsedBlock): Block => ({
   ...block,
+  timeSinceLastBlockMs: block.time_since_last_block_ms,
   timestamp: new Date(block.timestamp),
   transactionsCount: parseInt(block.transactions_count),
 })

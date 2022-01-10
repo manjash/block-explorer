@@ -22,7 +22,7 @@ import { round } from '../../utils/mathUtils'
 interface Prop {
   blockId?: number
   confirmations?: number
-  time_since_last_block_ms?: number
+  timeSinceLastBlockMs?: number
   difficulty?: number
   fee?: string
   graffiti?: string
@@ -41,7 +41,7 @@ const useStyles = makeStyles(informationPanelStyle)
 // This component is fairly verbose at this point. But the idea is to be flexible enough to start adding tooltips and other child components
 const InformationPanel = ({
   confirmations,
-  time_since_last_block_ms,
+  timeSinceLastBlockMs,
   difficulty,
   fee,
   graffiti,
@@ -152,13 +152,13 @@ const InformationPanel = ({
           {spendsReceipts}
         </Information>
       )}
-      {time_since_last_block_ms && (
+      {timeSinceLastBlockMs && (
         <Information
           icon={timestampIcon}
-          title={t('app.components.informationPanel.time_since_last_block_ms')}
+          title={t('app.components.informationPanel.timeSinceLastBlockMs')}
         >
-          {time_since_last_block_ms
-            ? getDisplayTimeInSeconds(round(time_since_last_block_ms / 1000, 2))
+          {timeSinceLastBlockMs
+            ? getDisplayTimeInSeconds(round(timeSinceLastBlockMs / 1000, 2))
             : '∞'}
         </Information>
       )}
