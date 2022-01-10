@@ -13,8 +13,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Block from '../../types/Block'
 import { getBlockDetailPageUrl } from '../../utils/routes'
 import { StyledTableCell, StyledTableRow } from '../Table/Table'
-import { round } from '../../utils/mathUtils'
-import { getDisplayTimeInSeconds, getDisplayTimestamp } from '../../utils/time'
+import { getDisplayTimestamp, renderTimeSinceLastBlock } from '../../utils/time'
 import { getDisplaySizeInBytes } from '../../utils/size'
 import blockRow from '../../assets/images/blockRow.svg'
 import blocksList from '../../assets/jss/components/BlocksList/blocksList'
@@ -82,9 +81,7 @@ const BlocksList = ({ blockList }: Prop) => {
                 {getDisplayShortHash(block.hash.toUpperCase())}
               </StyledTableCell>
               <StyledTableCell align='left'>
-                {block.timeSinceLastBlockMs
-                  ? getDisplayTimeInSeconds(round(block.timeSinceLastBlockMs / 1000, 2))
-                  : '∞'}
+                {renderTimeSinceLastBlock(block.timeSinceLastBlockMs)}
               </StyledTableCell>
               <StyledTableCell align='left'>
                 {getDisplayTimestamp(block.timestamp)}

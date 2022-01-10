@@ -15,9 +15,8 @@ import spendsreceipt from '../../assets/images/informations/spendsreceipt.svg'
 
 import Information from '../Information/Information'
 import informationPanelStyle from '../../assets/jss/components/InformationPanel/informationPanelStyle'
-import { getDisplayTimeInSeconds, getDisplayTimestamp } from '../../utils/time'
+import { getDisplayTimestamp, renderTimeSinceLastBlock } from '../../utils/time'
 import { getDisplayShortHash } from '../../utils/string'
-import { round } from '../../utils/mathUtils'
 
 interface Prop {
   blockId?: number
@@ -157,9 +156,7 @@ const InformationPanel = ({
           icon={timestampIcon}
           title={t('app.components.informationPanel.timeSinceLastBlockMs')}
         >
-          {timeSinceLastBlockMs
-            ? getDisplayTimeInSeconds(round(timeSinceLastBlockMs / 1000, 2))
-            : '∞'}
+          {renderTimeSinceLastBlock(timeSinceLastBlockMs)}
         </Information>
       )}
     </div>

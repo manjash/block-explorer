@@ -45,7 +45,7 @@ const Dashboard = () => {
     const [firstBlock] = blockData
     const { transactionsCount = 0, hash, sequence, difficulty } = firstBlock
     metrics.transactionsCount = transactionsCount
-    metrics.blockTime = firstBlock.timeSinceLastBlockMs ? firstBlock.timeSinceLastBlockMs : null
+    metrics.blockTime = firstBlock.timeSinceLastBlockMs
     metrics.latestHash = hash
     metrics.height = sequence
     metrics.difficulty = difficulty
