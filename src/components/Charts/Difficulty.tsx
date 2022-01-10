@@ -8,7 +8,7 @@ type Props = {
 }
 
 export default function Difficulty({ data }: Props): JSX.Element {
-  const yAccessor = React.useCallback((d: Metric) => d.average_difficulty, [])
+  const yAccessor = React.useCallback((d: Metric) => Math.round(d.average_difficulty / 1e9), [])
 
   return <GeneralChart data={data} marginLeft={90} yAccessor={yAccessor} />
 }
